@@ -1,2 +1,5 @@
 .DS_Store
 node_modules/
+
+# Sources: PDFs and extracted texts are closed-licence; only the notes are committed
+research/papers/

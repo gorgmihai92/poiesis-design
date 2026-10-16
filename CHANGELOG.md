@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 (poiesis-ux)
+- Evidence-based patterns for common situations (forms, waiting, confirmations, lists, notifications, transitions,
+  defaults), as an index in the skill and as rules with their studies: F5, F6, K6, K7, K8, E4, E5; E1 and W3
+  refined.
+- New group **D** Honesty: no deceptive patterns (D1), never a pre-selected cost or data sharing (D2), defaults that
+  serve the person (D3).
+- `ux-tester` checks the patterns and the honesty rules.
+- `research/`: one note per study behind the rules.
+
 ## 0.3.0 (2026-10-16)
 - Split into two plugins in the same marketplace: `poiesis-ui` (how it looks: `ui` skill, `ui-auditor`, publish
   gate) and `poiesis-ux` (how it behaves: `ux` skill, `ux-tester`). Install one or both. Agents are now

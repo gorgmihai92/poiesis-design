@@ -22,7 +22,7 @@
     {
       "name": "poiesis-ux",
       "description": "How your app behaves for the people using it: rules for feedback, errors, control, keyboard use and wording, and a tester that does your app's main tasks the way a person would and reports what gets in their way.",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"

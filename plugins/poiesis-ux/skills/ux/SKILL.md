@@ -1,6 +1,6 @@
 ---
 name: ux
-description: How an app behaves - feedback, control, consistency, errors, recognition, effort, access, wording - as rules with sources, plus the project's main tasks in .poiesis-design/ux.md, which the ux-tester agent walks in the running app. Use when designing or changing flows, states, errors, navigation or labels, when setting up ux.md, or when asked for a UX test. How it looks (type, spacing, color) is the ui skill of poiesis-ui.
+description: How an app behaves - feedback, control, consistency, errors, recognition, effort, access, honesty, wording - as rules with sources, including evidence-based patterns for forms, waiting, confirmations, lists, notifications, transitions and defaults, plus the project's main tasks in .poiesis-design/ux.md, which the ux-tester agent walks in the running app. Use when designing or changing flows, states, errors, navigation or labels, when setting up ux.md, or when asked for a UX test. How it looks (type, spacing, color) is the ui skill of poiesis-ui.
 ---
 
 # Poiesis UX
@@ -15,7 +15,18 @@ outcome), and decisions that override rules. Write the tasks from the code and t
 questions. Keep 5–10 tasks, the ones people do most.
 
 **Build.** When a change adds or alters a flow, check it against the rules before finishing: every state (F2),
-the exit (K1), the keyboard path (I1), the wording (L1, L2). Add or update its task in `ux.md`.
+the exit (K1), the keyboard path (I1), the wording (L1, L2). Add or update its task in `ux.md`. For common
+situations, apply the patterns:
+
+| Situation | Behave like this | Rules |
+|---|---|---|
+| A form | formats and required fields shown in advance; no errors while typing; on submit, every error next to its field, input kept; submit busy after the click; confirm what was sent | E1, E2, E4, E5 |
+| Waiting | answer within about 1 s; progress for long work, honest, slow stages first | F1, F4, F5 |
+| Delete, archive, send | routine and reversible: act and offer undo; rare or irreversible: confirm, naming what happens | K2, K6 |
+| Lists and menus | items stay where people left them; suggestions in a separate labelled area; pin or reorder by hand | K3, K7 |
+| Notifications | non-urgent ones wait for the end of the step; urgent ones at once | K8 |
+| A view changes in place | a simple transition shows where things went, within reduced motion | F6, I5 |
+| Choices and defaults | default = what serves the person; never pre-select a cost or data sharing; no deceptive patterns | D1, D2, D3, W3 |
 
 **Test (V3).** Run `poiesis-ux:ux-tester` after a change to a flow and before a release, next to
 `ui-auditor`. It walks each task in the running app when it can drive it (browser tools), else through the code,

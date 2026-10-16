@@ -7,7 +7,9 @@ broken; **should** = a default you may break on purpose, with the reason under "
 `.poiesis-design/ux.md`. A project decision (`ux.md`, `design.md`, `CLAUDE.md`) overrides a rule.
 
 Sources, cited by key: **N** = Nielsen, 10 usability heuristics (1994, rev. 2020; number = heuristic).
-**W** = WCAG 2.2 (number = success criterion). **I** = ISO 9241-110:2020, interaction principles.
+**W** = WCAG 2.2 (number = success criterion). **I** = ISO 9241-110:2020, interaction principles. Rules from
+studies name the study (author year); one note per study in the repository's `research/notes`. Most of these
+studies are desktop lab work with small samples: they are **should** unless the rule is a matter of honesty.
 
 ## Feedback (F)
 
@@ -18,7 +20,13 @@ done. None is a blank area or a stuck spinner (N1).
 **F3 · must · Status is announced.** Changes that matter and are not focused (saved, failed, new result) reach
 screen readers through a live region or role=status (W 4.1.3).
 **F4 · should · Long work shows progress** (how much, or what step), and keeps working when the view is hidden
-or reopened (N1).
+or reopened (N1; people prefer progress indicators, Myers 1985).
+**F5 · should · Progress is honest and ends cleanly.** Progress reflects real work, never invented movement. When
+the order of stages is free, run the slow or unpredictable ones first, so the bar does not stall near the end
+(Harrison et al. 2007, waits of about 5 s).
+**F6 · should · Show where things went.** When a person's action changes a data display in place (sort, filter,
+chart type), a simple transition (one or two stages) shows where items moved; always within I5 (Heer & Robertson
+2007).
 
 ## Control (K)
 
@@ -32,6 +40,16 @@ switch unless the person caused it (W 3.2.1, 3.2.2).
 (W 2.2.1).
 **K5 · should · The app does not take over.** Auto-scrolling, auto-play or auto-focus stops when the person acts
 elsewhere and offers a way back (I "controllability").
+**K6 · should · Undo for routine actions, confirmation for rare ones.** Repeated confirmations lose their effect
+(Bravo-Lillo et al. 2013; Vance et al. 2018), so frequent, reversible actions act at once and offer undo; keep
+confirmation for rare, irreversible or outward actions, naming the object and the consequence (refines K2).
+**K7 · should · Lists stay where people left them.** Do not reorder existing items on their own by use;
+usage-based suggestions go in a separate, labelled area (Recent, Suggested), and people can pin or reorder
+(Findlater & McGrenere 2004; Gajos et al. 2008).
+**K8 · should · Non-urgent notifications wait for a break.** Those created while the person is typing or mid-step
+are held until the step ends (save, submit, page change), with a short maximum delay; urgent or time-critical ones
+show at once (Iqbal & Bailey 2008; Okoshi et al. 2018; interruptions cost stress even when work quality holds,
+Mark et al. 2008).
 
 ## Consistency (N)
 
@@ -42,11 +60,16 @@ thing) unless the project decides otherwise (N4).
 
 ## Errors (E)
 
-**E1 · must · Prevent first.** Invalid input is limited or checked before it costs work: constraints, formats
-shown, disabled actions say why (N5).
+**E1 · must · Prevent first.** Invalid input is limited before it costs work: constraints, required formats
+stated in advance, required and optional fields marked, disabled actions say why (N5; Seckler et al. 2014).
 **E2 · must · Errors say what happened, why if known, and what to do next,** in plain words, next to the cause,
 keeping what the person entered (N9, W 3.3.1, 3.3.3).
 **E3 · should · Recover in place.** A failed step can be retried without starting over (N9).
+**E4 · should · Do not interrupt typing with errors.** In multi-field forms, show all errors at once when the
+person submits, each next to its field, input kept. A field may be checked when the person leaves it only if the
+check cannot fire on a partly typed value (Bargas-Avila et al. 2007; Seckler et al. 2012; Seckler et al. 2014).
+**E5 · should · Forms finish cleanly.** Only necessary fields; no reset button; submit disabled after the click,
+with a busy state; a confirmation of what was sent (expert-rated guidelines, tested as a set, Seckler et al. 2014).
 
 ## Recognition (R)
 
@@ -62,7 +85,9 @@ of needed information (N10).
 **W1 · must · The main task works from the default state** with no setup the app could do itself (N7).
 **W2 · should · Few steps.** Frequent tasks take the fewest actions; nothing asks twice for what the app knows
 (N7, W 3.3.7).
-**W3 · should · Each element earns its place.** Remove what does not help a task on this screen (N8).
+**W3 · should · Each element earns its place.** Remove what does not help a task on this screen (N8). Fewer
+options is not a universal rule: when choosing among comparable alternatives, offer a sensible default and a way
+to compare (Chernev et al. 2015).
 
 ## Access (I)
 
@@ -75,6 +100,20 @@ How it behaves for keyboard, screen-reader and zoom users. Contrast and color-al
 **I5 · must · Motion is optional.** Non-essential animation runs only under `prefers-reduced-motion:
 no-preference`; nothing flashes more than 3 times a second (W 2.3.1, 2.3.3).
 **I6 · must · Works at 200% zoom and 320 px width** without loss or two-way scrolling (W 1.4.4, 1.4.10).
+
+## Honesty (D)
+
+How the app treats the person's choices. Defaults decide for most people (Jachimowicz et al. 2019), and deceptive
+patterns measurably change decisions (Luguri & Strahilevitz 2021).
+
+**D1 · must · No deceptive patterns:** no fake urgency or scarcity (timers, stock or activity messages that are false
+or unverifiable), confirmshaming, hidden costs revealed late, items added without consent, subscriptions disguised
+as one-time or free, trick questions, cancelling harder than signing up, forced account creation to finish a task,
+or repeating a request the person already declined (Mathur et al. 2019; Gray et al. 2018).
+**D2 · must · Never pre-select a cost** (a paid add-on, a higher tier, a subscription) **or data sharing**
+(Jachimowicz et al. 2019; Mathur et al. 2019).
+**D3 · should · Defaults serve the person:** pre-select the option that serves them, or none when no option clearly
+does (Johnson & Goldstein 2003; Jachimowicz et al. 2019).
 
 ## Wording (L)
 

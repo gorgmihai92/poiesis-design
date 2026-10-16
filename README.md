@@ -112,8 +112,9 @@ can point to the research note or insight behind it (from poiesis-research or po
 | **A** Atoms | You change atoms, never the derived cells |
 | **P** Publishing | The audit passes before anything is published |
 
-**poiesis-ux** (`plugins/poiesis-ux/skills/ux/rules.md`), from Nielsen's 10 usability heuristics, WCAG 2.2 and
-ISO 9241-110; every rule names its source.
+**poiesis-ux** (`plugins/poiesis-ux/skills/ux/rules.md`), from Nielsen's 10 usability heuristics, WCAG 2.2,
+ISO 9241-110 and studies of how people use interfaces; every rule names its source. It also gives patterns for
+common situations: forms, waiting, confirmations, lists, notifications, transitions, defaults.
 
 | Group | What it checks |
 |---|---|
@@ -123,6 +124,7 @@ ISO 9241-110; every rule names its source.
 | **E** Errors | Mistakes are prevented where possible; errors say what happened and what to do |
 | **R** Recognition | Current state and options are visible, choices are remembered |
 | **W** Effort | The main task works straight away, in few steps |
+| **D** Honesty | No deceptive patterns; never a pre-selected cost or data sharing; defaults serve the person |
 | **I** Access | Everything works by keyboard, focus is visible, targets are big enough, motion can be turned off |
 | **L** Wording | The user's words, not the system's; buttons say what they do |
 | **V** Testing | Tasks are tested end to end, and every finding comes with evidence |
@@ -137,6 +139,17 @@ Each poiesis-ux rule cites its source by key in `plugins/poiesis-ux/skills/ux/ru
 - **Usability:** Nielsen's 10 usability heuristics (1994, revised 2020), cited as N plus the heuristic's number.
 - **Accessibility:** WCAG 2.2, cited as W plus the success criterion.
 - **Interaction principles:** ISO 9241-110:2020, cited as I.
+- **Studies of how people use interfaces,** cited by author and year, one note each in `research/notes`:
+  - forms: Seckler et al. 2014, Bargas-Avila et al. 2007, Seckler et al. 2012 (E1, E4, E5);
+  - waiting and progress: Shneiderman 1984, Myers 1985, Harrison et al. 2007 (F1, F4, F5);
+  - confirmations and habituation: Bravo-Lillo et al. 2013, Vance et al. 2018 (K6);
+  - stable lists: Findlater & McGrenere 2004, Gajos et al. 2008 (K7);
+  - notifications: Iqbal & Bailey 2008, Okoshi et al. 2018, Mark et al. 2008 (K8);
+  - transitions: Heer & Robertson 2007 (F6);
+  - defaults and choices: Johnson & Goldstein 2003, Jachimowicz et al. 2019, Chernev et al. 2015 (D2, D3, W3);
+  - deceptive patterns: Mathur et al. 2019, Gray et al. 2018, Luguri & Strahilevitz 2021 (D1).
+
+  Most are desktop lab studies with small samples, so these rules are **should**, except the honesty rules.
 - **Contrast in poiesis-ui (C3):** the WCAG 2.2 thresholds: 4.5:1 for text, 3:1 for large text and for shapes and
   indicators.
 - **The other poiesis-ui rules** (type scale, roles, spacing, atoms and cells, the publish gate): the plugin's own
@@ -188,12 +201,13 @@ plugins/
     .claude-plugin/
       plugin.json              name, version, description
     skills/ux/                 the skill: what Claude follows when it designs or changes a flow
-      SKILL.md                 entry point: set up ux.md, build, test
-      rules.md                 rules F, K, N, E, R, W, I, L, V with ids and sources
+      SKILL.md                 entry point: set up ux.md, build with the patterns, test
+      rules.md                 rules F, K, N, E, R, W, I, D, L, V with ids and sources
       templates/
         ux.md                  the project's task file, created on first use
     agents/
       ux-tester.md             does each task in ux.md and reports findings by rule id, with evidence
+research/                      the sources behind the evidence-based rules: one note per study
 CHANGELOG.md                   what changed in each version
 LICENSE                        MIT
 ```

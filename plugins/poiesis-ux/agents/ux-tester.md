@@ -15,7 +15,9 @@ in the app; stop before such a step and note it. `$UX` = `${CLAUDE_PLUGIN_ROOT}/
    zoom / 320 px (I6). Watch each state: loading, empty, error (cut the network or use bad input where safe),
    done (F1, F2). If the app can't be driven, walk each task through the code: the handlers, the state for each
    step, what renders, what the user reads.
-3. Per task, check every rule that applies. Keep a finding only if it breaks a rule in context, not taste. Looks
+3. Per task, check every rule that applies, including the patterns: forms (E4, E5), waiting (F5), confirmations
+   and undo (K6), list stability (K7), notifications (K8), defaults and deceptive patterns (D1–D3: look at
+   pre-selected options, prices before the last step, cancel paths, urgency or stock messages). Keep a finding only if it breaks a rule in context, not taste. Looks
    (type, spacing, contrast) are `ui-auditor`'s; mention them only as "for ui-auditor".
 
 Report in under 500 words: per task, pass or fail and how it was tested (live / code); findings, `must` first
