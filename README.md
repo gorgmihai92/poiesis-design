@@ -130,6 +130,18 @@ ISO 9241-110; every rule names its source.
 The two checks don't overlap: `ui-auditor` reads your code for how it looks, `ux-tester` uses your app to see how
 it behaves. If one notices the other's kind of problem, it hands it over.
 
+## Where the rules come from
+
+Each poiesis-ux rule cites its source by key in `plugins/poiesis-ux/skills/ux/rules.md`.
+
+- **Usability:** Nielsen's 10 usability heuristics (1994, revised 2020), cited as N plus the heuristic's number.
+- **Accessibility:** WCAG 2.2, cited as W plus the success criterion.
+- **Interaction principles:** ISO 9241-110:2020, cited as I.
+- **Contrast in poiesis-ui (C3):** the WCAG 2.2 thresholds: 4.5:1 for text, 3:1 for large text and for shapes and
+  indicators.
+- **The other poiesis-ui rules** (type scale, roles, spacing, atoms and cells, the publish gate): the plugin's own
+  design conventions. Your project's decisions override them.
+
 ## What it adds to your project
 
 ```
