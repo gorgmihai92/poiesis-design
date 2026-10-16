@@ -1,6 +1,6 @@
 # UX
 
-The project's main tasks, at `.poiesis-design/ux.md`, walked by `poiesis-design:ux-tester`. Rules: the `ux`
+The project's main tasks, at `.poiesis-design/ux.md`, walked by `poiesis-ux:ux-tester`. Rules: the `ux`
 skill's `rules.md`; decisions here override them.
 
 ## Run

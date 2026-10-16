@@ -36,7 +36,7 @@ const config = {
 };
 
 const header = (name) =>
-  `/* Managed by poiesis-design ${VERSION} (${name}). Do not edit: change atoms.css, or add project cells in another\n   file. Refresh with init.mjs --update. */\n`;
+  `/* Managed by poiesis-ui ${VERSION} (${name}). Do not edit: change atoms.css, or add project cells in another\n   file. Refresh with init.mjs --update. */\n`;
 
 function copyManaged(src, dest, name) {
   mkdirSync(dirname(dest), { recursive: true });
@@ -53,7 +53,7 @@ function atomsFromPreset(preset) {
   }
   return atoms.replace(
     'Poiesis UI · atoms:',
-    `Poiesis UI · atoms (preset "${preset}", poiesis-design ${VERSION}):`,
+    `Poiesis UI · atoms (preset "${preset}", poiesis-ui ${VERSION}):`,
   );
 }
 
@@ -67,7 +67,7 @@ if (!flag('audit-only')) {
     process.exit(2);
   }
   const styles = join(root, config.styles);
-  console.log(flag('update') ? `Updating poiesis-design files to ${VERSION}` : `Setting up poiesis-design ${VERSION}`);
+  console.log(flag('update') ? `Updating poiesis-ui files to ${VERSION}` : `Setting up poiesis-ui ${VERSION}`);
   copyManaged(join(UI, 'tokens/cells.css'), join(styles, 'poiesis/cells.css'), 'cells');
 
   const atomsPath = join(styles, 'atoms.css');

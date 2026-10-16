@@ -1,0 +1,21 @@
+{
+  "name": "poiesis-ui",
+  "version": "0.3.0",
+  "description": "How your interface looks: text sizes, hierarchy, spacing and color, all derived from a few values you choose. Rules, an auditor that checks your code, and a gate that holds back publishing until the check passes.",
+  "author": {
+    "name": "George Mihai",
+    "email": "hi@georgemihai.com"
+  },
+  "homepage": "https://github.com/gorgmihai92/poiesis-design",
+  "repository": "https://github.com/gorgmihai92/poiesis-design",
+  "license": "MIT",
+  "keywords": [
+    "ui",
+    "design-system",
+    "typography",
+    "spacing",
+    "color",
+    "tokens",
+    "audit"
+  ]
+}

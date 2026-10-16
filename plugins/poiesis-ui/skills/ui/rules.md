@@ -1,6 +1,6 @@
 # Poiesis UI rules
 
-Used for building (skill `ui`) and auditing (agent `ui-auditor`). How the app behaves is the `ux` skill; its
+Used for building (skill `ui`) and auditing (agent `ui-auditor`). How the app behaves is the `ux` skill (plugin poiesis-ux); its
 rule letters (F, K, N, E, R, W, I, L, V) never repeat these, so an id names one rule across the toolkit. **must** = a defect when broken; **should** = a
 default you may break on purpose, with the reason in the project's design notes. A project decision (in
 `design.md` or `CLAUDE.md`) overrides a rule. "Cells" are the tokens in `tokens/cells.css`.

@@ -1,21 +1,33 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "poiesis-design",
-  "description": "Design toolkit for Claude Code: how a UI looks (typography, hierarchy, spacing and color as shared tokens, with an auditor and a publish gate) and how it behaves (UX rules and a tester that walks the app's tasks).",
+  "description": "Design toolkit for Claude Code, in two plugins: poiesis-ui (how an interface looks) and poiesis-ux (how an app behaves).",
   "owner": {
     "name": "George Mihai",
     "email": "hi@georgemihai.com"
   },
   "plugins": [
     {
-      "name": "poiesis-design",
-      "description": "UI and UX for any project. ui: typography, hierarchy, spacing and color in atoms → cells, rules, ui-auditor and a publish gate. ux: behavior rules with sources (Nielsen, WCAG 2.2, ISO 9241-110) and ux-tester, which walks the project's tasks in the running app.",
-      "version": "0.2.0",
+      "name": "poiesis-ui",
+      "description": "How your interface looks: text sizes, hierarchy, spacing and color, all derived from a few values you choose. Rules, an auditor that checks your code, and a gate that holds back publishing until the check passes.",
+      "version": "0.3.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"
       },
-      "source": "./plugins/poiesis-design",
+      "source": "./plugins/poiesis-ui",
+      "category": "design",
+      "homepage": "https://github.com/gorgmihai92/poiesis-design"
+    },
+    {
+      "name": "poiesis-ux",
+      "description": "How your app behaves for the people using it: rules for feedback, errors, control, keyboard use and wording, and a tester that does your app's main tasks the way a person would and reports what gets in their way.",
+      "version": "0.3.0",
+      "author": {
+        "name": "George Mihai",
+        "email": "hi@georgemihai.com"
+      },
+      "source": "./plugins/poiesis-ux",
       "category": "design",
       "homepage": "https://github.com/gorgmihai92/poiesis-design"
     }

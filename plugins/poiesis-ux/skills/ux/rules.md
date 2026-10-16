@@ -1,7 +1,7 @@
 # Poiesis UX rules
 
 How an app behaves for the person using it: what they see happen, what they can do, what it costs them. How it
-looks is the `ui` skill (its rules T, H, S, C, A, P); the letters here don't repeat those, so an id names one rule
+looks is the `ui` skill (plugin poiesis-ui) (its rules T, H, S, C, A, P); the letters here don't repeat those, so an id names one rule
 across the toolkit. Used for building (skill `ux`) and testing (agent `ux-tester`). **must** = a defect when
 broken; **should** = a default you may break on purpose, with the reason under "Decisions" in
 `.poiesis-design/ux.md`. A project decision (`ux.md`, `design.md`, `CLAUDE.md`) overrides a rule.

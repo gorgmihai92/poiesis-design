@@ -8,7 +8,8 @@ description: The basics of a UI as tokens - typography, hierarchy, spacing and c
 **Atoms** (`tokens/atoms.css`) are the few values a project changes. **Cells** (`tokens/cells.css`) derive from
 them and are the same everywhere: type scale, role tokens (title, heading, subheading, body, label, caption),
 spacing, colors for light and dark. Code and components use cells only. How the app behaves (flows, states,
-errors, keyboard) is the `ux` skill, tested by `ux-tester`. Rules: `rules.md` (cite ids). `$UI` is
+errors, keyboard) is the `ux` skill of the poiesis-ux plugin, tested by
+`ux-tester`. Rules: `rules.md` (cite ids). `$UI` is
 this folder (`${CLAUDE_PLUGIN_ROOT}/skills/ui`).
 
 **Set up.** Pick the preset from the project (`tool` dense UI, `reading` long text, `expressive` brand pages) and
@@ -25,6 +26,6 @@ atoms on that element plus `data-atoms`.
 **Build.** Text takes a role's size, weight and leading together (H1). Spacing from `--space-*` and `--pad-*`.
 After a change: `node $UI/scripts/scan.mjs <dirs>`. `init.mjs --update` refreshes cells; atoms stay.
 
-**Publish (P1).** Before any push, deploy or release, run `poiesis-design:ui-auditor`; it records pass or fail and a
+**Publish (P1).** Before any push, deploy or release, run `poiesis-ui:ui-auditor`; it records pass or fail and a
 hook blocks publishing until the current UI passed. Only the user can accept open findings:
 `node $UI/scripts/audit-stamp.mjs accept --note "..."`.
