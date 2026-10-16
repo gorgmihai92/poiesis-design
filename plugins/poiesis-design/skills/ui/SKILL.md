@@ -7,7 +7,8 @@ description: The basics of a UI as tokens - typography, hierarchy, spacing and c
 
 **Atoms** (`tokens/atoms.css`) are the few values a project changes. **Cells** (`tokens/cells.css`) derive from
 them and are the same everywhere: type scale, role tokens (title, heading, subheading, body, label, caption),
-spacing, colors for light and dark. Code and components use cells only. Rules: `rules.md` (cite ids). `$UI` is
+spacing, colors for light and dark. Code and components use cells only. How the app behaves (flows, states,
+errors, keyboard) is the `ux` skill, tested by `ux-tester`. Rules: `rules.md` (cite ids). `$UI` is
 this folder (`${CLAUDE_PLUGIN_ROOT}/skills/ui`).
 
 **Set up.** Pick the preset from the project (`tool` dense UI, `reading` long text, `expressive` brand pages) and

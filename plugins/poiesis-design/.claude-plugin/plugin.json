@@ -1,7 +1,7 @@
 {
   "name": "poiesis-design",
-  "version": "0.1.0",
-  "description": "UI basics as tokens: typography, hierarchy, spacing and color in atoms → cells, with rules, an auditor and a publish gate.",
+  "version": "0.2.0",
+  "description": "UI and UX for any project. ui: typography, hierarchy, spacing and color in atoms → cells, rules, ui-auditor and a publish gate. ux: behavior rules with sources (Nielsen, WCAG 2.2, ISO 9241-110) and ux-tester, which walks the project's tasks in the running app.",
   "author": {
     "name": "George Mihai",
     "email": "hi@georgemihai.com"
@@ -9,5 +9,15 @@
   "homepage": "https://github.com/gorgmihai92/poiesis-design",
   "repository": "https://github.com/gorgmihai92/poiesis-design",
   "license": "MIT",
-  "keywords": ["ui", "design-system", "typography", "spacing", "tokens", "audit"]
+  "keywords": [
+    "audit",
+    "design-system",
+    "spacing",
+    "testing",
+    "tokens",
+    "typography",
+    "ui",
+    "usability",
+    "ux"
+  ]
 }
