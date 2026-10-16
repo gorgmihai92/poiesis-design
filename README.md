@@ -3,8 +3,19 @@
 Two Claude Code plugins for designing an app and checking it. Claude follows their rules while it builds your
 interface, and runs a check before you publish.
 
-Part of the Poiesis toolkits: [poiesis-research](https://github.com/gorgmihai92/poiesis-research) (research) and
-[poiesis-design](https://github.com/gorgmihai92/poiesis-design) (how an app looks and behaves).
+## The Poiesis toolkits
+
+**Collect → connect → create.** Three toolkits, each usable on its own; together, each one builds on what the
+previous one left in your project.
+
+| Toolkit | You | What it does | Leaves in your project |
+|---|---|---|---|
+| [poiesis-research](https://github.com/gorgmihai92/poiesis-research) | **collect** | finds and cites sources: the literature on a topic, the evidence behind a claim, the grants that fit | `research/` |
+| [poiesis-insight](https://github.com/gorgmihai92/poiesis-insight) | **connect** | interprets what was collected, or any data: insights and foresight, each conclusion challenged | `insights/`, `foresight/` |
+| [poiesis-design](https://github.com/gorgmihai92/poiesis-design) | **create** | designs the interface and how the app behaves, and checks both before release | `.poiesis-design/`, your design tokens |
+
+Research reports what sources say and stops there. Insight reads `research/` (or your own data) and says what it
+means. Design decisions can then point to the insight or source behind them.
 
 ## What it covers
 
@@ -87,7 +98,8 @@ may need you, for example to sign in.
 
 Every rule has an id, like C3 or K1, and the letters never repeat between the two plugins. **must** is a defect;
 **should** is a good default you can break on purpose if you write down why. **Your project's decisions win:**
-write them in `design.md`, `CLAUDE.md` or the "Decisions" part of `ux.md`, and both checks follow them.
+write them in `design.md`, `CLAUDE.md` or the "Decisions" part of `ux.md`, and both checks follow them. A decision
+can point to the research note or insight behind it (from poiesis-research or poiesis-insight).
 
 **poiesis-ui** (`plugins/poiesis-ui/skills/ui/rules.md`)
 
