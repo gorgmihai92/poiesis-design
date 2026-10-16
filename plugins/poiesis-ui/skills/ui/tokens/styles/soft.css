@@ -1,0 +1,8 @@
+/* Style · soft: rounded corners, no lines, gentle shadows; selected = accent tint. Friendly, consumer apps. */
+:root {
+  --atom-radius: 0.5rem;
+  --atom-line: 0px;
+  --atom-elevation: 0.7;
+  --atom-select-ink: 0;
+  --atom-motion: 1;
+}

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 (poiesis-ui) · 0.1.0 (poiesis-components)
+- poiesis-ui: shape atoms (radius, line, elevation, selected style, motion) and their cells, including
+  `--selected-bg`, `--selected-fg` and `--selected-ring`; four styles in `tokens/styles` (quiet, soft, crisp,
+  bold), chosen with `init.mjs --style`, independent of the preset; rules G1–G4; `scan.mjs` flags literal shape.
+  Contrast passes for every style with every preset, light and dark.
+- New plugin poiesis-components: 17 components on the cells, built to the ux rules, taken from a production side
+  panel and made project-neutral; `add.mjs` copies them with what they import; `preview.mjs` shows all of them in
+  the four styles.
+
 ## 0.4.0 (poiesis-ux)
 - Evidence-based patterns for common situations (forms, waiting, confirmations, lists, notifications, transitions,
   defaults), as an index in the skill and as rules with their studies: F5, F6, K6, K7, K8, E4, E5; E1 and W3

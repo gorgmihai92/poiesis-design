@@ -1,0 +1,50 @@
+/* Button and IconButton. Targets at least 24px (I4); busy shows at once (F1). */
+.pc-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-block-size: 1.5rem;
+  padding: var(--pad-s) var(--pad-m);
+  border: var(--line) solid transparent;
+  border-radius: var(--radius-m);
+  font: inherit;
+  font-size: var(--body-size);
+  font-weight: var(--weight-strong);
+  line-height: var(--leading-ui);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duration-fast), color var(--duration-fast);
+}
+.pc-button[data-size="s"] { padding: var(--space-1) var(--pad-s); }
+.pc-button[data-variant="primary"] { background: var(--ink); color: var(--paper); }
+.pc-button[data-variant="primary"]:hover:not(:disabled) { background: var(--accent); color: var(--on-accent); }
+.pc-button[data-variant="secondary"] { background: var(--surface-2); color: var(--ink); border-color: var(--line-color); }
+.pc-button[data-variant="secondary"]:hover:not(:disabled) { background: var(--surface-3); }
+.pc-button[data-variant="quiet"] {
+  padding-inline: 0;
+  background: transparent;
+  color: var(--muted);
+  font-weight: var(--weight-regular);
+  text-decoration: underline var(--accent) 1px;
+  text-underline-offset: 3px;
+}
+.pc-button[data-variant="quiet"]:hover:not(:disabled) { color: var(--ink); }
+.pc-button:disabled { opacity: 0.5; cursor: not-allowed; }
+.pc-button[aria-busy="true"] { cursor: progress; opacity: 1; }
+
+.pc-icon-button {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: 1.5rem;
+  min-block-size: 1.5rem;
+  padding: var(--space-1);
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background-color var(--duration-fast), color var(--duration-fast);
+}
+.pc-icon-button:hover:not([aria-pressed="true"]) { background: var(--surface-2); color: var(--ink); }
+.pc-icon-button svg { inline-size: 1rem; block-size: 1rem; stroke-linecap: square; }

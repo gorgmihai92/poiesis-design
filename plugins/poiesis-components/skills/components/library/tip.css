@@ -1,0 +1,12 @@
+/* Tooltip: the product's own font and size, never the browser's title (I3 keeps the name on the target). */
+.pc-tip {
+  z-index: 50;
+  max-inline-size: 34ch;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-s);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: var(--body-size);
+  line-height: var(--leading-ui);
+  box-shadow: var(--shadow-2);
+}

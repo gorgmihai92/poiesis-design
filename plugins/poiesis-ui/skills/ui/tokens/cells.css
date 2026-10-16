@@ -80,4 +80,33 @@
   --danger-tint: light-dark(oklch(0.95 0.035 var(--atom-danger-h)), oklch(0.28 0.05 var(--atom-danger-h)));
   --warning-tint: light-dark(oklch(0.96 0.045 var(--atom-warning-h)), oklch(0.29 0.05 var(--atom-warning-h)));
   --success-tint: light-dark(oklch(0.95 0.035 var(--atom-success-h)), oklch(0.28 0.05 var(--atom-success-h)));
+  --accent-tint: light-dark(oklch(0.95 calc(var(--atom-accent-c) * 0.2) var(--atom-accent-h)), oklch(0.3 calc(var(--atom-accent-c) * 0.35) var(--atom-accent-h)));
+
+  /* Selected / open (G3): inverted when --atom-select-ink is 1, an accent tint with ink text when 0 */
+  --selected-bg: light-dark(
+    oklch(calc(0.95 - 0.73 * var(--atom-select-ink)) calc(var(--atom-accent-c) * 0.2 * (1 - var(--atom-select-ink)) + var(--atom-neutral-c) * var(--atom-select-ink)) calc(var(--atom-accent-h) + (var(--atom-neutral-h) - var(--atom-accent-h)) * var(--atom-select-ink))),
+    oklch(calc(0.3 + 0.64 * var(--atom-select-ink)) calc(var(--atom-accent-c) * 0.35 * (1 - var(--atom-select-ink)) + var(--atom-neutral-c) * var(--atom-select-ink)) calc(var(--atom-accent-h) + (var(--atom-neutral-h) - var(--atom-accent-h)) * var(--atom-select-ink)))
+  );
+  /* A tint is too close to the page to show the state alone (W 1.4.11): it adds an accent ring, 3:1 on paper */
+  --ring: 2px; /* the width of state rings: focus, selected in tint mode, invalid */
+  --selected-ring: calc((1 - var(--atom-select-ink)) * var(--ring));
+  --selected-fg: light-dark(
+    oklch(calc(0.22 + 0.775 * var(--atom-select-ink)) var(--atom-neutral-c) var(--atom-neutral-h)),
+    oklch(calc(0.94 - 0.77 * var(--atom-select-ink)) var(--atom-neutral-c) var(--atom-neutral-h))
+  );
+
+  /* Shape (G) */
+  --radius-s: calc(var(--atom-radius) * 0.5);
+  --radius-m: var(--atom-radius);
+  --radius-l: calc(var(--atom-radius) * 1.5);
+  --line: var(--atom-line);
+  --line-color: light-dark(oklch(0.6 var(--atom-neutral-c) var(--atom-neutral-h)), oklch(0.52 var(--atom-neutral-c) var(--atom-neutral-h)));
+  --shadow-1: 0 1px 2px oklch(0 0 0 / calc(var(--atom-elevation) * 0.12)), 0 2px 8px oklch(0 0 0 / calc(var(--atom-elevation) * 0.08));
+  --shadow-2: 0 2px 4px oklch(0 0 0 / calc(var(--atom-elevation) * 0.1)), 0 8px 24px oklch(0 0 0 / calc(var(--atom-elevation) * 0.16));
+  --duration-fast: calc(120ms * var(--atom-motion));
+  --duration-base: calc(200ms * var(--atom-motion));
 }
+/* @pair --selected-fg on --selected-bg 4.5 */
+/* @pair --line-color on --paper 3 */
+/* @pair --line-color on --surface-1 3 */
+/* @pair --ink on --accent-tint 4.5 */

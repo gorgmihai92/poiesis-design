@@ -42,6 +42,19 @@ groups.
 **C4 · must · Never color alone.** Status and severity also have a word, icon or shape.
 **C5 · should · Structure from space and grey steps** before lines.
 
+## Shape (G)
+
+The style: corners, lines, shadows, how a selected thing looks, motion. Set by the shape atoms or a style file
+(`tokens/styles`: quiet, soft, crisp, bold), independent of the preset (type and density).
+
+**G1 · must · Shape from cells.** Corner radius, border width and color, shadows and transition lengths use
+`--radius-*`, `--line`, `--line-color`, `--ring`, `--shadow-*`, `--duration-*`. Only 0 and hairlines (1–2px) are literal.
+**G2 · must · Lines are optional, boundaries are not.** With `--line` at 0, a control or tile still differs from
+what is around it by a surface step; an input's boundary, when it is the only cue, keeps 3:1 (W 1.4.11).
+**G3 · must · Selected and open use the selected cells:** `--selected-bg`, `--selected-fg` and the
+`--selected-ring` (an accent ring in tint mode, where the fill alone is too faint), never a color of their own.
+**G4 · should · One style per product.** Mixing radii or line weights between screens reads as two products.
+
 ## Atoms (A)
 
 **A1 · must · Projects change atoms only.** `poiesis/cells.css` is managed. A missing value becomes a project cell

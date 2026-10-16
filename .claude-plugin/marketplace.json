@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "poiesis-design",
-  "description": "Design toolkit for Claude Code, in two plugins: poiesis-ui (how an interface looks) and poiesis-ux (how an app behaves).",
+  "description": "Design toolkit for Claude Code: poiesis-ui (how an interface looks), poiesis-ux (how an app behaves) and poiesis-components (components built on both).",
   "owner": {
     "name": "George Mihai",
     "email": "hi@georgemihai.com"
@@ -9,8 +9,8 @@
   "plugins": [
     {
       "name": "poiesis-ui",
-      "description": "How your interface looks: text sizes, hierarchy, spacing and color, all derived from a few values you choose. Rules, an auditor that checks your code, and a gate that holds back publishing until the check passes.",
-      "version": "0.3.0",
+      "description": "How your interface looks: text sizes, hierarchy, spacing, color and shape (corners, lines, shadows), all derived from a few values you choose, in a preset and a style. Rules, an auditor that checks your code, and a gate that holds back publishing until the check passes.",
+      "version": "0.4.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"
@@ -28,6 +28,18 @@
         "email": "hi@georgemihai.com"
       },
       "source": "./plugins/poiesis-ux",
+      "category": "design",
+      "homepage": "https://github.com/gorgmihai92/poiesis-design"
+    },
+    {
+      "name": "poiesis-components",
+      "description": "UI components built only on the poiesis-ui cells and meeting the poiesis-ux rules: copy them into a React project, then give the interface a direction by choosing a style (quiet, soft, crisp, bold) and a preset.",
+      "version": "0.1.0",
+      "author": {
+        "name": "George Mihai",
+        "email": "hi@georgemihai.com"
+      },
+      "source": "./plugins/poiesis-components",
       "category": "design",
       "homepage": "https://github.com/gorgmihai92/poiesis-design"
     }

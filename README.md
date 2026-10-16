@@ -1,7 +1,7 @@
 # Poiesis Design
 
-Two Claude Code plugins for designing an app and checking it. Claude follows their rules while it builds your
-interface, and runs a check before you publish.
+Three Claude Code plugins for designing an app and checking it. Claude follows their rules while it builds your
+interface, builds it from components that already meet them, and runs a check before you publish.
 
 ## The Poiesis toolkits
 
@@ -23,11 +23,13 @@ means. Design decisions can then point to the insight or source behind them.
 |---|---|---|---|
 | **poiesis-ui** | **how the interface looks:** text sizes, what stands out, spacing and color | `ui-auditor`, which reads your code | `atoms.css`, `poiesis/cells.css`, `.poiesis-design/config.json` |
 | **poiesis-ux** | **how the app behaves:** what happens when people click, wait, make a mistake or use only a keyboard | `ux-tester`, which does your app's main tasks | `.poiesis-design/ux.md` |
+| **poiesis-components** | **the pieces a screen is made of:** buttons, tabs, fields, notices and more, built on both | both checks above | the components you copy, e.g. `src/components/poiesis/` |
 
 Take a single button. Its size, weight and color are UI. Whether something visibly happens when you press it,
 whether you can reach it with the Tab key, and whether its label says what it will do are UX. A screen can look
 right and still be hard to use, or be easy to use and look messy. You need both, so the plugins are separate:
-install the one you need, or both.
+install the one you need, or both. **poiesis-components** is where they meet: a button from it already has its
+look from poiesis-ui and its behavior from poiesis-ux, so you start from pieces that pass both checks.
 
 ## Install
 
@@ -37,9 +39,11 @@ In Claude Code:
 /plugin marketplace add gorgmihai92/poiesis-design
 /plugin install poiesis-ui@poiesis-design
 /plugin install poiesis-ux@poiesis-design
+/plugin install poiesis-components@poiesis-design
 ```
 
-poiesis-ui needs **Node 18+**; the tokens it writes need a recent browser (Chrome 123, Safari 17.5, Firefox 120).
+poiesis-components needs poiesis-ui (its cells) and a React 18+ project; four components use the `radix-ui`
+package. poiesis-ui needs **Node 18+**; the tokens it writes need a recent browser (Chrome 123, Safari 17.5, Firefox 120).
 poiesis-ux needs nothing else; it drives the running app when Claude in Chrome is available.
 
 ## What to ask Claude
@@ -52,6 +56,8 @@ Ask in plain language. The plugins come in when the work is about design, and yo
 - *"Audit the UI."* `ui-auditor` reads your code and lists what breaks a rule.
 - *"Write ux.md for this app."* Claude reads the code and writes the 5–10 tasks people do most.
 - *"Test the UX."* `ux-tester` does each task and reports what got in the way.
+- *"Build the settings screen from the components."* Claude copies the components it needs and builds with them.
+- *"Make it feel softer"* or *"more precise, with thin lines."* Claude switches the style; every component follows.
 
 ## How it works
 
@@ -68,8 +74,15 @@ cells   everything derived from them: text sizes, the styles for title, heading,
 ```
 
 Your code uses only the cells. To make the whole app denser, the headings bigger or the brand color different,
-you change one atom and everything follows. It starts from one of three presets: `tool` (dense apps and
-dashboards), `reading` (long text) or `expressive` (brand and landing pages). A project that already has its own
+you change one atom and everything follows. Two choices set the starting atoms:
+
+- a **preset**, for type and density: `tool` (dense apps and dashboards), `reading` (long text) or `expressive`
+  (brand and landing pages);
+- a **style**, for shape: corners, lines, shadows, how a selected thing looks and how much moves. `quiet` is
+  square with no lines or shadows and inverts what is selected; `soft` is rounded with gentle shadows; `crisp`
+  has small corners and thin lines; `bold` is round, with strong lines, and raised.
+
+Any preset goes with any style. A project that already has its own
 design system can use the rules and the auditor alone.
 
 **The publish gate.** Once a project is set up, Claude can't push, deploy or publish it until `ui-auditor` has
@@ -94,9 +107,22 @@ get a pass or fail per task, then each finding with the step, the rule it breaks
 It runs after you change a flow and before a release. It doesn't block publishing, because testing a live app
 may need you, for example to sign in.
 
+### poiesis-components: pieces that already pass both
+
+Seventeen components a screen is usually made of: button, icon button, switch, tabs, segmented control, tooltip,
+disclosure, field, notice, loading, status dot, meter, progress, tile, section, hint and empty state. Each one
+uses only the poiesis-ui cells and is built to the poiesis-ux rules it touches: a button shows at once that it is
+working, a field's error says what to do and keeps what you typed, a status dot changes shape as well as color,
+nothing moves when a tab changes. `catalog.md` lists the rules each one meets.
+
+`add.mjs` copies the ones you ask for into your project, with what they need. The copies are yours to change,
+the way shadcn/ui works. Because they hold no values of their own, switching the style or preset in `atoms.css`
+restyles all of them at once. `preview.mjs` builds one page with every component in the four styles side by
+side, so you can choose a direction by looking.
+
 ## The rules
 
-Every rule has an id, like C3 or K1, and the letters never repeat between the two plugins. **must** is a defect;
+Every rule has an id, like C3 or K1, and the letters never repeat between the plugins. **must** is a defect;
 **should** is a good default you can break on purpose if you write down why. **Your project's decisions win:**
 write them in `design.md`, `CLAUDE.md` or the "Decisions" part of `ux.md`, and both checks follow them. A decision
 can point to the research note or insight behind it (from poiesis-research or poiesis-insight).
@@ -109,6 +135,7 @@ can point to the research note or insight behind it (from poiesis-research or po
 | **H** Hierarchy | Every text has one role (title, heading, body…); importance shown by weight, color and space first |
 | **S** Spacing | Spacing comes from the scale; things that belong together sit closer than things that don't |
 | **C** Color | Colors are used by meaning, text is readable (contrast), meaning never shown by color alone |
+| **G** Shape | Corners, lines, shadows and motion come from the style; selected things use the selected cells |
 | **A** Atoms | You change atoms, never the derived cells |
 | **P** Publishing | The audit passes before anything is published |
 
@@ -169,22 +196,23 @@ Each poiesis-ux rule cites its source by key in `plugins/poiesis-ux/skills/ux/ru
 
 ## What's in this repository
 
-The repository is a Claude Code **marketplace** holding two **plugins**, each installable on its own.
+The repository is a Claude Code **marketplace** holding three **plugins**, each installable on its own.
 
 ```
 .claude-plugin/
-  marketplace.json             the marketplace: its name and the two plugins it lists
+  marketplace.json             the marketplace: its name and the three plugins it lists
 plugins/
   poiesis-ui/                  how the interface looks
     .claude-plugin/
       plugin.json              name, version, description
     skills/ui/                 the skill: what Claude follows when it styles or checks a UI
       SKILL.md                 entry point: set up, tune, build, publish
-      rules.md                 rules T, H, S, C, A, P with ids
+      rules.md                 rules T, H, S, C, G, A, P with ids
       tokens/
         atoms.css              the atoms and their defaults
         cells.css              the cells derived from them
-        presets/               tool.css, reading.css, expressive.css: starting atoms per kind of app
+        presets/               tool.css, reading.css, expressive.css: type and density per kind of app
+        styles/                quiet.css, soft.css, crisp.css, bold.css: shape atoms per visual direction
       scripts/                 Node 18+, no dependencies
         init.mjs               set up a project from a preset, or refresh its cells
         resolve.mjs            show what the atoms produce: scales in px, colors in both themes, contrast
@@ -207,6 +235,16 @@ plugins/
         ux.md                  the project's task file, created on first use
     agents/
       ux-tester.md             does each task in ux.md and reports findings by rule id, with evidence
+  poiesis-components/          the pieces a screen is made of, built on both
+    .claude-plugin/
+      plugin.json              name, version, description
+    skills/components/
+      SKILL.md                 entry point: set up, copy, build, make a new component, check
+      catalog.md               each component, what it is for and the rules it meets
+      library/                 one .tsx and one .css per component, plus base.css and cx.ts
+      scripts/
+        add.mjs                copy components and what they import into a project
+        preview.mjs            one page with every component in the four styles
 research/                      the sources behind the evidence-based rules: one note per study
 CHANGELOG.md                   what changed in each version
 LICENSE                        MIT
@@ -218,8 +256,10 @@ LICENSE                        MIT
 /plugin marketplace update poiesis-design
 /plugin update poiesis-ui@poiesis-design
 /plugin update poiesis-ux@poiesis-design
+/plugin update poiesis-components@poiesis-design
 /plugin uninstall poiesis-ui@poiesis-design
 /plugin uninstall poiesis-ux@poiesis-design
+/plugin uninstall poiesis-components@poiesis-design
 ```
 
 In a project that uses poiesis-ui, also run `init.mjs --update` after an update to refresh the derived cells.

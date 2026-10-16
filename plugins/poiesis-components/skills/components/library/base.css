@@ -1,0 +1,16 @@
+/* Poiesis components · base: the focus ring and the selected state every component shares.
+   Uses cells only (poiesis-ui). The focus ring is the one literal line (rules G1, I2). */
+:where(.pc-button, .pc-icon-button, .pc-switch, .pc-tabs__trigger, .pc-segmented__trigger, .pc-disclosure__trigger, .pc-input, .pc-tip-target):focus-visible {
+  outline: var(--ring) solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Selected / open (G3): inverted in the "quiet" and "bold" styles, an accent tint with a ring in the others. */
+:where(.pc-selectable)[aria-pressed="true"],
+:where(.pc-selectable)[aria-checked="true"],
+:where(.pc-selectable)[aria-expanded="true"],
+:where(.pc-selectable)[aria-selected="true"] {
+  background: var(--selected-bg);
+  color: var(--selected-fg);
+  box-shadow: inset 0 0 0 var(--selected-ring) var(--accent);
+}

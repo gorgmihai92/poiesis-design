@@ -1,0 +1,13 @@
+/* Meter (1–3 rising bars) and Progress (a fraction). */
+.pc-meter { display: inline-block; flex: none; inline-size: 0.875rem; block-size: 0.75rem; }
+.pc-meter rect { fill: currentColor; opacity: 0.25; }
+.pc-meter rect[data-on] { opacity: 1; }
+.pc-meter[data-tone="ink"] { color: var(--ink); }
+.pc-meter[data-tone="danger"] { color: var(--danger); }
+.pc-meter[data-tone="warning"] { color: var(--warning); }
+.pc-meter[data-tone="success"] { color: var(--success); }
+.pc-meter[data-tone]:not([data-tone="ink"]) rect:not([data-on]) { fill: var(--ink); }
+
+.pc-progress { display: block; block-size: 0.5rem; border-radius: var(--radius-s); background: var(--surface-2); overflow: hidden; }
+.pc-progress__fill { display: block; block-size: 100%; background: var(--accent); transition: inline-size var(--duration-base); }
+@media (prefers-reduced-motion: reduce) { .pc-progress__fill { transition: none; } }

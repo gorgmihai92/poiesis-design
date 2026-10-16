@@ -28,4 +28,11 @@
   --atom-warning-h: 75;
   --atom-success-h: 170;
   --atom-status-c: 0.17;
+
+  /* Shape: the style (tokens/styles), independent of the preset. These defaults are "quiet". */
+  --atom-radius: 0rem;         /* corners: 0 square, 0.125–0.25rem crisp, 0.5rem soft, 0.75rem round */
+  --atom-line: 0px;            /* borders on controls and tiles: 0px = structure from space and grey steps, 1px = lines */
+  --atom-elevation: 0;         /* shadow on tiles and floating layers: 0 flat … 1 raised */
+  --atom-select-ink: 1;        /* selected / open: 1 = inverted (ink background), 0 = accent tint. Use 0 or 1 */
+  --atom-motion: 1;            /* transition length: 0 none, 1 normal. Reduced motion always turns it off */
 }

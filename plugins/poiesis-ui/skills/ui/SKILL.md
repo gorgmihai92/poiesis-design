@@ -7,7 +7,10 @@ description: The basics of a UI as tokens - typography, hierarchy, spacing and c
 
 **Atoms** (`tokens/atoms.css`) are the few values a project changes. **Cells** (`tokens/cells.css`) derive from
 them and are the same everywhere: type scale, role tokens (title, heading, subheading, body, label, caption),
-spacing, colors for light and dark. Code and components use cells only. How the app behaves (flows, states,
+spacing, colors for light and dark, and shape (corners, lines, shadows, selected, motion). Code and components
+use cells only. The **style** (`tokens/styles`: quiet, soft, crisp, bold) sets the shape atoms, the **preset**
+the type and density; `init.mjs --style` picks one. Ready-made components on these cells: plugin
+poiesis-components. How the app behaves (flows, states,
 errors, keyboard) is the `ux` skill of the poiesis-ux plugin, tested by
 `ux-tester`. Rules: `rules.md` (cite ids). `$UI` is
 this folder (`${CLAUDE_PLUGIN_ROOT}/skills/ui`).

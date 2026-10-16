@@ -7,7 +7,7 @@ import { join, extname, relative } from 'node:path';
 
 const EXT = new Set(['.css', '.scss', '.less', '.html', '.jsx', '.tsx', '.vue', '.svelte', '.astro']);
 const SKIP = new Set(['node_modules', '.git', 'dist', 'build', '.next', 'out', 'coverage', '.vercel', 'vendor', '.turbo']);
-const TOKEN_FILE = /(^|\/)(atoms|cells)(\.[\w-]+)?\.css$|\/presets\//;
+const TOKEN_FILE = /(^|\/)(atoms|cells)(\.[\w-]+)?\.css$|\/(presets|styles)\//;
 const num = String.raw`-?\d*\.?\d+`;
 const hairline = /^(?:0|0?\.5px|-?1px|-?2px)$/;
 
@@ -39,6 +39,15 @@ const checks = [
       l.match(/(?<![\w&-])#[0-9a-fA-F]{3,8}\b(?![\w-])/)?.[0] ??
       l.match(/\b(?:rgba?|hsla?|oklch|oklab|lab|lch)\(\s*\d/)?.[0] ??
       l.match(/\b(?:bg|text|border|fill|stroke|ring|outline|from|to|via)-\[#[0-9a-fA-F]+\]/)?.[0] ?? null,
+  },
+  {
+    id: 'G1', what: 'literal shape (radius, border, shadow, duration)',
+    test: (l) =>
+      l.match(new RegExp(String.raw`border-radius\s*:\s*(?!var\()[^;]*?[1-9]\d*\.?\d*(px|rem|em|%)`))?.[0] ??
+      l.match(/box-shadow\s*:\s*(?!var\(|none|inset 0 0 0 var)[^;]*\d+px/)?.[0] ??
+      l.match(/border(-[a-z]+)?(-width)?\s*:\s*(?!var\()[^;]*?\b[1-9]\d*px/)?.[0] ??
+      l.match(/\b(?:transition|animation)(-duration)?\s*:[^;]*?\b\d+m?s\b/)?.[0] ??
+      l.match(/\brounded-(?:sm|md|lg|xl|2xl|3xl|full|\[[^\]]+\])/)?.[0] ?? null,
   },
   { id: 'C1', what: 'atom used directly (use a cell)', test: (l) => l.match(/var\(\s*--atom-[\w-]+/)?.[0] ?? null },
   { id: 'A2', what: 'atom set outside atoms.css (needs data-atoms there)', test: (l) => (/data-atoms/.test(l) ? null : l.match(/--atom-[\w-]+\s*:/)?.[0] ?? null) },
