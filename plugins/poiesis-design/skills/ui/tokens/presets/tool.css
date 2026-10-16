@@ -1,0 +1,9 @@
+/* Preset · tool: dense, calm, used all day (dashboards, panels, editors). Only the atoms that differ. */
+:root {
+  --atom-text-base: 0.875rem;
+  --atom-ratio: 1.125;
+  --atom-leading: 1.55;
+  --atom-leading-tight: 1.25;
+  --atom-weight-heading: 600;
+  --atom-density: 0.85;
+}

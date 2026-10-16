@@ -1,0 +1,16 @@
+/* Preset · expressive: launch pages, portfolios, brand sites. Only the atoms that differ. */
+:root {
+  --atom-font-body: "DM Sans", system-ui, sans-serif;
+  --atom-font-display: "Fraunces", Georgia, serif;
+  --atom-text-base: 1.0625rem;
+  --atom-ratio: 1.5;
+  --atom-leading: 1.6;
+  --atom-leading-tight: 1.05;
+  --atom-weight-heading: 600;
+  --atom-space: 0.3125rem;
+  --atom-density: 1.25;
+  --atom-neutral-h: 70;
+  --atom-neutral-c: 0.012;
+  --atom-accent-h: 35;
+  --atom-accent-c: 0.17;
+}

@@ -1,0 +1,11 @@
+/* Preset · reading: long text, articles, docs, reports. Only the atoms that differ. */
+:root {
+  --atom-font-body: "Source Serif 4", Georgia, serif;
+  --atom-font-display: "Inter", system-ui, sans-serif;
+  --atom-text-base: 1.0625rem;
+  --atom-ratio: 1.25;
+  --atom-leading: 1.65;
+  --atom-leading-tight: 1.15;
+  --atom-measure: 66ch;
+  --atom-density: 1.1;
+}

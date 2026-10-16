@@ -1,0 +1,17 @@
+{
+  "description": "Poiesis UI publish gate (rule P1): blocks push/deploy/publish in opted-in projects until ui-auditor has passed on the current UI.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/publish-gate.mjs\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

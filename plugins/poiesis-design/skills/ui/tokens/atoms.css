@@ -1,0 +1,31 @@
+/* Poiesis UI · atoms: the only values a project changes. Cells derive from them.
+   To tune one area, set atoms on that element and give it the attribute data-atoms (rule A2). */
+
+:root {
+  /* Type */
+  --atom-font-body: "Inter", system-ui, sans-serif;
+  --atom-font-display: var(--atom-font-body);
+  --atom-font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --atom-text-base: 1rem;      /* body size. Tools 0.875–1, reading 1–1.125 */
+  --atom-ratio: 1.2;           /* scale ratio. Dense 1.125, calm 1.2, reading 1.25, display 1.333–1.5 */
+  --atom-leading: 1.6;         /* body line height, 1.5–1.65 */
+  --atom-leading-tight: 1.2;   /* heading line height, 1.05–1.25 */
+  --atom-weight-regular: 400;
+  --atom-weight-strong: 600;
+  --atom-weight-heading: 700;
+  --atom-measure: 68ch;        /* 45–75ch */
+
+  /* Space */
+  --atom-space: 0.25rem;       /* unit; steps are 1 2 3 4 6 8 12 16 24 × unit */
+  --atom-density: 1;           /* padding inside blocks: dense 0.8–0.9, airy 1.2–1.3 */
+
+  /* Color (OKLCH: hue 0–360, chroma 0–0.37) */
+  --atom-neutral-h: 265;
+  --atom-neutral-c: 0.006;     /* 0 = pure grey, 0.01–0.02 = tinted */
+  --atom-accent-h: 255;
+  --atom-accent-c: 0.19;
+  --atom-danger-h: 25;
+  --atom-warning-h: 75;
+  --atom-success-h: 170;
+  --atom-status-c: 0.17;
+}

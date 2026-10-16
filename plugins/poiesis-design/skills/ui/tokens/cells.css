@@ -1,0 +1,83 @@
+/* Poiesis UI · cells: derived from atoms, identical in every project. Code and components use cells only.
+   Needs pow() and light-dark(): Chrome 123, Safari 17.5, Firefox 120. */
+
+:root { color-scheme: light dark; }
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+
+:where(:root, [data-atoms]) {
+  /* Type scale */
+  --font-body: var(--atom-font-body);
+  --font-display: var(--atom-font-display);
+  --font-mono: var(--atom-font-mono);
+  --text-sm: max(0.75rem, calc(var(--atom-text-base) / var(--atom-ratio)));
+  --text-base: var(--atom-text-base);
+  --text-md: calc(var(--atom-text-base) * var(--atom-ratio));
+  --text-lg: calc(var(--atom-text-base) * pow(var(--atom-ratio), 2));
+  --text-xl: calc(var(--atom-text-base) * pow(var(--atom-ratio), 3));
+  --text-2xl: clamp(
+    calc(var(--atom-text-base) * pow(var(--atom-ratio), 3)),
+    calc(var(--atom-text-base) * pow(var(--atom-ratio), 3) * 0.75 + 1.5vw),
+    calc(var(--atom-text-base) * pow(var(--atom-ratio), 4))
+  );
+  --leading-body: var(--atom-leading);
+  --leading-ui: calc(var(--atom-leading) - 0.2);
+  --leading-heading: var(--atom-leading-tight);
+  --leading-display: calc(var(--atom-leading-tight) - 0.1);
+  --weight-regular: var(--atom-weight-regular);
+  --weight-strong: var(--atom-weight-strong);
+  --weight-heading: var(--atom-weight-heading);
+  --measure: var(--atom-measure);
+
+  /* Hierarchy: every piece of text is one role (H1) */
+  --title-size: var(--text-2xl);
+  --title-weight: var(--weight-heading);
+  --title-leading: var(--leading-display);
+  --heading-size: var(--text-lg);
+  --heading-weight: var(--weight-heading);
+  --heading-leading: var(--leading-heading);
+  --subheading-size: var(--text-md);
+  --subheading-weight: var(--weight-strong);
+  --subheading-leading: var(--leading-heading);
+  --body-size: var(--text-base);
+  --body-weight: var(--weight-regular);
+  --body-leading: var(--leading-body);
+  --label-size: var(--text-sm);
+  --label-weight: var(--weight-strong);
+  --label-leading: var(--leading-ui);
+  --caption-size: var(--text-sm);
+  --caption-weight: var(--weight-regular);
+  --caption-leading: var(--leading-ui);
+
+  /* Space */
+  --space-1: var(--atom-space);
+  --space-2: calc(var(--atom-space) * 2);
+  --space-3: calc(var(--atom-space) * 3);
+  --space-4: calc(var(--atom-space) * 4);
+  --space-5: calc(var(--atom-space) * 6);
+  --space-6: calc(var(--atom-space) * 8);
+  --space-7: calc(var(--atom-space) * 12);
+  --space-8: calc(var(--atom-space) * 16);
+  --space-9: calc(var(--atom-space) * 24);
+  --pad-s: calc(var(--atom-space) * 2 * var(--atom-density));
+  --pad-m: calc(var(--atom-space) * 4 * var(--atom-density));
+  --pad-l: calc(var(--atom-space) * 6 * var(--atom-density));
+
+  /* Color, light and dark */
+  --paper: light-dark(oklch(0.995 calc(var(--atom-neutral-c) * 0.3) var(--atom-neutral-h)), oklch(0.17 var(--atom-neutral-c) var(--atom-neutral-h)));
+  --surface-1: light-dark(oklch(0.97 var(--atom-neutral-c) var(--atom-neutral-h)), oklch(0.205 var(--atom-neutral-c) var(--atom-neutral-h)));
+  --surface-2: light-dark(oklch(0.945 var(--atom-neutral-c) var(--atom-neutral-h)), oklch(0.235 var(--atom-neutral-c) var(--atom-neutral-h)));
+  --surface-3: light-dark(oklch(0.92 var(--atom-neutral-c) var(--atom-neutral-h)), oklch(0.265 var(--atom-neutral-c) var(--atom-neutral-h)));
+  --ink: light-dark(oklch(0.22 var(--atom-neutral-c) var(--atom-neutral-h)), oklch(0.94 var(--atom-neutral-c) var(--atom-neutral-h)));
+  --muted: light-dark(oklch(0.5 var(--atom-neutral-c) var(--atom-neutral-h)), oklch(0.73 var(--atom-neutral-c) var(--atom-neutral-h)));
+  --accent: light-dark(oklch(0.55 var(--atom-accent-c) var(--atom-accent-h)), oklch(0.7 var(--atom-accent-c) var(--atom-accent-h)));
+  --accent-text: light-dark(oklch(0.5 var(--atom-accent-c) var(--atom-accent-h)), oklch(0.8 calc(var(--atom-accent-c) * 0.7) var(--atom-accent-h)));
+  --on-accent: light-dark(oklch(1 0 0), oklch(0.17 var(--atom-neutral-c) var(--atom-neutral-h)));
+  --focus: var(--accent);
+  --danger: light-dark(oklch(0.6 var(--atom-status-c) var(--atom-danger-h)), oklch(0.7 var(--atom-status-c) var(--atom-danger-h)));
+  --warning: light-dark(oklch(0.67 var(--atom-status-c) var(--atom-warning-h)), oklch(0.8 var(--atom-status-c) var(--atom-warning-h)));
+  --success: light-dark(oklch(0.62 var(--atom-status-c) var(--atom-success-h)), oklch(0.72 var(--atom-status-c) var(--atom-success-h)));
+  --danger-tint: light-dark(oklch(0.95 0.035 var(--atom-danger-h)), oklch(0.28 0.05 var(--atom-danger-h)));
+  --warning-tint: light-dark(oklch(0.96 0.045 var(--atom-warning-h)), oklch(0.29 0.05 var(--atom-warning-h)));
+  --success-tint: light-dark(oklch(0.95 0.035 var(--atom-success-h)), oklch(0.28 0.05 var(--atom-success-h)));
+}

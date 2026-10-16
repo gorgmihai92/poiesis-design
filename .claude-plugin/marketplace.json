@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "poiesis-design",
+  "description": "Design toolkit for Claude Code. UI: typography, hierarchy, spacing and color as shared tokens, with rules, an auditor and a publish gate.",
+  "owner": {
+    "name": "George Mihai",
+    "email": "hi@georgemihai.com"
+  },
+  "plugins": [
+    {
+      "name": "poiesis-design",
+      "description": "UI basics as tokens: typography, hierarchy, spacing and color in atoms → cells, with rules, an auditor and a publish gate.",
+      "version": "0.1.0",
+      "author": {
+        "name": "George Mihai",
+        "email": "hi@georgemihai.com"
+      },
+      "source": "./plugins/poiesis-design",
+      "category": "design",
+      "homepage": "https://github.com/gorgmihai92/poiesis-design"
+    }
+  ]
+}
