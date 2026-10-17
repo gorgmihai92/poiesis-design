@@ -42,7 +42,9 @@ and new = that status only. Text is `--ink` or `--muted`, `--accent-text` for li
 text and thin lines; a role's own color is a fill, with `--on-color` text.
 **C3 · must · Contrast, light and dark.** Text 4.5:1 (3:1 at 24px+ or 18.66px+ bold); shapes and indicators 3:1.
 **C4 · must · Never color alone.** Status and severity also have a word, icon or shape.
-**C5 · should · Structure from space and grey steps** before lines.
+**C5 · should · Structure from space first, then the blocks.** Sections stand apart by white space; where more
+is needed, by the block cells (`--block-bg`, `--block-line`, `--divider`), which the theme sets with `--atom-fill`:
+grey steps (1) or the paper with lines (0). Never a surface picked by hand to set sections apart.
 
 ## Shape (G)
 

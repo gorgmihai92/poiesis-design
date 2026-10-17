@@ -67,34 +67,35 @@
   --pad-l: calc(var(--atom-space) * 6 * var(--atom-density));
 
   /* Color, light and dark. Everything here comes from the palette atoms (oklch(from <atom> …) keeps their hue):
-     greys from paper and ink; for each color role the fill itself (the palette color, both themes), a tint for
-     backgrounds, and a strong shade for text and thin lines, dark enough for 4.5:1. Text on a fill: --on-color. */
-  --paper: light-dark(var(--atom-paper), oklch(from var(--atom-ink) 0.17 c h));
-  --surface-1: light-dark(oklch(from var(--atom-paper) calc(l - 0.03) c h), oklch(from var(--atom-ink) 0.205 c h));
-  --surface-2: light-dark(oklch(from var(--atom-paper) calc(l - 0.055) c h), oklch(from var(--atom-ink) 0.235 c h));
-  --surface-3: light-dark(oklch(from var(--atom-paper) calc(l - 0.08) c h), oklch(from var(--atom-ink) 0.265 c h));
-  --ink: light-dark(var(--atom-ink), oklch(from var(--atom-paper) 0.94 c h));
-  --muted: light-dark(oklch(from var(--atom-ink) 0.5 c h), oklch(from var(--atom-paper) 0.73 c h));
+     pure greys from paper and ink (no hue, whatever the palette); for each color role the fill itself (the palette color, both themes), a tint for
+     backgrounds, and a strong shade for text and thin lines (darkened to 4.5:1 unless --atom-strong-contrast is 0).
+     Text on a fill: --on-color. */
+  --paper: light-dark(oklch(from var(--atom-paper) l 0 h), oklch(from var(--atom-ink) 0.17 0 h));
+  --surface-1: light-dark(oklch(from var(--atom-paper) calc(l - 0.03) 0 h), oklch(from var(--atom-ink) 0.205 0 h));
+  --surface-2: light-dark(oklch(from var(--atom-paper) calc(l - 0.055) 0 h), oklch(from var(--atom-ink) 0.235 0 h));
+  --surface-3: light-dark(oklch(from var(--atom-paper) calc(l - 0.08) 0 h), oklch(from var(--atom-ink) 0.265 0 h));
+  --ink: light-dark(oklch(from var(--atom-ink) l 0 h), oklch(from var(--atom-paper) 0.94 0 h));
+  --muted: light-dark(oklch(from var(--atom-ink) 0.5 0 h), oklch(from var(--atom-paper) 0.73 0 h));
   --on-color: var(--atom-ink);
 
   --accent: var(--atom-accent);   /* interactive, information */
   --accent-tint: light-dark(var(--atom-accent-tint), oklch(from var(--atom-accent) 0.3 calc(c * 0.35) h));
-  --accent-strong: light-dark(oklch(from var(--atom-accent) min(l, 0.48) min(c, 0.15) h), oklch(from var(--atom-accent) max(l, 0.8) min(c, 0.08) h));
+  --accent-strong: light-dark(oklch(from var(--atom-accent) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-accent) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
   --success: var(--atom-success);  /* done, healthy */
   --success-tint: light-dark(var(--atom-success-tint), oklch(from var(--atom-success) 0.3 calc(c * 0.35) h));
-  --success-strong: light-dark(oklch(from var(--atom-success) min(l, 0.48) min(c, 0.15) h), oklch(from var(--atom-success) max(l, 0.8) min(c, 0.08) h));
+  --success-strong: light-dark(oklch(from var(--atom-success) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-success) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
   --warning: var(--atom-warning);  /* check this */
   --warning-tint: light-dark(var(--atom-warning-tint), oklch(from var(--atom-warning) 0.3 calc(c * 0.35) h));
-  --warning-strong: light-dark(oklch(from var(--atom-warning) min(l, 0.48) min(c, 0.15) h), oklch(from var(--atom-warning) max(l, 0.8) min(c, 0.08) h));
+  --warning-strong: light-dark(oklch(from var(--atom-warning) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-warning) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
   --caution: var(--atom-caution);  /* needs attention now */
   --caution-tint: light-dark(var(--atom-caution-tint), oklch(from var(--atom-caution) 0.3 calc(c * 0.35) h));
-  --caution-strong: light-dark(oklch(from var(--atom-caution) min(l, 0.48) min(c, 0.15) h), oklch(from var(--atom-caution) max(l, 0.8) min(c, 0.08) h));
+  --caution-strong: light-dark(oklch(from var(--atom-caution) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-caution) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
   --danger: var(--atom-danger);   /* failed, destructive */
   --danger-tint: light-dark(var(--atom-danger-tint), oklch(from var(--atom-danger) 0.3 calc(c * 0.35) h));
-  --danger-strong: light-dark(oklch(from var(--atom-danger) min(l, 0.48) min(c, 0.15) h), oklch(from var(--atom-danger) max(l, 0.8) min(c, 0.08) h));
+  --danger-strong: light-dark(oklch(from var(--atom-danger) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-danger) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
   --new: var(--atom-new);      /* new, beta, featured */
   --new-tint: light-dark(var(--atom-new-tint), oklch(from var(--atom-new) 0.3 calc(c * 0.35) h));
-  --new-strong: light-dark(oklch(from var(--atom-new) min(l, 0.48) min(c, 0.15) h), oklch(from var(--atom-new) max(l, 0.8) min(c, 0.08) h));
+  --new-strong: light-dark(oklch(from var(--atom-new) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-new) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
   --accent-text: var(--accent-strong); /* links */
   --on-accent: var(--on-color);
   --focus: var(--accent);
@@ -108,16 +109,22 @@
   --ring: 2px; /* the width of state rings: focus, selected in tint mode, invalid */
   --selected-ring: calc((1 - var(--atom-select-ink)) * var(--ring));
   --selected-fg: light-dark(
-    oklch(from var(--atom-ink) calc(l + (1 - l) * var(--atom-select-ink)) c h),
-    oklch(from var(--atom-paper) calc(0.94 - 0.77 * var(--atom-select-ink)) c h)
+    oklch(from var(--atom-ink) calc(l + (1 - l) * var(--atom-select-ink)) 0 h),
+    oklch(from var(--atom-paper) calc(0.94 - 0.77 * var(--atom-select-ink)) 0 h)
   );
+
+  /* Blocks (cards, panels): how sections stand apart besides space (C5). On a grey step when --atom-fill is 1,
+     on the paper with a line when 0. Dividers between sections use --divider. */
+  --block-bg: light-dark(oklch(from var(--atom-paper) calc(l - 0.03 * var(--atom-fill)) 0 h), oklch(from var(--atom-ink) calc(0.17 + 0.035 * var(--atom-fill)) 0 h));
+  --block-line: max(var(--atom-line), calc((1 - var(--atom-fill)) * 1px));
+  --divider: light-dark(oklch(from var(--atom-paper) calc(l - 0.1) 0 h), oklch(from var(--atom-ink) 0.3 0 h));
 
   /* Shape (G) */
   --radius-s: calc(var(--atom-radius) * 0.5);
   --radius-m: var(--atom-radius);
   --radius-l: calc(var(--atom-radius) * 1.5);
   --line: var(--atom-line);
-  --line-color: light-dark(oklch(from var(--atom-ink) 0.6 c h), oklch(from var(--atom-paper) 0.52 c h));
+  --line-color: light-dark(oklch(from var(--atom-ink) 0.6 0 h), oklch(from var(--atom-paper) 0.52 0 h));
   --shadow-1: 0 1px 2px oklch(0 0 0 / calc(var(--atom-elevation) * 0.12)), 0 2px 8px oklch(0 0 0 / calc(var(--atom-elevation) * 0.08));
   --shadow-2: 0 2px 4px oklch(0 0 0 / calc(var(--atom-elevation) * 0.1)), 0 8px 24px oklch(0 0 0 / calc(var(--atom-elevation) * 0.16));
   --duration-fast: calc(120ms * var(--atom-motion));

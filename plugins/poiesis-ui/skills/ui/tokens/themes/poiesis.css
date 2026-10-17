@@ -8,4 +8,6 @@
 @import "../styles/quiet.css";
 
 :root {
+  --atom-fill: 0;               /* sections apart by lines and white space, not grey steps */
+  --atom-strong-contrast: 0;    /* colored text and lines in the palette colors as they are (vivid, below 4.5:1) */
 }

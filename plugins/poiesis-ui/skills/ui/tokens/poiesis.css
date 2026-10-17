@@ -23,7 +23,7 @@
 
   --color-background: var(--paper);
   --color-foreground: var(--ink);
-  --color-card: var(--surface-1);
+  --color-card: var(--block-bg);
   --color-card-foreground: var(--ink);
   --color-popover: var(--surface-1);
   --color-popover-foreground: var(--ink);
@@ -36,7 +36,7 @@
   --color-accent: var(--surface-3);
   --color-accent-foreground: var(--ink);
   --color-destructive: var(--danger-strong);
-  --color-border: var(--surface-3);
+  --color-border: var(--divider);
   --color-input: var(--line-color);
   --color-ring: var(--focus);
 
