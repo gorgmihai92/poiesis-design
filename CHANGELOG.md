@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.7.2 (poiesis-ui)
+- `--subsection-space` is a quarter of `--section-space` (was half).
 ## 0.7.1 (poiesis-ui)
 - **`--subsection-space`** (`gap-(--subsection-space)`): the space between the parts of a page section, half of
   `--section-space`, so a section's parts read as groups and sections stay further apart. Rule S1.

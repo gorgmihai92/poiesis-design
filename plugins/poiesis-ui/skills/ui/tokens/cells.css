@@ -71,7 +71,7 @@
   --block-pad: calc(var(--atom-space) * 4 * var(--atom-density));
   --block-pad-sm: calc(var(--atom-space) * 3 * var(--atom-density));
   --section-space: calc(var(--atom-space) * 64);  /* between page sections: a section's content starts near its top and this space follows it */
-  --subsection-space: calc(var(--section-space) / 2); /* between the parts of a section: half the space between sections */
+  --subsection-space: calc(var(--section-space) / 4); /* between the parts of a section: a quarter of the space between sections */
   --icon: var(--atom-icon);
   --icon-sm: calc(var(--atom-icon) * 0.875);
   --page: var(--atom-page);
