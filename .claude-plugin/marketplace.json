@@ -10,7 +10,7 @@
     {
       "name": "poiesis-ui",
       "description": "How your interface looks: text sizes, hierarchy, spacing, color and shape (corners, lines, shadows), all derived from a few values you choose, in a preset and a style. Rules, an auditor that checks your code, and a gate that holds back publishing until the check passes.",
-      "version": "0.6.2",
+      "version": "0.6.3",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"
@@ -34,7 +34,7 @@
     {
       "name": "poiesis-components",
       "description": "The Poiesis component set: shadcn/ui components themed by poiesis-ui's poiesis.css, copied into a React + Tailwind project; change the theme, preset or style and every component follows. Shown in poiesis-gallery.",
-      "version": "0.3.2",
+      "version": "0.3.3",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"

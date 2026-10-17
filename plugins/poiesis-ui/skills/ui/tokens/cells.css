@@ -70,6 +70,7 @@
   --control-pad-sm: calc(var(--atom-space) * 2 * var(--atom-density));
   --block-pad: calc(var(--atom-space) * 4 * var(--atom-density));
   --block-pad-sm: calc(var(--atom-space) * 3 * var(--atom-density));
+  --section-space: calc(var(--atom-space) * 32);  /* between page sections: a section's content starts near its top and this space follows it */
   --icon: var(--atom-icon);
   --icon-sm: calc(var(--atom-icon) * 0.875);
   --page: var(--atom-page);
@@ -84,6 +85,7 @@
   --surface-3: light-dark(oklch(from var(--atom-paper) calc(l - 0.08) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.095) 0 h));
   --ink: light-dark(oklch(from var(--atom-ink) l 0 h), oklch(from var(--atom-ink-dark) l 0 h));
   --muted: light-dark(oklch(from var(--atom-ink) 0.5 0 h), oklch(from var(--atom-ink-dark) 0.73 0 h));
+  --faint: light-dark(oklch(from var(--atom-ink) 0.8 0 h), oklch(from var(--atom-ink-dark) 0.42 0 h)); /* text out of focus, below 4.5:1 */
   --line-color: light-dark(oklch(from var(--atom-ink) 0.6 0 h), oklch(from var(--atom-ink-dark) 0.52 0 h)); /* control edges, 3:1 */
   --divider: light-dark(oklch(from var(--atom-paper) calc(l - 0.13) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.13) 0 h)); /* between sections */
   --block-bg: light-dark(oklch(from var(--atom-paper) calc(l - 0.03 * var(--atom-fill)) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.035 * var(--atom-fill)) 0 h));
@@ -121,6 +123,7 @@
     oklch(from var(--atom-ink-dark) calc(l - 0.77 * var(--atom-select-ink)) 0 h)
   );
   --selected-ring: calc((1 - var(--atom-select-ink)) * var(--ring));
+  --selected-hover: color-mix(in oklch, var(--selected-bg), var(--paper) var(--atom-hover));
   --hover: var(--surface-2);
   --ink-hover: color-mix(in oklch, var(--ink), var(--paper) var(--atom-hover));
   --danger-hover: color-mix(in oklch, var(--danger), var(--paper) var(--atom-hover));

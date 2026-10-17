@@ -6,13 +6,14 @@
      @import "<tokens>/poiesis.css";
      @import "<tokens>/themes/poiesis.css";   the theme: a palette, typefaces, a preset and a style (tokens/themes)
 
-   Names: colors bg-/text-/border-/ring- paper, surface-1…3, block, ink, muted, line, divider, on-color, overlay,
-   selected (+ -foreground), hover, ink-hover, danger-hover, and each role (info, success, warning, caution,
+   Names: colors bg-/text-/border-/ring- paper, surface-1…3, block, ink, muted, faint, line, divider, on-color, overlay,
+   selected (+ -foreground, -hover), hover, ink-hover, danger-hover, and each role (info, success, warning, caution,
    danger, new) with -tint and -strong. Radii rounded-sm, -md, -lg, -pill. Shadows shadow-sm, -md. Fonts font-sans,
    -serif, -mono. Weights font-regular (400), font-strong (700). Leading leading-body, -ui, -heading,
    -display. Tracking tracking-body, -heading. Text text-ui (component text) and text-sm … text-2xl (page text).
    Widths max-w-page, -measure, -narrow.
-   Sizes from cells with arbitrary values: h-(--control-md), size-(--icon), p-(--block-pad), opacity-(--disabled),
+   Sizes from cells with arbitrary values: h-(--control-md), size-(--icon), p-(--block-pad), pb-(--section-space),
+   opacity-(--disabled),
    z-(--layer-float). Dark follows the system, as the cells do with light-dark(). */
 
 @import "./atoms.css";
@@ -58,12 +59,14 @@
   --color-block: var(--block-bg);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-line: var(--line-color);
   --color-divider: var(--divider);
   --color-on-color: var(--on-color);
   --color-overlay: var(--overlay);
   --color-selected: var(--selected-bg);
   --color-selected-foreground: var(--selected-fg);
+  --color-selected-hover: var(--selected-hover);
   --color-hover: var(--hover);
   --color-ink-hover: var(--ink-hover);
   --color-danger-hover: var(--danger-hover);

@@ -10,11 +10,11 @@ const buttonVariants = cva(
       variant: {
         default: "bg-ink text-paper hover:bg-ink-hover",
         outline:
-          "border-line bg-paper hover:bg-hover hover:text-ink aria-expanded:bg-selected aria-expanded:text-selected-foreground",
+          "border-line bg-paper hover:not-aria-expanded:bg-hover hover:not-aria-expanded:text-ink aria-expanded:bg-selected aria-expanded:hover:bg-selected-hover aria-expanded:text-selected-foreground",
         secondary:
-          "bg-surface-2 text-ink hover:bg-surface-3 aria-expanded:bg-selected aria-expanded:text-selected-foreground",
+          "bg-surface-2 text-ink hover:not-aria-expanded:bg-surface-3 aria-expanded:bg-selected aria-expanded:hover:bg-selected-hover aria-expanded:text-selected-foreground",
         ghost:
-          "hover:bg-hover hover:text-ink aria-expanded:bg-selected aria-expanded:text-selected-foreground",
+          "hover:not-aria-expanded:bg-hover hover:not-aria-expanded:text-ink aria-expanded:bg-selected aria-expanded:hover:bg-selected-hover aria-expanded:text-selected-foreground",
         danger:
           "bg-danger text-on-color hover:bg-danger-hover focus-visible:ring-danger",
         link: "text-info-strong underline-offset-4 hover:underline",
