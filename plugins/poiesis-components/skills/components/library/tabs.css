@@ -7,6 +7,8 @@
   background: none;
   color: var(--muted);
   font: inherit;
+  font-size: var(--control-size);
+  line-height: var(--control-leading);
   cursor: pointer;
 }
 .pc-tabs__trigger:hover { color: var(--ink); }
@@ -14,8 +16,8 @@
 /* The active label is bold; an invisible bold copy reserves its width, so nothing moves (K3). */
 .pc-tabs__label { display: grid; }
 .pc-tabs__label > * { grid-area: 1 / 1; }
-.pc-tabs__label > [aria-hidden] { visibility: hidden; font-weight: var(--weight-strong); }
-.pc-tabs__trigger[data-state="active"] .pc-tabs__label > :first-child { font-weight: var(--weight-strong); }
+.pc-tabs__label > [aria-hidden] { visibility: hidden; font-weight: var(--control-weight); }
+.pc-tabs__trigger[data-state="active"] .pc-tabs__label > :first-child { font-weight: var(--control-weight); }
 .pc-tabs__content[data-state="inactive"] { display: none; }
 
 .pc-segmented {

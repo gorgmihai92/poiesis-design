@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.2 (poiesis-ui) · 0.1.2 (poiesis-components)
+Second audit and live UX test: every earlier fix confirmed; these are the new findings.
+- poiesis-ui: a `control` text role (buttons, tabs, triggers: body size, strong weight, UI leading), added to H1.
+- Busy dots follow the button's text color (they failed 3:1 on the primary button).
+- No hover look on disabled, busy or aria-disabled buttons; progress tracks have an edge.
+- A disabled button's reason is read once (its description, not part of its name).
+- Loading, Notice and a `live` StatusDot mount their live region empty and fill it, so they are announced.
+- Field keeps a caller's `id`; status dots keep 14px apart in the preview.
+
 ## 0.4.1 (poiesis-ui) · 0.1.1 (poiesis-components)
 Fixes from the first independent UI audit and UX test (live in a browser) of the components.
 - The selected state was invisible in quiet and bold (the shared rule lost to each component's own background):

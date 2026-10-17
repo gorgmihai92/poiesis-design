@@ -2,6 +2,8 @@
 // hollow, "!"), not only its color, and its name is the accessible label and the tooltip. Rules: C4 never color
 // alone · I3 named · I5 the pulse only without reduced motion · F1 the state is visible.
 import { cx } from "./cx.js";
+import { useFilled } from "./loading.js";
+import "./base.css";
 import { Tip } from "./tip.js";
 import "./status.css";
 
@@ -24,14 +26,25 @@ const SHAPES: Record<ProcessState, React.ReactNode> = {
   ),
 };
 
-/** `label`: the state in words, e.g. "Analyzing" or "Paused". */
-export function StatusDot({ state, label, className }: { state: ProcessState; label: string; className?: string }) {
-  return (
+/**
+ * `label`: the state in words, e.g. "Analyzing" or "Paused". `live`: also announce changes of state (F3), for
+ * the one dot that reports the main process. Keep 14px or more between dots, so their 24px targets don't overlap.
+ */
+export function StatusDot({ state, label, live, className }: { state: ProcessState; label: string; live?: boolean; className?: string }) {
+  const filled = useFilled();
+  const dot = (
     <Tip label={label}>
       <span role="img" aria-label={label} tabIndex={0} data-state={state} className={cx("pc-status pc-tip-target", className)}>
         {state === "active" && <span className="pc-status__ring" />}
         <svg viewBox="0 0 10 10" aria-hidden>{SHAPES[state]}</svg>
       </span>
     </Tip>
+  );
+  if (!live) return dot;
+  return (
+    <>
+      {dot}
+      <span role="status" className="pc-sr-only">{filled ? label : null}</span>
+    </>
   );
 }

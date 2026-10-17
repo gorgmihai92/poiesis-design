@@ -1,11 +1,12 @@
 /* Loading: three dots (still under reduced motion), what is pending and how long it has taken. */
 .pc-dots { display: inline-flex; align-self: center; gap: var(--space-1); }
-.pc-dots > i { inline-size: 0.3125rem; block-size: 0.3125rem; border-radius: var(--radius-s); background: var(--muted); }
+.pc-dots > i { inline-size: 0.3125rem; block-size: 0.3125rem; border-radius: var(--radius-s); background: currentColor; }
 @media (prefers-reduced-motion: no-preference) {
   .pc-dots > i { animation: pc-dot calc(var(--duration-base) * 6) ease-in-out infinite; }
   .pc-dots > i:nth-child(2) { animation-delay: calc(var(--duration-base) * 0.75); }
   .pc-dots > i:nth-child(3) { animation-delay: calc(var(--duration-base) * 1.5); }
 }
 @keyframes pc-dot { 0%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+.pc-loading .pc-dots { color: var(--muted); }
 .pc-loading { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2); margin: 0; }
 .pc-loading__time { color: var(--muted); font-variant-numeric: tabular-nums; }

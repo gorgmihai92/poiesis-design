@@ -16,7 +16,7 @@ sizes, nothing under 12px.
 
 ## Hierarchy (H)
 
-**H1 · must · Every text is one role:** title, heading, subheading, body, label or caption, using that role's
+**H1 · must · Every text is one role:** title, heading, subheading, body, label, control (buttons, tabs, triggers) or caption, using that role's
 size, weight and leading cells together.
 **H2 · should · Weight, color and space before size.** At most three weights; secondary text is `--muted`, not
 smaller and lighter and greyer at once.

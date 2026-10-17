@@ -6,6 +6,19 @@ import { useEffect, useState } from "react";
 import type * as React from "react";
 import "./loading.css";
 
+/**
+ * True a moment after mounting. A live region is announced when its content changes, and many screen readers
+ * skip one that appears already filled: mount it empty, then fill it.
+ */
+export function useFilled() {
+  const [filled, setFilled] = useState(false);
+  useEffect(() => {
+    const id = setTimeout(() => setFilled(true), 50);
+    return () => clearTimeout(id);
+  }, []);
+  return filled;
+}
+
 export function Dots() {
   return (
     <span className="pc-dots" aria-hidden>
@@ -26,10 +39,11 @@ export function Loading({ children, since }: { children: React.ReactNode; since?
     return () => clearInterval(id);
   }, [since]);
   const seconds = since === undefined ? 0 : Math.max(0, Math.round((now - since) / 1000));
+  const filled = useFilled();
   return (
     <p className="pc-loading">
       <Dots />
-      <span role="status">{children}</span>
+      <span role="status">{filled ? children : null}</span>
       {seconds >= 3 && <span className="pc-loading__time">· {seconds} s</span>}
     </p>
   );

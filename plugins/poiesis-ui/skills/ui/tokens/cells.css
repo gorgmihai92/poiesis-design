@@ -45,6 +45,9 @@
   --label-size: var(--text-sm);
   --label-weight: var(--weight-strong);
   --label-leading: var(--leading-ui);
+  --control-size: var(--text-base);
+  --control-weight: var(--weight-strong);
+  --control-leading: var(--leading-ui);
   --caption-size: var(--text-sm);
   --caption-weight: var(--weight-regular);
   --caption-leading: var(--leading-ui);

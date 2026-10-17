@@ -8,6 +8,6 @@
 .pc-meter[data-tone="success"] { color: var(--success); }
 .pc-meter[data-tone]:not([data-tone="ink"]) rect:not([data-on]) { fill: var(--ink); }
 
-.pc-progress { display: block; block-size: 0.5rem; border-radius: var(--radius-s); background: var(--surface-2); overflow: hidden; }
+.pc-progress { display: block; block-size: 0.5rem; border-radius: var(--radius-s); background: var(--surface-2); overflow: hidden; box-shadow: inset 0 0 0 max(1px, var(--line)) var(--line-color); }
 .pc-progress__fill { display: block; block-size: 100%; background: var(--ink); transition: inline-size var(--duration-base); }
 @media (prefers-reduced-motion: reduce) { .pc-progress__fill { transition: none; } }

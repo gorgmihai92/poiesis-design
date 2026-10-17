@@ -9,18 +9,18 @@
   border: var(--line) solid transparent;
   border-radius: var(--radius-m);
   font: inherit;
-  font-size: var(--body-size);
-  font-weight: var(--weight-strong);
-  line-height: var(--leading-ui);
+  font-size: var(--control-size);
+  font-weight: var(--control-weight);
+  line-height: var(--control-leading);
   white-space: nowrap;
   cursor: pointer;
   transition: background-color var(--duration-fast), color var(--duration-fast);
 }
 .pc-button[data-size="s"] { padding: var(--space-1) var(--pad-s); }
 .pc-button[data-variant="primary"] { background: var(--ink); color: var(--paper); }
-.pc-button[data-variant="primary"]:hover:not(:disabled) { background: var(--accent); color: var(--on-accent); }
+.pc-button[data-variant="primary"]:hover:not(:disabled):not([aria-disabled="true"]) { background: var(--accent); color: var(--on-accent); }
 .pc-button[data-variant="secondary"] { background: var(--surface-2); color: var(--ink); border-color: var(--line-color); }
-.pc-button[data-variant="secondary"]:hover:not(:disabled) { background: var(--surface-3); }
+.pc-button[data-variant="secondary"]:hover:not(:disabled):not([aria-disabled="true"]) { background: var(--surface-3); }
 .pc-button[data-variant="quiet"] {
   padding-inline: 0;
   background: transparent;
@@ -29,7 +29,7 @@
   text-decoration: underline var(--accent) 1px;
   text-underline-offset: 3px;
 }
-.pc-button[data-variant="quiet"]:hover:not(:disabled) { color: var(--ink); }
+.pc-button[data-variant="quiet"]:hover:not(:disabled):not([aria-disabled="true"]) { color: var(--ink); }
 .pc-button:disabled, .pc-button[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
 .pc-button[aria-busy="true"] { cursor: progress; opacity: 1; }
 
@@ -46,6 +46,6 @@
   cursor: pointer;
   transition: background-color var(--duration-fast), color var(--duration-fast);
 }
-.pc-icon-button:hover:not([aria-pressed="true"]) { background: var(--surface-2); color: var(--ink); }
+.pc-icon-button:hover:not([aria-pressed="true"]):not(:disabled) { background: var(--surface-2); color: var(--ink); }
 .pc-icon-button:disabled { opacity: 0.5; cursor: not-allowed; }
 .pc-icon-button svg { inline-size: 1rem; block-size: 1rem; stroke-linecap: square; }

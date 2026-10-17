@@ -4,6 +4,7 @@
 import type * as React from "react";
 import { IconButton } from "./button.js";
 import { cx } from "./cx.js";
+import { useFilled } from "./loading.js";
 import "./notice.css";
 
 export function Notice({ children, action, onClose, closeLabel = "Close", className }: {
@@ -14,9 +15,10 @@ export function Notice({ children, action, onClose, closeLabel = "Close", classN
   closeLabel?: string;
   className?: string;
 }) {
+  const filled = useFilled();
   return (
-    <div role="status" className={cx("pc-notice", className)}>
-      <span className="pc-notice__text">{children}</span>
+    <div className={cx("pc-notice", className)}>
+      <span role="status" className="pc-notice__text">{filled ? children : null}</span>
       {(action || onClose) && (
         <span className="pc-notice__actions">
           {action}

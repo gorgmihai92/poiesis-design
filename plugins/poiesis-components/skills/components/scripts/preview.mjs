@@ -122,8 +122,8 @@ function stage([style, about]) {
       <button type="button" class="pc-button" data-variant="secondary" data-size="s" aria-disabled="true" aria-describedby="${id('pub-why')}" data-tip="Add a name first">Publish<span id="${id('pub-why')}" class="pc-sr-only">Add a name first</span></button>
     </div>
 
-    <div role="status" class="pc-notice">
-      <span class="pc-notice__text">New version available: 2.4</span>
+    <div class="pc-notice">
+      <span role="status" class="pc-notice__text">New version available: 2.4</span>
       <span class="pc-notice__actions">
         <button type="button" class="pc-button" data-variant="quiet" data-size="s">Update</button>
         <button type="button" class="pc-icon-button" aria-label="Close" data-tip="Close">${icon.close}</button>
@@ -204,7 +204,7 @@ body {
 .stage__name { margin: 0; font-family: var(--font-display); font-size: var(--heading-size); font-weight: var(--heading-weight); line-height: var(--heading-leading); text-transform: capitalize; }
 .stage__body { display: grid; gap: var(--space-4); }
 .row { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
-.status-row { display: inline-flex; gap: var(--space-3); margin-inline-start: auto; }
+.status-row { display: inline-flex; gap: var(--space-4); margin-inline-start: auto; }
 .tile-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); }
 .progress { display: grid; grid-template-columns: auto 1fr auto; gap: var(--space-2); align-items: center; }
 .num { font-variant-numeric: tabular-nums; color: var(--muted); }

@@ -40,10 +40,16 @@ export function Button({ variant = "secondary", size = "m", busy = false, reason
     >
       {busy && <Dots />}
       {children}
-      {disabled && reason && <span id={`${id}-reason`} className="pc-sr-only">{reason}</span>}
     </button>
   );
-  return disabled && reason ? <Tip label={reason}>{button}</Tip> : button;
+  if (!(disabled && reason)) return button;
+  // The reason sits outside the button, so it is its description and not part of its name.
+  return (
+    <>
+      <Tip label={reason}>{button}</Tip>
+      <span id={`${id}-reason`} className="pc-sr-only">{reason}</span>
+    </>
+  );
 }
 
 type IconButtonProps = Omit<React.ComponentProps<"button">, "aria-label"> & {

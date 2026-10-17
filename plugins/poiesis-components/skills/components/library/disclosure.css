@@ -9,7 +9,9 @@
   background: none;
   color: var(--ink);
   font: inherit;
-  font-weight: var(--weight-strong);
+  font-size: var(--control-size);
+  font-weight: var(--control-weight);
+  line-height: var(--control-leading);
   cursor: pointer;
 }
 .pc-disclosure__arrow { inline-size: 0.625rem; block-size: 0.625rem; transition: rotate var(--duration-fast); }
