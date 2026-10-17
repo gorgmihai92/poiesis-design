@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.3 (poiesis-components)
+- Input, button and toggle: an invalid control has one edge, its 1px danger border, instead of the border with a
+  danger ring around it; the ring appears only on focus, in danger. Switch, which has no border, keeps its ring.
+
 ## 0.3.0 (poiesis-copy) · 0.9.0 (poiesis-ui) · 0.6.0 (poiesis-ux)
 Rules learned while reviewing a workshop page for a teacher, where the page had to keep the client's voice and
 stay still while the reader used it.
