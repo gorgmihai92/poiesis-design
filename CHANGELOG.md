@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.2 (poiesis-components)
+- `SectionNav`: the address and the current row agree. On wide screens a link scrolls its section to its own row,
+  so the row it names is current even when the next section is short; opening a link from elsewhere, Back and
+  Forward do the same. As the page scrolls, the address follows the current section (`replaceState`, so Back is
+  not filled with every section passed). Narrow screens keep plain links.
+
 ## 0.5.1 (poiesis-components)
 - `MastheadDescription`: what the page or app is, in one muted line under the name, so the first screen says it
   (copy O2).
