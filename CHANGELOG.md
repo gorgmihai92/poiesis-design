@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1 (poiesis-ui) · 0.4.2 (poiesis-ux)
+- Suggestions of another Poiesis plugin, from the skill or its agents, give the plugin's link and name the skill or
+  agent to use.
+
 ## 0.5.0 (poiesis-ui) · 0.2.0 (poiesis-components)
 Found by using the toolkit in a real product.
 - **One component set.** poiesis-components now holds the shadcn/ui set themed by `poiesis.css` (18 components);

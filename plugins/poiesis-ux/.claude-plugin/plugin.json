@@ -1,6 +1,6 @@
 {
   "name": "poiesis-ux",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "How your app behaves for the people using it: rules for feedback, errors, control, keyboard use and wording, and a tester that does your app's main tasks the way a person would and reports what gets in their way.",
   "author": {
     "name": "George Mihai",

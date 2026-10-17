@@ -38,8 +38,10 @@ This plugin works alone. Suggest another one only when it would change the resul
 on without it if the user says no (say what was left out). Check with `claude plugin list`; install only after
 the user agrees, with `claude plugin marketplace add gorgmihai92/<repo>` and then
 `claude plugin install <plugin>@<repo>` (it works after Claude Code restarts).
-- **poiesis-ui** (repo `poiesis-design`): how the app looks (type, spacing, color), which this plugin does not
+Every suggestion, from the skill or an agent, gives the plugin's link (below) and names the skill or agent
+to use, e.g. "[poiesis-insight](https://github.com/gorgmihai92/poiesis-insight), `foresight-analyst`".
+- **poiesis-ui** ([poiesis-design](https://github.com/gorgmihai92/poiesis-design)): how the app looks (type, spacing, color), which this plugin does not
   check.
-- **poiesis-frontier** (repo `poiesis-frontier`): when the user wants an unconventional interaction concept, with an
+- **[poiesis-frontier](https://github.com/gorgmihai92/poiesis-frontier)**: when the user wants an unconventional interaction concept, with an
   experiment, before building it.
-- **poiesis-insight** (repo `poiesis-insight`): to interpret what users did in a test or in usage data.
+- **[poiesis-insight](https://github.com/gorgmihai92/poiesis-insight)**: to interpret what users did in a test or in usage data.
