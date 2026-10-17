@@ -12,7 +12,7 @@
    -serif, -mono. Weights font-regular (400), font-strong (700). Leading leading-body, -ui, -heading,
    -display. Tracking tracking-body, -heading. Text text-ui (component text) and text-sm … text-2xl (page text).
    Widths max-w-page, -measure, -narrow.
-   Sizes from cells with arbitrary values: h-(--control-md), size-(--icon), p-(--block-pad), pb-(--section-space),
+   Sizes from cells with arbitrary values: h-(--control-md), size-(--icon), p-(--block-pad), pb-(--section-space), gap-(--subsection-space),
    opacity-(--disabled),
    z-(--layer-float). Dark follows the system, as the cells do with light-dark(). */
 

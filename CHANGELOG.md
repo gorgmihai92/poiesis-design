@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.7.1 (poiesis-ui)
+- **`--subsection-space`** (`gap-(--subsection-space)`): the space between the parts of a page section, half of
+  `--section-space`, so a section's parts read as groups and sections stay further apart. Rule S1.
 ## 0.7.0 (poiesis-ui) · 0.4.0 (poiesis-components)
 **Fewer colors.** Breaking: removed names need their replacements.
 - Greys: `--surface-1`, `-2`, `-3` and `--hover` become one `--surface`; the unused `--overlay` is gone. Neutrals are

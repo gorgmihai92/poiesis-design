@@ -32,7 +32,7 @@ smaller and lighter and greyer at once.
 
 **S1 · must · Spacing from the scale.** Margin, padding and gap are multiples of `--atom-space` (Tailwind's
 `p-4`, `gap-2`…). Controls and blocks take their size from the density cells: `--control-xs` … `--control-lg`,
-`--control-pad`, `--block-pad`, `--icon`; page sections from `--section-space`. Only 0, 1px and 2px are allowed as
+`--control-pad`, `--block-pad`, `--icon`; page sections `--section-space` apart, their parts `--subsection-space` (half of it). Only 0, 1px and 2px are allowed as
 literals.
 **S2 · must · Proximity shows grouping.** Space inside a group is at least one step smaller than space between
 groups.
