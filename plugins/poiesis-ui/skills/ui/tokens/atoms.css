@@ -19,15 +19,22 @@
   --atom-space: 0.25rem;       /* unit; steps are 1 2 3 4 6 8 12 16 24 × unit */
   --atom-density: 1;           /* padding inside blocks: dense 0.8–0.9, airy 1.2–1.3 */
 
-  /* Color (OKLCH: hue 0–360, chroma 0–0.37) */
-  --atom-neutral-h: 265;
-  --atom-neutral-c: 0.006;     /* 0 = pure grey, 0.01–0.02 = tinted */
-  --atom-accent-h: 255;
-  --atom-accent-c: 0.19;
-  --atom-danger-h: 25;
-  --atom-warning-h: 75;
-  --atom-success-h: 170;
-  --atom-status-c: 0.17;
+  /* Color: the palette (tokens/palettes). Every other color is derived from these: grey steps from paper and
+     ink, darker shades for text and thin lines, dark-theme versions. Defaults: the "poiesis" palette. */
+  --atom-paper: #FFFFFF;        /* page, light theme */
+  --atom-ink: #000000;          /* text, light theme; also text on a colored fill */
+  --atom-accent: #0080FF;       /* interactive, information (blue) */
+  --atom-accent-tint: #E6F2FF;
+  --atom-success: #00A896;      /* done, healthy (teal) */
+  --atom-success-tint: #E6F6F3;
+  --atom-warning: #F5A800;      /* check this (amber) */
+  --atom-warning-tint: #FFF6E0;
+  --atom-caution: #F57722;      /* needs attention now, short of failure (orange) */
+  --atom-caution-tint: #FFF0E6;
+  --atom-danger: #F45B5B;       /* failed, destructive (red) */
+  --atom-danger-tint: #FEECEC;
+  --atom-new: #9254DE;          /* new, beta, featured (purple) */
+  --atom-new-tint: #F3ECFC;
 
   /* Shape: the style (tokens/styles), independent of the preset. These defaults are "quiet". */
   --atom-radius: 0rem;         /* corners: 0 square, 0.125–0.25rem crisp, 0.5rem soft, 0.75rem round */

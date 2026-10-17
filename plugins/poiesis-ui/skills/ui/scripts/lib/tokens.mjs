@@ -2,7 +2,7 @@
 // max(), clamp(), light-dark() and oklch() with computed arguments. Lengths come out in px (1rem = 16px).
 
 import { readFileSync } from 'node:fs';
-import { parseColor, splitTop, toHex } from './color.mjs';
+import { parseColor, rgbToOklch, splitTop, toHex } from './color.mjs';
 
 const REM = 16;
 
@@ -66,6 +66,19 @@ export function makeResolver(props, { scheme = 'light', vw = 1280 } = {}) {
 
   function evalColorArgs(value) {
     return replaceFn(value, 'oklch', (args) => {
+      // Relative color: oklch(from <color> <l> <c> <h>), where l, c and h stand for the origin's channels.
+      if (/^\s*from\s/.test(args)) {
+        const [, origin, ...channels] = splitTop(args, /\s/);
+        const base = parseColor(origin);
+        if (!base) throw new Error(`unsupported origin color ${origin}`);
+        const [l, c, h] = rgbToOklch(base);
+        const parts = channels.slice(0, 3).map((p) => {
+          const r = evaluate(p.replace(/\bl\b/g, String(l)).replace(/\bc\b/g, String(c)).replace(/\bh\b/g, String(h)), vw);
+          if (!r) throw new Error(`cannot evaluate ${p} in oklch(from ...)`);
+          return String(r.v);
+        });
+        return `oklch(${parts.join(' ')})`;
+      }
       const [main, alpha] = args.split('/');
       const parts = splitTop(main, /\s/).map((p) => {
         const r = evaluate(p, vw);

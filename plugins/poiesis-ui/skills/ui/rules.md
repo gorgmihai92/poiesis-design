@@ -34,10 +34,12 @@ groups.
 
 ## Color (C)
 
-**C1 · must · Semantic cells only.** Code uses `--ink`, `--muted`, `--paper`, `--surface-*`, `--accent*`,
-`--focus`, status colors and tints. No literal colors and no atoms outside the token files.
-**C2 · must · One color, one meaning.** Accent = interactive; status colors = status only. Text is `--ink` or
-`--muted` (`--accent-text` for links); strong colors are fills and lines.
+**C1 · must · Semantic cells only.** Code uses `--ink`, `--muted`, `--paper`, `--surface-*`, `--focus`, and
+the color roles (`--accent`, `--success`, `--warning`, `--caution`, `--danger`, `--new`, each with `-tint` and
+`-strong`), with `--on-color` for text on a fill. No literal colors and no atoms outside the token files.
+**C2 · must · One color, one meaning.** Accent = interactive and information; success, warning, caution, danger
+and new = that status only. Text is `--ink` or `--muted`, `--accent-text` for links, a role's `-strong` for colored
+text and thin lines; a role's own color is a fill, with `--on-color` text.
 **C3 · must · Contrast, light and dark.** Text 4.5:1 (3:1 at 24px+ or 18.66px+ bold); shapes and indicators 3:1.
 **C4 · must · Never color alone.** Status and severity also have a word, icon or shape.
 **C5 · should · Structure from space and grey steps** before lines.

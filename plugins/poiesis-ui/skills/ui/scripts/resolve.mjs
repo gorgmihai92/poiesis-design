@@ -9,13 +9,17 @@ import { contrast } from './lib/color.mjs';
 
 // Default pairs: text 4.5:1, shapes and boundaries 3:1.
 const SURFACES = ['--paper', '--surface-1', '--surface-2', '--surface-3'];
+const ROLES = ['accent', 'success', 'warning', 'caution', 'danger', 'new'];
 const DEFAULT_PAIRS = [
   ...['--ink', '--muted', '--accent-text'].flatMap((fg) => SURFACES.map((bg) => ({ fg, bg, min: 4.5 }))),
-  { fg: '--on-accent', bg: '--accent', min: 4.5 },
-  { fg: '--ink', bg: '--danger-tint', min: 4.5 },
-  { fg: '--ink', bg: '--warning-tint', min: 4.5 },
-  { fg: '--ink', bg: '--success-tint', min: 4.5 },
-  ...['--accent', '--focus', '--danger', '--warning', '--success'].map((fg) => ({ fg, bg: '--paper', min: 3 })),
+  // Each color role: text on its fill and on its tint; its strong shade as text on paper and on its tint.
+  ...ROLES.flatMap((r) => [
+    { fg: '--on-color', bg: `--${r}`, min: 4.5 },
+    { fg: '--ink', bg: `--${r}-tint`, min: 4.5 },
+    { fg: `--${r}-strong`, bg: '--paper', min: 4.5 },
+    { fg: `--${r}-strong`, bg: `--${r}-tint`, min: 4.5 },
+  ]),
+  { fg: '--focus', bg: '--paper', min: 3 },
 ];
 
 const argv = process.argv.slice(2);

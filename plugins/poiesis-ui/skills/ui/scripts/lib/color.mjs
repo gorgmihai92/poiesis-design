@@ -43,6 +43,24 @@ function oklchToRgb(L, C, H) {
   return { rgb: lin.map(enc), inGamut };
 }
 
+// sRGB 0–255 → OKLCH [L 0–1, C, H degrees], for relative colors (oklch(from <color> l c h)).
+export function rgbToOklch({ r, g, b }) {
+  const lin = (v) => {
+    const c = v / 255;
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  };
+  const [R, G, B] = [lin(r), lin(g), lin(b)];
+  const l = Math.cbrt(0.4122214708 * R + 0.5363137098 * G + 0.0514625307 * B);
+  const m = Math.cbrt(0.2119034982 * R + 0.6806995451 * G + 0.1073969566 * B);
+  const s = Math.cbrt(0.0883024619 * R + 0.2817188376 * G + 0.6299787005 * B);
+  const L = 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s;
+  const a = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s;
+  const bb = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s;
+  const C = Math.hypot(a, bb);
+  const H = C < 1e-4 ? 0 : ((Math.atan2(bb, a) * 180) / Math.PI + 360) % 360;
+  return [L, C, H];
+}
+
 const pct = (v, scale = 1) => (String(v).endsWith('%') ? (parseFloat(v) / 100) * scale : Number(v));
 
 // Returns { r, g, b, a, inGamut } or null when the string is not a color this parser knows.

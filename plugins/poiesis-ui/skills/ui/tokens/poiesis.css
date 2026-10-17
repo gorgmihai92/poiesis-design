@@ -4,7 +4,7 @@
 
      @import "tailwindcss";
      @import "<tokens>/poiesis.css";
-     @import "<tokens>/styles/quiet.css";   the style: quiet, soft, crisp or bold
+     @import "<tokens>/themes/poiesis.css";   the theme: a palette, a preset and a style (tokens/themes)
 
    Use it in place of the :root and .dark blocks `shadcn init` writes. The slots go straight to the cells, not
    through shadcn's own variables: --muted, --accent and --ring mean different things in the two systems
@@ -35,14 +35,38 @@
   --color-muted-foreground: var(--muted);
   --color-accent: var(--surface-3);
   --color-accent-foreground: var(--ink);
-  --color-destructive: var(--danger);
+  --color-destructive: var(--danger-strong);
   --color-border: var(--surface-3);
   --color-input: var(--line-color);
   --color-ring: var(--focus);
-  /* Beyond shadcn's slots: the status colours, for Poiesis components shadcn lacks (status dot, meter). */
+
+  /* The palette's roles, each as bg-<role>, text-<role>-foreground (text on the fill), bg-<role>-tint (a
+     background for ink text) and text-<role>-strong / border-<role>-strong (text and thin lines). "info" is the
+     accent; shadcn's own "accent" slot above is its hover grey. */
+  --color-info: var(--accent);
+  --color-info-foreground: var(--on-color);
+  --color-info-tint: var(--accent-tint);
+  --color-info-strong: var(--accent-strong);
   --color-success: var(--success);
+  --color-success-foreground: var(--on-color);
+  --color-success-tint: var(--success-tint);
+  --color-success-strong: var(--success-strong);
   --color-warning: var(--warning);
-  --color-highlight: var(--accent);
+  --color-warning-foreground: var(--on-color);
+  --color-warning-tint: var(--warning-tint);
+  --color-warning-strong: var(--warning-strong);
+  --color-caution: var(--caution);
+  --color-caution-foreground: var(--on-color);
+  --color-caution-tint: var(--caution-tint);
+  --color-caution-strong: var(--caution-strong);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--on-color);
+  --color-danger-tint: var(--danger-tint);
+  --color-danger-strong: var(--danger-strong);
+  --color-new: var(--new);
+  --color-new-foreground: var(--on-color);
+  --color-new-tint: var(--new-tint);
+  --color-new-strong: var(--new-strong);
 
   --radius-sm: var(--radius-s);
   --radius-md: var(--radius-m);

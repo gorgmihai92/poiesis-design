@@ -1,0 +1,11 @@
+/* Theme · poiesis: one feel, made of one file from each layer, plus any atoms of its own below them.
+     palette  colors        tokens/palettes
+     preset   type, density tokens/presets   (none here: the defaults in atoms.css)
+     style    shape         tokens/styles
+   A new theme is a copy of this file: pick other layers, or set atoms in the :root block. Projects import
+   poiesis.css, then one theme. */
+@import "../palettes/poiesis.css";
+@import "../styles/quiet.css";
+
+:root {
+}

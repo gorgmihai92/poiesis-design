@@ -23,7 +23,7 @@ with its own system: `--audit-only`. With Tailwind, map the cells into `@theme` 
 
 **Tune.** Change atoms, then `node $UI/scripts/resolve.mjs <styles>/atoms.css <styles>/poiesis/cells.css`: scales
 in px, colors in both themes, contrast of every pair; exit 1 on a failure. Denser → `--atom-density`,
-`--atom-ratio` down. Bigger headings → `--atom-ratio` up. Brand color → `--atom-accent-h/c`. One area different →
+`--atom-ratio` down. Bigger headings → `--atom-ratio` up. Colors → the palette atoms (`--atom-paper`, `--atom-ink`, and a color and a tint for accent, success, warning, caution, danger, new); a whole new set → a file in `tokens/palettes`. A new feel → a file in `tokens/themes` (a palette, a preset and a style). One area different →
 atoms on that element plus `data-atoms`.
 
 **Build.** Text takes a role's size, weight and leading together (H1). Spacing from `--space-*` and `--pad-*`.
