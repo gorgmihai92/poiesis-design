@@ -1,0 +1,63 @@
+/* Poiesis UI · theme for components built on shadcn/ui and Tailwind v4: one import gives a project the atoms,
+   the cells derived from them, and the component slots (colour, radius, shadow, font, spacing) mapped onto the
+   cells. Any shadcn component added later takes the Poiesis look with no change; customise it from there.
+
+     @import "tailwindcss";
+     @import "<tokens>/poiesis.css";
+     @import "<tokens>/styles/quiet.css";   the style: quiet, soft, crisp or bold
+
+   Use it in place of the :root and .dark blocks `shadcn init` writes. The slots go straight to the cells, not
+   through shadcn's own variables: --muted, --accent and --ring mean different things in the two systems
+   (shadcn: a grey fill, a hover fill, a ring colour; cells: muted text, the accent colour, the ring width).
+   Dark follows the system, as the cells do with light-dark(). */
+
+@import "./atoms.css";
+@import "./cells.css";
+
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface-1);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface-1);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--paper);
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--surface-2);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--surface-3);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: var(--danger);
+  --color-border: var(--surface-3);
+  --color-input: var(--line-color);
+  --color-ring: var(--focus);
+  /* Beyond shadcn's slots: the status colours, for Poiesis components shadcn lacks (status dot, meter). */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-highlight: var(--accent);
+
+  --radius-sm: var(--radius-s);
+  --radius-md: var(--radius-m);
+  --radius-lg: var(--radius-m);
+  --radius-xl: var(--radius-l);
+  --radius-2xl: var(--radius-l);
+  --radius-3xl: var(--radius-l);
+  --radius-4xl: var(--radius-l);
+
+  --shadow-xs: var(--shadow-1);
+  --shadow-sm: var(--shadow-1);
+  --shadow-md: var(--shadow-2);
+  --shadow-lg: var(--shadow-2);
+
+  /* Tailwind's p-4, gap-2… are multiples of this, as the space cells are of --atom-space. Its text-sm, text-base
+     and text-lg read --text-sm, --text-base and --text-lg, which are cells already. */
+  --spacing: var(--atom-space);
+}
