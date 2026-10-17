@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.2 (poiesis-ui) · 0.3.2 (poiesis-components)
+- Meter bars had lost their color: `poiesis.css` defined a `data-on` variant for pressed toggles, which replaced
+  Tailwind's own `data-on` (an attribute is present) that the meter uses for its filled bars. The pressed variant
+  is now `data-pressed`.
 ## 0.6.1 (poiesis-ui) · 0.3.1 (poiesis-components)
 - **One text face.** `--atom-font-body` and `--atom-font-display` are gone, and with them the per-role font cells,
   `font-body`, `font-display` and the presets' font choice: all text is `--font-sans`, code `--font-mono`; the serif
