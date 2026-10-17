@@ -47,12 +47,16 @@ const checks = [
       l.match(/box-shadow\s*:(?!\s*(?:var\(|none|inset 0 0 0 (?:var|max|calc)\())[^;]*\d+px/)?.[0] ??
       l.match(/border(-[a-z]+)?(-width)?\s*:\s*(?!var\()[^;]*?\b[1-9]\d*px/)?.[0] ??
       l.match(/\b(?:transition|animation)(-duration)?\s*:[^;]*?\b\d+m?s\b/)?.[0] ??
-      l.match(/\brounded-(?:sm|md|lg|xl|2xl|3xl|full|\[[^\]]+\])/)?.[0] ?? null,
+      l.match(/\brounded(?:-[trblse]{1,2})?-(?:full|\[[^\]]*\d(?:px|rem|em|%)[^\]]*\])/)?.[0] ??
+      (themed ? null : l.match(/\brounded(?:-[trblse]{1,2})?-(?:xs|sm|md|lg|xl|2xl|3xl|4xl)\b/)?.[0]) ?? null,
   },
   { id: 'C1', what: 'atom used directly (use a cell)', test: (l) => l.match(/var\(\s*--atom-[\w-]+/)?.[0] ?? null },
   { id: 'A2', what: 'atom set outside atoms.css (needs data-atoms there)', test: (l) => (/data-atoms/.test(l) ? null : l.match(/--atom-[\w-]+\s*:/)?.[0] ?? null) },
 ];
 
+// A project that imports poiesis.css has Tailwind's named radii (rounded-sm … rounded-4xl, rounded-pill) mapped
+// onto the radius cells, so only rounded-full and arbitrary literals bypass them.
+let themed = false;
 const hits = [];
 const sizes = new Set();
 const weights = new Set();
@@ -98,6 +102,13 @@ if (!targets.length) {
   console.error('usage: node scan.mjs <dir or file> [...] [--json]');
   process.exit(2);
 }
+const findTheme = (path) => {
+  if (themed) return;
+  if (statSync(path).isDirectory()) {
+    for (const name of readdirSync(path)) if (!SKIP.has(name) && !name.startsWith('.')) findTheme(join(path, name));
+  } else if (extname(path) === '.css' && /@import\s+["'][^"']*poiesis\.css["']/.test(readFileSync(path, 'utf8'))) themed = true;
+};
+for (const t of targets) findTheme(t);
 for (const t of targets) walk(t, statSync(t).isDirectory() ? t : join(t, '..'));
 
 if (args.includes('--json')) {

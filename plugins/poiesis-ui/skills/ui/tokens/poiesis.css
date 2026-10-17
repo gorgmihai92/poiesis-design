@@ -16,6 +16,29 @@
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
+/* State variants the components use (data-open:, data-checked:, data-active:, data-horizontal:…): Radix writes
+   data-state and data-orientation, so these map one onto the other. A project needs no other file for them. */
+@custom-variant data-open { &:where([data-state="open"]), &:where([data-open]:not([data-open="false"])) { @slot; } }
+@custom-variant data-closed { &:where([data-state="closed"]), &:where([data-closed]:not([data-closed="false"])) { @slot; } }
+@custom-variant data-checked { &:where([data-state="checked"]), &:where([data-checked]:not([data-checked="false"])) { @slot; } }
+@custom-variant data-unchecked { &:where([data-state="unchecked"]), &:where([data-unchecked]:not([data-unchecked="false"])) { @slot; } }
+@custom-variant data-selected { &:where([data-selected="true"]) { @slot; } }
+@custom-variant data-disabled { &:where([data-disabled="true"]), &:where([data-disabled]:not([data-disabled="false"])) { @slot; } }
+@custom-variant data-active { &:where([data-state="active"]), &:where([data-active]:not([data-active="false"])) { @slot; } }
+@custom-variant data-horizontal { &:where([data-orientation="horizontal"]) { @slot; } }
+@custom-variant data-vertical { &:where([data-orientation="vertical"]) { @slot; } }
+
+/* The text roles (H1) as one class each: size, weight, leading, family and tracking together. type-* rather than
+   text-*, so they never collide with text colors. */
+@utility type-title { font-size: var(--title-size); font-weight: var(--title-weight); line-height: var(--title-leading); font-family: var(--title-font); letter-spacing: var(--title-tracking); }
+@utility type-heading { font-size: var(--heading-size); font-weight: var(--heading-weight); line-height: var(--heading-leading); font-family: var(--heading-font); letter-spacing: var(--heading-tracking); }
+@utility type-subheading { font-size: var(--subheading-size); font-weight: var(--subheading-weight); line-height: var(--subheading-leading); font-family: var(--subheading-font); letter-spacing: var(--subheading-tracking); }
+@utility type-body { font-size: var(--body-size); font-weight: var(--body-weight); line-height: var(--body-leading); font-family: var(--body-font); letter-spacing: var(--body-tracking); }
+@utility type-label { font-size: var(--label-size); font-weight: var(--label-weight); line-height: var(--label-leading); font-family: var(--label-font); letter-spacing: var(--label-tracking); }
+@utility type-control { font-size: var(--control-size); font-weight: var(--control-weight); line-height: var(--control-leading); font-family: var(--control-font); letter-spacing: var(--control-tracking); }
+@utility type-caption { font-size: var(--caption-size); font-weight: var(--caption-weight); line-height: var(--caption-leading); font-family: var(--caption-font); letter-spacing: var(--caption-tracking); }
+@utility type-code { font-size: var(--code-size); font-weight: var(--code-weight); line-height: var(--code-leading); font-family: var(--code-font); letter-spacing: var(--code-tracking); }
+
 @theme inline {
   /* font-sans, font-serif and font-mono read --font-sans, --font-serif and --font-mono, which are cells already;
      font-heading is the display face. The page's own font is the body face (set on html). */
@@ -36,6 +59,10 @@
   --color-accent: var(--surface-3);
   --color-accent-foreground: var(--ink);
   --color-destructive: var(--danger-strong);
+  /* The grey steps, for things that sit on a step rather than on a card (bg-surface-1 … bg-surface-3). */
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
   --color-border: var(--divider);
   --color-input: var(--line-color);
   --color-ring: var(--focus);
@@ -68,6 +95,7 @@
   --color-new-tint: var(--new-tint);
   --color-new-strong: var(--new-strong);
 
+  --radius-xs: var(--radius-s);
   --radius-sm: var(--radius-s);
   --radius-md: var(--radius-m);
   --radius-lg: var(--radius-m);
@@ -75,6 +103,8 @@
   --radius-2xl: var(--radius-l);
   --radius-3xl: var(--radius-l);
   --radius-4xl: var(--radius-l);
+  /* rounded-pill in place of rounded-full: round in round styles, square in square ones (G1). */
+  --radius-pill: var(--radius-round);
 
   --shadow-xs: var(--shadow-1);
   --shadow-sm: var(--shadow-1);

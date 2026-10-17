@@ -52,7 +52,9 @@ The style: corners, lines, shadows, how a selected thing looks, motion. Set by t
 (`tokens/styles`: quiet, soft, crisp, bold), independent of the preset (type and density).
 
 **G1 · must · Shape from cells.** Corner radius, border width and color, shadows and transition lengths use
-`--radius-*`, `--line`, `--line-color`, `--ring`, `--shadow-*`, `--duration-*`. Only 0 and hairlines (1–2px) are literal.
+`--radius-*`, `--line`, `--line-color`, `--ring`, `--shadow-*`, `--duration-*`. Only 0 and hairlines (1–2px) are literal. Round
+controls (pills, switch tracks) use `--radius-round`, never a fixed full radius: square in a square style. With
+`poiesis.css`, Tailwind's named radii map onto the cells and `rounded-pill` replaces `rounded-full`.
 **G2 · must · Lines are optional, boundaries are not.** With `--line` at 0, a control or tile still differs from
 what is around it by a surface step; an input's boundary, when it is the only cue, keeps 3:1 (W 1.4.11).
 **G3 · must · Selected and open use the selected cells:** `--selected-bg`, `--selected-fg` and the

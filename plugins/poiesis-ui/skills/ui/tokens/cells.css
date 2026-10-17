@@ -146,6 +146,7 @@
   --radius-s: calc(var(--atom-radius) * 0.5);
   --radius-m: var(--atom-radius);
   --radius-l: calc(var(--atom-radius) * 1.5);
+  --radius-round: calc(var(--atom-radius) * 1000); /* pills and round controls: square when the style is square */
   --line: var(--atom-line);
   --line-color: light-dark(oklch(from var(--atom-ink) 0.6 0 h), oklch(from var(--atom-paper) 0.52 0 h));
   --shadow-1: 0 1px 2px oklch(0 0 0 / calc(var(--atom-elevation) * 0.12)), 0 2px 8px oklch(0 0 0 / calc(var(--atom-elevation) * 0.08));

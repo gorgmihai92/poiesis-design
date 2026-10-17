@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-// Copies components into a project, with the files they import (helpers, base styles, other components).
-// The copies are the project's own: change them freely; nothing is linked back.
+// Copies components into a project, with the files they import (utils.ts and the other components they use).
+// The copies are the project's own (the shadcn model): change them freely; nothing is linked back.
 //
-//   node add.mjs button tabs field --to src/components/poiesis   some components
-//   node add.mjs all --to src/components/poiesis                 every component
-//   node add.mjs --list                                          what there is
+//   node add.mjs button tabs field --to src/components/ui   some components
+//   node add.mjs all --to src/components/ui                 every component
+//   node add.mjs --list                                     what there is
 //
-// Existing files are kept unless --force. Needs the poiesis-ui cells (0.4+, with the shape cells) in the
-// project's CSS, and React 18+; components that use Radix need the "radix-ui" package.
+// Existing files are kept unless --force. Needs Tailwind v4 with poiesis-ui's poiesis.css and a theme imported in
+// the project's CSS, and React 18+.
 
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
@@ -28,7 +28,7 @@ if (argv.includes('--list') || !names.length) {
 }
 const to = opt('to');
 if (!to) {
-  console.error('Missing --to <dir> (where the components go).');
+  console.error('Missing --to <dir> (where the components go, e.g. src/components/ui).');
   process.exit(2);
 }
 const unknown = names.filter((n) => n !== 'all' && !available.includes(n));
@@ -37,7 +37,7 @@ if (unknown.length) {
   process.exit(2);
 }
 
-// Follow the imports: "./x.js" means x.tsx or x.ts; "./x.css" is copied as is.
+// Follow the imports: "./x" is x.tsx or x.ts in the library; anything else is a package.
 const files = new Set();
 const packages = new Set(['react']);
 const visit = (file) => {
@@ -46,10 +46,10 @@ const visit = (file) => {
   const src = readFileSync(join(LIB, file), 'utf8');
   for (const [, spec] of src.matchAll(/(?:from\s+|import\s+)["']([^"']+)["']/g)) {
     if (spec.startsWith('./')) {
-      const base = spec.slice(2);
-      const local = base.endsWith('.css') ? base : [base.replace(/\.js$/, '.tsx'), base.replace(/\.js$/, '.ts')].find((f) => existsSync(join(LIB, f)));
+      const base = spec.slice(2).replace(/\.js$/, '');
+      const local = [`${base}.tsx`, `${base}.ts`].find((f) => existsSync(join(LIB, f)));
       if (local) visit(local);
-    } else packages.add(spec.split('/')[0]);
+    } else packages.add(spec.startsWith('@') ? spec.split('/').slice(0, 2).join('/') : spec.split('/')[0]);
   }
 };
 for (const n of names.includes('all') ? available : names) visit(`${n}.tsx`);
@@ -67,17 +67,17 @@ for (const f of [...files].sort()) {
   console.log(`  wrote  ${relative(process.cwd(), target)}`);
 }
 
-// The cells must be there, with the shape cells added in poiesis-ui 0.4.
-const cssHasCells = (dir, depth = 0) => {
+// The theme must be there: poiesis.css maps the components' slots onto the cells.
+const hasTheme = (dir, depth = 0) => {
   if (depth > 6 || !existsSync(dir)) return false;
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     if (['node_modules', '.git', 'dist', 'build'].includes(e.name)) continue;
     const p = join(dir, e.name);
-    if (e.isDirectory() ? cssHasCells(p, depth + 1) : e.name.endsWith('.css') && /--selected-bg\s*:/.test(readFileSync(p, 'utf8'))) return true;
+    if (e.isDirectory() ? hasTheme(p, depth + 1) : e.name.endsWith('.css') && /@import\s+["'][^"']*poiesis\.css["']/.test(readFileSync(p, 'utf8'))) return true;
   }
   return false;
 };
-console.log(`\nPackages: ${[...packages].join(', ')} (install the ones the project lacks).`);
-if (!cssHasCells(process.cwd()))
-  console.log('No poiesis-ui cells with shape found here: run poiesis-ui init.mjs (0.4+) with --preset and --style first.');
-console.log('Wrap the app once in <TipProvider> (tip.tsx). Then check with poiesis-ui:ui-auditor and poiesis-ux:ux-tester.');
+console.log(`\nPackages: ${[...packages].sort().join(', ')}, tw-animate-css (install the ones the project lacks).`);
+if (!hasTheme(process.cwd()))
+  console.log('No CSS here imports poiesis.css: add poiesis-ui\'s poiesis.css and a theme to the main stylesheet first.');
+console.log('Wrap the app once in <TooltipProvider> (tooltip.tsx). Then check with poiesis-ui:ui-auditor and poiesis-ux:ux-tester.');

@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.5.0 (poiesis-ui) · 0.2.0 (poiesis-components)
+Found by using the toolkit in a real product.
+- **One component set.** poiesis-components now holds the shadcn/ui set themed by `poiesis.css` (18 components);
+  the earlier `pc-` set and `preview.mjs` are gone. poiesis-gallery shows this set, read from the plugin.
+- Containers (tab panels, cards) no longer set a text size: their text is the body role, not a caption.
+- Controls (buttons, tabs, toggles) use the control role: body size, control weight.
+- Round controls follow the style: new cell `--radius-round` and `rounded-pill` (switch, progress); no `rounded-full`,
+  literal radii, `text-xs` or `text-[…]` left in the set. Rule G1 says so.
+- `poiesis.css`: `bg-surface-1` … `bg-surface-3` for the grey steps; `rounded-xs` mapped.
+- `scan.mjs`: in a project that imports `poiesis.css`, Tailwind's named radii are cells, not literals; only
+  `rounded-full` and arbitrary literal radii are reported.
+- `poiesis.css` defines the Radix state variants (`data-open:`, `data-checked:`, `data-active:`…), so selected tabs,
+  switches and open states render without shadcn's own CSS; and the text roles as classes (`type-title` …
+  `type-code`).
+- Theme poiesis: `--atom-strong-contrast: 1`: status dots and meters were 2–3.2:1 on paper (C3).
+- Components: focus rings at full strength and `--ring` width (were 50%, about 1.8:1); alert borders follow
+  `--line`; looping motion only with `motion-safe:`; switch and tab indicator without literal sizes.
+
 ## 0.4.3 (poiesis-ui)
 - `poiesis.css`: the theme for shadcn/ui and Tailwind v4 components.
 - Colors from a palette; themes.

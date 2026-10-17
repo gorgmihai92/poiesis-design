@@ -1,23 +1,30 @@
-// Switch: an on/off setting that applies at once, the label beside it. A button with role="switch": Space and
-// Enter toggle it, screen readers hear its state. Rules: I1 keyboard · I3 named by its label · R2 the caller
-// remembers the choice · C4 on/off also by the thumb's position · I5 no motion under reduced motion.
-import { cx } from "./cx.js";
-import "./base.css";
-import "./switch.css";
+import * as React from "react"
+import { cn } from "./utils"
+import { Switch as SwitchPrimitive } from "radix-ui"
 
-export function Switch({ checked, onChange, label, id, className }: {
-  checked: boolean;
-  onChange: (on: boolean) => void;
-  label: React.ReactNode;
-  id?: string;
-  className?: string;
+function Switch({
+  className,
+  size = "default",
+  ...props
+}: React.ComponentProps<typeof SwitchPrimitive.Root> & {
+  size?: "sm" | "default"
 }) {
   return (
-    <button id={id} type="button" role="switch" aria-checked={checked} onClick={() => onChange(!checked)} className={cx("pc-switch", className)}>
-      <span>{label}</span>
-      <span aria-hidden className="pc-switch__track">
-        <span className="pc-switch__thumb" />
-      </span>
-    </button>
-  );
+    <SwitchPrimitive.Root
+      data-slot="switch"
+      data-size={size}
+      className={cn(
+        "peer group/switch relative inline-flex shrink-0 items-center rounded-pill border border-transparent transition-all outline-none group-has-[:focus-visible]/field-label:border-transparent group-has-[:focus-visible]/field-label:ring-0 after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-(length:--ring) focus-visible:ring-ring aria-invalid:border-destructive aria-invalid:ring-(length:--ring) aria-invalid:ring-destructive/20 data-[size=default]:h-5 data-[size=default]:w-8 data-[size=sm]:h-3.5 data-[size=sm]:w-6 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:bg-primary data-unchecked:bg-input dark:data-unchecked:bg-input/80 data-disabled:cursor-not-allowed data-disabled:opacity-50",
+        className
+      )}
+      {...props}
+    >
+      <SwitchPrimitive.Thumb
+        data-slot="switch-thumb"
+        className="pointer-events-none block rounded-pill bg-background ring-0 transition-transform group-data-[size=default]/switch:size-4 group-data-[size=sm]/switch:size-3 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] dark:data-checked:bg-primary-foreground group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0 dark:data-unchecked:bg-foreground"
+      />
+    </SwitchPrimitive.Root>
+  )
 }
+
+export { Switch }

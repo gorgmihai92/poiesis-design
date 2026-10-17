@@ -57,8 +57,7 @@ In Claude Code:
 /plugin install poiesis-components@poiesis-design
 ```
 
-poiesis-components needs poiesis-ui (its cells) and a React 18+ project; four components use the `radix-ui`
-package. poiesis-ui needs **Node 18+**; the tokens it writes need a recent browser (Chrome 123, Safari 17.5, Firefox 120).
+poiesis-components needs poiesis-ui (`poiesis.css`) and a React 18+ project with Tailwind v4. poiesis-ui needs **Node 18+**; the tokens it writes need a recent browser (Chrome 123, Safari 17.5, Firefox 120).
 poiesis-ux needs nothing else; it drives the running app when Claude in Chrome is available.
 
 ## What to ask Claude
@@ -124,16 +123,16 @@ may need you, for example to sign in.
 
 ### poiesis-components: pieces that already pass both
 
-Seventeen components a screen is usually made of: button, icon button, switch, tabs, segmented control, tooltip,
-disclosure, field, notice, loading, status dot, meter, progress, tile, section, hint and empty state. Each one
-uses only the poiesis-ui cells and is built to the poiesis-ux rules it touches: a button shows at once that it is
-working, a field's error says what to do and keeps what you typed, a status dot changes shape as well as color,
-nothing moves when a tab changes. `catalog.md` lists the rules each one meets.
+One set of eighteen components a screen is usually made of: button, tabs, tooltip, switch, field, input, label,
+alert, card, collapsible, empty state, status dot, meter, progress, spinner, separator, toggle and toggle group.
+They are [shadcn/ui](https://ui.shadcn.com) components (plus status dot and meter, built the same way) that use
+only role names; poiesis-ui's `poiesis.css` maps those onto the cells. Round controls follow the style (square in
+`quiet`), containers leave text at the body size, controls use the control text role. `catalog.md` lists them.
 
 `add.mjs` copies the ones you ask for into your project, with what they need. The copies are yours to change,
-the way shadcn/ui works. Because they hold no values of their own, switching the style or preset in `atoms.css`
-restyles all of them at once. `preview.mjs` builds one page with every component in the four styles side by
-side, so you can choose a direction by looking.
+the way shadcn/ui works. Because they hold no values of their own, switching the theme, preset or style restyles
+all of them at once. [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery) shows every component and
+its states, read straight from this folder, so you can choose a direction by looking.
 
 ## The rules
 
@@ -255,11 +254,10 @@ plugins/
       plugin.json              name, version, description
     skills/components/
       SKILL.md                 entry point: set up, copy, build, make a new component, check
-      catalog.md               each component, what it is for and the rules it meets
-      library/                 one .tsx and one .css per component, plus base.css and cx.ts
+      catalog.md               each component and what it is for
+      library/                 one .tsx per component (shadcn/ui on poiesis.css), plus utils.ts
       scripts/
         add.mjs                copy components and what they import into a project
-        preview.mjs            one page with every component in the four styles
 research/                      the sources behind the evidence-based rules: one note per study
 CHANGELOG.md                   what changed in each version
 LICENSE                        MIT

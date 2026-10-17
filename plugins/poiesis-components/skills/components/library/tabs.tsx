@@ -1,43 +1,87 @@
-// Tabs: the main sections of a screen. Segmented: a small choice between views of the same content, on a grey
-// step, the chosen one with the selected cells. Both are the ARIA tabs pattern from Radix (arrow keys move,
-// Tab enters the panel). Rules: I1 keyboard · K3 nothing moves (reserved bold width, indicator always 2px) ·
-// R1 the current one is visible · R2 the caller remembers the choice · G3 selected cells.
-import { Tabs as T } from "radix-ui";
-import type * as React from "react";
-import { cx } from "./cx.js";
-import "./base.css";
-import "./tabs.css";
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "./utils"
+import { Tabs as TabsPrimitive } from "radix-ui"
 
-export const Tabs = T.Root;
-export const TabsContent = ({ className, ...p }: React.ComponentProps<typeof T.Content>) => (
-  <T.Content className={cx("pc-tabs__content", className)} {...p} />
-);
-
-/** `items`: value and label of each tab, in order. */
-export function TabsList({ items, label, className }: { items: [string, React.ReactNode][]; label: string; className?: string }) {
+function Tabs({
+  className,
+  orientation = "horizontal",
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Root>) {
   return (
-    <T.List aria-label={label} className={cx("pc-tabs__list", className)}>
-      {items.map(([value, text]) => (
-        <T.Trigger key={value} value={value} className="pc-tabs__trigger">
-          <span className="pc-tabs__label">
-            <span>{text}</span>
-            <span aria-hidden>{text}</span>
-          </span>
-        </T.Trigger>
-      ))}
-    </T.List>
-  );
+    <TabsPrimitive.Root
+      data-slot="tabs"
+      data-orientation={orientation}
+      className={cn(
+        "group/tabs flex gap-2 data-horizontal:flex-col",
+        className
+      )}
+      {...props}
+    />
+  )
 }
 
-/** A segmented control inside a Tabs root: the second level under the main tabs. */
-export function Segmented({ items, label, className }: { items: [string, React.ReactNode][]; label: string; className?: string }) {
+const tabsListVariants = cva(
+  "group/tabs-list inline-flex w-fit items-center justify-center rounded-lg p-0.5 text-muted-foreground group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col data-[variant=line]:rounded-none",
+  {
+    variants: {
+      variant: {
+        default: "bg-muted",
+        line: "gap-1 bg-transparent",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+function TabsList({
+  className,
+  variant = "default",
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.List> &
+  VariantProps<typeof tabsListVariants>) {
   return (
-    <T.List aria-label={label} className={cx("pc-segmented", className)}>
-      {items.map(([value, text]) => (
-        <T.Trigger key={value} value={value} className="pc-segmented__trigger pc-selectable">
-          {text}
-        </T.Trigger>
-      ))}
-    </T.List>
-  );
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      data-variant={variant}
+      className={cn(tabsListVariants({ variant }), className)}
+      {...props}
+    />
+  )
 }
+
+function TabsTrigger({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+  return (
+    <TabsPrimitive.Trigger
+      data-slot="tabs-trigger"
+      className={cn(
+        "relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-base font-(--control-weight) whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-(length:--ring) focus-visible:ring-ring focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent",
+        "data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground",
+        "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:-bottom-1 group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function TabsContent({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Content>) {
+  return (
+    <TabsPrimitive.Content
+      data-slot="tabs-content"
+      className={cn("flex-1 outline-none", className)}
+      {...props}
+    />
+  )
+}
+
+export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
