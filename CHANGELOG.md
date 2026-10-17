@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 (poiesis-copy) · 0.8.1 (poiesis-ui)
+- Rule O6: no word left alone on the last line (a widow) in headings and short text, at the widths shown, in every
+  language. Fixed by rewording, never by a forced line break; long running text is left to `text-wrap: pretty`.
+  `copy-reviewer` checks it on the rendered page, or estimates from the container's width and says so.
+- poiesis-ui rule T7: the `type-*` roles set how lines wrap: titles, headings and subheadings `text-wrap: balance`,
+  body and captions `text-wrap: pretty`, so a block rarely ends on one word.
+
 ## 0.1.0 (poiesis-copy) · 0.5.0 (poiesis-ux)
 **poiesis-copy: what the product says, in English and Romanian.** A new plugin for UX copy, landing pages, ads
 and email, written clear, concise and honest.

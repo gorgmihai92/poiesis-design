@@ -26,6 +26,10 @@ You review one project's copy and report. You never edit project files. `$COPY` 
    to do (M1, M2), confirmations that name the object (B3), the secondary option's wording (B5), headings that
    carry a page (O1), claims and proof with a source (Q1, Q2, Q4, Q5), tone against `voice.md` (Y1, Y2, M5), the
    form of address held throughout (X4), ad and subject lengths (O5).
+5. Widows (O6): headings and short text (up to about four lines) ending in one word on its own line. With browser
+   tools, look at the rendered page at about 375 px and 1280 px wide; else estimate from the container's width
+   (`max-w-*`, `--measure`) (about 2 characters per em of width, at the text's size), and say it is an estimate. Give a rewrite
+   that ends on two or more words, in each language affected.
 
 Report in under 500 words: findings, `must` first (rule id · the text, quoted · `file:line` · what breaks · a
 rewrite in the voice, in each language affected), up to 3 examples per rule + count; then what you could not check

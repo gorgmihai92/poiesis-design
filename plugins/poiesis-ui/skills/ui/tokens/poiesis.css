@@ -40,12 +40,13 @@
    navigation. */
 @utility text-nearness { color: color-mix(in oklch, var(--ink) var(--nearness, 0%), var(--faint)); }
 
-/* The page text roles (H1) as one class each: size, weight, leading, family and tracking together. */
-@utility type-title { font-size: var(--title-size); font-weight: var(--title-weight); line-height: var(--title-leading); font-family: var(--font-sans); letter-spacing: var(--title-tracking); }
-@utility type-heading { font-size: var(--heading-size); font-weight: var(--heading-weight); line-height: var(--heading-leading); font-family: var(--font-sans); letter-spacing: var(--heading-tracking); }
-@utility type-subheading { font-size: var(--subheading-size); font-weight: var(--subheading-weight); line-height: var(--subheading-leading); font-family: var(--font-sans); letter-spacing: var(--subheading-tracking); }
-@utility type-body { font-size: var(--body-size); font-weight: var(--body-weight); line-height: var(--body-leading); font-family: var(--font-sans); letter-spacing: var(--body-tracking); }
-@utility type-caption { font-size: var(--caption-size); font-weight: var(--caption-weight); line-height: var(--caption-leading); font-family: var(--font-sans); letter-spacing: var(--caption-tracking); }
+/* The page text roles (H1) as one class each: size, weight, leading, family and tracking together, and how lines
+   wrap (T7): headings balanced, body and captions pretty. */
+@utility type-title { font-size: var(--title-size); font-weight: var(--title-weight); line-height: var(--title-leading); font-family: var(--font-sans); letter-spacing: var(--title-tracking); text-wrap: balance; }
+@utility type-heading { font-size: var(--heading-size); font-weight: var(--heading-weight); line-height: var(--heading-leading); font-family: var(--font-sans); letter-spacing: var(--heading-tracking); text-wrap: balance; }
+@utility type-subheading { font-size: var(--subheading-size); font-weight: var(--subheading-weight); line-height: var(--subheading-leading); font-family: var(--font-sans); letter-spacing: var(--subheading-tracking); text-wrap: balance; }
+@utility type-body { font-size: var(--body-size); font-weight: var(--body-weight); line-height: var(--body-leading); font-family: var(--font-sans); letter-spacing: var(--body-tracking); text-wrap: pretty; }
+@utility type-caption { font-size: var(--caption-size); font-weight: var(--caption-weight); line-height: var(--caption-leading); font-family: var(--font-sans); letter-spacing: var(--caption-tracking); text-wrap: pretty; }
 @utility type-code { font-size: var(--code-size); font-weight: var(--code-weight); line-height: var(--code-leading); font-family: var(--font-mono); letter-spacing: var(--code-tracking); }
 
 @theme inline {

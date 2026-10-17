@@ -1,7 +1,7 @@
 # poiesis-ui
 
-How an interface looks: text sizes, hierarchy, spacing and color, derived from a few values you choose (atoms →
-cells). The `ui` skill holds the tokens and rules; the `ui-auditor` agent checks your code; a hook holds back
+How an interface looks: text sizes, hierarchy, spacing, color and shape, derived from a few values a theme sets
+(atoms → cells). The `ui` skill holds the tokens and rules; the `ui-auditor` agent checks your code; a hook holds back
 publishing until the audit passes, in projects that turn it on.
 
 Part of the Poiesis toolkits: research collects, insight connects, frontier explores, design creates

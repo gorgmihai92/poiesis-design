@@ -26,4 +26,9 @@ function MastheadByline({ className, ...props }: React.ComponentProps<"span">) {
   return <span data-slot="masthead-byline" className={cn("text-muted", className)} {...props} />
 }
 
-export { Masthead, MastheadTitle, MastheadName, MastheadByline }
+/** What it is, in one muted line under the name, so the first screen says it (copy O2). */
+function MastheadDescription({ className, ...props }: React.ComponentProps<"p">) {
+  return <p data-slot="masthead-description" className={cn("text-muted", className)} {...props} />
+}
+
+export { Masthead, MastheadTitle, MastheadName, MastheadByline, MastheadDescription }

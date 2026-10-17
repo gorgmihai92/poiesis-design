@@ -28,6 +28,8 @@ ask only what changes the words: who it's for, the one action, the language.
    (Q1–Q5).
 3. Both languages when the project has both: write each from the meaning (X1), with the Romanian rules (X2–X5);
    check lengths in the longer one (X6, O5).
+   Headings and short text that will wrap: no single word on the last line at the widths shown (O6); reword,
+   don't force a break.
 4. Before finishing, check the piece against the rules it touches and fix what breaks.
 
 Headlines, taglines, ads and subject lines: give 2–3 versions with different angles (outcome, problem, belief),

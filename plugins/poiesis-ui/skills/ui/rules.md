@@ -18,6 +18,9 @@ a component's parts apart.
 **T3 · must · Line height by role, unitless.** Body 1.5–1.65, UI text 1.3–1.45, headings 1.1–1.25.
 **T4 · must · Measure.** Running text 45–75 characters per line (`max-inline-size: var(--measure)`).
 **T5 · must · One family for text** (`--font-sans`), mono for code; the serif only where chosen on purpose. Changing or aligned numbers use `tabular-nums`.
+**T7 · should · Lines wrap well.** Titles and headings `text-wrap: balance`, running text and captions
+`text-wrap: pretty`, so a block rarely ends on one word; the `type-*` roles set it. A fallback: short text is
+reworded so no word sits alone (`copy` O6).
 
 ## Hierarchy (H)
 

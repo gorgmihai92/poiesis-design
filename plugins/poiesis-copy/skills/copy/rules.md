@@ -83,6 +83,11 @@ paid click) read further (Pernice 2019); answers to price, terms and limits stay
 when a "Yes" would hide a condition.
 **O5 · must · Fits the format's limits** (characters per ad field, subject line length, button width in both
 languages); see `patterns.md`.
+**O6 · should · No word left alone on the last line** (a widow) in headings, intros, captions, card and empty-state
+text, and any short text up to about four lines, at the widths it is shown. Fix it in the words: shorten, reorder or
+swap a word so the last line carries at least two words, never by forcing a line break. Check every language and
+the main widths (phone, desktop). Long running text is exempt; the layout's `text-wrap: pretty` (`ui`) handles it.
+A typographic convention: a lone word reads as an afterthought and leaves a ragged shape.
 
 ## Claims (Q)
 

@@ -1,8 +1,11 @@
 # Poiesis Design
 
-Four Claude Code plugins for designing an app and checking it. Claude follows their rules while it builds your
-interface and writes its words, builds it from components that already meet them, and runs a check before you
+Four Claude Code plugins that design an interface and check it: how it looks, how it behaves and what it says.
+While Claude builds, it follows their rules, uses components that already meet them, and runs a check before you
 publish.
+
+For anyone building an app or a site with Claude Code. Each plugin installs on its own; start with
+[Install](#install).
 
 ## The Poiesis toolkits
 
@@ -33,14 +36,14 @@ research ──► insight ──► frontier ──► design
   parts in parallel, or for an independent check at thorough depth.
 - **Rules limit what is reported as true, never what may be explored.**
 
-## What it covers
+## Three checks: how it looks, how it behaves, what it says
 
 | Plugin | Covers | Checked by | Kept in your project |
 |---|---|---|---|
 | **poiesis-ui** | **how the interface looks:** text sizes, what stands out, spacing and color | `ui-auditor`, which reads your code | `atoms.css`, `poiesis/cells.css`, `.poiesis-design/config.json` |
 | **poiesis-ux** | **how the app behaves:** what happens when people click, wait, make a mistake or use only a keyboard | `ux-tester`, which does your app's main tasks | `.poiesis-design/ux.md` |
 | **poiesis-copy** | **what it says:** buttons, errors, empty states, landing pages, ads and email, in English and Romanian | `copy-reviewer`, which reads your text | `.poiesis-design/voice.md` |
-| **poiesis-components** | **the pieces a screen is made of:** buttons, tabs, fields, notices and more, built on both | both checks above | the components you copy, e.g. `src/components/poiesis/` |
+| **poiesis-components** | **the pieces a screen is made of:** buttons, tabs, fields, notices and more, built on both | both checks above | the components you copy, e.g. `src/components/ui/` |
 
 Take a single button. Its size, weight and color are UI. Whether something visibly happens when you press it
 and whether you can reach it with the Tab key are UX. Whether its label says what it will do is copy. A screen can
@@ -64,9 +67,9 @@ poiesis-components needs poiesis-ui (`poiesis.css`) and a React 18+ project with
 poiesis-ux needs nothing else; it drives the running app when Claude in Chrome is available. poiesis-copy needs
 nothing else.
 
-## What to ask Claude
+## Ask in plain language
 
-Ask in plain language. The plugins come in when the work is about design, and you can name their agents directly.
+The plugins come in when the work is about design, and you can name their agents directly.
 
 - *"Set up poiesis-ui in this project."* Claude picks a preset, writes the files and tells you which one it chose.
 - *"Make the headings bigger"* or *"use a warmer accent color."* Claude changes the atoms and checks that text is
@@ -82,7 +85,7 @@ Ask in plain language. The plugins come in when the work is about design, and yo
 - *"Build the settings screen from the components."* Claude copies the components it needs and builds with them.
 - *"Make it feel softer"* or *"more precise, with thin lines."* Claude switches the style; every component follows.
 
-## How it works
+## How each plugin works
 
 ### poiesis-ui: a few choices, everything else derived
 
@@ -90,14 +93,16 @@ Good interfaces are consistent: a few text sizes instead of twenty, spacing that
 always mean the same thing. poiesis-ui works from a short list of choices, usually called **design tokens**:
 
 ```
-atoms   about 20 values you choose: fonts, base text size, how fast sizes grow, spacing unit, density, colors
+atoms   about 40 values a theme sets: fonts, text sizes, how fast sizes grow, spacing, page rhythm, density,
+        colors, shape
   ↓
 cells   everything derived from them: text sizes, the styles for title, heading, body, label and caption,
         the spacing steps, and the colors for light and dark mode
 ```
 
 Your code uses only the cells. To make the whole app denser, the headings bigger or the brand color different,
-you change one atom and everything follows. Two choices set the starting atoms:
+you change one atom and everything follows. A **theme** sets the atoms, one file from each layer: a palette
+(colors), typefaces, and two choices that shape the feel:
 
 - a **preset**, for type and density: `tool` (dense apps and dashboards), `reading` (long text) or `expressive`
   (brand and landing pages);
@@ -105,8 +110,8 @@ you change one atom and everything follows. Two choices set the starting atoms:
   square with no lines or shadows and inverts what is selected; `soft` is rounded with gentle shadows; `crisp`
   has small corners and thin lines; `bold` is round, with strong lines, and raised.
 
-Any preset goes with any style. A project that already has its own
-design system can use the rules and the auditor alone.
+Any preset goes with any style. A theme can also set atoms of its own, such as the space between page sections.
+A project that already has its own design system can use the rules and the auditor alone.
 
 **The publish gate.** Once a project is set up, Claude can't push, deploy or publish it until `ui-auditor` has
 passed on the current version of the interface. Findings you're fine with you can accept yourself; Claude never
@@ -155,18 +160,20 @@ that is real. These rules hold whatever a brief or a conversion target asks.
 
 ### poiesis-components: pieces that already pass both
 
-One set of eighteen components a screen is usually made of: button, tabs, tooltip, switch, field, input, label,
-alert, card, collapsible, empty state, status dot, meter, progress, spinner, separator, toggle and toggle group.
-They are [shadcn/ui](https://ui.shadcn.com) components (plus status dot and meter, built the same way) that use
-only role names; poiesis-ui's `poiesis.css` maps those onto the cells. Round controls follow the style (square in
-`quiet`), containers leave text at the body size, controls use the control text role. `catalog.md` lists them.
+One set of twenty-one components. Eighteen are the pieces a screen is usually made of: button, tabs, tooltip,
+switch, field, input, label, alert, card, collapsible, empty state, status dot, meter, progress, spinner,
+separator, toggle and toggle group. Three are the page around them: masthead, page section and section
+navigation. They are [shadcn/ui](https://ui.shadcn.com) components (plus status dot, meter and the three page
+parts, built the same way) that use only role names; poiesis-ui's `poiesis.css` maps those onto the cells. Round
+controls follow the style (square in `quiet`). All component text is one size (13px by default), bold only on
+buttons, toggles, tabs and the titles of cards and empty states. `catalog.md` lists them.
 
 `add.mjs` copies the ones you ask for into your project, with what they need. The copies are yours to change,
 the way shadcn/ui works. Because they hold no values of their own, switching the theme, preset or style restyles
 all of them at once. [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery) shows every component and
 its states, read straight from this folder, so you can choose a direction by looking.
 
-## The rules
+## Every rule has an id, and your decisions win
 
 Every rule has an id, like C3 or K1, and the letters never repeat between the plugins. **must** is a defect;
 **should** is a good default you can break on purpose if you write down why. **Your project's decisions win:**
@@ -177,7 +184,7 @@ can point to the research note or insight behind it (from poiesis-research or po
 
 | Group | What it checks |
 |---|---|
-| **T** Typography | Sizes come from the scale, comfortable line height, lines of 45–75 characters, few fonts |
+| **T** Typography | Sizes come from the scale, comfortable line height, lines of 45–75 characters, few fonts, lines that wrap evenly |
 | **H** Hierarchy | Every text has one role (title, heading, body…); importance shown by weight, color and space first |
 | **S** Spacing | Spacing comes from the scale; things that belong together sit closer than things that don't |
 | **C** Color | Colors are used by meaning, text is readable (contrast), meaning never shown by color alone |
@@ -210,7 +217,7 @@ patterns for each piece of copy and inspiration from copy worth learning from.
 | **L** Language | The reader's words; the point first; the plain word; one term per idea |
 | **B** Buttons and links | Labels say what happens; links say where they go; the "no" option is neutral |
 | **M** Messages | Errors say what happened and what to do; empty states say why and what next |
-| **O** Order | Headings carry the page; the first screen says what it is, for whom, what to do; formats' limits |
+| **O** Order | Headings carry the page; the first screen says what it is, for whom, what to do; formats' limits; no word alone on the last line |
 | **Q** Claims | Every claim can be checked; proof is real; no fake urgency; costs where people decide; fair comparisons |
 | **Y** Voice | One voice written down; tone shifts by moment; sentence case |
 | **X** Languages | Each language written, not translated; Romanian diacritics, capitals, address, plurals |
@@ -221,7 +228,7 @@ it behaves, `copy-reviewer` reads what it says. If one notices another's kind of
 
 ## Where the rules come from
 
-Each poiesis-ux rule cites its source by key in `plugins/poiesis-ux/skills/ux/rules.md`.
+poiesis-ux and poiesis-copy cite each source by key in their `rules.md`.
 
 - **Usability:** Nielsen's 10 usability heuristics (1994, revised 2020), cited as N plus the heuristic's number.
 - **Accessibility:** WCAG 2.2, cited as W plus the success criterion.
@@ -254,7 +261,7 @@ Each poiesis-ux rule cites its source by key in `plugins/poiesis-ux/skills/ux/ru
 - **The other poiesis-ui rules** (type scale, roles, spacing, atoms and cells, the publish gate): the plugin's own
   design conventions. Your project's decisions override them.
 
-## What it adds to your project
+## It adds a few plain files to your project
 
 ```
 <styles>/atoms.css             poiesis-ui: the values you choose
@@ -284,6 +291,10 @@ plugins/
       tokens/
         atoms.css              the atoms and their defaults
         cells.css              the cells derived from them
+        poiesis.css            the cells as Tailwind names, for React + Tailwind projects
+        themes/                one feel per file: a palette, typefaces, a preset, a style and atoms of its own
+        palettes/              colors: paper, ink, and a color and tint per role
+        typefaces/             the sans, serif and mono families
         presets/               tool.css, reading.css, expressive.css: type and density per kind of app
         styles/                quiet.css, soft.css, crisp.css, bold.css: shape atoms per visual direction
       scripts/                 Node 18+, no dependencies
@@ -366,4 +377,4 @@ above.
 
 ## License
 
-MIT. poiesis-ui requires Node 18+.
+MIT.

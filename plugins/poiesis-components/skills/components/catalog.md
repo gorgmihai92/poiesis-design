@@ -20,7 +20,7 @@ status dot, meter, masthead, page section and section nav, built the same way; `
 | Progress | how much of a known amount is done | progress.tsx |
 | Spinner | something loading, for an unknown time | spinner.tsx |
 | Separator | a divider between groups | separator.tsx |
-| Masthead | the top of a page or app: `MastheadTitle` holding `MastheadName` and a muted `MastheadByline`, then one `default` button as the call to action | masthead.tsx |
+| Masthead | the top of a page or app: `MastheadTitle` holding `MastheadName` and a muted `MastheadByline`, a muted `MastheadDescription` (what it is), then one `default` button as the call to action | masthead.tsx |
 | PageSection | one section of a long page: divider on top, content near it, `--section-space` after; parts `--subsection-space` apart. `PageSectionHeader`, `-Title`, `-Description` | page-section.tsx |
 | SectionNav | navigation for a page of sections, in a side column: passed rows stack at the top, coming rows at the bottom, rows ride up with their sections; the current one ink with its description, the rest faint, darkening as they near (`text-nearness`); a wrapped list on narrow screens | section-nav.tsx |
 | Toggle, ToggleGroup | a pressed / not pressed control; a group of them | toggle.tsx, toggle-group.tsx |
