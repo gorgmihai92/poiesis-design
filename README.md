@@ -1,34 +1,37 @@
 # Poiesis Design
 
-Four Claude Code plugins that design an interface and check it: how it looks, how it behaves and what it says.
-While Claude builds, it follows their rules, uses components that already meet them, and runs a check before you
-publish.
+Interface design that is checked while Claude builds it, in Claude Code: how it looks, how it behaves and what it
+says. Claude follows the rules as it works, builds from components that already meet them, and runs a check before
+you publish.
 
-For anyone building an app or a site with Claude Code. Each plugin installs on its own; start with
+For anyone building an app or a site with Claude Code. Poiesis Design is one of the four products in the
+[Poiesis Toolkit](#part-of-the-poiesis-toolkit). It comes as four plugins, each installed on its own; start with
 [Install](#install).
 
-## The Poiesis toolkits
+## Part of the Poiesis Toolkit
 
-**Collect → connect → explore → create.** Four toolkits. Each works on its own; together, each reads what the others
-left in your project, as plain files.
+The Poiesis Toolkit is four products for Claude Code, one for each step from a question to a finished product:
+**Research** collects, **Insight** connects, **Frontier** explores, **Design** creates. Each installs and works on
+its own. Insight and Frontier also read what the other steps left in your project, as plain files, and Design
+builds a Frontier concept when you ask.
 
-| Toolkit | Role | Agents | Reads | Leaves in your project |
-|---|---|---|---|---|
-| [poiesis-research](https://github.com/gorgmihai92/poiesis-research) | **collect:** the literature on a topic, the evidence for and against a claim, the grants that fit | `paper-scout`, `evidence-scout`, `funding-scout` | the web's scholarly databases, official funding pages | `research/` |
-| [poiesis-insight](https://github.com/gorgmihai92/poiesis-insight) | **connect:** what the evidence or your data mean, and what is emerging; every conclusion challenged | `insight-analyst`, `foresight-analyst`, `challenger` | `research/`, your own data, `frontier/results/` | `insights/`, `foresight/` |
-| [poiesis-frontier](https://github.com/gorgmihai92/poiesis-frontier) | **explore:** new concepts, each with the smallest experiment that could kill it | `experimentalist` | `insights/`, `foresight/`, `research/` | `frontier/` |
-| [poiesis-design](https://github.com/gorgmihai92/poiesis-design) | **create:** how the interface looks, behaves and what it says, checked before release | `ui-auditor`, `ux-tester`, `copy-reviewer` | your code, `.poiesis-design/` | `.poiesis-design/`, design tokens, components |
+| Product | What it does | Plugins | Agents | Reads | Leaves in your project |
+|---|---|---|---|---|---|
+| [Poiesis Research](https://github.com/gorgmihai92/poiesis-research) | **collect:** the literature on a topic, the evidence for and against a claim, the grants that fit | `poiesis-research` | `paper-scout`, `evidence-scout`, `funding-scout` | the web's scholarly databases, official funding pages | `research/` |
+| [Poiesis Insight](https://github.com/gorgmihai92/poiesis-insight) | **connect:** what the evidence or your data mean, and what is emerging; every conclusion challenged | `poiesis-insight` | `insight-analyst`, `foresight-analyst`, `challenger` | `research/`, your own data, `frontier/results/` | `insights/`, `foresight/` |
+| [Poiesis Frontier](https://github.com/gorgmihai92/poiesis-frontier) | **explore:** new concepts, each with the smallest experiment that could kill it | `poiesis-frontier` | `experimentalist` | `insights/`, `foresight/`, `research/` | `frontier/` |
+| [Poiesis Design](https://github.com/gorgmihai92/poiesis-design) | **create:** how the interface looks, behaves and what it says, built from components that already pass, checked before release | `poiesis-ui`, `poiesis-ux`, `poiesis-copy`, `poiesis-components` | `ui-auditor`, `ux-tester`, `copy-reviewer` | your code, `.poiesis-design/` | `.poiesis-design/`, design tokens, components |
 
 ```
-research ──► insight ──► frontier ──► design
+Research ──► Insight ──► Frontier ──► Design
                ▲            │
-               └─ results ◄─┘   (experiment results go back to insight as data)
+               └─ results ◄─┘   (experiment results go back to Insight as data)
 ```
 
-- **One job each.** Research says what sources say; insight says what it means; frontier proposes what could be
-  and how to test it; design builds and checks. None does another's job.
-- **None needs another.** When one would really improve the answer, Claude says so once, in one line, and offers
-  to install it. You can say no; the work goes on and the report says what was left out.
+- **One job each.** Research says what sources say; Insight says what it means; Frontier proposes what could be
+  and how to test it; Design builds and checks. None does another's job.
+- **None needs another.** When another product would really improve the answer, Claude says so once, in one line,
+  and offers to install it. You can say no; the work goes on and the report says what was left out.
 - **Depth you choose:** quick, standard (the default) or thorough, per request or as a line in your project's
   `CLAUDE.md`, e.g. `Depth: quick`. A few rules hold at every depth (nothing invented, sources cited, interpretation
   labelled); the rest scale with what is at stake, and every report ends with what was **not checked**.
@@ -36,14 +39,14 @@ research ──► insight ──► frontier ──► design
   parts in parallel, or for an independent check at thorough depth.
 - **Rules limit what is reported as true, never what may be explored.**
 
-## Three checks: how it looks, how it behaves, what it says
+## Four plugins: how it looks, how it behaves, what it says, and the pieces
 
-| Plugin | Covers | Checked by | Kept in your project |
+| Plugin | What it does | Checked by | Kept in your project |
 |---|---|---|---|
 | **poiesis-ui** | **how the interface looks:** text sizes, what stands out, spacing and color | `ui-auditor`, which reads your code | `atoms.css`, `poiesis/cells.css`, `.poiesis-design/config.json` |
 | **poiesis-ux** | **how the app behaves:** what happens when people click, wait, make a mistake or use only a keyboard | `ux-tester`, which does your app's main tasks | `.poiesis-design/ux.md` |
 | **poiesis-copy** | **what it says:** buttons, errors, empty states, landing pages, ads and email, in English and Romanian | `copy-reviewer`, which reads your text | `.poiesis-design/voice.md` |
-| **poiesis-components** | **the pieces a screen is made of:** buttons, tabs, fields, notices and more, built on both | both checks above | the components you copy, e.g. `src/components/ui/` |
+| **poiesis-components** | **the pieces a screen is made of:** buttons, tabs, fields, notices and more, built on the first two | `ui-auditor` and `ux-tester` | the components you copy, e.g. `src/components/ui/` |
 
 Take a single button. Its size, weight and color are UI. Whether something visibly happens when you press it
 and whether you can reach it with the Tab key are UX. Whether its label says what it will do is copy. A screen can
@@ -63,9 +66,9 @@ In Claude Code:
 /plugin install poiesis-components@poiesis-design
 ```
 
-poiesis-components needs poiesis-ui (`poiesis.css`) and a React 18+ project with Tailwind v4. poiesis-ui needs **Node 18+**; the tokens it writes need a recent browser (Chrome 123, Safari 17.5, Firefox 120).
-poiesis-ux needs nothing else; it drives the running app when Claude in Chrome is available. poiesis-copy needs
-nothing else.
+poiesis-components needs poiesis-ui (`poiesis.css`) and a React 18+ project with Tailwind v4. poiesis-ui needs
+**Node 18+**; the tokens it writes need a recent browser (Chrome 123, Safari 17.5, Firefox 120). poiesis-ux needs
+nothing else; it drives the running app when Claude in Chrome is available. poiesis-copy needs nothing else.
 
 ## Ask in plain language
 
@@ -85,9 +88,18 @@ The plugins come in when the work is about design, and you can name their agents
 - *"Build the settings screen from the components."* Claude copies the components it needs and builds with them.
 - *"Make it feel softer"* or *"more precise, with thin lines."* Claude switches the style; every component follows.
 
-## How each plugin works
+## What each plugin does
 
 ### poiesis-ui: a few choices, everything else derived
+
+- **Sets up your project** from a preset that fits it, writes the token files and turns on the publish gate. It
+  tells you which preset it chose; you don't answer questions first.
+- **Changes the whole look from a few values:** denser, bigger headings, more air between sections, another accent
+  color, a softer or sharper style.
+- **Shows what your choices produce:** every text size and space in px, every color in light and dark mode, and
+  the contrast of every pair, with a failure flagged (`resolve.mjs`).
+- **Finds values that bypass the tokens** in your code, each with its rule id (`scan.mjs`).
+- **Audits before you publish:** `ui-auditor` reads your code against the rules and records pass or fail.
 
 Good interfaces are consistent: a few text sizes instead of twenty, spacing that follows a rhythm, colors that
 always mean the same thing. poiesis-ui works from a short list of choices, usually called **design tokens**:
@@ -117,7 +129,27 @@ A project that already has its own design system can use the rules and the audit
 passed on the current version of the interface. Findings you're fine with you can accept yourself; Claude never
 accepts them for you. Without `.poiesis-design/config.json` the gate stays off.
 
+**What it checks** (`plugins/poiesis-ui/skills/ui/rules.md`):
+
+| Group | What it checks |
+|---|---|
+| **T** Typography | Sizes come from the scale, comfortable line height, lines of 45–75 characters, few fonts, lines that wrap evenly |
+| **H** Hierarchy | Every text has one role (title, heading, body…); importance shown by weight, color and space first |
+| **S** Spacing | Spacing comes from the scale; things that belong together sit closer than things that don't |
+| **C** Color | Colors are used by meaning, text is readable (contrast), meaning never shown by color alone |
+| **G** Shape | Corners, lines, shadows and motion come from the style; selected things use the selected cells |
+| **A** Atoms | You change atoms, never the derived cells |
+| **P** Publishing | The audit passes before anything is published |
+
 ### poiesis-ux: the tasks people come to do
+
+- **Writes your app's tasks** in `ux.md` from the code: how to start the app, the 5–10 tasks people do most, and
+  the rules your project breaks on purpose.
+- **Builds flows from tested patterns:** forms, waiting, delete, archive and send, lists and menus, notifications,
+  transitions, choices and defaults, each tied to its rules.
+- **Checks each flow it changes** for every state (loading, empty, error), a way out and a keyboard path, and
+  updates the flow's task.
+- **Tests the app:** `ux-tester` does each task and reports what got in the way, with evidence.
 
 You test UX by using the app, not by looking at it. So poiesis-ux starts from the **tasks**, written in
 `.poiesis-design/ux.md`, together with how to start the app and the rules your project breaks on purpose:
@@ -135,66 +167,8 @@ get a pass or fail per task, then each finding with the step, the rule it breaks
 It runs after you change a flow and before a release. It doesn't block publishing, because testing a live app
 may need you, for example to sign in.
 
-### poiesis-copy: clear, concise, honest words
-
-poiesis-copy writes and checks every word people read: in the app (buttons, errors, empty states, confirmations,
-onboarding) and around it (landing pages, ads, email). It starts from your product's **voice**, written in
-`.poiesis-design/voice.md`: who reads it, three or four traits, the glossary (one word per idea, in English and
-Romanian), words to avoid, how the tone shifts from onboarding to errors, and whether Romanian says "tu" or
-"dumneavoastră".
-
-Three kinds of guidance, kept apart:
-
-- **rules** (`rules.md`), with ids and sources, that the reviewer checks;
-- **patterns** (`patterns.md`), ready shapes for each piece: a confirmation, an empty state, a landing page in
-  seven sections, ad and subject-line limits;
-- **inspiration** (`inspiration/`), copy you admire, one file per source, read for what it does well. They are good
-  practice, never rules, and their wording is never reused. Ask Claude to add a new one whenever you find copy you
-  like.
-
-Honesty is not negotiable: no fake urgency, no shaming the "no" option, no claim that can't be checked, proof
-that is real. These rules hold whatever a brief or a conversion target asks.
-
-`copy-reviewer` reads the project's text, in every language, and reports each finding with the text, its
-`file:line`, the rule and a rewrite. Like `ux-tester`, it doesn't block publishing.
-
-### poiesis-components: pieces that already pass both
-
-One set of twenty-one components. Eighteen are the pieces a screen is usually made of: button, tabs, tooltip,
-switch, field, input, label, alert, card, collapsible, empty state, status dot, meter, progress, spinner,
-separator, toggle and toggle group. Three are the page around them: masthead, page section and section
-navigation. They are [shadcn/ui](https://ui.shadcn.com) components (plus status dot, meter and the three page
-parts, built the same way) that use only role names; poiesis-ui's `poiesis.css` maps those onto the cells. Round
-controls follow the style (square in `quiet`). All component text is one size (13px by default), bold only on
-buttons, toggles, tabs and the titles of cards and empty states. `catalog.md` lists them.
-
-`add.mjs` copies the ones you ask for into your project, with what they need. The copies are yours to change,
-the way shadcn/ui works. Because they hold no values of their own, switching the theme, preset or style restyles
-all of them at once. [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery) shows every component and
-its states, read straight from this folder, so you can choose a direction by looking.
-
-## Every rule has an id, and your decisions win
-
-Every rule has an id, like C3 or K1, and the letters never repeat between the plugins. **must** is a defect;
-**should** is a good default you can break on purpose if you write down why. **Your project's decisions win:**
-write them in `design.md`, `CLAUDE.md` or the "Decisions" part of `ux.md`, and both checks follow them. A decision
-can point to the research note or insight behind it (from poiesis-research or poiesis-insight).
-
-**poiesis-ui** (`plugins/poiesis-ui/skills/ui/rules.md`)
-
-| Group | What it checks |
-|---|---|
-| **T** Typography | Sizes come from the scale, comfortable line height, lines of 45–75 characters, few fonts, lines that wrap evenly |
-| **H** Hierarchy | Every text has one role (title, heading, body…); importance shown by weight, color and space first |
-| **S** Spacing | Spacing comes from the scale; things that belong together sit closer than things that don't |
-| **C** Color | Colors are used by meaning, text is readable (contrast), meaning never shown by color alone |
-| **G** Shape | Corners, lines, shadows and motion come from the style; selected things use the selected cells |
-| **A** Atoms | You change atoms, never the derived cells |
-| **P** Publishing | The audit passes before anything is published |
-
-**poiesis-ux** (`plugins/poiesis-ux/skills/ux/rules.md`), from Nielsen's 10 usability heuristics, WCAG 2.2,
-ISO 9241-110 and studies of how people use interfaces; every rule names its source. It also gives patterns for
-common situations: forms, waiting, confirmations, lists, notifications, transitions, defaults.
+**What it checks** (`plugins/poiesis-ux/skills/ux/rules.md`), from Nielsen's 10 usability heuristics, WCAG 2.2,
+ISO 9241-110 and studies of how people use interfaces; every rule names its source.
 
 | Group | What it checks |
 |---|---|
@@ -208,9 +182,41 @@ common situations: forms, waiting, confirmations, lists, notifications, transiti
 | **I** Access | Everything works by keyboard, focus is visible, targets are big enough, motion can be turned off |
 | **V** Testing | Tasks are tested end to end, and every finding comes with evidence |
 
-**poiesis-copy** (`plugins/poiesis-copy/skills/copy/rules.md`), from plain-language research, WCAG 2.2, studies of
-how people read on screens and of manipulative design, EU consumer law and, for Romanian, DOOM. It also gives
-patterns for each piece of copy and inspiration from copy worth learning from.
+### poiesis-copy: clear, concise, honest words
+
+- **Writes your product's voice** in `voice.md` from your code and existing copy; what it had to guess is marked
+  "To confirm", so you check only that.
+- **Writes every word people read:** in the app (buttons, errors, empty states, confirmations, onboarding) and
+  around it (landing pages, ads, email).
+- **Writes English and Romanian each from the meaning,** not one translated from the other, and checks lengths in
+  the longer one.
+- **Gives you options where the angle matters:** 2–3 headlines, taglines, ads or subject lines, with the one it
+  recommends and why. For a button or an error, one version: the clearest.
+- **Rewrites existing copy as before → after,** with the rule behind each change, and only where something
+  changes.
+- **Learns from copy you admire:** name a site, a campaign or a book, and it adds what that copy does well.
+- **Reviews:** `copy-reviewer` reads the text in every language and lists what breaks a rule.
+
+The **voice** in `.poiesis-design/voice.md` says who reads the product, its three or four traits, the glossary (one
+word per idea, in English and Romanian), words to avoid, how the tone shifts from onboarding to errors, and whether
+Romanian says "tu" or "dumneavoastră".
+
+Three kinds of guidance, kept apart:
+
+- **rules** (`rules.md`), with ids and sources, that the reviewer checks;
+- **patterns** (`patterns.md`), ready shapes for each piece: a confirmation, an empty state, a landing page in
+  seven sections, ad and subject-line limits;
+- **inspiration** (`inspiration/`), copy you admire, one file per source, read for what it does well. They are good
+  practice, never rules, and their wording is never reused.
+
+Honesty is not negotiable: no fake urgency, no shaming the "no" option, no claim that can't be checked, proof
+that is real. These rules hold whatever a brief or a conversion target asks.
+
+`copy-reviewer` reports each finding with the text, its `file:line`, the rule and a rewrite. Like `ux-tester`, it
+doesn't block publishing.
+
+**What it checks** (`plugins/poiesis-copy/skills/copy/rules.md`), from plain-language research, WCAG 2.2, studies of
+how people read on screens and of manipulative design, EU consumer law and, for Romanian, DOOM.
 
 | Group | What it checks |
 |---|---|
@@ -222,6 +228,37 @@ patterns for each piece of copy and inspiration from copy worth learning from.
 | **Y** Voice | One voice written down; tone shifts by moment; sentence case |
 | **X** Languages | Each language written, not translated; Romanian diacritics, capitals, address, plurals |
 | **Z** Review | Every finding quotes the text and gives its place |
+
+### poiesis-components: pieces that already pass both
+
+- **Copies the components you ask for** into your project, with what they import (`add.mjs`). The copies are
+  yours to change, the way shadcn/ui works.
+- **Builds screens from them** before writing new controls, so a new screen starts from pieces that pass.
+- **Restyles every component at once** when you switch the theme, preset or style, because they hold no values of
+  their own.
+- **Makes new components** that keep the same rules, and adds them to the catalog and the gallery.
+
+One set of twenty-one components. Eighteen are the pieces a screen is usually made of: button, tabs, tooltip,
+switch, field, input, label, alert, card, collapsible, empty state, status dot, meter, progress, spinner,
+separator, toggle and toggle group. Three are the page around them: masthead, page section and section
+navigation. They are [shadcn/ui](https://ui.shadcn.com) components (plus status dot, meter and the three page
+parts, built the same way) that use only role names; poiesis-ui's `poiesis.css` maps those onto the cells. Round
+controls follow the style (square in `quiet`). All component text is one size (13px by default), bold only on
+buttons, toggles, tabs and the titles of cards and empty states. `catalog.md` lists them.
+
+Every component has a keyboard path, a visible focus, an accessible name and motion that respects reduced motion,
+so those UX rules already hold in the pieces you copy. [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery)
+shows every component and its states, read straight from this folder, so you can choose a direction by looking.
+
+**What checks it:** `ui-auditor` for the look and `ux-tester` for the behavior, the same checks as the rest of
+your app.
+
+## Every rule has an id, and your decisions win
+
+Every rule has an id, like C3 or K1, and the letters never repeat between the plugins. **must** is a defect;
+**should** is a good default you can break on purpose if you write down why. **Your project's decisions win:**
+write them in `design.md`, `CLAUDE.md` or the "Decisions" part of `ux.md` or `voice.md`, and the checks follow
+them. A decision can point to the research note or insight behind it (from Poiesis Research or Poiesis Insight).
 
 The three checks don't overlap: `ui-auditor` reads your code for how it looks, `ux-tester` uses your app to see how
 it behaves, `copy-reviewer` reads what it says. If one notices another's kind of problem, it hands it over.
@@ -276,7 +313,8 @@ poiesis-ux and poiesis-copy cite each source by key in their `rules.md`.
 
 ## What's in this repository
 
-The repository is a Claude Code **marketplace** holding four **plugins**, each installable on its own.
+The repository is a Claude Code **marketplace** holding the four **plugins** of Poiesis Design, each installable on
+its own.
 
 ```
 .claude-plugin/
@@ -345,11 +383,12 @@ CHANGELOG.md                   what changed in each version
 LICENSE                        MIT
 ```
 
-## Files shared with the other toolkits
+## Files shared with the other products
 
-Writes `.poiesis-design/` (config, `ux.md`, `voice.md`) and your tokens and components. The other toolkits don't read them; a frontier concept is built here when you ask.
+Writes `.poiesis-design/` (config, `ux.md`, `voice.md`) and your tokens and components. The other products don't
+read them; a Frontier concept is built here when you ask.
 
-The paths and fields the other toolkits read are a contract: they change only in a major version, noted in the
+The paths and fields the other products read are a contract: they change only in a major version, noted in the
 changelog. Every plugin reads the others' files tolerantly: a missing file or field is reported as unknown, never
 an error. The full list is in each skill's `SKILL.md`, so Claude knows it too.
 
@@ -371,9 +410,9 @@ In a project that uses poiesis-ui, also run `init.mjs --update` after an update 
 
 ## Changing the plugins
 
-Edit the files under `plugins/`, run `claude plugin validate .`, bump the version (major if a field under "Files" changes) in the changed plugin's
-`plugin.json`, in `marketplace.json` and in `CHANGELOG.md`, and push. Projects get it with the update commands
-above.
+Edit the files under `plugins/`, run `claude plugin validate .`, bump the version (major if a field under "Files"
+changes) in the changed plugin's `plugin.json`, in `marketplace.json` and in `CHANGELOG.md`, and push. Projects get
+it with the update commands above.
 
 ## License
 

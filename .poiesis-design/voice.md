@@ -1,6 +1,6 @@
 # Voice
 
-How the Poiesis toolkits speak in their READMEs and docs (poiesis-design, poiesis-research, poiesis-insight,
+How the Poiesis Toolkit speaks in its READMEs and docs (poiesis-design, poiesis-research, poiesis-insight,
 poiesis-frontier), used by the `copy` skill and checked by `poiesis-copy:copy-reviewer`. Rules: the `copy`
 skill's `rules.md`; decisions here override them, except the Claims rules (Q).
 
@@ -23,7 +23,8 @@ how to install it and what to ask.
 | Idea | English | Romanian | Not |
 |---|---|---|---|
 | One installable unit | plugin | | extension, add-on |
-| The four repositories as a family | the Poiesis toolkits | | suite, platform |
+| The four products as a family | the Poiesis Toolkit | | the toolkits, suite, platform |
+| One of the four, one repository each | product: Poiesis Research, Poiesis Insight, Poiesis Frontier, Poiesis Design | | toolkit, module |
 | What Claude follows for a kind of work | skill | | mode |
 | A sub-assistant run on its own | agent | | bot, worker |
 | A procedure inside a skill | playbook | | workflow |
@@ -46,7 +47,13 @@ of results the evidence does not give.
 
 ## Decisions
 - O1 · Reference headings stay labels ("Install", "Update or remove", "License", "What's in this repository",
-  "Files shared with the other toolkits"): readers look them up by name, and other files refer to them.
+  "Files shared with the other products"): readers look them up by name, and other files refer to them.
+
+- Product framing (George, 2026-10-17): the Poiesis Toolkit is one product made of four: Research, Insight,
+  Frontier, Design. A product is named "Poiesis <Name>" in prose and by its plugin or repository name in code and
+  commands. Design is one product with four plugins (poiesis-ui, poiesis-ux, poiesis-copy, poiesis-components);
+  its README says what each plugin does. Every README opens with what its product does, then the same
+  "Part of the Poiesis Toolkit" section.
 
 ## To confirm
 - The reader and US spelling were guessed from the READMEs.

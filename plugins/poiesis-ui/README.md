@@ -4,8 +4,12 @@ How an interface looks: text sizes, hierarchy, spacing, color and shape, derived
 (atoms → cells). The `ui` skill holds the tokens and rules; the `ui-auditor` agent checks your code; a hook holds back
 publishing until the audit passes, in projects that turn it on.
 
-Part of the Poiesis toolkits: research collects, insight connects, frontier explores, design creates
-([poiesis-research](https://github.com/gorgmihai92/poiesis-research), [poiesis-insight](https://github.com/gorgmihai92/poiesis-insight), [poiesis-frontier](https://github.com/gorgmihai92/poiesis-frontier), [poiesis-design](https://github.com/gorgmihai92/poiesis-design)).
+One of the four plugins of [Poiesis Design](https://github.com/gorgmihai92/poiesis-design), with poiesis-ux,
+poiesis-copy and poiesis-components; it installs on its own. Poiesis Design is one of the four products in the
+Poiesis Toolkit: Research collects, Insight connects, Frontier explores, Design creates ([Poiesis
+Research](https://github.com/gorgmihai92/poiesis-research), [Poiesis
+Insight](https://github.com/gorgmihai92/poiesis-insight), [Poiesis
+Frontier](https://github.com/gorgmihai92/poiesis-frontier)).
 
 ```
 /plugin marketplace add gorgmihai92/poiesis-design

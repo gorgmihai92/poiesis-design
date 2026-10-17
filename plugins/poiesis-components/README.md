@@ -5,8 +5,12 @@ React + Tailwind v4 project; to change how the whole interface looks, choose ano
 (quiet, soft, crisp, bold), and every component follows. See them in
 [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery).
 
-Part of the Poiesis toolkits: research collects, insight connects, frontier explores, design creates
-([poiesis-research](https://github.com/gorgmihai92/poiesis-research), [poiesis-insight](https://github.com/gorgmihai92/poiesis-insight), [poiesis-frontier](https://github.com/gorgmihai92/poiesis-frontier), [poiesis-design](https://github.com/gorgmihai92/poiesis-design)).
+One of the four plugins of [Poiesis Design](https://github.com/gorgmihai92/poiesis-design), with poiesis-ui,
+poiesis-ux and poiesis-copy; it installs on its own. Poiesis Design is one of the four products in the Poiesis
+Toolkit: Research collects, Insight connects, Frontier explores, Design creates ([Poiesis
+Research](https://github.com/gorgmihai92/poiesis-research), [Poiesis
+Insight](https://github.com/gorgmihai92/poiesis-insight), [Poiesis
+Frontier](https://github.com/gorgmihai92/poiesis-frontier)).
 
 ```
 /plugin marketplace add gorgmihai92/poiesis-design

@@ -4,8 +4,12 @@ What your product says: UX copy, landing pages, ads and email, in English and Ro
 rules, the patterns, the inspiration and the voice file `.poiesis-design/voice.md`; the `copy-reviewer` agent reads
 the project's text against them and reports what breaks a rule.
 
-Part of the Poiesis toolkits: research collects, insight connects, frontier explores, design creates
-([poiesis-research](https://github.com/gorgmihai92/poiesis-research), [poiesis-insight](https://github.com/gorgmihai92/poiesis-insight), [poiesis-frontier](https://github.com/gorgmihai92/poiesis-frontier), [poiesis-design](https://github.com/gorgmihai92/poiesis-design)).
+One of the four plugins of [Poiesis Design](https://github.com/gorgmihai92/poiesis-design), with poiesis-ui,
+poiesis-ux and poiesis-components; it installs on its own. Poiesis Design is one of the four products in the Poiesis
+Toolkit: Research collects, Insight connects, Frontier explores, Design creates ([Poiesis
+Research](https://github.com/gorgmihai92/poiesis-research), [Poiesis
+Insight](https://github.com/gorgmihai92/poiesis-insight), [Poiesis
+Frontier](https://github.com/gorgmihai92/poiesis-frontier)).
 
 ```
 /plugin marketplace add gorgmihai92/poiesis-design
