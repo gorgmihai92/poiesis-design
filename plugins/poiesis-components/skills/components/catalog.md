@@ -24,7 +24,7 @@ status dot and meter, built the same way; `utils.ts` holds `cn`. poiesis-gallery
 
 Colors: one color per role, the palette's, for icons, small shapes, lines, text and fills alike (`text-danger`,
 `border-danger`, `bg-danger`); everything else is grey. Alerts sit on the paper inside a grey divider line, with no fill;
-the role shown by the icon's color, ink text.
+the role shown by the icon's color, ink text. Danger is red throughout: text, line and icon.
 
 Text: every component's text is `text-ui font-strong` (T6, 13px, 700), containers included, in the sans face;
 secondary text `text-muted`. States (selected, hover, disabled) and sizes (control height,

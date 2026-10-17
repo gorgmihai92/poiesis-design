@@ -13,7 +13,8 @@ const alertVariants = cva(
         success: "*:[svg]:text-success",
         warning: "*:[svg]:text-warning",
         caution: "*:[svg]:text-caution",
-        danger: "*:[svg]:text-danger",
+        // Danger is the one role that colors the whole alert: text, line and icon, in the one red.
+        danger: "border-danger text-danger *:[svg]:text-danger *:data-[slot=alert-description]:text-danger",
         new: "*:[svg]:text-new",
       },
     },

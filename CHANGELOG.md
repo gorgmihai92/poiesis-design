@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.3 (poiesis-components)
+- Danger alert is red throughout: text, line and icon, in the one red (`--danger`). Other roles keep the grey line
+  and ink text, the role in the icon's color.
 ## 0.4.2 (poiesis-components)
 - Alert: back to the row of 0.4.0 (0.4.1's built-in icons and stacked layout are reverted), now inside a 1px
   `--divider` line with the control padding; still no fill, the role in the icon's color.
