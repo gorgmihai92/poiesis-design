@@ -19,8 +19,9 @@ components (titles, headings, running text) keeps the scale.
 
 ## Hierarchy (H)
 
-**H1 · must · Every text is one role:** title, heading, subheading, body, label, control (buttons, tabs, triggers), caption or
-code, using that role's size, weight, leading, font and tracking cells together.
+**H1 · must · Every page text is one role:** title, heading, subheading, body, caption or code, using that role's
+size, weight, leading, font and tracking cells together (`type-*` with `poiesis.css`). Text inside a component is
+not a role: it is `--text-ui` with a weight (T6).
 **H2 · should · Weight, color and space before size.** At most three weights; secondary text is `--muted`, not
 smaller and lighter and greyer at once.
 **H3 · should · One primary per view.** One title, one accent-colored main action.
@@ -28,8 +29,9 @@ smaller and lighter and greyer at once.
 
 ## Spacing (S)
 
-**S1 · must · Spacing from the scale.** Margin, padding and gap use `--space-*` (between things) and `--pad-*`
-(inside blocks). Only 0, 1px and 2px are allowed as literals.
+**S1 · must · Spacing from the scale.** Margin, padding and gap are multiples of `--atom-space` (Tailwind's
+`p-4`, `gap-2`…). Controls and blocks take their size from the density cells: `--control-xs` … `--control-lg`,
+`--control-pad`, `--block-pad`, `--icon`. Only 0, 1px and 2px are allowed as literals.
 **S2 · must · Proximity shows grouping.** Space inside a group is at least one step smaller than space between
 groups.
 **S3 · must · Edges breathe.** A container's padding is at least the gaps inside it.
@@ -37,12 +39,13 @@ groups.
 
 ## Color (C)
 
-**C1 · must · Semantic cells only.** Code uses `--ink`, `--muted`, `--paper`, `--surface-*`, `--focus`, and
-the color roles (`--accent`, `--success`, `--warning`, `--caution`, `--danger`, `--new`, each with `-tint` and
-`-strong`), with `--on-color` for text on a fill. No literal colors and no atoms outside the token files.
-**C2 · must · One color, one meaning.** Accent = interactive and information; success, warning, caution, danger
-and new = that status only. Text is `--ink` or `--muted`, `--accent-text` for links, a role's `-strong` for colored
-text and thin lines; a role's own color is a fill, with `--on-color` text.
+**C1 · must · Semantic cells only, one name per meaning.** Greys: `--paper`, `--surface-1`…`3`, `--block-bg`,
+`--divider`, `--line-color`, `--muted`, `--ink`. Color roles: `--info`, `--success`, `--warning`, `--caution`,
+`--danger`, `--new`, each with `-tint` and `-strong`; `--on-color` for text on a fill. No literal colors, no atoms
+outside the token files, and no second name for a cell (no alias tokens).
+**C2 · must · One color, one meaning.** Info = interactive, information and focus; success, warning, caution,
+danger and new = that status only. Text is `--ink` or `--muted`, `--info-strong` for links, a role's `-strong` for
+colored text and thin lines; a role's own color is a fill, with `--on-color` text.
 **C3 · must · Contrast, light and dark.** Text 4.5:1 (3:1 at 24px+ or 18.66px+ bold); shapes and indicators 3:1.
 **C4 · must · Never color alone.** Status and severity also have a word, icon or shape.
 **C5 · should · Structure from space first, then the blocks.** Sections stand apart by white space; where more
@@ -55,13 +58,15 @@ The style: corners, lines, shadows, how a selected thing looks, motion. Set by t
 (`tokens/styles`: quiet, soft, crisp, bold), independent of the preset (type and density).
 
 **G1 · must · Shape from cells.** Corner radius, border width and color, shadows and transition lengths use
-`--radius-*`, `--line`, `--line-color`, `--ring`, `--shadow-*`, `--duration-*`. Only 0 and hairlines (1–2px) are literal. Round
+`--radius-*`, `--line`, `--block-line`, `--line-color`, `--ring`, `--shadow-*`, `--duration-*`, `--ease`. Only 0 and hairlines (1–2px) are literal. Round
 controls (pills, switch tracks) use `--radius-round`, never a fixed full radius: square in a square style. With
 `poiesis.css`, Tailwind's named radii map onto the cells and `rounded-pill` replaces `rounded-full`.
 **G2 · must · Lines are optional, boundaries are not.** With `--line` at 0, a control or tile still differs from
 what is around it by a surface step; an input's boundary, when it is the only cue, keeps 3:1 (W 1.4.11).
-**G3 · must · Selected and open use the selected cells:** `--selected-bg`, `--selected-fg` and the
-`--selected-ring` (an accent ring in tint mode, where the fill alone is too faint), never a color of their own.
+**G3 · must · States use the state cells.** Selected, pressed, active and open: `--selected-bg`, `--selected-fg`
+and `--selected-ring` (an info ring in tint mode, where the fill alone is too faint). Hover: `--hover` on plain
+controls, `--ink-hover` / `--danger-hover` on filled ones. Disabled: opacity `--disabled`. Never a color or
+opacity of their own.
 **G4 · should · One style per product.** Mixing radii or line weights between screens reads as two products.
 
 ## Atoms (A)

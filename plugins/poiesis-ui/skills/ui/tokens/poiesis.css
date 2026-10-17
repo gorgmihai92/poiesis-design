@@ -1,15 +1,19 @@
-/* Poiesis UI · theme for components built on shadcn/ui and Tailwind v4: one import gives a project the atoms,
-   the cells derived from them, and the component slots (colour, radius, shadow, font, spacing) mapped onto the
-   cells. Any shadcn component added later takes the Poiesis look with no change; customise it from there.
+/* Poiesis UI · theme for components built on shadcn/ui and Tailwind v4: one import gives a project the atoms, the
+   cells derived from them, and Tailwind's names for them. Tailwind's own colors, radii, shadows, weights, leading,
+   tracking and text sizes are cleared, so a class can only name a cell: one name per meaning.
 
      @import "tailwindcss";
      @import "<tokens>/poiesis.css";
-     @import "<tokens>/themes/poiesis.css";   the theme: a palette, a preset and a style (tokens/themes)
+     @import "<tokens>/themes/poiesis.css";   the theme: a palette, typefaces, a preset and a style (tokens/themes)
 
-   Use it in place of the :root and .dark blocks `shadcn init` writes. The slots go straight to the cells, not
-   through shadcn's own variables: --muted, --accent and --ring mean different things in the two systems
-   (shadcn: a grey fill, a hover fill, a ring colour; cells: muted text, the accent colour, the ring width).
-   Dark follows the system, as the cells do with light-dark(). */
+   Names: colors bg-/text-/border-/ring- paper, surface-1…3, block, ink, muted, line, divider, on-color, overlay,
+   selected (+ -foreground), hover, ink-hover, danger-hover, and each role (info, success, warning, caution,
+   danger, new) with -tint and -strong. Radii rounded-sm, -md, -lg, -pill. Shadows shadow-sm, -md. Fonts font-sans,
+   -serif, -mono, -body, -display. Weights font-regular, -strong, -heading. Leading leading-body, -ui, -heading,
+   -display. Tracking tracking-body, -heading. Text text-ui (component text) and text-sm … text-2xl (page text).
+   Widths max-w-page, -measure, -narrow.
+   Sizes from cells with arbitrary values: h-(--control-md), size-(--icon), p-(--block-pad), opacity-(--disabled),
+   z-(--layer-float). Dark follows the system, as the cells do with light-dark(). */
 
 @import "./atoms.css";
 @import "./cells.css";
@@ -25,96 +29,103 @@
 @custom-variant data-selected { &:where([data-selected="true"]) { @slot; } }
 @custom-variant data-disabled { &:where([data-disabled="true"]), &:where([data-disabled]:not([data-disabled="false"])) { @slot; } }
 @custom-variant data-active { &:where([data-state="active"]), &:where([data-active]:not([data-active="false"])) { @slot; } }
+@custom-variant data-on { &:where([data-state="on"]), &:where([aria-pressed="true"]) { @slot; } }
 @custom-variant data-horizontal { &:where([data-orientation="horizontal"]) { @slot; } }
 @custom-variant data-vertical { &:where([data-orientation="vertical"]) { @slot; } }
 
-/* The text roles (H1) as one class each: size, weight, leading, family and tracking together. type-* rather than
-   text-*, so they never collide with text colors. */
+/* The page text roles (H1) as one class each: size, weight, leading, family and tracking together. */
 @utility type-title { font-size: var(--title-size); font-weight: var(--title-weight); line-height: var(--title-leading); font-family: var(--title-font); letter-spacing: var(--title-tracking); }
 @utility type-heading { font-size: var(--heading-size); font-weight: var(--heading-weight); line-height: var(--heading-leading); font-family: var(--heading-font); letter-spacing: var(--heading-tracking); }
 @utility type-subheading { font-size: var(--subheading-size); font-weight: var(--subheading-weight); line-height: var(--subheading-leading); font-family: var(--subheading-font); letter-spacing: var(--subheading-tracking); }
 @utility type-body { font-size: var(--body-size); font-weight: var(--body-weight); line-height: var(--body-leading); font-family: var(--body-font); letter-spacing: var(--body-tracking); }
-@utility type-label { font-size: var(--label-size); font-weight: var(--label-weight); line-height: var(--label-leading); font-family: var(--label-font); letter-spacing: var(--label-tracking); }
-@utility type-control { font-size: var(--control-size); font-weight: var(--control-weight); line-height: var(--control-leading); font-family: var(--control-font); letter-spacing: var(--control-tracking); }
 @utility type-caption { font-size: var(--caption-size); font-weight: var(--caption-weight); line-height: var(--caption-leading); font-family: var(--caption-font); letter-spacing: var(--caption-tracking); }
 @utility type-code { font-size: var(--code-size); font-weight: var(--code-weight); line-height: var(--code-leading); font-family: var(--code-font); letter-spacing: var(--code-tracking); }
 
 @theme inline {
-  /* font-sans, font-serif and font-mono read --font-sans, --font-serif and --font-mono, which are cells already;
-     font-heading is the display face. The page's own font is the body face (set on html). */
-  --font-heading: var(--font-display);
+  --color-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --font-*: initial;
+  --font-weight-*: initial;
+  --leading-*: initial;
+  --tracking-*: initial;
+  --text-*: initial;
 
-  --color-background: var(--paper);
-  --color-foreground: var(--ink);
-  --color-card: var(--block-bg);
-  --color-card-foreground: var(--ink);
-  --color-popover: var(--surface-1);
-  --color-popover-foreground: var(--ink);
-  --color-primary: var(--ink);
-  --color-primary-foreground: var(--paper);
-  --color-secondary: var(--surface-2);
-  --color-secondary-foreground: var(--ink);
-  --color-muted: var(--surface-2);
-  --color-muted-foreground: var(--muted);
-  --color-accent: var(--surface-3);
-  --color-accent-foreground: var(--ink);
-  --color-destructive: var(--danger-strong);
-  /* The grey steps, for things that sit on a step rather than on a card (bg-surface-1 … bg-surface-3). */
+  --color-paper: var(--paper);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
-  --color-border: var(--divider);
-  --color-input: var(--line-color);
-  --color-ring: var(--focus);
-
-  /* The palette's roles, each as bg-<role>, text-<role>-foreground (text on the fill), bg-<role>-tint (a
-     background for ink text) and text-<role>-strong / border-<role>-strong (text and thin lines). "info" is the
-     accent; shadcn's own "accent" slot above is its hover grey. */
-  --color-info: var(--accent);
-  --color-info-foreground: var(--on-color);
-  --color-info-tint: var(--accent-tint);
-  --color-info-strong: var(--accent-strong);
+  --color-block: var(--block-bg);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line-color);
+  --color-divider: var(--divider);
+  --color-on-color: var(--on-color);
+  --color-overlay: var(--overlay);
+  --color-selected: var(--selected-bg);
+  --color-selected-foreground: var(--selected-fg);
+  --color-hover: var(--hover);
+  --color-ink-hover: var(--ink-hover);
+  --color-danger-hover: var(--danger-hover);
+  --color-info: var(--info);
+  --color-info-tint: var(--info-tint);
+  --color-info-strong: var(--info-strong);
   --color-success: var(--success);
-  --color-success-foreground: var(--on-color);
   --color-success-tint: var(--success-tint);
   --color-success-strong: var(--success-strong);
   --color-warning: var(--warning);
-  --color-warning-foreground: var(--on-color);
   --color-warning-tint: var(--warning-tint);
   --color-warning-strong: var(--warning-strong);
   --color-caution: var(--caution);
-  --color-caution-foreground: var(--on-color);
   --color-caution-tint: var(--caution-tint);
   --color-caution-strong: var(--caution-strong);
   --color-danger: var(--danger);
-  --color-danger-foreground: var(--on-color);
   --color-danger-tint: var(--danger-tint);
   --color-danger-strong: var(--danger-strong);
   --color-new: var(--new);
-  --color-new-foreground: var(--on-color);
   --color-new-tint: var(--new-tint);
   --color-new-strong: var(--new-strong);
 
-  --radius-xs: var(--radius-s);
   --radius-sm: var(--radius-s);
   --radius-md: var(--radius-m);
-  --radius-lg: var(--radius-m);
-  --radius-xl: var(--radius-l);
-  --radius-2xl: var(--radius-l);
-  --radius-3xl: var(--radius-l);
-  --radius-4xl: var(--radius-l);
-  /* rounded-pill in place of rounded-full: round in round styles, square in square ones (G1). */
+  --radius-lg: var(--radius-l);
   --radius-pill: var(--radius-round);
 
-  --shadow-xs: var(--shadow-1);
   --shadow-sm: var(--shadow-1);
   --shadow-md: var(--shadow-2);
-  --shadow-lg: var(--shadow-2);
 
-  /* Tailwind's p-4, gap-2… are multiples of this, as the space cells are of --atom-space. Its text-sm, text-base
-     and text-lg read --text-sm, --text-base and --text-lg, which are cells already. text-ui is every component's
-     text size (--text-ui, from --atom-text-ui), with the UI line height. */
-  --text-ui: var(--atom-text-ui);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+  --font-body: var(--font-body);
+  --font-display: var(--font-display);
+  --font-weight-regular: var(--weight-regular);
+  --font-weight-strong: var(--weight-strong);
+  --font-weight-heading: var(--weight-heading);
+  --leading-body: var(--leading-body);
+  --leading-ui: var(--leading-ui);
+  --leading-heading: var(--leading-heading);
+  --leading-display: var(--leading-display);
+  --tracking-body: var(--tracking-body);
+  --tracking-heading: var(--tracking-heading);
+
+  --text-ui: var(--text-ui);
   --text-ui--line-height: var(--leading-ui);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-md: var(--text-md);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+
+  /* Widths: max-w-page, max-w-measure (running text), max-w-narrow (tooltips, short forms). Tailwind's other
+     container sizes stay for its @container queries. */
+  --container-page: var(--page);
+  --container-measure: var(--measure);
+  --container-narrow: var(--measure-narrow);
+
+  /* Tailwind's p-4, gap-2… are multiples of --atom-space; transitions take the motion cells. */
   --spacing: var(--atom-space);
+  --default-transition-duration: var(--duration-fast);
+  --default-transition-timing-function: var(--ease);
 }

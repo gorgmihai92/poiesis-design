@@ -5,7 +5,7 @@ status dot and meter, built the same way; `utils.ts` holds `cn`. poiesis-gallery
 
 | Component | For | File |
 |---|---|---|
-| Button | one action: `default` (primary, once per view, H3), `secondary`, `outline`, `ghost`, `destructive`, `link`; sizes `xs`–`lg` and icon sizes | button.tsx |
+| Button | one action: `default` (primary, once per view, H3), `secondary`, `outline`, `ghost`, `danger`, `link`; sizes `xs`–`lg` and icon sizes | button.tsx |
 | Tabs | sections of a screen: `line` (main navigation) or the default segmented control (views of the same content) | tabs.tsx |
 | Tooltip | a short explanation on hover and focus, Esc closes; never the native `title` | tooltip.tsx |
 | Switch | an on/off setting that applies at once, next to its label (in a `Field`) | switch.tsx |
@@ -22,8 +22,9 @@ status dot and meter, built the same way; `utils.ts` holds `cn`. poiesis-gallery
 | Separator | a divider between groups | separator.tsx |
 | Toggle, ToggleGroup | a pressed / not pressed control; a group of them | toggle.tsx, toggle-group.tsx |
 
-Colors: icons and small shapes (status dot, meter bars, alert icons) and fills (the destructive button) use the
+Colors: icons and small shapes (status dot, meter bars, alert icons) and fills (the danger button) use the
 role color as the palette gives it (`text-danger`, `bg-danger`), crisp; colored text uses the `-strong` shade.
 
-Text: every component's text is `text-ui` (T6, 14px by default), containers included; controls take the control
-weight, secondary text the muted color.
+Text: every component's text is `text-ui` (T6, 14px by default), containers included; controls, labels and
+titles `font-strong`, secondary text `text-muted`. States (selected, hover, disabled) and sizes (control height,
+padding, icon) come from their cells, so density, selection style and motion follow the theme.

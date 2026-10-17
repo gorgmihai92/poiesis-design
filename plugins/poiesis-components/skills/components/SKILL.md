@@ -7,9 +7,9 @@ description: The Poiesis component set (button, tabs, tooltip, switch, field, in
 
 One set of components, the one [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery) shows. They are
 [shadcn/ui](https://ui.shadcn.com) (MIT) components, plus status dot and meter built the same way. They keep
-shadcn's structure and behavior and use only role names (`bg-primary`, `text-muted-foreground`, `bg-danger-tint`,
-`rounded-lg`…); poiesis-ui's `poiesis.css` maps those names onto the **cells**, so the project's atoms decide the
-look:
+shadcn's structure and behavior, renamed to the Poiesis names (`bg-ink`, `text-muted`, `bg-danger-tint`,
+`rounded-md`, `h-(--control-md)`…, the list is at the top of `poiesis.css`). `poiesis.css` maps them onto the
+**cells** and clears Tailwind's own colors and scales, so the project's atoms decide the look:
 
 - **theme** (poiesis-ui `tokens/themes`): one palette, typeface and style;
 - **preset** (`tokens/presets`): type and density: `tool`, `reading`, `expressive`;
@@ -28,18 +28,22 @@ Wrap the app once in `<TooltipProvider>`. Packages: `radix-ui`, `class-variance-
 with values of their own. Change a component's look by changing atoms (theme, preset, style), not its classes.
 
 **Rules every component keeps** (and a new one follows):
-- Cells only (T1, S1, C1, G1): role colors, Tailwind's named radii and spacing steps. No `text-xs`, no
-  `text-[…]`, no literal px.
+- Cells only, one name per meaning (T1, S1, C1, G1): the Poiesis color names, `rounded-sm`/`-md`/`-lg`/`-pill`,
+  spacing steps; heights, padding and icons from the density cells (`h-(--control-md)`, `px-(--control-pad)`,
+  `p-(--block-pad)`, `size-(--icon)`). No `dark:` classes (the cells handle dark), no `text-xs`, no `text-[…]`,
+  no literal px.
 - **All component text is one size: `text-ui`** (T6; `--atom-text-ui`, 14px by default), controls, labels,
   captions and descriptions alike, and containers (cards, tab panels, collapsible content, empty states) set it
-  too, so text inside them is 14px whatever the page uses. Weight and color tell the parts apart: controls
-  `font-(--control-weight)`, secondary text `text-muted-foreground`.
-- Section titles and headings use the role classes from `poiesis.css` (`type-subheading`, `type-heading`,
-  `type-label`, `type-caption`…), never a size or weight of their own.
+  too, so text inside them is 14px whatever the page uses. Weight and color tell the parts apart: `font-strong` for
+  controls, labels and titles, `font-regular` otherwise, `text-muted` for secondary text.
+- Page titles and headings use the role classes from `poiesis.css` (`type-title`, `type-heading`,
+  `type-subheading`, `type-caption`…), never a size or weight of their own.
+- States use the state cells (G3): selected, pressed and active `bg-selected text-selected-foreground` with the
+  `--selected-ring`; hover `bg-hover`, `bg-ink-hover`, `bg-danger-hover`; disabled `opacity-(--disabled)`.
 - State styles use the variants `poiesis.css` defines for Radix (`data-open:`, `data-checked:`, `data-active:`,
   `data-horizontal:`…); no other CSS file is needed for them.
-- Focus rings at full strength: `ring-(length:--ring) ring-ring` (C3, 3:1), never a faded ring. Borders that are
-  lines take `--line` (`border-(length:--line)`); an input keeps its 1px edge (G2).
+- Focus rings at full strength: `ring-(length:--ring) ring-info` (C3, 3:1), never a faded ring. Borders that are
+  lines take `--line` (`border-(length:--line)`), a block's edge `--block-line`; an input keeps its 1px edge (G2).
 - Motion only with `motion-safe:` (I5), loops included (status dot, spinner).
 - Round controls use `rounded-pill` (the `--radius-round` cell), never `rounded-full`: square in a square style (G1).
 - A keyboard path and a visible focus (I1, I2), an accessible name (I3), never color alone (C4), motion through

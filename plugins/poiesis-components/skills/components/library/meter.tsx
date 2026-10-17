@@ -5,7 +5,7 @@ import { cn } from "./utils"
 const meterVariants = cva("inline-block h-3 w-3.5 shrink-0", {
   variants: {
     tone: {
-      default: "text-foreground",
+      default: "text-ink",
       info: "text-info",
       success: "text-success",
       warning: "text-warning",
@@ -47,7 +47,7 @@ function Meter({
           width="4"
           height={b.h}
           data-on={i < value || undefined}
-          className="fill-current not-data-on:fill-foreground/20"
+          className="fill-current not-data-on:fill-divider"
         />
       ))}
     </svg>

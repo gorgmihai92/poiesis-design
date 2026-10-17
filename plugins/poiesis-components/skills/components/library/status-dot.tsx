@@ -7,7 +7,7 @@ const statusDotVariants = cva("relative inline-block size-2.5 shrink-0", {
     state: {
       active: "text-success",
       paused: "text-warning",
-      stopped: "text-muted-foreground",
+      stopped: "text-muted",
       error: "text-danger",
     },
   },

@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.6.0 (poiesis-ui) · 0.3.0 (poiesis-components)
+**One name per meaning.** Breaking: projects using the removed names need the new ones.
+- Renamed: the accent color is `info` (atoms, cells, classes), so "accent" no longer means blue in the tokens and
+  a hover grey in the components. `destructive` is `danger` (button variant; the alert's duplicate variant is gone).
+- Removed aliases: `--accent-text`, `--on-accent`, `--focus` (now `--info-strong`, `--on-color`, `--info`); the
+  `label` and `control` text roles (component text is `--text-ui`, T6); `--space-*` and `--pad-*` (Tailwind's
+  spacing reads `--atom-space`; sizes come from the density cells).
+- `poiesis.css` clears Tailwind's own colors, radii, shadows, fonts, weights, leading, tracking and text sizes:
+  a class can only name a cell. One name each: greys `paper`, `surface-1`…`3`, `block`, `divider`, `line`,
+  `muted`, `ink`; radii `sm`, `md`, `lg`, `pill`; shadows `sm`, `md`; weights `font-regular`, `-strong`, `-heading`.
+- Settings that did nothing now work: `--atom-density` sets control heights and padding (`--control-xs`…`-lg`,
+  `--control-pad`, `--block-pad`); `--atom-select-ink` sets how selected, pressed and active look (toggles,
+  tabs); `--atom-motion` sets transition length (also off under reduced motion).
+- New tokens: `--atom-control`, `--atom-icon`, `--atom-page`, `--atom-hover`, `--atom-disabled`,
+  `--atom-paper-dark`, `--atom-ink-dark`; cells for hover, disabled, overlay, layers, easing, widths
+  (`max-w-page`, `-measure`, `-narrow`).
+- Components: no literal weights, leading, tracking, opacity, heights or `dark:` classes left; card and alert edges
+  follow `--block-line`; rules H1, S1, C1, C2, G1, G3 say so.
 ## 0.5.2 (poiesis-ui) · 0.2.2 (poiesis-components)
 - **All component text is one size, 14px.** New atom `--atom-text-ui` (0.875rem), cell `--text-ui` and the
   Tailwind class `text-ui`; rule T6. Every component uses it in place of `text-sm` / `text-base`, and containers

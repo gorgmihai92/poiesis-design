@@ -6,8 +6,9 @@ description: The basics of a UI as tokens - typography, hierarchy, spacing and c
 # Poiesis UI
 
 **Atoms** (`tokens/atoms.css`) are the few values a project changes. **Cells** (`tokens/cells.css`) derive from
-them and are the same everywhere: type scale, role tokens (title, heading, subheading, body, label, caption),
-spacing, colors for light and dark, and shape (corners, lines, shadows, selected, motion). Code and components
+them and are the same everywhere, one name per meaning: type scale and page text roles (title, heading,
+subheading, body, caption, code), component text (`--text-ui`), sizes that follow density (controls, blocks,
+icons), colors for light and dark, states (selected, hover, disabled), shape, motion and layers. Code and components
 use cells only. The **style** (`tokens/styles`: quiet, soft, crisp, bold) sets the shape atoms, the **preset**
 the type and density; `init.mjs --style` picks one. Ready-made components on these cells: plugin
 poiesis-components. How the app behaves (flows, states,
@@ -19,14 +20,14 @@ this folder (`${CLAUDE_PLUGIN_ROOT}/skills/ui`).
 say which; don't ask questions.
 `node $UI/scripts/init.mjs --preset tool --styles src/styles --ui src` writes the project's `atoms.css`, the
 managed `poiesis/cells.css`, an `index.css` and `.poiesis-design/config.json` (turns on the publish gate). A project
-with its own system: `--audit-only`. With Tailwind, map the cells into `@theme` and drop the default scales.
+with its own system: `--audit-only`. With Tailwind, import `tokens/poiesis.css` (it maps the cells and clears Tailwind's own scales) and one theme.
 
 **Tune.** Change atoms, then `node $UI/scripts/resolve.mjs <styles>/atoms.css <styles>/poiesis/cells.css`: scales
 in px, colors in both themes, contrast of every pair; exit 1 on a failure. Denser → `--atom-density`,
-`--atom-ratio` down. Bigger headings → `--atom-ratio` up. Colors → the palette atoms (`--atom-paper`, `--atom-ink`, and a color and a tint for accent, success, warning, caution, danger, new); a whole new set → a file in `tokens/palettes`. A new feel → a file in `tokens/themes` (a palette, a preset and a style). One area different →
+`--atom-ratio` down. Bigger headings → `--atom-ratio` up. Colors → the palette atoms (`--atom-paper`, `--atom-ink`, their dark versions, and a color and a tint for info, success, warning, caution, danger, new); a whole new set → a file in `tokens/palettes`. A new feel → a file in `tokens/themes` (a palette, a preset and a style). One area different →
 atoms on that element plus `data-atoms`.
 
-**Build.** Text takes a role's size, weight, leading, font and tracking together (H1). Spacing from `--space-*` and `--pad-*`.
+**Build.** Text takes a role's size, weight, leading, font and tracking together (H1). Spacing in multiples of `--atom-space`; control and block sizes from the density cells (S1).
 After a change: `node $UI/scripts/scan.mjs <dirs>`. `init.mjs --update` refreshes cells; atoms stay.
 
 **Publish (P1).** Before any push, deploy or release, run `poiesis-ui:ui-auditor`; it records pass or fail and a
