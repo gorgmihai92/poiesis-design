@@ -1,6 +1,6 @@
 # poiesis-ux
 
-How an app behaves: feedback, control, errors, keyboard use and wording. The `ux` skill holds the rules and the
+How an app behaves: feedback, control, errors, keyboard use and honesty. What the words say is poiesis-copy. The `ux` skill holds the rules and the
 task file `.poiesis-design/ux.md`; the `ux-tester` agent does each task in the running app, or through the code,
 and reports what gets in the way.
 

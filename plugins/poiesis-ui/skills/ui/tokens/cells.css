@@ -70,8 +70,8 @@
   --control-pad-sm: calc(var(--atom-space) * 2 * var(--atom-density));
   --block-pad: calc(var(--atom-space) * 4 * var(--atom-density));
   --block-pad-sm: calc(var(--atom-space) * 3 * var(--atom-density));
-  --section-space: calc(var(--atom-space) * 64);  /* between page sections: a section's content starts near its top and this space follows it */
-  --subsection-space: calc(var(--section-space) / 4); /* between the parts of a section: a quarter of the space between sections */
+  --section-space: var(--atom-section);  /* between page sections: a section's content starts near its top and this space follows it */
+  --subsection-space: calc(var(--section-space) / var(--atom-pace)); /* between the parts of a section: one level down */
   --icon: var(--atom-icon);
   --icon-sm: calc(var(--atom-icon) * 0.875);
   --page: var(--atom-page);

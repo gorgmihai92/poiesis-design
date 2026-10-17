@@ -8,12 +8,12 @@
   --atom-font-serif: "EB Garamond", Garamond, Georgia, serif;
   --atom-font-mono: "Fragment Mono", ui-monospace, Menlo, monospace;
   --atom-text-base: 1rem;      /* page body size. Tools 0.875–1, reading 1–1.125 */
-  --atom-text-ui: 0.8125rem;   /* every component's text, one size (T6): strong on buttons, toggles and tabs, regular elsewhere */
+  --atom-text-ui: 0.8125rem;   /* every component's text, one size (T6): strong on buttons, toggles, tabs and card and empty titles, regular elsewhere */
   --atom-ratio: 1.2;           /* scale ratio. Dense 1.125, calm 1.2, reading 1.25, display 1.333–1.5 */
   --atom-leading: 1.6;         /* body line height, 1.5–1.65 */
   --atom-leading-tight: 1.2;   /* heading line height, 1.05–1.25 */
   --atom-weight-regular: 400;  /* running text */
-  --atom-weight-strong: 700;   /* headings, emphasis, buttons, toggles and tabs */
+  --atom-weight-strong: 700;   /* headings, emphasis, buttons, toggles, tabs, card and empty titles */
   --atom-tracking: 0em;        /* letter spacing of body text */
   --atom-tracking-tight: -0.01em; /* letter spacing of title and heading: 0 to -0.03em, tighter as type grows */
   --atom-measure: 68ch;        /* running text line length, 45–75ch */
@@ -24,6 +24,8 @@
   --atom-control: 2rem;        /* default control height (button, input, tab list) at density 1 */
   --atom-icon: 1rem;           /* icon size inside controls */
   --atom-page: 72rem;          /* widest page content */
+  --atom-section: 8rem;        /* space between page sections, after each one's content. Calm 6–10rem, airy 12–16rem */
+  --atom-pace: 2;              /* how many times smaller each level of page space is than the one above (section, its parts). 2 gentle, 4 marked */
 
   /* Color: the palette (tokens/palettes). The greys are derived from paper and ink; each role is its color and
      its tint. Defaults: the "poiesis" palette. */

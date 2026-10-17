@@ -1,12 +1,13 @@
 ---
 name: components
-description: The Poiesis component set (button, tabs, tooltip, switch, field, input, label, alert, card, collapsible, empty, meter, progress, separator, spinner, status dot, toggle, toggle group) - shadcn/ui components themed by poiesis-ui's poiesis.css, copied into a React + Tailwind v4 project and restyled by choosing a theme, preset and style. Use when building or restyling a React interface, adding one of these components, choosing a visual direction, or making a new component that follows the poiesis-ui and poiesis-ux rules.
+description: The Poiesis component set (button, tabs, tooltip, switch, field, input, label, alert, card, collapsible, empty, meter, progress, separator, spinner, status dot, toggle, toggle group, masthead, page section, section nav) - shadcn/ui components themed by poiesis-ui's poiesis.css, copied into a React + Tailwind v4 project and restyled by choosing a theme, preset and style. Use when building or restyling a React interface, adding one of these components, choosing a visual direction, or making a new component that follows the poiesis-ui and poiesis-ux rules.
 ---
 
 # Poiesis Components
 
 One set of components, the one [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery) shows. They are
-[shadcn/ui](https://ui.shadcn.com) (MIT) components, plus status dot and meter built the same way. They keep
+[shadcn/ui](https://ui.shadcn.com) (MIT) components, plus status dot, meter, masthead, page section and section
+nav built the same way. They keep
 shadcn's structure and behavior, renamed to the Poiesis names (`bg-ink`, `text-muted`, `bg-surface`,
 `rounded-md`, `h-(--control-md)`…, the list is at the top of `poiesis.css`). `poiesis.css` maps them onto the
 **cells** and clears Tailwind's own colors and scales, so the project's atoms decide the look:
@@ -34,7 +35,7 @@ with values of their own. Change a component's look by changing atoms (theme, pr
   no literal px.
 - **All component text is one size: `text-ui`** (T6; `--atom-text-ui`, 13px), containers included (cards, tab
   panels, collapsible content, empty states), so text inside them is 13px whatever the page uses. Weight:
-  `font-strong` (700) on buttons, toggles and tabs, `font-regular` (400) everywhere else. Color tells the other parts
+  `font-strong` (700) on buttons, toggles, tabs and the titles of cards and empty states, `font-regular` (400) everywhere else. Color tells the other parts
   apart: `text-muted` for secondary text, a role's own color for colored text. All text is the sans face.
 - Page titles and headings use the role classes from `poiesis.css` (`type-title`, `type-heading`,
   `type-subheading`, `type-caption`…), never a size or weight of their own.

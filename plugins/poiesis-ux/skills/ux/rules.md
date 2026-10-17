@@ -1,8 +1,9 @@
 # Poiesis UX rules
 
 How an app behaves for the person using it: what they see happen, what they can do, what it costs them. How it
-looks is the `ui` skill (plugin poiesis-ui) (its rules T, H, S, C, A, P); the letters here don't repeat those, so an id names one rule
-across the toolkit. Used for building (skill `ux`) and testing (agent `ux-tester`). **must** = a defect when
+looks is the `ui` skill (plugin poiesis-ui) (its rules T, H, S, C, A, P); what the words say is the `copy` skill
+(plugin poiesis-copy) (its rules L, B, M, O, Q, Y, X, Z): here a message must exist and appear at the right time,
+there it says the right thing. The letters don't repeat, so an id names one rule across the toolkit. Used for building (skill `ux`) and testing (agent `ux-tester`). **must** = a defect when
 broken; **should** = a default you may break on purpose, with the reason under "Decisions" in
 `.poiesis-design/ux.md`. A project decision (`ux.md`, `design.md`, `CLAUDE.md`) overrides a rule.
 
@@ -62,8 +63,8 @@ thing) unless the project decides otherwise (N4).
 
 **E1 · must · Prevent first.** Invalid input is limited before it costs work: constraints, required formats
 stated in advance, required and optional fields marked, disabled actions say why (N5; Seckler et al. 2014).
-**E2 · must · Errors say what happened, why if known, and what to do next,** in plain words, next to the cause,
-keeping what the person entered (N9, W 3.3.1, 3.3.3).
+**E2 · must · Errors say what happened, why if known, and what to do next,** next to the cause, keeping what
+the person entered (N9, W 3.3.1, 3.3.3); the wording is `copy` M1.
 **E3 · should · Recover in place.** A failed step can be retried without starting over (N9).
 **E4 · should · Do not interrupt typing with errors.** In multi-field forms, show all errors at once when the
 person submits, each next to its field, input kept. A field may be checked when the person leaves it only if the
@@ -114,12 +115,6 @@ or repeating a request the person already declined (Mathur et al. 2019; Gray et 
 (Jachimowicz et al. 2019; Mathur et al. 2019).
 **D3 · should · Defaults serve the person:** pre-select the option that serves them, or none when no option clearly
 does (Johnson & Goldstein 2003; Jachimowicz et al. 2019).
-
-## Wording (L)
-
-**L1 · must · The person's words,** not the system's: no internal names, codes or jargon in the UI (N2).
-**L2 · must · Labels say the result** ("Save key", not "OK"); buttons are verbs, states are adjectives (N2).
-**L3 · should · Short and in one voice:** sentence case, one term per idea, numbers with units.
 
 ## Testing (V)
 

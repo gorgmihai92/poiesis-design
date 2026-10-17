@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "poiesis-design",
-  "description": "Design toolkit for Claude Code: poiesis-ui (how an interface looks), poiesis-ux (how an app behaves) and poiesis-components (the component set built on both).",
+  "description": "Design toolkit for Claude Code: poiesis-ui (how an interface looks), poiesis-ux (how an app behaves), poiesis-copy (what it says) and poiesis-components (the component set built on ui and ux).",
   "owner": {
     "name": "George Mihai",
     "email": "hi@georgemihai.com"
@@ -10,7 +10,7 @@
     {
       "name": "poiesis-ui",
       "description": "How your interface looks: text sizes, hierarchy, spacing, color and shape (corners, lines, shadows), all derived from a few values you choose, in a preset and a style. Rules, an auditor that checks your code, and a gate that holds back publishing until the check passes.",
-      "version": "0.7.3",
+      "version": "0.8.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"
@@ -21,8 +21,8 @@
     },
     {
       "name": "poiesis-ux",
-      "description": "How your app behaves for the people using it: rules for feedback, errors, control, keyboard use and wording, and a tester that does your app's main tasks the way a person would and reports what gets in their way.",
-      "version": "0.4.4",
+      "description": "How your app behaves for the people using it: rules for feedback, errors, control, keyboard use and honest choices, and a tester that does your app's main tasks the way a person would and reports what gets in their way.",
+      "version": "0.5.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"
@@ -32,9 +32,21 @@
       "homepage": "https://github.com/gorgmihai92/poiesis-design"
     },
     {
+      "name": "poiesis-copy",
+      "description": "What your product says, in English and Romanian: UX copy, landing pages, ads and email, written clear, concise and honest. Rules with sources, patterns for each piece, inspiration from copy you admire, your product's voice in one file, and a reviewer that checks the text.",
+      "version": "0.1.0",
+      "author": {
+        "name": "George Mihai",
+        "email": "hi@georgemihai.com"
+      },
+      "source": "./plugins/poiesis-copy",
+      "category": "design",
+      "homepage": "https://github.com/gorgmihai92/poiesis-design"
+    },
+    {
       "name": "poiesis-components",
       "description": "The Poiesis component set: shadcn/ui components themed by poiesis-ui's poiesis.css, copied into a React + Tailwind project; change the theme, preset or style and every component follows. Shown in poiesis-gallery.",
-      "version": "0.4.4",
+      "version": "0.5.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"

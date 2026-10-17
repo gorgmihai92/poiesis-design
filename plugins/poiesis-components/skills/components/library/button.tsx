@@ -18,6 +18,8 @@ const buttonVariants = cva(
         danger:
           "bg-danger text-paper hover:opacity-(--hover) focus-visible:ring-danger",
         link: "text-info underline-offset-4 hover:underline",
+        /** A link that is not an action (a byline, a credit): the color and weight of the text around it (H3). */
+        quiet: "text-inherit font-regular underline-offset-4 hover:underline",
       },
       size: {
         default:

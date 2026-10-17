@@ -10,7 +10,8 @@
    selected (+ -foreground), and each role (info, success, warning, caution, danger, new) with -tint. Hover:
    hover:bg-surface on plain controls, hover:opacity-(--hover) on filled ones. Radii rounded-sm, -md, -lg, -pill. Shadows shadow-sm, -md. Fonts font-sans,
    -serif, -mono. Weights font-regular (400), font-strong (700). Leading leading-body, -ui, -heading,
-   -display. Tracking tracking-body, -heading. Text text-ui (component text) and text-sm … text-2xl (page text).
+   -display. Tracking tracking-body, -heading. Text text-ui (component text) and text-sm … text-2xl (page text);
+   text-nearness (a grey by --nearness).
    Widths max-w-page, -measure, -narrow.
    Sizes from cells with arbitrary values: h-(--control-md), size-(--icon), p-(--block-pad), pb-(--section-space), gap-(--subsection-space),
    opacity-(--disabled),
@@ -33,6 +34,11 @@
 @custom-variant data-pressed { &:where([data-state="on"]), &:where([aria-pressed="true"]) { @slot; } }
 @custom-variant data-horizontal { &:where([data-orientation="horizontal"]) { @slot; } }
 @custom-variant data-vertical { &:where([data-orientation="vertical"]) { @slot; } }
+
+/* Nearness (H5): a grey between --faint and --ink by how near the thing is to the current place, set as
+   --nearness from 0% (far: faint) to 100% (here: ink). For position in a sequence, such as the rows of a section
+   navigation. */
+@utility text-nearness { color: color-mix(in oklch, var(--ink) var(--nearness, 0%), var(--faint)); }
 
 /* The page text roles (H1) as one class each: size, weight, leading, family and tracking together. */
 @utility type-title { font-size: var(--title-size); font-weight: var(--title-weight); line-height: var(--title-leading); font-family: var(--font-sans); letter-spacing: var(--title-tracking); }

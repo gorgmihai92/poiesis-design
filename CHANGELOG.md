@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.1.0 (poiesis-copy) · 0.5.0 (poiesis-ux)
+**poiesis-copy: what the product says, in English and Romanian.** A new plugin for UX copy, landing pages, ads
+and email, written clear, concise and honest.
+- Skill `copy`: rules L (language), B (buttons and links), M (messages), O (order), Q (claims), Y (voice),
+  X (languages, Romanian included) and Z (review), each with its source; `patterns.md` for each piece of copy, the
+  landing page, ads and email; `inspiration/`, copy worth learning from (mymind, Semplice, Carbonmade to start),
+  practices and never rules; `templates/voice.md` for the project's `.poiesis-design/voice.md`.
+- Agent `copy-reviewer`: reads the project's text in every language and reports findings by rule id, with the
+  text and `file:line`. Never edits the project.
+- Twelve new research notes in `research/notes` (scanning, plain language, links, proof, manipulation, letter case).
+- poiesis-ux: the wording rules L1–L3 move to poiesis-copy (now L1, B1, L5, Y4). E2 keeps where an error appears;
+  its wording is copy M1. The `plugin.json` version, which had fallen behind the marketplace, matches again.
+
+## 0.8.0 (poiesis-ui) · 0.5.0 (poiesis-components)
+**Page rhythm in the theme, and the gallery's page parts as components.**
+- Two atoms: `--atom-section` (space between page sections, default 8rem) and `--atom-pace` (how many times
+  smaller each level of page space is, default 2). `--section-space` and `--subsection-space` keep their names and
+  now derive from them, so a theme sets the rhythm. The poiesis theme sets 16rem and 4 (the values it had).
+- `text-nearness`: a grey between `--faint` and `--ink` by `--nearness` (0% far, 100% here), for position in a
+  sequence.
+- Rules: H2 (a dense page can set all text in `--text-ui`), H3 (the byline stays quiet, its link included), H4 (a
+  section's space comes after its content), new H5 (position in greys, choice in fills), S2 (levels of page space by
+  `--atom-pace`), C2 (only links that are actions take `--info`).
+- Card and empty titles are strong (T6): bold on buttons, toggles, tabs and these titles, regular elsewhere.
+- Button variant `quiet`: a link in the color and weight of the text around it.
+- New components: `Masthead` (name, quiet byline, one call to action), `PageSection` (divider, content near it,
+  the section's space after), `SectionNav` (the stacked section navigation of poiesis-gallery).
+
 ## 0.7.3 (poiesis-ui) · 0.4.4 (poiesis-components)
 - Component text weight: `--weight-strong` (700) on buttons, toggles and tabs only; every other component's text
   (labels, descriptions, errors, alerts, cards, empty states, tab panels, input values) is `--weight-regular` (400).
