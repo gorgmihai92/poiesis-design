@@ -11,7 +11,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col text-ui font-strong gap-(--card-spacing) overflow-hidden rounded-lg bg-block py-(--card-spacing) text-ink ring-(length:--block-line) ring-divider [--card-spacing:var(--block-pad)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:var(--block-pad-sm)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-lg *:[img:last-child]:rounded-b-lg",
+        "group/card flex flex-col text-ui font-regular gap-(--card-spacing) overflow-hidden rounded-lg bg-block py-(--card-spacing) text-ink ring-(length:--block-line) ring-divider [--card-spacing:var(--block-pad)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:var(--block-pad-sm)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-lg *:[img:last-child]:rounded-b-lg",
         className
       )}
       {...props}
@@ -37,7 +37,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-title"
       className={cn(
-        "font-sans text-ui leading-ui font-strong",
+        "font-sans text-ui leading-ui font-regular",
         className
       )}
       {...props}
@@ -49,7 +49,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("text-ui font-strong text-muted", className)}
+      className={cn("text-ui font-regular text-muted", className)}
       {...props}
     />
   )

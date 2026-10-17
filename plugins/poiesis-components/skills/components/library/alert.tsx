@@ -4,7 +4,7 @@ import { cn } from "./utils"
 
 const alertVariants = cva(
   // On the paper, inside the grey divider line, with no fill; the role shows in the icon's color only.
-  "group/alert relative grid w-full gap-0.5 border border-divider px-(--control-pad) py-(--control-pad-sm) text-left text-ui font-strong text-ink has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-ink *:[svg:not([class*='size-'])]:size-(--icon)",
+  "group/alert relative grid w-full gap-0.5 border border-divider px-(--control-pad) py-(--control-pad-sm) text-left text-ui font-regular text-ink has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-ink *:[svg:not([class*='size-'])]:size-(--icon)",
   {
     variants: {
       variant: {
@@ -44,7 +44,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="alert-title"
       className={cn(
-        "font-strong group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-ink",
+        "font-regular group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-ink",
         className
       )}
       {...props}
@@ -60,7 +60,7 @@ function AlertDescription({
     <div
       data-slot="alert-description"
       className={cn(
-        "text-ui font-strong text-balance text-ink md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-ink [&_p:not(:last-child)]:mb-4",
+        "text-ui font-regular text-balance text-ink md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-ink [&_p:not(:last-child)]:mb-4",
         className
       )}
       {...props}

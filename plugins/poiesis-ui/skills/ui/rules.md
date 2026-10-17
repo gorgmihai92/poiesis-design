@@ -9,8 +9,9 @@ default you may break on purpose, with the reason in the project's design notes.
 
 **T1 · must · Sizes from the scale.** Every font size is a cell (`--text-*` or a role size), in `rem`. No literal
 sizes, nothing under 12px.
-**T6 · must · One size and weight for component text.** All text inside a UI component (controls, labels,
-captions, descriptions, its content) is `--text-ui` (`--atom-text-ui`, 13px by default) in `--weight-strong` (700).
+**T6 · must · One size for component text, two weights.** All text inside a UI component (controls, labels,
+captions, descriptions, its content) is `--text-ui` (`--atom-text-ui`, 13px by default): `--weight-strong` (700) on
+buttons, toggles and tabs, `--weight-regular` (400) everywhere else.
 Page text outside components (titles, headings, running text) keeps the scale; color, not size or weight, tells
 a component's parts apart.
 **T2 · should · Few sizes.** 3–5 sizes per screen.

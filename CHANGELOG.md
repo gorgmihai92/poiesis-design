@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.3 (poiesis-ui) · 0.4.4 (poiesis-components)
+- Component text weight: `--weight-strong` (700) on buttons, toggles and tabs only; every other component's text
+  (labels, descriptions, errors, alerts, cards, empty states, tab panels, input values) is `--weight-regular` (400).
+  Still one size, `--text-ui` (13px). Rule T6.
 ## 0.4.3 (poiesis-components)
 - Button size `inline`: a text action inside a sentence (with variant `link`) that keeps the line's height.
 

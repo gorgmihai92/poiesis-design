@@ -27,7 +27,7 @@ in px, colors in both themes, contrast of every pair; exit 1 on a failure. Dense
 `--atom-ratio` down. Bigger headings → `--atom-ratio` up. Colors → the palette atoms (`--atom-paper`, `--atom-ink`, their dark versions, and a color and a tint for info, success, warning, caution, danger, new); a whole new set → a file in `tokens/palettes`. A new feel → a file in `tokens/themes` (a palette, a preset and a style). One area different →
 atoms on that element plus `data-atoms`.
 
-**Build.** Page text takes a role's size, weight, leading and tracking together (H1); component text is `--text-ui` in the strong weight (T6). Spacing in multiples of `--atom-space`; control and block sizes from the density cells (S1).
+**Build.** Page text takes a role's size, weight, leading and tracking together (H1); component text is `--text-ui`, strong on buttons, toggles and tabs, regular elsewhere (T6). Spacing in multiples of `--atom-space`; control and block sizes from the density cells (S1).
 After a change: `node $UI/scripts/scan.mjs <dirs>`. `init.mjs --update` refreshes cells; atoms stay.
 
 **Publish (P1).** Before any push, deploy or release, run `poiesis-ui:ui-auditor`; it records pass or fail and a
