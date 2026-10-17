@@ -8,14 +8,15 @@ import { cx } from "./cx.js";
 import "./base.css";
 import "./field.css";
 
-export function Field({ label, hint, error, className, ...input }: React.ComponentProps<"input"> & {
+export function Field({ label, hint, error, className, "aria-describedby": own, ...input }: React.ComponentProps<"input"> & {
   label: React.ReactNode;
   hint?: React.ReactNode;
   /** What went wrong and what to do now. */
   error?: React.ReactNode;
 }) {
   const id = useId();
-  const described = [hint && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(" ") || undefined;
+  // The caller's own description is kept, next to the hint and the error.
+  const described = [own, hint && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(" ") || undefined;
   return (
     <div className={cx("pc-field", className)}>
       <label htmlFor={id} className="pc-field__label">{label}</label>

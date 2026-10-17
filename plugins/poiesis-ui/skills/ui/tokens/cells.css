@@ -75,8 +75,8 @@
   --on-accent: light-dark(oklch(1 0 0), oklch(0.17 var(--atom-neutral-c) var(--atom-neutral-h)));
   --focus: var(--accent);
   --danger: light-dark(oklch(0.6 var(--atom-status-c) var(--atom-danger-h)), oklch(0.7 var(--atom-status-c) var(--atom-danger-h)));
-  --warning: light-dark(oklch(0.67 var(--atom-status-c) var(--atom-warning-h)), oklch(0.8 var(--atom-status-c) var(--atom-warning-h)));
-  --success: light-dark(oklch(0.62 var(--atom-status-c) var(--atom-success-h)), oklch(0.72 var(--atom-status-c) var(--atom-success-h)));
+  --warning: light-dark(oklch(0.63 var(--atom-status-c) var(--atom-warning-h)), oklch(0.8 var(--atom-status-c) var(--atom-warning-h)));
+  --success: light-dark(oklch(0.59 var(--atom-status-c) var(--atom-success-h)), oklch(0.72 var(--atom-status-c) var(--atom-success-h)));
   --danger-tint: light-dark(oklch(0.95 0.035 var(--atom-danger-h)), oklch(0.28 0.05 var(--atom-danger-h)));
   --warning-tint: light-dark(oklch(0.96 0.045 var(--atom-warning-h)), oklch(0.29 0.05 var(--atom-warning-h)));
   --success-tint: light-dark(oklch(0.95 0.035 var(--atom-success-h)), oklch(0.28 0.05 var(--atom-success-h)));
@@ -110,3 +110,7 @@
 /* @pair --line-color on --paper 3 */
 /* @pair --line-color on --surface-1 3 */
 /* @pair --ink on --accent-tint 4.5 */
+/* @pair --danger on --surface-1 3 */
+/* @pair --warning on --surface-1 3 */
+/* @pair --success on --surface-1 3 */
+/* The tint styles' ring (--accent on a tinted --selected-bg) measures 4.2:1 light, 4.9:1 dark; inverted styles have no ring. */

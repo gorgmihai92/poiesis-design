@@ -118,8 +118,8 @@ function stage([style, about]) {
       <button type="button" class="pc-button" data-variant="quiet" data-size="m">Cancel</button>
     </div>
     <div class="row">
-      <button type="button" class="pc-button" data-variant="secondary" data-size="s" aria-busy="true" disabled><span class="pc-dots" aria-hidden="true"><i></i><i></i><i></i></span>Saving</button>
-      <button type="button" class="pc-button" data-variant="secondary" data-size="s" disabled>Publish</button>
+      <button type="button" class="pc-button" data-variant="secondary" data-size="s" aria-busy="true" aria-disabled="true"><span class="pc-dots" aria-hidden="true"><i></i><i></i><i></i></span>Saving…</button>
+      <button type="button" class="pc-button" data-variant="secondary" data-size="s" aria-disabled="true" aria-describedby="${id('pub-why')}" data-tip="Add a name first">Publish<span id="${id('pub-why')}" class="pc-sr-only">Add a name first</span></button>
     </div>
 
     <div role="status" class="pc-notice">
@@ -144,7 +144,7 @@ function stage([style, about]) {
       </div>
     </section>
 
-    <p class="pc-loading"><span class="pc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Reading the file</span><span class="pc-loading__time">· 12 s</span></p>
+    <p class="pc-loading"><span class="pc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span role="status">Reading the file</span><span class="pc-loading__time">· 12 s</span></p>
     <div class="progress">
       <span>Upload</span>
       <span role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" class="pc-progress"><span class="pc-progress__fill" style="inline-size: 64%"></span></span>
@@ -157,7 +157,7 @@ function stage([style, about]) {
       <label for="${id('name-input')}" class="pc-field__label">Project name</label>
       <input id="${id('name-input')}" class="pc-input" value="Atlas" aria-invalid="true" aria-describedby="${id('name-hint')} ${id('name-error')}">
       <p id="${id('name-hint')}" class="pc-field__hint">Letters, numbers and spaces, up to 40 characters.</p>
-      <p id="${id('name-error')}" class="pc-field__error">That name is taken. Try another one.</p>
+      <p id="${id('name-error')}" class="pc-field__error" role="alert">That name is taken. Try another one.</p>
     </div>
 
     <div>
@@ -198,7 +198,7 @@ body {
 .controls { display: flex; flex-wrap: wrap; gap: var(--space-5); align-items: end; }
 .control { display: grid; gap: var(--space-1); }
 .control > span { font-weight: var(--weight-strong); }
-.stages { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: var(--space-4); align-items: start; }
+.stages { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); gap: var(--space-4); align-items: start; }
 .stage { min-inline-size: 0; display: grid; gap: var(--space-4); padding: var(--pad-m); background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: var(--body-size); line-height: var(--body-leading); outline: 1px solid var(--surface-3); }
 .stage__head { display: grid; gap: var(--space-1); }
 .stage__name { margin: 0; font-family: var(--font-display); font-size: var(--heading-size); font-weight: var(--heading-weight); line-height: var(--heading-leading); text-transform: capitalize; }
@@ -249,7 +249,7 @@ function selectTab(tab) {
 }
 document.addEventListener('click', (e) => {
   const el = e.target.closest('button');
-  if (!el || el.disabled) return;
+  if (!el || el.disabled || el.getAttribute('aria-disabled') === 'true') return;
   if (el.getAttribute('role') === 'tab') selectTab(el);
   else if (el.getAttribute('role') === 'switch') el.setAttribute('aria-checked', el.getAttribute('aria-checked') !== 'true');
   else if (el.hasAttribute('aria-pressed')) el.setAttribute('aria-pressed', el.getAttribute('aria-pressed') !== 'true');

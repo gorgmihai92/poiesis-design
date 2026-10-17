@@ -44,7 +44,7 @@ const checks = [
     id: 'G1', what: 'literal shape (radius, border, shadow, duration)',
     test: (l) =>
       l.match(new RegExp(String.raw`border-radius\s*:\s*(?!var\()[^;]*?[1-9]\d*\.?\d*(px|rem|em|%)`))?.[0] ??
-      l.match(/box-shadow\s*:\s*(?!var\(|none|inset 0 0 0 var)[^;]*\d+px/)?.[0] ??
+      l.match(/box-shadow\s*:(?!\s*(?:var\(|none|inset 0 0 0 (?:var|max|calc)\())[^;]*\d+px/)?.[0] ??
       l.match(/border(-[a-z]+)?(-width)?\s*:\s*(?!var\()[^;]*?\b[1-9]\d*px/)?.[0] ??
       l.match(/\b(?:transition|animation)(-duration)?\s*:[^;]*?\b\d+m?s\b/)?.[0] ??
       l.match(/\brounded-(?:sm|md|lg|xl|2xl|3xl|full|\[[^\]]+\])/)?.[0] ?? null,

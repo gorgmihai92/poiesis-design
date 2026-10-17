@@ -1,6 +1,6 @@
 /* Loading: three dots (still under reduced motion), what is pending and how long it has taken. */
 .pc-dots { display: inline-flex; align-self: center; gap: var(--space-1); }
-.pc-dots > i { inline-size: 0.3125rem; block-size: 0.3125rem; border-radius: var(--radius-s); background: var(--accent); }
+.pc-dots > i { inline-size: 0.3125rem; block-size: 0.3125rem; border-radius: var(--radius-s); background: var(--muted); }
 @media (prefers-reduced-motion: no-preference) {
   .pc-dots > i { animation: pc-dot calc(var(--duration-base) * 6) ease-in-out infinite; }
   .pc-dots > i:nth-child(2) { animation-delay: calc(var(--duration-base) * 0.75); }

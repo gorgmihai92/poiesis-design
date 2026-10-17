@@ -1,10 +1,20 @@
 {
   "name": "poiesis-components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "UI components built only on the poiesis-ui cells and meeting the poiesis-ux rules: copy them into a React project, then give the interface a direction by choosing a style (quiet, soft, crisp, bold) and a preset.",
-  "author": { "name": "George Mihai", "email": "hi@georgemihai.com" },
+  "author": {
+    "name": "George Mihai",
+    "email": "hi@georgemihai.com"
+  },
   "homepage": "https://github.com/gorgmihai92/poiesis-design",
   "repository": "https://github.com/gorgmihai92/poiesis-design",
   "license": "MIT",
-  "keywords": ["components", "react", "design-system", "radix", "tokens", "accessibility"]
+  "keywords": [
+    "components",
+    "react",
+    "design-system",
+    "radix",
+    "tokens",
+    "accessibility"
+  ]
 }

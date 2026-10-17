@@ -1,11 +1,12 @@
 /* StatusDot: the state of a running process, by color and by shape. */
 .pc-status { position: relative; display: inline-block; flex: none; inline-size: 0.625rem; block-size: 0.625rem; }
+.pc-status::after { content: ""; position: absolute; inset: -0.4375rem; } /* a 24px target around the 10px mark (I4) */
 .pc-status svg { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
 .pc-status[data-state="active"] { color: var(--success); }
 .pc-status[data-state="paused"] { color: var(--warning); }
 .pc-status[data-state="stopped"] { color: var(--muted); }
 .pc-status[data-state="error"] { color: var(--danger); }
-.pc-status__ring { position: absolute; inset: 0; border-radius: var(--radius-s); background: currentColor; opacity: 0; }
+.pc-status__ring { position: absolute; inset: 0; background: currentColor; opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .pc-status[data-state="active"] .pc-status__ring { animation: pc-ring calc(var(--duration-base) * 8) ease-out infinite; }
 }

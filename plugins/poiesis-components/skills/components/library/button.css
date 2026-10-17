@@ -30,7 +30,7 @@
   text-underline-offset: 3px;
 }
 .pc-button[data-variant="quiet"]:hover:not(:disabled) { color: var(--ink); }
-.pc-button:disabled { opacity: 0.5; cursor: not-allowed; }
+.pc-button:disabled, .pc-button[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
 .pc-button[aria-busy="true"] { cursor: progress; opacity: 1; }
 
 .pc-icon-button {
@@ -47,4 +47,5 @@
   transition: background-color var(--duration-fast), color var(--duration-fast);
 }
 .pc-icon-button:hover:not([aria-pressed="true"]) { background: var(--surface-2); color: var(--ink); }
+.pc-icon-button:disabled { opacity: 0.5; cursor: not-allowed; }
 .pc-icon-button svg { inline-size: 1rem; block-size: 1rem; stroke-linecap: square; }

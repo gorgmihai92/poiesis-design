@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.1 (poiesis-ui) · 0.1.1 (poiesis-components)
+Fixes from the first independent UI audit and UX test (live in a browser) of the components.
+- The selected state was invisible in quiet and bold (the shared rule lost to each component's own background):
+  it now wins whatever the import order.
+- Inputs keep a 3:1 edge in styles without lines; an invalid input no longer doubles its line.
+- Accent only on interactive things: progress fills in ink, loading dots muted.
+- Warning and success hold 3:1 on grey surfaces too (`--warning`, `--success` slightly darker in light).
+- A busy button keeps focus and blocks a second press; a disabled button can say why (`reason`).
+- Status dots get a 24px target; loading is announced; notices wrap instead of cutting text; edge padding at
+  least the inner gaps; disabled inputs and icon buttons look disabled; Field keeps a caller's description.
+- `scan.mjs` no longer flags state rings computed from cells.
+
 ## 0.4.0 (poiesis-ui) · 0.1.0 (poiesis-components)
 - poiesis-ui: shape atoms (radius, line, elevation, selected style, motion) and their cells, including
   `--selected-bg`, `--selected-fg` and `--selected-ring`; four styles in `tokens/styles` (quiet, soft, crisp,
