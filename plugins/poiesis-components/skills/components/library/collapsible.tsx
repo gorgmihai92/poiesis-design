@@ -25,7 +25,7 @@ function CollapsibleContent({
   return (
     <CollapsiblePrimitive.CollapsibleContent
       data-slot="collapsible-content"
-      className={cn("text-ui", className)}
+      className={cn("text-ui font-strong", className)}
       {...props}
     />
   )

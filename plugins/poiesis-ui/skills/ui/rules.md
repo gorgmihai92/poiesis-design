@@ -9,20 +9,21 @@ default you may break on purpose, with the reason in the project's design notes.
 
 **T1 · must · Sizes from the scale.** Every font size is a cell (`--text-*` or a role size), in `rem`. No literal
 sizes, nothing under 12px.
-**T6 · must · One size for component text.** All text inside a UI component (controls, labels, captions,
-descriptions, its content) is `--text-ui`, set by `--atom-text-ui` (14px by default). Page text outside
-components (titles, headings, running text) keeps the scale.
+**T6 · must · One size and weight for component text.** All text inside a UI component (controls, labels,
+captions, descriptions, its content) is `--text-ui` (`--atom-text-ui`, 13px by default) in `--weight-strong` (700).
+Page text outside components (titles, headings, running text) keeps the scale; color, not size or weight, tells
+a component's parts apart.
 **T2 · should · Few sizes.** 3–5 sizes per screen.
 **T3 · must · Line height by role, unitless.** Body 1.5–1.65, UI text 1.3–1.45, headings 1.1–1.25.
 **T4 · must · Measure.** Running text 45–75 characters per line (`max-inline-size: var(--measure)`).
-**T5 · should · Two families at most** (plus mono). Changing or aligned numbers use `tabular-nums`.
+**T5 · must · One family for text** (`--font-sans`), mono for code; the serif only where chosen on purpose. Changing or aligned numbers use `tabular-nums`.
 
 ## Hierarchy (H)
 
 **H1 · must · Every page text is one role:** title, heading, subheading, body, caption or code, using that role's
 size, weight, leading, font and tracking cells together (`type-*` with `poiesis.css`). Text inside a component is
-not a role: it is `--text-ui` with a weight (T6).
-**H2 · should · Weight, color and space before size.** At most three weights; secondary text is `--muted`, not
+not a role: it is `--text-ui` in `--weight-strong` (T6). All text is the sans face; code is mono.
+**H2 · should · Weight, color and space before size.** Two weights: `--weight-regular` (400) and `--weight-strong` (700); secondary text is `--muted`, not
 smaller and lighter and greyer at once.
 **H3 · should · One primary per view.** One title, one accent-colored main action.
 **H4 · should · Headings belong to what follows.** About twice as much space above a heading as below it.

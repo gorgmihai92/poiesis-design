@@ -7,7 +7,7 @@ description: The basics of a UI as tokens - typography, hierarchy, spacing and c
 
 **Atoms** (`tokens/atoms.css`) are the few values a project changes. **Cells** (`tokens/cells.css`) derive from
 them and are the same everywhere, one name per meaning: type scale and page text roles (title, heading,
-subheading, body, caption, code), component text (`--text-ui`), sizes that follow density (controls, blocks,
+subheading, body, caption, code; all sans, code mono), component text (`--text-ui`, bold), sizes that follow density (controls, blocks,
 icons), colors for light and dark, states (selected, hover, disabled), shape, motion and layers. Code and components
 use cells only. The **style** (`tokens/styles`: quiet, soft, crisp, bold) sets the shape atoms, the **preset**
 the type and density; `init.mjs --style` picks one. Ready-made components on these cells: plugin
@@ -27,7 +27,7 @@ in px, colors in both themes, contrast of every pair; exit 1 on a failure. Dense
 `--atom-ratio` down. Bigger headings → `--atom-ratio` up. Colors → the palette atoms (`--atom-paper`, `--atom-ink`, their dark versions, and a color and a tint for info, success, warning, caution, danger, new); a whole new set → a file in `tokens/palettes`. A new feel → a file in `tokens/themes` (a palette, a preset and a style). One area different →
 atoms on that element plus `data-atoms`.
 
-**Build.** Text takes a role's size, weight, leading, font and tracking together (H1). Spacing in multiples of `--atom-space`; control and block sizes from the density cells (S1).
+**Build.** Page text takes a role's size, weight, leading and tracking together (H1); component text is `--text-ui` in the strong weight (T6). Spacing in multiples of `--atom-space`; control and block sizes from the density cells (S1).
 After a change: `node $UI/scripts/scan.mjs <dirs>`. `init.mjs --update` refreshes cells; atoms stay.
 
 **Publish (P1).** Before any push, deploy or release, run `poiesis-ui:ui-auditor`; it records pass or fail and a

@@ -25,6 +25,6 @@ status dot and meter, built the same way; `utils.ts` holds `cn`. poiesis-gallery
 Colors: icons and small shapes (status dot, meter bars, alert icons) and fills (the danger button) use the
 role color as the palette gives it (`text-danger`, `bg-danger`), crisp; colored text uses the `-strong` shade.
 
-Text: every component's text is `text-ui` (T6, 14px by default), containers included; controls, labels and
-titles `font-strong`, secondary text `text-muted`. States (selected, hover, disabled) and sizes (control height,
+Text: every component's text is `text-ui font-strong` (T6, 13px, 700), containers included, in the sans face;
+secondary text `text-muted`. States (selected, hover, disabled) and sizes (control height,
 padding, icon) come from their cells, so density, selection style and motion follow the theme.

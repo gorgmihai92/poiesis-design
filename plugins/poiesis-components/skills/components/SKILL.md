@@ -32,10 +32,10 @@ with values of their own. Change a component's look by changing atoms (theme, pr
   spacing steps; heights, padding and icons from the density cells (`h-(--control-md)`, `px-(--control-pad)`,
   `p-(--block-pad)`, `size-(--icon)`). No `dark:` classes (the cells handle dark), no `text-xs`, no `text-[…]`,
   no literal px.
-- **All component text is one size: `text-ui`** (T6; `--atom-text-ui`, 14px by default), controls, labels,
+- **All component text is one size: `text-ui`** in one weight, `text-ui font-strong` (T6; `--atom-text-ui` 13px, `--atom-weight-strong` 700), controls, labels,
   captions and descriptions alike, and containers (cards, tab panels, collapsible content, empty states) set it
-  too, so text inside them is 14px whatever the page uses. Weight and color tell the parts apart: `font-strong` for
-  controls, labels and titles, `font-regular` otherwise, `text-muted` for secondary text.
+  too, so text inside them is 14px whatever the page uses. Color tells the parts apart: `text-muted` for secondary text,
+  a role's `-strong` for colored text. Every component's text is the sans face (`font-sans`).
 - Page titles and headings use the role classes from `poiesis.css` (`type-title`, `type-heading`,
   `type-subheading`, `type-caption`…), never a size or weight of their own.
 - States use the state cells (G3): selected, pressed and active `bg-selected text-selected-foreground` with the

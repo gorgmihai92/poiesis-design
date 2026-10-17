@@ -1,6 +1,6 @@
 /* Typefaces · poiesis: Helvetica (sans; on Apple devices, Arial elsewhere), EB Garamond (serif) and Fragment Mono
-   (mono), both free (SIL OFL, Google Fonts). Only the three families; which one the body and headings use is the
-   preset's choice. A project loads the web fonts it names. */
+   (mono), both free (SIL OFL, Google Fonts). Only the three families: all text is sans, code is mono, the serif is
+   there to use on purpose (font-serif). A project loads the web fonts it names. */
 :root {
   --atom-font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --atom-font-serif: "EB Garamond", Garamond, Georgia, serif;

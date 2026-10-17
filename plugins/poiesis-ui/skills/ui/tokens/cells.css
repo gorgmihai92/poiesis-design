@@ -11,8 +11,6 @@
   --font-sans: var(--atom-font-sans);
   --font-serif: var(--atom-font-serif);
   --font-mono: var(--atom-font-mono);
-  --font-body: var(--atom-font-body);
-  --font-display: var(--atom-font-display);
   --text-sm: max(0.75rem, calc(var(--atom-text-base) / var(--atom-ratio)));
   --text-base: var(--atom-text-base);
   --text-md: calc(var(--atom-text-base) * var(--atom-ratio));
@@ -30,43 +28,36 @@
   --leading-display: calc(var(--atom-leading-tight) - 0.1);
   --weight-regular: var(--atom-weight-regular);
   --weight-strong: var(--atom-weight-strong);
-  --weight-heading: var(--atom-weight-heading);
   --tracking-body: var(--atom-tracking);
   --tracking-heading: var(--atom-tracking-tight);
   --measure: var(--atom-measure);
   --measure-narrow: calc(var(--atom-measure) * 0.5); /* tooltips, short forms, empty states */
 
-  /* Page text roles (H1): size, weight, leading, font and tracking together. Text inside components is not a
-     role: it is --text-ui with a weight (T6). */
+  /* Page text roles (H1): size, weight, leading and tracking together, in the sans face (code: mono). Text
+     inside components is not a role: it is --text-ui in --weight-strong (T6). */
   --title-size: var(--text-2xl);
-  --title-weight: var(--weight-heading);
+  --title-weight: var(--weight-strong);
   --title-leading: var(--leading-display);
-  --title-font: var(--font-display);
   --title-tracking: var(--tracking-heading);
   --heading-size: var(--text-lg);
-  --heading-weight: var(--weight-heading);
+  --heading-weight: var(--weight-strong);
   --heading-leading: var(--leading-heading);
-  --heading-font: var(--font-display);
   --heading-tracking: var(--tracking-heading);
   --subheading-size: var(--text-md);
   --subheading-weight: var(--weight-strong);
   --subheading-leading: var(--leading-heading);
-  --subheading-font: var(--font-body);
   --subheading-tracking: var(--tracking-body);
   --body-size: var(--text-base);
   --body-weight: var(--weight-regular);
   --body-leading: var(--leading-body);
-  --body-font: var(--font-body);
   --body-tracking: var(--tracking-body);
   --caption-size: var(--text-sm);
   --caption-weight: var(--weight-regular);
   --caption-leading: var(--leading-ui);
-  --caption-font: var(--font-body);
   --caption-tracking: var(--tracking-body);
   --code-size: var(--text-sm);
   --code-weight: var(--weight-regular);
   --code-leading: var(--leading-ui);
-  --code-font: var(--font-mono);
   --code-tracking: var(--tracking-body);
 
   /* Size. Spacing steps are multiples of --atom-space (Tailwind's p-*, gap-*); controls and blocks also follow

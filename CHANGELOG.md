@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.1 (poiesis-ui) · 0.3.1 (poiesis-components)
+- **One text face.** `--atom-font-body` and `--atom-font-display` are gone, and with them the per-role font cells,
+  `font-body`, `font-display` and the presets' font choice: all text is `--font-sans`, code `--font-mono`; the serif
+  stays for use on purpose (`font-serif`). Rule T5.
+- **Two weights.** `--atom-weight-regular` 400 and `--atom-weight-strong` 700; `--atom-weight-heading` is gone
+  (headings use strong). Rule H2.
+- **Component text 13px, 700.** `--atom-text-ui` is 0.8125rem and every component's text is `text-ui font-strong`;
+  parts are told apart by color. Rule T6.
+- Switch: an even 2px inset around the thumb (the track's transparent border and `calc(100%-2px)` travel left it
+  0.6px from one edge and 1.4px from the other).
 ## 0.6.0 (poiesis-ui) · 0.3.0 (poiesis-components)
 **One name per meaning.** Breaking: projects using the removed names need the new ones.
 - Renamed: the accent color is `info` (atoms, cells, classes), so "accent" no longer means blue in the tokens and

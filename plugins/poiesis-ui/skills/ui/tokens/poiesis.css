@@ -9,7 +9,7 @@
    Names: colors bg-/text-/border-/ring- paper, surface-1…3, block, ink, muted, line, divider, on-color, overlay,
    selected (+ -foreground), hover, ink-hover, danger-hover, and each role (info, success, warning, caution,
    danger, new) with -tint and -strong. Radii rounded-sm, -md, -lg, -pill. Shadows shadow-sm, -md. Fonts font-sans,
-   -serif, -mono, -body, -display. Weights font-regular, -strong, -heading. Leading leading-body, -ui, -heading,
+   -serif, -mono. Weights font-regular (400), font-strong (700). Leading leading-body, -ui, -heading,
    -display. Tracking tracking-body, -heading. Text text-ui (component text) and text-sm … text-2xl (page text).
    Widths max-w-page, -measure, -narrow.
    Sizes from cells with arbitrary values: h-(--control-md), size-(--icon), p-(--block-pad), opacity-(--disabled),
@@ -34,12 +34,12 @@
 @custom-variant data-vertical { &:where([data-orientation="vertical"]) { @slot; } }
 
 /* The page text roles (H1) as one class each: size, weight, leading, family and tracking together. */
-@utility type-title { font-size: var(--title-size); font-weight: var(--title-weight); line-height: var(--title-leading); font-family: var(--title-font); letter-spacing: var(--title-tracking); }
-@utility type-heading { font-size: var(--heading-size); font-weight: var(--heading-weight); line-height: var(--heading-leading); font-family: var(--heading-font); letter-spacing: var(--heading-tracking); }
-@utility type-subheading { font-size: var(--subheading-size); font-weight: var(--subheading-weight); line-height: var(--subheading-leading); font-family: var(--subheading-font); letter-spacing: var(--subheading-tracking); }
-@utility type-body { font-size: var(--body-size); font-weight: var(--body-weight); line-height: var(--body-leading); font-family: var(--body-font); letter-spacing: var(--body-tracking); }
-@utility type-caption { font-size: var(--caption-size); font-weight: var(--caption-weight); line-height: var(--caption-leading); font-family: var(--caption-font); letter-spacing: var(--caption-tracking); }
-@utility type-code { font-size: var(--code-size); font-weight: var(--code-weight); line-height: var(--code-leading); font-family: var(--code-font); letter-spacing: var(--code-tracking); }
+@utility type-title { font-size: var(--title-size); font-weight: var(--title-weight); line-height: var(--title-leading); font-family: var(--font-sans); letter-spacing: var(--title-tracking); }
+@utility type-heading { font-size: var(--heading-size); font-weight: var(--heading-weight); line-height: var(--heading-leading); font-family: var(--font-sans); letter-spacing: var(--heading-tracking); }
+@utility type-subheading { font-size: var(--subheading-size); font-weight: var(--subheading-weight); line-height: var(--subheading-leading); font-family: var(--font-sans); letter-spacing: var(--subheading-tracking); }
+@utility type-body { font-size: var(--body-size); font-weight: var(--body-weight); line-height: var(--body-leading); font-family: var(--font-sans); letter-spacing: var(--body-tracking); }
+@utility type-caption { font-size: var(--caption-size); font-weight: var(--caption-weight); line-height: var(--caption-leading); font-family: var(--font-sans); letter-spacing: var(--caption-tracking); }
+@utility type-code { font-size: var(--code-size); font-weight: var(--code-weight); line-height: var(--code-leading); font-family: var(--font-mono); letter-spacing: var(--code-tracking); }
 
 @theme inline {
   --color-*: initial;
@@ -97,11 +97,8 @@
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
-  --font-body: var(--font-body);
-  --font-display: var(--font-display);
   --font-weight-regular: var(--weight-regular);
   --font-weight-strong: var(--weight-strong);
-  --font-weight-heading: var(--weight-heading);
   --leading-body: var(--leading-body);
   --leading-ui: var(--leading-ui);
   --leading-heading: var(--leading-heading);

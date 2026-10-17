@@ -1,7 +1,5 @@
 /* Preset · reading: long text, articles, docs, reports. Only the atoms that differ. */
 :root {
-  --atom-font-body: var(--atom-font-serif);
-  --atom-font-display: var(--atom-font-sans);
   --atom-text-base: 1.0625rem;
   --atom-ratio: 1.25;
   --atom-leading: 1.65;

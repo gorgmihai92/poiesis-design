@@ -14,7 +14,7 @@ const toggleVariants = cva(
       size: {
         default:
           "h-(--control-md) min-w-(--control-md) px-(--control-pad) has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        sm: "h-(--control-sm) min-w-(--control-sm) rounded-md px-(--control-pad) text-ui has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-(--icon-sm)",
+        sm: "h-(--control-sm) min-w-(--control-sm) rounded-md px-(--control-pad) text-ui font-strong has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-(--icon-sm)",
         lg: "h-(--control-lg) min-w-(--control-lg) px-(--control-pad) has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
       },
     },
