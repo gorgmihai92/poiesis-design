@@ -28,11 +28,12 @@ Wrap the app once in `<TooltipProvider>`. Packages: `radix-ui`, `class-variance-
 with values of their own. Change a component's look by changing atoms (theme, preset, style), not its classes.
 
 **Rules every component keeps** (and a new one follows):
-- Cells only (T1, S1, C1, G1): role colors, Tailwind's named radii and spacing steps, text sizes from the scale
-  (`text-sm` caption and label, `text-base` body and controls). No `text-xs`, no `text-[…]`, no literal px.
-- **Containers never set a text size** (tab panels, cards, collapsible content): text inside them takes the body
-  role from the page (H1). Only a component's own text sets one: controls the `control` role (`text-base
-  font-(--control-weight)`), labels and captions `text-sm`.
+- Cells only (T1, S1, C1, G1): role colors, Tailwind's named radii and spacing steps. No `text-xs`, no
+  `text-[…]`, no literal px.
+- **All component text is one size: `text-ui`** (T6; `--atom-text-ui`, 14px by default), controls, labels,
+  captions and descriptions alike, and containers (cards, tab panels, collapsible content, empty states) set it
+  too, so text inside them is 14px whatever the page uses. Weight and color tell the parts apart: controls
+  `font-(--control-weight)`, secondary text `text-muted-foreground`.
 - Section titles and headings use the role classes from `poiesis.css` (`type-subheading`, `type-heading`,
   `type-label`, `type-caption`…), never a size or weight of their own.
 - State styles use the variants `poiesis.css` defines for Radix (`data-open:`, `data-checked:`, `data-active:`,

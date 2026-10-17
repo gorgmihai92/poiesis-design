@@ -112,6 +112,9 @@
   --shadow-lg: var(--shadow-2);
 
   /* Tailwind's p-4, gap-2… are multiples of this, as the space cells are of --atom-space. Its text-sm, text-base
-     and text-lg read --text-sm, --text-base and --text-lg, which are cells already. */
+     and text-lg read --text-sm, --text-base and --text-lg, which are cells already. text-ui is every component's
+     text size (--text-ui, from --atom-text-ui), with the UI line height. */
+  --text-ui: var(--atom-text-ui);
+  --text-ui--line-height: var(--leading-ui);
   --spacing: var(--atom-space);
 }

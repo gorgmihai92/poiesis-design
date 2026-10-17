@@ -9,6 +9,9 @@ default you may break on purpose, with the reason in the project's design notes.
 
 **T1 · must · Sizes from the scale.** Every font size is a cell (`--text-*` or a role size), in `rem`. No literal
 sizes, nothing under 12px.
+**T6 · must · One size for component text.** All text inside a UI component (controls, labels, captions,
+descriptions, its content) is `--text-ui`, set by `--atom-text-ui` (14px by default). Page text outside
+components (titles, headings, running text) keeps the scale.
 **T2 · should · Few sizes.** 3–5 sizes per screen.
 **T3 · must · Line height by role, unitless.** Body 1.5–1.65, UI text 1.3–1.45, headings 1.1–1.25.
 **T4 · must · Measure.** Running text 45–75 characters per line (`max-inline-size: var(--measure)`).

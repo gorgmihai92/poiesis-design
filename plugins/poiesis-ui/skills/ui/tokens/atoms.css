@@ -9,6 +9,7 @@
   --atom-font-body: var(--atom-font-sans);
   --atom-font-display: var(--atom-font-body);
   --atom-text-base: 1rem;      /* body size. Tools 0.875–1, reading 1–1.125 */
+  --atom-text-ui: 0.875rem;    /* every component's text, one size: controls, labels, captions, content */
   --atom-ratio: 1.2;           /* scale ratio. Dense 1.125, calm 1.2, reading 1.25, display 1.333–1.5 */
   --atom-leading: 1.6;         /* body line height, 1.5–1.65 */
   --atom-leading-tight: 1.2;   /* heading line height, 1.05–1.25 */

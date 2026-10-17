@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.2 (poiesis-ui) · 0.2.2 (poiesis-components)
+- **All component text is one size, 14px.** New atom `--atom-text-ui` (0.875rem), cell `--text-ui` and the
+  Tailwind class `text-ui`; rule T6. Every component uses it in place of `text-sm` / `text-base`, and containers
+  (card, tab panel, collapsible content, empty state) set it too, so text inside a component is 14px whatever the
+  page uses. Page titles, headings and running text keep the scale.
+- `cn()` tells tailwind-merge that `text-ui` is a font size; it had read it as a color and dropped it next to one.
 ## 0.2.1 (poiesis-components)
 - Crisper colors: status dots, meter bars and alert icons in the palette's role color as it is (they had taken the
   darker `-strong` shade once the theme turned strong contrast on); `-strong` stays for colored text.
