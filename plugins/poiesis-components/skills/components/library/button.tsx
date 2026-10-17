@@ -31,6 +31,8 @@ const buttonVariants = cva(
         "icon-sm":
           "size-(--control-sm) rounded-md in-data-[slot=button-group]:rounded-md",
         "icon-lg": "size-(--control-lg)",
+        /** A text action inside a sentence (with variant "link"): no box, it keeps the line's height. */
+        inline: "h-auto gap-1 p-0 align-baseline",
       },
     },
     defaultVariants: {

@@ -1,6 +1,9 @@
 # Changelog
 
 ## 0.4.3 (poiesis-components)
+- Button size `inline`: a text action inside a sentence (with variant `link`) that keeps the line's height.
+
+## 0.4.3 (poiesis-components)
 - Danger alert is red throughout: text, line and icon, in the one red (`--danger`). Other roles keep the grey line
   and ink text, the role in the icon's color.
 ## 0.4.2 (poiesis-components)
