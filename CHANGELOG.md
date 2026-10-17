@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 (poiesis-components)
+- Crisper colors: status dots, meter bars and alert icons in the palette's role color as it is (they had taken the
+  darker `-strong` shade once the theme turned strong contrast on); `-strong` stays for colored text.
+- Destructive button: a solid danger fill with ink text (about 6.6:1), instead of red text on a pale tint.
+
 ## 0.5.1 (poiesis-ui) · 0.4.2 (poiesis-ux)
 - Suggestions of another Poiesis plugin, from the skill or its agents, give the plugin's link and name the skill or
   agent to use.

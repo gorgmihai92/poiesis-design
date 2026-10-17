@@ -22,5 +22,8 @@ status dot and meter, built the same way; `utils.ts` holds `cn`. poiesis-gallery
 | Separator | a divider between groups | separator.tsx |
 | Toggle, ToggleGroup | a pressed / not pressed control; a group of them | toggle.tsx, toggle-group.tsx |
 
+Colors: icons and small shapes (status dot, meter bars, alert icons) and fills (the destructive button) use the
+role color as the palette gives it (`text-danger`, `bg-danger`), crisp; colored text uses the `-strong` shade.
+
 Text roles: controls (buttons, tabs, toggles) `text-base` with the control weight; labels, captions, field
 descriptions, tooltips `text-sm`; containers set no size (H1).
