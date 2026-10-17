@@ -6,9 +6,9 @@
      @import "<tokens>/poiesis.css";
      @import "<tokens>/themes/poiesis.css";   the theme: a palette, typefaces, a preset and a style (tokens/themes)
 
-   Names: colors bg-/text-/border-/ring- paper, surface-1…3, block, ink, muted, faint, line, divider, on-color, overlay,
-   selected (+ -foreground, -hover), hover, ink-hover, danger-hover, and each role (info, success, warning, caution,
-   danger, new) with -tint and -strong. Radii rounded-sm, -md, -lg, -pill. Shadows shadow-sm, -md. Fonts font-sans,
+   Names: colors bg-/text-/border-/ring- paper, surface, block, divider, line, faint, muted, ink, on-color,
+   selected (+ -foreground), and each role (info, success, warning, caution, danger, new) with -tint. Hover:
+   hover:bg-surface on plain controls, hover:opacity-(--hover) on filled ones. Radii rounded-sm, -md, -lg, -pill. Shadows shadow-sm, -md. Fonts font-sans,
    -serif, -mono. Weights font-regular (400), font-strong (700). Leading leading-body, -ui, -heading,
    -display. Tracking tracking-body, -heading. Text text-ui (component text) and text-sm … text-2xl (page text).
    Widths max-w-page, -measure, -narrow.
@@ -53,41 +53,28 @@
   --text-*: initial;
 
   --color-paper: var(--paper);
-  --color-surface-1: var(--surface-1);
-  --color-surface-2: var(--surface-2);
-  --color-surface-3: var(--surface-3);
+  --color-surface: var(--surface);
   --color-block: var(--block-bg);
-  --color-ink: var(--ink);
-  --color-muted: var(--muted);
-  --color-faint: var(--faint);
-  --color-line: var(--line-color);
   --color-divider: var(--divider);
+  --color-line: var(--line-color);
+  --color-faint: var(--faint);
+  --color-muted: var(--muted);
+  --color-ink: var(--ink);
   --color-on-color: var(--on-color);
-  --color-overlay: var(--overlay);
   --color-selected: var(--selected-bg);
   --color-selected-foreground: var(--selected-fg);
-  --color-selected-hover: var(--selected-hover);
-  --color-hover: var(--hover);
-  --color-ink-hover: var(--ink-hover);
-  --color-danger-hover: var(--danger-hover);
   --color-info: var(--info);
   --color-info-tint: var(--info-tint);
-  --color-info-strong: var(--info-strong);
   --color-success: var(--success);
   --color-success-tint: var(--success-tint);
-  --color-success-strong: var(--success-strong);
   --color-warning: var(--warning);
   --color-warning-tint: var(--warning-tint);
-  --color-warning-strong: var(--warning-strong);
   --color-caution: var(--caution);
   --color-caution-tint: var(--caution-tint);
-  --color-caution-strong: var(--caution-strong);
   --color-danger: var(--danger);
   --color-danger-tint: var(--danger-tint);
-  --color-danger-strong: var(--danger-strong);
   --color-new: var(--new);
   --color-new-tint: var(--new-tint);
-  --color-new-strong: var(--new-strong);
 
   --radius-sm: var(--radius-s);
   --radius-md: var(--radius-m);

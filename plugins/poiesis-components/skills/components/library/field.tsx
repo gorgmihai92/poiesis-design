@@ -50,7 +50,7 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const fieldVariants = cva(
-  "group/field flex w-full gap-2 data-[invalid=true]:text-danger-strong",
+  "group/field flex w-full gap-2 data-[invalid=true]:text-danger",
   {
     variants: {
       orientation: {
@@ -104,7 +104,7 @@ function FieldLabel({
     <Label
       data-slot="field-label"
       className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 leading-ui group-data-[disabled=true]/field:opacity-(--disabled) has-data-checked:border-info has-data-checked:bg-info-tint has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-surface-1 has-[>[data-slot=field]]:has-[:focus-visible]:border-info has-[>[data-slot=field]]:has-[:focus-visible]:ring-(length:--ring) has-[>[data-slot=field]]:has-[:focus-visible]:ring-info *:data-[slot=field]:p-(--control-pad)",
+        "group/field-label peer/field-label flex w-fit gap-2 leading-ui group-data-[disabled=true]/field:opacity-(--disabled) has-data-checked:bg-surface has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-surface has-[>[data-slot=field]]:has-[:focus-visible]:border-info has-[>[data-slot=field]]:has-[:focus-visible]:ring-(length:--ring) has-[>[data-slot=field]]:has-[:focus-visible]:ring-info *:data-[slot=field]:p-(--control-pad)",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
         className
       )}
@@ -133,7 +133,7 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
       className={cn(
         "text-left text-ui leading-ui font-strong text-muted group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
         "last:mt-0 nth-last-2:-mt-1",
-        "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-info-strong",
+        "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-info",
         className
       )}
       {...props}
@@ -214,7 +214,7 @@ function FieldError({
     <div
       role="alert"
       data-slot="field-error"
-      className={cn("text-ui font-strong text-danger-strong", className)}
+      className={cn("text-ui font-strong text-danger", className)}
       {...props}
     >
       {content}

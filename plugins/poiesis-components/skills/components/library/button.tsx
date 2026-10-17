@@ -4,20 +4,20 @@ import { cn } from "./utils"
 import { Slot } from "radix-ui"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-ui font-strong whitespace-nowrap transition-all outline-none select-none focus-visible:border-info focus-visible:ring-(length:--ring) focus-visible:ring-info active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-(--disabled) aria-invalid:border-danger-strong aria-invalid:ring-(length:--ring) aria-invalid:ring-danger-tint [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-(--icon)",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-ui font-strong whitespace-nowrap transition-all outline-none select-none focus-visible:border-info focus-visible:ring-(length:--ring) focus-visible:ring-info active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-(--disabled) aria-invalid:border-danger aria-invalid:ring-(length:--ring) aria-invalid:ring-danger [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-(--icon)",
   {
     variants: {
       variant: {
-        default: "bg-ink text-paper hover:bg-ink-hover",
+        default: "bg-ink text-paper hover:opacity-(--hover)",
         outline:
-          "border-line bg-paper hover:not-aria-expanded:bg-hover hover:not-aria-expanded:text-ink aria-expanded:bg-selected aria-expanded:hover:bg-selected-hover aria-expanded:text-selected-foreground",
+          "border-line bg-paper hover:not-aria-expanded:bg-surface hover:not-aria-expanded:text-ink aria-expanded:bg-selected aria-expanded:hover:opacity-(--hover) aria-expanded:text-selected-foreground",
         secondary:
-          "bg-surface-2 text-ink hover:not-aria-expanded:bg-surface-3 aria-expanded:bg-selected aria-expanded:hover:bg-selected-hover aria-expanded:text-selected-foreground",
+          "bg-surface text-ink hover:not-aria-expanded:opacity-(--hover) aria-expanded:bg-selected aria-expanded:hover:opacity-(--hover) aria-expanded:text-selected-foreground",
         ghost:
-          "hover:not-aria-expanded:bg-hover hover:not-aria-expanded:text-ink aria-expanded:bg-selected aria-expanded:hover:bg-selected-hover aria-expanded:text-selected-foreground",
+          "hover:not-aria-expanded:bg-surface hover:not-aria-expanded:text-ink aria-expanded:bg-selected aria-expanded:hover:opacity-(--hover) aria-expanded:text-selected-foreground",
         danger:
-          "bg-danger text-on-color hover:bg-danger-hover focus-visible:ring-danger",
-        link: "text-info-strong underline-offset-4 hover:underline",
+          "bg-danger text-paper hover:opacity-(--hover) focus-visible:ring-danger",
+        link: "text-info underline-offset-4 hover:underline",
       },
       size: {
         default:

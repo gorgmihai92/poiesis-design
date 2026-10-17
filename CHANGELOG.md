@@ -1,14 +1,25 @@
 # Changelog
 
+## 0.7.0 (poiesis-ui) · 0.4.0 (poiesis-components)
+**Fewer colors.** Breaking: removed names need their replacements.
+- Greys: `--surface-1`, `-2`, `-3` and `--hover` become one `--surface`; the unused `--overlay` is gone. Neutrals are
+  now paper, surface, divider, line, faint, muted and ink (block is the paper or the surface, by `--atom-fill`).
+- One color per role: the `-strong` shades and `--atom-strong-contrast` are gone; a role's color is used for fills,
+  text, icons and lines alike, so there is one red everywhere (field error, invalid input, danger button). Its
+  `-tint` stays. Colored text is below 4.5:1 for most roles; resolve.mjs reports it.
+- Hover in one rule: plain controls take `--surface`; filled ones fade to `--hover` (`--atom-hover`, now an
+  opacity, 0.85). `--ink-hover`, `--danger-hover`, `--selected-hover` are gone.
+- States in greys: selection is inverted (ink) or the surface with an ink ring; the checked field is the surface.
+- Alerts are rows on the page: no fill, no border, ink text, the role in the icon's color; the action is centered
+  on the text. The danger button has paper text. Rules C1, C2, G3.
 ## 0.6.3 (poiesis-ui) · 0.3.3 (poiesis-components)
 - **Hover on a selected thing.** New cell `--selected-hover` (`bg-selected-hover`): the selected color moved toward
   the paper by `--atom-hover`, as `--ink-hover` is. A pressed toggle, an active tab and an open button take it on
   hover; hover's ink text now applies only to what is not selected, so a pressed toggle no longer turns its icon
   black on black. Toggles move 1px when pressed, as buttons do. Rule G3 lists the cell.
-## 0.6.3 (poiesis-ui)
 - **`--faint`** (`text-faint`): a third text grey, lighter than `--muted`, for text out of focus such as sections
   already passed. It is below 4.5:1, so it never carries the only copy of information. Rules C1, C2.
-- **`--section-space`** (`pb-(--section-space)`): the space between page sections, 32 spacing units, so sections
+- **`--section-space`** (`pb-(--section-space)`): the space between page sections, 64 spacing units, so sections
   breathe; a section's content starts near its top edge and the space follows it. Rule S1.
 ## 0.6.2 (poiesis-ui) · 0.3.2 (poiesis-components)
 - Meter bars had lost their color: `poiesis.css` defined a `data-on` variant for pressed toggles, which replaced

@@ -13,6 +13,4 @@
   --atom-radius: 0rem;          /* straight corners: no roundness, pills and switches included */
   --atom-elevation: 0;          /* no shadows */
   --atom-fill: 0;               /* sections apart by lines and white space, not grey steps */
-  --atom-strong-contrast: 1;    /* colored text, lines and small shapes darkened to 4.5:1 (C3: the vivid palette
-                                   colors are 2–3.2:1 on paper, under the 3:1 a status dot or meter needs) */
 }

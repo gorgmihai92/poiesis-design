@@ -7,7 +7,7 @@ description: The Poiesis component set (button, tabs, tooltip, switch, field, in
 
 One set of components, the one [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery) shows. They are
 [shadcn/ui](https://ui.shadcn.com) (MIT) components, plus status dot and meter built the same way. They keep
-shadcn's structure and behavior, renamed to the Poiesis names (`bg-ink`, `text-muted`, `bg-danger-tint`,
+shadcn's structure and behavior, renamed to the Poiesis names (`bg-ink`, `text-muted`, `bg-surface`,
 `rounded-md`, `h-(--control-md)`…, the list is at the top of `poiesis.css`). `poiesis.css` maps them onto the
 **cells** and clears Tailwind's own colors and scales, so the project's atoms decide the look:
 
@@ -34,12 +34,12 @@ with values of their own. Change a component's look by changing atoms (theme, pr
   no literal px.
 - **All component text is one size: `text-ui`** in one weight, `text-ui font-strong` (T6; `--atom-text-ui` 13px, `--atom-weight-strong` 700), controls, labels,
   captions and descriptions alike, and containers (cards, tab panels, collapsible content, empty states) set it
-  too, so text inside them is 14px whatever the page uses. Color tells the parts apart: `text-muted` for secondary text,
-  a role's `-strong` for colored text. Every component's text is the sans face (`font-sans`).
+  too, so text inside them is 13px whatever the page uses. Color tells the parts apart: `text-muted` for secondary text,
+  a role's own color for colored text. Every component's text is the sans face (`font-sans`).
 - Page titles and headings use the role classes from `poiesis.css` (`type-title`, `type-heading`,
   `type-subheading`, `type-caption`…), never a size or weight of their own.
 - States use the state cells (G3): selected, pressed and active `bg-selected text-selected-foreground` with the
-  `--selected-ring`; hover `bg-hover`, `bg-ink-hover`, `bg-danger-hover`; disabled `opacity-(--disabled)`.
+  `--selected-ring`; hover `bg-surface` on plain controls, `opacity-(--hover)` on filled ones; disabled `opacity-(--disabled)`.
 - State styles use the variants `poiesis.css` defines for Radix (`data-open:`, `data-checked:`, `data-active:`,
   `data-horizontal:`…); no other CSS file is needed for them.
 - Focus rings at full strength: `ring-(length:--ring) ring-info` (C3, 3:1), never a faded ring. Borders that are

@@ -41,14 +41,16 @@ groups.
 
 ## Color (C)
 
-**C1 · must · Semantic cells only, one name per meaning.** Greys: `--paper`, `--surface-1`…`3`, `--block-bg`,
-`--divider`, `--line-color`, `--faint`, `--muted`, `--ink`. Color roles: `--info`, `--success`, `--warning`, `--caution`,
-`--danger`, `--new`, each with `-tint` and `-strong`; `--on-color` for text on a fill. No literal colors, no atoms
+**C1 · must · Semantic cells only, one name per meaning, as few as possible.** Greys only for everything that is
+not a status: `--paper`, `--surface`, `--block-bg` (the paper or the surface, by `--atom-fill`), `--divider`,
+`--line-color`, `--faint`, `--muted`, `--ink`. Color roles: `--info`, `--success`, `--warning`, `--caution`,
+`--danger`, `--new`, each one color for fills, text, icons and lines (one red everywhere), and a `-tint`;
+`--on-color` for text on a fill. No literal colors, no atoms
 outside the token files, and no second name for a cell (no alias tokens).
 **C2 · must · One color, one meaning.** Info = interactive, information and focus; success, warning, caution,
 danger and new = that status only. Text is `--ink` or `--muted` (`--faint` only for text out of focus that is
-not the only copy of its information, such as sections already passed, since it is below 4.5:1), `--info-strong` for links, a role's `-strong` for
-colored text and thin lines; a role's own color is a fill, with `--on-color` text.
+not the only copy of its information, such as sections already passed, since it is below 4.5:1), `--info` for links, a role's color for colored
+text, icons and lines; on a role's fill, `--on-color` text (paper on danger).
 **C3 · must · Contrast, light and dark.** Text 4.5:1 (3:1 at 24px+ or 18.66px+ bold); shapes and indicators 3:1.
 **C4 · must · Never color alone.** Status and severity also have a word, icon or shape.
 **C5 · should · Structure from space first, then the blocks.** Sections stand apart by white space; where more
@@ -67,8 +69,9 @@ controls (pills, switch tracks) use `--radius-round`, never a fixed full radius:
 **G2 · must · Lines are optional, boundaries are not.** With `--line` at 0, a control or tile still differs from
 what is around it by a surface step; an input's boundary, when it is the only cue, keeps 3:1 (W 1.4.11).
 **G3 · must · States use the state cells.** Selected, pressed, active and open: `--selected-bg`, `--selected-fg`
-and `--selected-ring` (an info ring in tint mode, where the fill alone is too faint). Hover: `--hover` on plain
-controls, `--ink-hover` / `--danger-hover` on filled ones, `--selected-hover` on selected ones. Disabled: opacity `--disabled`. Never a color or
+and `--selected-ring` (an ink ring when selection is the surface, where the fill alone is too faint), all greys.
+Hover: `--surface` on plain controls; filled ones (ink, colored, surface, selected) fade to opacity `--hover`.
+Disabled: opacity `--disabled`. Never a color or
 opacity of their own.
 **G4 · should · One style per product.** Mixing radii or line weights between screens reads as two products.
 

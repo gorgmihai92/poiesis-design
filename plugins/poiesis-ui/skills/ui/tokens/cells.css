@@ -70,63 +70,43 @@
   --control-pad-sm: calc(var(--atom-space) * 2 * var(--atom-density));
   --block-pad: calc(var(--atom-space) * 4 * var(--atom-density));
   --block-pad-sm: calc(var(--atom-space) * 3 * var(--atom-density));
-  --section-space: calc(var(--atom-space) * 32);  /* between page sections: a section's content starts near its top and this space follows it */
+  --section-space: calc(var(--atom-space) * 64);  /* between page sections: a section's content starts near its top and this space follows it */
   --icon: var(--atom-icon);
   --icon-sm: calc(var(--atom-icon) * 0.875);
   --page: var(--atom-page);
 
-  /* Color, light and dark. Everything comes from the palette atoms (oklch(from <atom> …) keeps their hue).
-     Greys: pure, from paper and ink, a step scale and its uses. Color roles: the fill (the palette color, both
-     themes), a tint for backgrounds, a strong shade for text and thin lines (darkened to 4.5:1 unless
-     --atom-strong-contrast is 0). Text on any fill: --on-color. */
+  /* Color, light and dark. Neutrals are pure greys from paper and ink, one per use. Each color role is one
+     color, the palette's, for fills, text, icons and lines alike, plus a tint for backgrounds under ink text. */
   --paper: light-dark(oklch(from var(--atom-paper) l 0 h), oklch(from var(--atom-paper-dark) l 0 h));
-  --surface-1: light-dark(oklch(from var(--atom-paper) calc(l - 0.03) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.035) 0 h));
-  --surface-2: light-dark(oklch(from var(--atom-paper) calc(l - 0.055) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.065) 0 h));
-  --surface-3: light-dark(oklch(from var(--atom-paper) calc(l - 0.08) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.095) 0 h));
-  --ink: light-dark(oklch(from var(--atom-ink) l 0 h), oklch(from var(--atom-ink-dark) l 0 h));
-  --muted: light-dark(oklch(from var(--atom-ink) 0.5 0 h), oklch(from var(--atom-ink-dark) 0.73 0 h));
-  --faint: light-dark(oklch(from var(--atom-ink) 0.8 0 h), oklch(from var(--atom-ink-dark) 0.42 0 h)); /* text out of focus, below 4.5:1 */
+  --surface: light-dark(oklch(from var(--atom-paper) calc(l - 0.05) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.06) 0 h)); /* grey fill: secondary controls, tracks, hover, disabled */
+  --block-bg: light-dark(oklch(from var(--atom-paper) calc(l - 0.05 * var(--atom-fill)) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.06 * var(--atom-fill)) 0 h)); /* cards: the surface when --atom-fill is 1, the paper when 0 */
+  --divider: light-dark(oklch(from var(--atom-paper) calc(l - 0.13) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.13) 0 h)); /* lines between sections and around blocks */
   --line-color: light-dark(oklch(from var(--atom-ink) 0.6 0 h), oklch(from var(--atom-ink-dark) 0.52 0 h)); /* control edges, 3:1 */
-  --divider: light-dark(oklch(from var(--atom-paper) calc(l - 0.13) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.13) 0 h)); /* between sections */
-  --block-bg: light-dark(oklch(from var(--atom-paper) calc(l - 0.03 * var(--atom-fill)) 0 h), oklch(from var(--atom-paper-dark) calc(l + 0.035 * var(--atom-fill)) 0 h));
-  --on-color: var(--atom-ink);
-  --overlay: light-dark(oklch(from var(--atom-ink) l 0 h / 0.5), oklch(from var(--atom-paper-dark) 0 0 h / 0.6));
+  --faint: light-dark(oklch(from var(--atom-ink) 0.8 0 h), oklch(from var(--atom-ink-dark) 0.42 0 h)); /* text out of focus, below 4.5:1 */
+  --muted: light-dark(oklch(from var(--atom-ink) 0.5 0 h), oklch(from var(--atom-ink-dark) 0.73 0 h)); /* secondary text */
+  --ink: light-dark(oklch(from var(--atom-ink) l 0 h), oklch(from var(--atom-ink-dark) l 0 h));
+  --on-color: var(--atom-ink); /* text on a colored fill */
 
-  --info: var(--atom-info);       /* interactive, information, focus */
+  --info: var(--atom-info);     /* interactive, information, focus */
   --info-tint: light-dark(var(--atom-info-tint), oklch(from var(--atom-info) 0.3 calc(c * 0.35) h));
-  --info-strong: light-dark(oklch(from var(--atom-info) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-info) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
-  --success: var(--atom-success); /* done, healthy */
+  --success: var(--atom-success);  /* done, healthy */
   --success-tint: light-dark(var(--atom-success-tint), oklch(from var(--atom-success) 0.3 calc(c * 0.35) h));
-  --success-strong: light-dark(oklch(from var(--atom-success) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-success) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
-  --warning: var(--atom-warning); /* check this */
+  --warning: var(--atom-warning);  /* check this */
   --warning-tint: light-dark(var(--atom-warning-tint), oklch(from var(--atom-warning) 0.3 calc(c * 0.35) h));
-  --warning-strong: light-dark(oklch(from var(--atom-warning) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-warning) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
-  --caution: var(--atom-caution); /* needs attention now */
+  --caution: var(--atom-caution);  /* needs attention now */
   --caution-tint: light-dark(var(--atom-caution-tint), oklch(from var(--atom-caution) 0.3 calc(c * 0.35) h));
-  --caution-strong: light-dark(oklch(from var(--atom-caution) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-caution) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
   --danger: var(--atom-danger);   /* failed, destructive */
   --danger-tint: light-dark(var(--atom-danger-tint), oklch(from var(--atom-danger) 0.3 calc(c * 0.35) h));
-  --danger-strong: light-dark(oklch(from var(--atom-danger) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-danger) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
-  --new: var(--atom-new);         /* new, beta, featured */
+  --new: var(--atom-new);      /* new, beta, featured */
   --new-tint: light-dark(var(--atom-new-tint), oklch(from var(--atom-new) 0.3 calc(c * 0.35) h));
-  --new-strong: light-dark(oklch(from var(--atom-new) calc(l - (l - min(l, 0.48)) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.15)) * var(--atom-strong-contrast)) h), oklch(from var(--atom-new) calc(l + (max(l, 0.8) - l) * var(--atom-strong-contrast)) calc(c - (c - min(c, 0.08)) * var(--atom-strong-contrast)) h));
 
-  /* State. Selected, pressed or active (G3): inverted when --atom-select-ink is 1, an info tint with an info ring
-     when 0 (the tint alone is too faint to show the state, W 1.4.11). Hover: a grey step for plain controls, the
-     fill moved toward the paper for filled ones. */
-  --selected-bg: light-dark(
-    oklch(from var(--atom-info-tint) calc(l * (1 - var(--atom-select-ink))) calc(c * (1 - var(--atom-select-ink))) h),
-    oklch(from var(--atom-info) calc(0.3 + 0.64 * var(--atom-select-ink)) calc(c * 0.35 * (1 - var(--atom-select-ink))) h)
-  );
-  --selected-fg: light-dark(
-    oklch(from var(--atom-ink) calc(l + (1 - l) * var(--atom-select-ink)) 0 h),
-    oklch(from var(--atom-ink-dark) calc(l - 0.77 * var(--atom-select-ink)) 0 h)
-  );
+  /* State, in greys. Selected, pressed, active and open (G3): inverted (ink fill, paper text) when
+     --atom-select-ink is 1; the surface with ink text and an ink ring when 0. Hover: plain controls take the
+     surface; filled ones (ink, colored, surface, selected) fade to --hover. Disabled fades to --disabled. */
+  --selected-bg: color-mix(in oklch, var(--ink) calc(var(--atom-select-ink) * 100%), var(--surface));
+  --selected-fg: color-mix(in oklch, var(--paper) calc(var(--atom-select-ink) * 100%), var(--ink));
   --selected-ring: calc((1 - var(--atom-select-ink)) * var(--ring));
-  --selected-hover: color-mix(in oklch, var(--selected-bg), var(--paper) var(--atom-hover));
-  --hover: var(--surface-2);
-  --ink-hover: color-mix(in oklch, var(--ink), var(--paper) var(--atom-hover));
-  --danger-hover: color-mix(in oklch, var(--danger), var(--paper) var(--atom-hover));
+  --hover: var(--atom-hover);
   --disabled: var(--atom-disabled);
 
   /* Shape (G) */
@@ -152,8 +132,5 @@
 }
 /* @pair --selected-fg on --selected-bg 4.5 */
 /* @pair --line-color on --paper 3 */
-/* @pair --line-color on --surface-1 3 */
-/* @pair --danger-strong on --surface-1 4.5 */
-/* @pair --warning-strong on --surface-1 4.5 */
-/* @pair --success-strong on --surface-1 4.5 */
+/* @pair --line-color on --surface 3 */
 /* @pair --info on --paper 3 */

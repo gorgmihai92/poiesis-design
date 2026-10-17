@@ -25,8 +25,8 @@
   --atom-icon: 1rem;           /* icon size inside controls */
   --atom-page: 72rem;          /* widest page content */
 
-  /* Color: the palette (tokens/palettes). Every other color is derived from these: grey steps from paper and
-     ink, darker shades for text and thin lines. Defaults: the "poiesis" palette. */
+  /* Color: the palette (tokens/palettes). The greys are derived from paper and ink; each role is its color and
+     its tint. Defaults: the "poiesis" palette. */
   --atom-paper: #FFFFFF;        /* page, light theme */
   --atom-ink: #000000;          /* text, light theme; also text on a colored fill */
   --atom-paper-dark: #0F0F0F;   /* page, dark theme */
@@ -43,15 +43,14 @@
   --atom-danger-tint: #FEECEC;
   --atom-new: #9254DE;          /* new, beta, featured (purple) */
   --atom-new-tint: #F3ECFC;
-  --atom-strong-contrast: 1;    /* the -strong shades (colored text, thin lines): 1 = darkened to 4.5:1, 0 = the palette color as is */
 
   /* Shape and state: the style (tokens/styles), independent of the preset. These defaults are "quiet". */
   --atom-radius: 0rem;         /* corners: 0 square, 0.125–0.25rem crisp, 0.5rem soft, 0.75rem round */
   --atom-line: 0px;            /* borders on controls and blocks: 0px = structure from space and grey steps, 1px = lines */
   --atom-fill: 1;              /* blocks (cards, panels): 1 = on a grey step, 0 = on the paper, apart by a line */
   --atom-elevation: 0;         /* shadow on blocks and floating layers: 0 flat … 1 raised */
-  --atom-select-ink: 1;        /* selected / pressed / active: 1 = inverted (ink background), 0 = info tint. Use 0 or 1 */
-  --atom-hover: 15%;           /* how far a filled control moves toward the paper on hover */
+  --atom-select-ink: 1;        /* selected / pressed / active: 1 = inverted (ink fill), 0 = the surface with an ink ring. Use 0 or 1 */
+  --atom-hover: 0.85;          /* opacity of a filled control on hover */
   --atom-disabled: 0.5;        /* opacity of a disabled control */
   --atom-motion: 1;            /* transition length: 0 none, 1 normal. Reduced motion always turns it off */
 }
