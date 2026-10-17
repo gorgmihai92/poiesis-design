@@ -265,6 +265,14 @@ CHANGELOG.md                   what changed in each version
 LICENSE                        MIT
 ```
 
+## Files shared with the other toolkits
+
+Writes `.poiesis-design/` (config, `ux.md`) and your tokens and components. The other toolkits don't read them; a frontier concept is built here when you ask.
+
+The paths and fields the other toolkits read are a contract: they change only in a major version, noted in the
+changelog. Every plugin reads the others' files tolerantly: a missing file or field is reported as unknown, never
+an error. The full list is in each skill's `SKILL.md`, so Claude knows it too.
+
 ## Update or remove
 
 ```
@@ -281,7 +289,7 @@ In a project that uses poiesis-ui, also run `init.mjs --update` after an update 
 
 ## Changing the plugins
 
-Edit the files under `plugins/`, run `claude plugin validate .`, bump the version in the changed plugin's
+Edit the files under `plugins/`, run `claude plugin validate .`, bump the version (major if a field under "Files" changes) in the changed plugin's
 `plugin.json`, in `marketplace.json` and in `CHANGELOG.md`, and push. Projects get it with the update commands
 above.
 
