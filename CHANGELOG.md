@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1 (poiesis-ux)
+- "Other Poiesis plugins" in the ux skill (and in the ui skill, released with the next poiesis-ui version): when
+  another plugin would change the result, Claude suggests it once and installs it only if the user agrees.
+- README: the four Poiesis toolkits, their roles, agents, what each reads and leaves, and how they connect.
+
 ## 0.4.2 (poiesis-ui) · 0.1.2 (poiesis-components)
 Second audit and live UX test: every earlier fix confirmed; these are the new findings.
 - poiesis-ui: a `control` text role (buttons, tabs, triggers: body size, strong weight, UI leading), added to H1.

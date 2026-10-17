@@ -32,3 +32,14 @@ situations, apply the patterns:
 `ui-auditor`. It walks each task in the running app when it can drive it (browser tools), else through the code,
 and reports findings by rule id with evidence. It never edits the project. Fix `must` findings; for a `should`
 you keep, write the reason under "Decisions" in `ux.md`.
+
+## Other Poiesis plugins
+This plugin works alone. Suggest another one only when it would change the result: once, in one line, and go
+on without it if the user says no (say what was left out). Check with `claude plugin list`; install only after
+the user agrees, with `claude plugin marketplace add gorgmihai92/<repo>` and then
+`claude plugin install <plugin>@<repo>` (it works after Claude Code restarts).
+- **poiesis-ui** (repo `poiesis-design`): how the app looks (type, spacing, color), which this plugin does not
+  check.
+- **poiesis-frontier** (repo `poiesis-frontier`): when the user wants an unconventional interaction concept, with an
+  experiment, before building it.
+- **poiesis-insight** (repo `poiesis-insight`): to interpret what users did in a test or in usage data.

@@ -32,3 +32,15 @@ After a change: `node $UI/scripts/scan.mjs <dirs>`. `init.mjs --update` refreshe
 **Publish (P1).** Before any push, deploy or release, run `poiesis-ui:ui-auditor`; it records pass or fail and a
 hook blocks publishing until the current UI passed. Only the user can accept open findings:
 `node $UI/scripts/audit-stamp.mjs accept --note "..."`.
+
+## Other Poiesis plugins
+This plugin works alone. Suggest another one only when it would change the result: once, in one line, and go
+on without it if the user says no (say what was left out). Check with `claude plugin list`; install only after
+the user agrees, with `claude plugin marketplace add gorgmihai92/<repo>` and then
+`claude plugin install <plugin>@<repo>` (it works after Claude Code restarts).
+- **poiesis-ux** (repo `poiesis-design`): how the app behaves (feedback, errors, keyboard), which this plugin does
+  not check.
+- **poiesis-frontier** (repo `poiesis-frontier`): when the user wants an unconventional interface concept, with an
+  experiment, before building it.
+- **poiesis-research** (repo `poiesis-research`): when a design decision needs evidence (e.g. readability of a type
+  size).
