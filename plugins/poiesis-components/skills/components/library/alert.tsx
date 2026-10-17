@@ -3,8 +3,8 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "./utils"
 
 const alertVariants = cva(
-  // A row on the page, not a box: no fill, no border; the role shows in the icon's color only.
-  "group/alert relative grid w-full gap-0.5 text-left text-ui font-strong text-ink has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-ink *:[svg:not([class*='size-'])]:size-(--icon)",
+  // On the paper, inside the grey divider line, with no fill; the role shows in the icon's color only.
+  "group/alert relative grid w-full gap-0.5 border border-divider px-(--control-pad) py-(--control-pad-sm) text-left text-ui font-strong text-ink has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-ink *:[svg:not([class*='size-'])]:size-(--icon)",
   {
     variants: {
       variant: {
@@ -71,7 +71,7 @@ function AlertAction({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="alert-action"
-      className={cn("absolute top-1/2 right-0 -translate-y-1/2", className)}
+      className={cn("absolute top-1/2 right-(--control-pad) -translate-y-1/2", className)}
       {...props}
     />
   )

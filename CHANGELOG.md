@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.2 (poiesis-components)
+- Alert: back to the row of 0.4.0 (0.4.1's built-in icons and stacked layout are reverted), now inside a 1px
+  `--divider` line with the control padding; still no fill, the role in the icon's color.
 ## 0.7.2 (poiesis-ui)
 - `--subsection-space` is a quarter of `--section-space` (was half).
 ## 0.7.1 (poiesis-ui)
