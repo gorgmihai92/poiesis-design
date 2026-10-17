@@ -1,8 +1,15 @@
 # Changelog
 
+## 0.4.3 (poiesis-ui)
+- `poiesis.css`: the theme for shadcn/ui and Tailwind v4 components.
+- Colors from a palette; themes.
+- Block cells and `--atom-fill`; pure greys; `--atom-strong-contrast`.
+- Typefaces layer (sans, serif, mono); role fonts, tracking, a code role.
+- "Other Poiesis plugins" in the ui skill.
+
 ## 0.4.1 (poiesis-ux)
-- "Other Poiesis plugins" in the ux skill (and in the ui skill, released with the next poiesis-ui version): when
-  another plugin would change the result, Claude suggests it once and installs it only if the user agrees.
+- "Other Poiesis plugins" in the ux skill: when another plugin would change the result, Claude suggests it once
+  and installs it only if the user agrees.
 - README: the four Poiesis toolkits, their roles, agents, what each reads and leaves, and how they connect.
 
 ## 0.4.2 (poiesis-ui) · 0.1.2 (poiesis-components)
