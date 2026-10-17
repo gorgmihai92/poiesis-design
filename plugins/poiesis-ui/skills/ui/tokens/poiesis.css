@@ -17,9 +17,9 @@
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
 @theme inline {
-  --font-sans: var(--font-body);
+  /* font-sans, font-serif and font-mono read --font-sans, --font-serif and --font-mono, which are cells already;
+     font-heading is the display face. The page's own font is the body face (set on html). */
   --font-heading: var(--font-display);
-  --font-mono: var(--font-mono);
 
   --color-background: var(--paper);
   --color-foreground: var(--ink);
