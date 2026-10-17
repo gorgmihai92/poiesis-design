@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 (poiesis-components)
+- Alert draws its own icon for each variant (info, check, warning, caution, error, sparkle; info in ink for the
+  default), so no alert appears without a marker. Title, description and action stack beside the icon; the
+  description is muted under a title; the action sits under the text instead of floating at the edge.
 ## 0.7.2 (poiesis-ui)
 - `--subsection-space` is a quarter of `--section-space` (was half).
 ## 0.7.1 (poiesis-ui)

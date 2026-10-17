@@ -23,8 +23,9 @@ status dot and meter, built the same way; `utils.ts` holds `cn`. poiesis-gallery
 | Toggle, ToggleGroup | a pressed / not pressed control; a group of them | toggle.tsx, toggle-group.tsx |
 
 Colors: one color per role, the palette's, for icons, small shapes, lines, text and fills alike (`text-danger`,
-`border-danger`, `bg-danger`); everything else is grey. Alerts are rows on the page, not boxes: no fill, no border,
-the role shown by the icon's color, ink text.
+`border-danger`, `bg-danger`); everything else is grey. Alerts are rows on the page, not boxes: no fill, no border;
+each variant draws its own icon (shape and color carry the role), then title, description and action stack
+beside it, the description muted under a title.
 
 Text: every component's text is `text-ui font-strong` (T6, 13px, 700), containers included, in the sans face;
 secondary text `text-muted`. States (selected, hover, disabled) and sizes (control height,
