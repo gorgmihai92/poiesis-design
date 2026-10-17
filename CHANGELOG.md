@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1 (poiesis-components)
+- `MastheadDescription`: what the page or app is, in one muted line under the name, so the first screen says it
+  (copy O2).
+
 ## 0.2.0 (poiesis-copy) · 0.8.1 (poiesis-ui)
 - Rule O6: no word left alone on the last line (a widow) in headings and short text, at the widths shown, in every
   language. Fixed by rewording, never by a forced line break; long running text is left to `text-wrap: pretty`.
