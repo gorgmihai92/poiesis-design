@@ -28,6 +28,12 @@ the order of stages is free, run the slow or unpredictable ones first, so the ba
 **F6 · should · Show where things went.** When a person's action changes a data display in place (sort, filter,
 chart type), a simple transition (one or two stages) shows where items moved; always within I5 (Heer & Robertson
 2007).
+**F7 · should · Reveals unlock in order.** In a sequence the reader opens one part at a time (questions,
+steps, a worked example), the parts not reached yet are visibly locked and what is done is shown by a line or a
+count (`ui` H5). The next action sits on the same row as the steps and keeps its place and width; on the last
+step it becomes "start again". In a narrow container it shrinks to an icon with a name (I3).
+**F8 · should · Small tasks show progress too:** a box per item, or a path that fills in; the last state names
+the result in the product's own words, and each change is announced (F3).
 
 ## Control (K)
 
@@ -51,6 +57,9 @@ usage-based suggestions go in a separate, labelled area (Recent, Suggested), and
 are held until the step ends (save, submit, page change), with a short maximum delay; urgent or time-critical ones
 show at once (Iqbal & Bailey 2008; Okoshi et al. 2018; interruptions cost stress even when work quality holds,
 Mark et al. 2008).
+**K9 · should · What the person changes keeps its place.** A reveal, a toggle or a next step the person
+causes (allowed by K3) still does not resize or move what is around it: the element reserves room for its largest
+state (states stacked in one cell, or a minimum height), so the control they used stays under the pointer.
 
 ## Consistency (N)
 
@@ -124,3 +133,6 @@ finding names the task, the step and the rule.
 `file:line`. Never invent a step, file or line; say what could not be checked.
 **V3 · should · Test before release.** `ux-tester` runs after a change to a flow and before a release; unlike
 P1 it has no gate, because a live test may need the user (sign-in, loading an extension).
+**V4 · should · Stability is walked at 1440, 1024, 800, 390 and 320 px:** every interactive state stepped
+through (each step, each reveal, the reset), measuring the size and place of the control used and of its
+container (K3, K9).
