@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0 (poiesis-copy) · 0.9.0 (poiesis-ui) · 0.6.0 (poiesis-ux)
+Rules learned while reviewing a workshop page for a teacher, where the page had to keep the client's voice and
+stay still while the reader used it.
+- poiesis-copy: **Q7** the client's own words stay theirs; added sentences are marked and shown first. **X7**
+  English numbers and dates ("1,234.56", "17 Oct 2026", "$49"), each language in its own format, never mixed.
+  **Y5** encouragement answers an action. **Z3** "no source" only after the sources were read. **Z4** propose
+  copy changes as a table before rewriting. `patterns.md`: a person's offer (class, workshop, service) as a path,
+  doubts answered in the FAQ.
+- poiesis-ui: **S5** side-by-side panels share one height. **T8** type by job (handwriting never carries a
+  sentence). **T9** short items fit on one line. **G5** one icon set per product. **G6** one mark per meaning.
+- poiesis-ux: **F7** reveals unlock in order, the next action keeps its place. **F8** small tasks show progress.
+  **K9** what the person changes keeps its place (refines K3). **V4** stability is walked at 1440, 1024, 800, 390
+  and 320 px.
+
 ## 0.5.2 (poiesis-components)
 - `SectionNav`: the address and the current row agree. On wide screens a link scrolls its section to its own row,
   so the row it names is current even when the next section is short; opening a link from elsewhere, Back and

@@ -21,6 +21,10 @@ a component's parts apart.
 **T7 · should · Lines wrap well.** Titles and headings `text-wrap: balance`, running text and captions
 `text-wrap: pretty`, so a block rarely ends on one word; the `type-*` roles set it. A fallback: short text is
 reworded so no word sits alone (`copy` O6).
+**T8 · should · Type by job.** Working text (instructions, problems, data, answers) is in the text family; the
+serif is for headings (T5); a decorative or handwriting face carries short notes only, never a full sentence.
+**T9 · should · Short items fit on one line** at the widths the page is checked at: list items, chips, labels.
+When one doesn't, the text is shortened before the type is made smaller (`copy` O5).
 
 ## Hierarchy (H)
 
@@ -52,6 +56,9 @@ groups. Page space has levels (between sections, between a section's parts), eac
 than the one above; the theme sets the pace (2 gentle, 4 marked) and `--atom-section`, never a page by hand.
 **S3 · must · Edges breathe.** A container's padding is at least the gaps inside it.
 **S4 · should · Parents own the space between children** (`gap`); reusable blocks carry no outer margin.
+**S5 · should · Side-by-side panels share one height:** cards in a row, the two columns of a feature. Content
+aligns to the top, actions to the bottom (`align-items: stretch`, the action pushed down with `margin-block-start:
+auto`).
 
 ## Color (C)
 
@@ -89,6 +96,10 @@ Hover: `--surface` on plain controls; filled ones (ink, colored, surface, select
 Disabled: opacity `--disabled`. Never a color or
 opacity of their own.
 **G4 · should · One style per product.** Mixing radii or line weights between screens reads as two products.
+**G5 · must · One icon set per product:** the same grid, stroke weight, corner style and fill rule, sized by
+`--icon`, one color per role (C2). Never outlined and filled icons together, nor icons from two sets (N4).
+**G6 · must · One mark per meaning.** A meaning such as "done" or "correct" has one shape everywhere (one tick),
+and no other icon reuses that shape (C2, `ux` N1).
 
 ## Atoms (A)
 

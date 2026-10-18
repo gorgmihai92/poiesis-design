@@ -39,6 +39,21 @@ point (O3).
 
 Headings test: read only the headings in order. They should make the case alone.
 
+### A person's offer (a class, a workshop, a service)
+
+When the reader buys a person's way of working rather than a product, the page is a path, in this order unless
+the project decides otherwise:
+
+1. **First screen (O2):** what, when and for whom, the main action, the person's photo and real proof (Q2).
+2. **They recognize their situation:** two or three moments in the reader's own words (from research, L1).
+3. **They try something small:** an example they can do on the page.
+4. **They see how it works:** one real case, shown the way the person explains it.
+5. **Who is behind it:** the person, in their own words (Q7).
+6. **Proof:** what others say, quoted as written (Q2).
+7. **The action again (B4).**
+8. **Doubts answered in the FAQ (O3, O4):** timing, cost, recording, "is it for me?". Each doubt gets an answer
+   there, not a section of its own, so the path stays whole.
+
 ## Ads and email
 
 Character limits change; check the platform before shipping. Write in the longer language first (X6).

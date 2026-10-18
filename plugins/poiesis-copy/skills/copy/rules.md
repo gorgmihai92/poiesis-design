@@ -110,6 +110,11 @@ in a footnote or a later step (EU; `ux` D1).
 advantages not hidden when the reader would weigh them (EU 2006/114/EC, comparative advertising).
 **Q6 · should · Benefit first, then how it works.** Say what the reader gets, then enough of the mechanism to be
 believed; "magically" or "seamlessly" explains nothing.
+**Q7 · must · The client's own words stay theirs.** When copy rewrites what a client already wrote (the live
+page, their emails, posts or explanations), keep their wording, headings included; change it only to meet a rule
+(a negation the voice forbids, length, a claim without proof), and keep the change small. Every sentence the writer
+adds is marked as added and shown to the client before it ships. Words in a person's voice that they never said
+are a claim (Q1).
 
 ## Voice (Y)
 
@@ -123,6 +128,10 @@ anything about money or data (M5).
 platforms (G; no study shows it reads faster than Title Case; don't claim it does). **No ALL CAPS for more than a
 few words:** running text in capitals reads about 10–14% slower (Tinker 1963); a short label set in capitals by
 the `ui` style is a styling choice, written in sentence case in the source.
+**Y5 · should · Encouragement answers an action.** A short reassurance appears after something the reader did
+(a box ticked, an answer revealed, a step finished), changes as they go, and ends on the outcome in the product's
+own words. Rare and specific to what was done; never cheering by default, no exclamation pile-ups, no emoji
+(convention).
 
 ## Languages (X)
 
@@ -143,6 +152,11 @@ quotes „…”.
 **X6 · should · Leave room:** Romanian runs longer than English; layouts and character limits are checked in the
 longer language (O5). Prefer the established Romanian word ("descarcă", "setări"), keep the loan when it is what
 people say ("email", "link").
+**X7 · must · English numbers and dates:** comma for thousands, point for decimals ("1,234.56", "2,000",
+"2.5"); dates "17 Oct 2026" in text, ISO "2026-10-17" in data; currency before the number ("$49", "€49"); percent
+without a space ("62%"). Each language keeps its own format (X5 for Romanian: "1.234,56", "17.10.2026", "49 lei",
+"62 %" or "62%" as the project decides); never mix formats on one page, and never copy one language's figures into
+the other unchanged. Changing or aligned figures use `tabular-nums` (`ui` T5). (Unicode CLDR locale data, en and ro.)
 
 ## Review (Z)
 
@@ -150,3 +164,7 @@ people say ("email", "link").
 invent a string, file or line; say what could not be checked.
 **Z2 · should · Review before release,** next to `ui-auditor` and `ux-tester`: the reviewer reads every
 user-facing string that changed, in every language.
+**Z3 · must · "No source" is a finding only after the sources were read:** the live page, the client's
+documents, earlier versions. The finding says which were checked.
+**Z4 · should · Propose before rewriting.** Changes to existing copy are shown first as a table (now / proposed /
+source / why); only what is approved is applied, and what was not mentioned is asked about, not changed.
