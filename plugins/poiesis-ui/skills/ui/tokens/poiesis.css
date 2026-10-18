@@ -4,7 +4,7 @@
 
      @import "tailwindcss";
      @import "<tokens>/poiesis.css";
-     @import "<tokens>/themes/poiesis.css";   the theme: a palette, typefaces, a preset and a style (tokens/themes)
+     @import "<tokens>/themes/poiesis.css";   the theme: its atoms on top of the defaults
 
    Names: colors bg-/text-/border-/ring- paper, surface, block, divider, line, faint, muted, ink, on-color,
    selected (+ -foreground), and each role (info, success, warning, caution, danger, new) with -tint. Hover:

@@ -81,12 +81,12 @@ grey steps (1) or the paper with lines (0). Never a surface picked by hand to se
 
 ## Shape (G)
 
-The style: corners, lines, shadows, how a selected thing looks, motion. Set by the shape atoms or a style file
-(`tokens/styles`: quiet, soft, crisp, bold), independent of the preset (type and density).
+Corners, lines, shadows, how a selected thing looks, motion. Set by the shape atoms, independent of type and
+density.
 
 **G1 · must · Shape from cells.** Corner radius, border width and color, shadows and transition lengths use
 `--radius-*`, `--line`, `--block-line`, `--line-color`, `--ring`, `--shadow-*`, `--duration-*`, `--ease`. Only 0 and hairlines (1–2px) are literal. Round
-controls (pills, switch tracks) use `--radius-round`, never a fixed full radius: square in a square style. With
+controls (pills, switch tracks) use `--radius-round`, never a fixed full radius: square when `--atom-radius` is 0. With
 `poiesis.css`, Tailwind's named radii map onto the cells and `rounded-pill` replaces `rounded-full`.
 **G2 · must · Lines are optional, boundaries are not.** With `--line` at 0, a control or tile still differs from
 what is around it by a surface step; an input's boundary, when it is the only cue, keeps 3:1 (W 1.4.11).

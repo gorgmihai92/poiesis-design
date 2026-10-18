@@ -1,8 +1,8 @@
 # poiesis-components
 
 The Poiesis component set: shadcn/ui components themed by poiesis-ui's `poiesis.css`. Copy the ones you need into a
-React + Tailwind v4 project; to change how the whole interface looks, choose another theme, preset or style
-(quiet, soft, crisp, bold), and every component follows. See them in
+React + Tailwind v4 project; to change how the whole interface looks, change the atoms, and every component
+follows. See them in
 [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery).
 
 One of the four plugins of [Poiesis Design](https://github.com/gorgmihai92/poiesis-design), with poiesis-ui,

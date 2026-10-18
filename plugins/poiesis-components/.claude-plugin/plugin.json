@@ -1,7 +1,7 @@
 {
   "name": "poiesis-components",
-  "version": "0.5.3",
-  "description": "The Poiesis component set: shadcn/ui components themed by poiesis-ui's poiesis.css, copied into a React + Tailwind project; change the theme, preset or style and every component follows.",
+  "version": "0.5.4",
+  "description": "The Poiesis component set: shadcn/ui components themed by poiesis-ui's poiesis.css, copied into a React + Tailwind project; change the atoms and every component follows.",
   "author": {
     "name": "George Mihai",
     "email": "hi@georgemihai.com"

@@ -74,7 +74,7 @@ nothing else; it drives the running app when Claude in Chrome is available. poie
 
 The plugins come in when the work is about design, and you can name their agents directly.
 
-- *"Set up poiesis-ui in this project."* Claude picks a preset, writes the files and tells you which one it chose.
+- *"Set up poiesis-ui in this project."* Claude writes the token files from the Poiesis theme and turns on the check.
 - *"Make the headings bigger"* or *"use a warmer accent color."* Claude changes the atoms and checks that text is
   still readable in light and dark mode.
 - *"Audit the UI."* `ui-auditor` reads your code and lists what breaks a rule.
@@ -86,16 +86,16 @@ The plugins come in when the work is about design, and you can name their agents
 - *"I love the copy on this site: add it to inspiration."* Claude reads it and adds what it does well.
 - *"Review the copy."* `copy-reviewer` reads the text in every language and lists what breaks a rule.
 - *"Build the settings screen from the components."* Claude copies the components it needs and builds with them.
-- *"Make it feel softer"* or *"more precise, with thin lines."* Claude switches the style; every component follows.
+- *"Round the corners"* or *"add thin lines."* Claude changes the shape atoms; every component follows.
 
 ## What each plugin does
 
 ### poiesis-ui: a few choices, everything else derived
 
-- **Sets up your project** from a preset that fits it, writes the token files and turns on the publish gate. It
-  tells you which preset it chose; you don't answer questions first.
+- **Sets up your project** from the Poiesis theme, writes the token files and turns on the publish gate. You
+  don't answer questions first.
 - **Changes the whole look from a few values:** denser, bigger headings, more air between sections, another accent
-  color, a softer or sharper style.
+  color, rounder or sharper corners.
 - **Shows what your choices produce:** every text size and space in px, every color in light and dark mode, and
   the contrast of every pair, with a failure flagged (`resolve.mjs`).
 - **Finds values that bypass the tokens** in your code, each with its rule id (`scan.mjs`).
@@ -113,16 +113,9 @@ cells   everything derived from them: text sizes, the styles for title, heading,
 ```
 
 Your code uses only the cells. To make the whole app denser, the headings bigger or the brand color different,
-you change one atom and everything follows. A **theme** sets the atoms, one file from each layer: a palette
-(colors), typefaces, and two choices that shape the feel:
-
-- a **preset**, for type and density: `tool` (dense apps and dashboards), `reading` (long text) or `expressive`
-  (brand and landing pages);
-- a **style**, for shape: corners, lines, shadows, how a selected thing looks and how much moves. `quiet` is
-  square with no lines or shadows and inverts what is selected; `soft` is rounded with gentle shadows; `crisp`
-  has small corners and thin lines; `bold` is round, with strong lines, and raised.
-
-Any preset goes with any style. A theme can also set atoms of its own, such as the space between page sections.
+you change one atom and everything follows. The defaults in `atoms.css` are Helvetica, white paper and black ink,
+a color per role, and a square shape with no lines or shadows that inverts what is selected. The **Poiesis theme**
+(`tokens/themes/poiesis.css`) sets a few atoms on top: sections far apart, set off by lines and white space.
 A project that already has its own design system can use the rules and the auditor alone.
 
 **The publish gate.** Once a project is set up, Claude can't push, deploy or publish it until `ui-auditor` has
@@ -234,8 +227,7 @@ how people read on screens and of manipulative design, EU consumer law and, for 
 - **Copies the components you ask for** into your project, with what they import (`add.mjs`). The copies are
   yours to change, the way shadcn/ui works.
 - **Builds screens from them** before writing new controls, so a new screen starts from pieces that pass.
-- **Restyles every component at once** when you switch the theme, preset or style, because they hold no values of
-  their own.
+- **Restyles every component at once** when you change the atoms, because they hold no values of their own.
 - **Makes new components** that keep the same rules, and adds them to the catalog and the gallery.
 
 One set of twenty-one components. Eighteen are the pieces a screen is usually made of: button, tabs, tooltip,
@@ -243,7 +235,7 @@ switch, field, input, label, alert, card, collapsible, empty state, status dot, 
 separator, toggle and toggle group. Three are the page around them: masthead, page section and section
 navigation. They are [shadcn/ui](https://ui.shadcn.com) components (plus status dot, meter and the three page
 parts, built the same way) that use only role names; poiesis-ui's `poiesis.css` maps those onto the cells. Round
-controls follow the style (square in `quiet`). All component text is one size (13px by default), bold only on
+controls follow the corner atom (square by default). All component text is one size (13px by default), bold only on
 buttons, toggles, tabs and the titles of cards and empty states. `catalog.md` lists them.
 
 Every component has a keyboard path, a visible focus, an accessible name and motion that respects reduced motion,
@@ -330,13 +322,9 @@ plugins/
         atoms.css              the atoms and their defaults
         cells.css              the cells derived from them
         poiesis.css            the cells as Tailwind names, for React + Tailwind projects
-        themes/                one feel per file: a palette, typefaces, a preset, a style and atoms of its own
-        palettes/              colors: paper, ink, and a color and tint per role
-        typefaces/             the sans, serif and mono families
-        presets/               tool.css, reading.css, expressive.css: type and density per kind of app
-        styles/                quiet.css, soft.css, crisp.css, bold.css: shape atoms per visual direction
+        themes/poiesis.css     the Poiesis theme: the atoms it sets on top of the defaults
       scripts/                 Node 18+, no dependencies
-        init.mjs               set up a project from a preset, or refresh its cells
+        init.mjs               set up a project from the theme, or refresh its cells
         resolve.mjs            show what the atoms produce: scales in px, colors in both themes, contrast
         scan.mjs               list values in your code that bypass the cells, by rule id
         contrast.mjs           WCAG contrast for any color pairs

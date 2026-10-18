@@ -1,9 +1,9 @@
-/* Poiesis UI · atoms: the only values a project changes. Cells derive from them. Each atom has one meaning, and
-   each layer file (tokens/palettes, typefaces, presets, styles) sets only its own group.
+/* Poiesis UI · atoms: the only values a project changes. Cells derive from them. Each atom has one meaning. The
+   theme (tokens/themes/poiesis.css) sets a few of its own on top of these defaults.
    To tune one area, set atoms on that element and give it the attribute data-atoms (rule A2). */
 
 :root {
-  /* Type: three typefaces (tokens/typefaces; defaults: "poiesis"). All text is sans; code is mono. */
+  /* Type: three typefaces. All text is sans; code is mono. */
   --atom-font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --atom-font-serif: "EB Garamond", Garamond, Georgia, serif;
   --atom-font-mono: "Fragment Mono", ui-monospace, Menlo, monospace;
@@ -27,8 +27,7 @@
   --atom-section: 8rem;        /* space between page sections, after each one's content. Calm 6–10rem, airy 12–16rem */
   --atom-pace: 2;              /* how many times smaller each level of page space is than the one above (section, its parts). 2 gentle, 4 marked */
 
-  /* Color: the palette (tokens/palettes). The greys are derived from paper and ink; each role is its color and
-     its tint. Defaults: the "poiesis" palette. */
+  /* Color: the palette. The greys are derived from paper and ink; each role is its color and its tint. */
   --atom-paper: #FFFFFF;        /* page, light theme */
   --atom-ink: #000000;          /* text, light theme; also text on a colored fill */
   --atom-paper-dark: #0F0F0F;   /* page, dark theme */
@@ -46,7 +45,7 @@
   --atom-new: #9254DE;          /* new, beta, featured (purple) */
   --atom-new-tint: #F3ECFC;
 
-  /* Shape and state: the style (tokens/styles), independent of the preset. These defaults are "quiet". */
+  /* Shape and state: square, no lines, no shadows, selected inverted. */
   --atom-radius: 0rem;         /* corners: 0 square, 0.125–0.25rem crisp, 0.5rem soft, 0.75rem round */
   --atom-line: 0px;            /* borders on controls and blocks: 0px = structure from space and grey steps, 1px = lines */
   --atom-fill: 1;              /* blocks (cards, panels): 1 = on a grey step, 0 = on the paper, apart by a line */

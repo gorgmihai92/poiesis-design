@@ -1,9 +1,0 @@
-/* Preset · expressive: launch pages, portfolios, brand sites. Only the atoms that differ. */
-:root {
-  --atom-text-base: 1.0625rem;
-  --atom-ratio: 1.5;
-  --atom-leading: 1.6;
-  --atom-leading-tight: 1.05;
-  --atom-space: 0.3125rem;
-  --atom-density: 1.25;
-}

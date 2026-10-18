@@ -1,8 +1,0 @@
-/* Style · crisp: small corners, thin lines, flat; selected = accent tint. Precise, data-heavy tools. */
-:root {
-  --atom-radius: 0.1875rem;
-  --atom-line: 1px;
-  --atom-elevation: 0;
-  --atom-select-ink: 0;
-  --atom-motion: 0.8;
-}

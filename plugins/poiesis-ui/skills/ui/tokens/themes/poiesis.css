@@ -1,17 +1,8 @@
-/* Theme · poiesis: one feel, made of one file from each layer, plus any atoms of its own below them.
-     palette   colors               tokens/palettes
-     typeface  sans, serif, mono    tokens/typefaces
-     preset    type scale, density  tokens/presets   (none here: the defaults in atoms.css)
-     style     shape                tokens/styles
-   A new theme is a copy of this file: pick other layers, or set atoms in the :root block. Projects import
-   poiesis.css, then one theme. */
-@import "../palettes/poiesis.css";
-@import "../typefaces/poiesis.css";
-@import "../styles/quiet.css";
+/* Theme · poiesis: the defaults in atoms.css (Helvetica, EB Garamond and Fragment Mono; white paper, black ink,
+   a color and tint per role; square, no lines, no shadows, selected inverted), plus the atoms below.
+   Projects import poiesis.css, then this file. */
 
 :root {
-  --atom-radius: 0rem;          /* straight corners: no roundness, pills and switches included */
-  --atom-elevation: 0;          /* no shadows */
   --atom-fill: 0;               /* sections apart by lines and white space, not grey steps */
   --atom-section: 16rem;        /* sections far apart: each one breathes */
   --atom-pace: 4;               /* levels of space clearly apart: parts of a section a quarter of the space between sections */

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // Sets up Poiesis UI in a project, or refreshes the managed cells.
 //
-//   node init.mjs --preset tool|reading|expressive [--style quiet|soft|crisp|bold] [--palette poiesis] [--typeface poiesis] --styles src/styles --ui src [--root .]
+//   node init.mjs --styles src/styles --ui src [--root .]
 //   node init.mjs --update               refresh poiesis/cells.css; atoms are never touched
 //   node init.mjs --audit-only --ui src  only the rules, the auditor and the publish gate
 //
-// Writes <styles>/atoms.css (the project's, from the preset, style and palette), <styles>/poiesis/cells.css (managed),
+// Writes <styles>/atoms.css (the project's, from the poiesis theme), <styles>/poiesis/cells.css (managed),
 // <styles>/index.css (if missing) and .poiesis-design/config.json.
 
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -15,10 +15,6 @@ import { findRoot, readConfig, writeJson } from './lib/project.mjs';
 
 const UI = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const VERSION = JSON.parse(readFileSync(join(UI, '../../.claude-plugin/plugin.json'), 'utf8')).version;
-const PRESETS = ['tool', 'reading', 'expressive'];
-const STYLES = ['quiet', 'soft', 'crisp', 'bold'];
-const PALETTES = ['poiesis'];
-const TYPEFACES = ['poiesis'];
 
 const argv = process.argv.slice(2);
 const opt = (name) => {
@@ -32,10 +28,6 @@ const root = resolve(opt('root') ?? (flag('update') ? findRoot(process.cwd()) ??
 const existing = existsSync(join(root, '.poiesis-design/config.json')) ? readConfig(root) : {};
 const config = {
   version: VERSION,
-  preset: opt('preset') ?? existing.preset ?? null,
-  style: opt('style') ?? existing.style ?? 'quiet',
-  palette: opt('palette') ?? existing.palette ?? 'poiesis',
-  typeface: opt('typeface') ?? existing.typeface ?? 'poiesis',
   styles: opt('styles') ?? existing.styles ?? null,
   uiPaths: all('ui').length ? all('ui') : existing.uiPaths ?? ['src'],
   publishCommands: existing.publishCommands ?? [],
@@ -51,41 +43,19 @@ function copyManaged(src, dest, name) {
   console.log(`  wrote ${relative(root, dest)}`);
 }
 
-function atomsFromPreset(preset, style, palette, typeface) {
+function atomsFromTheme() {
   let atoms = readFileSync(join(UI, 'tokens/atoms.css'), 'utf8');
-  // The preset sets type and density, the style shape, the palette colors, the typefaces the families. Each only
-  // names the atoms it changes.
-  for (const file of [`tokens/presets/${preset}.css`, `tokens/styles/${style}.css`, `tokens/palettes/${palette}.css`, `tokens/typefaces/${typeface}.css`]) {
-    const css = readFileSync(join(UI, file), 'utf8');
-    for (const [, name, value] of css.matchAll(/(--atom-[\w-]+)\s*:\s*([^;]+);/g)) {
-      atoms = atoms.replace(new RegExp(`^(\\s*${name}\\s*:\\s*)[^;]+;`, 'm'), `$1${value.trim()};`);
-    }
+  // The theme names only the atoms it changes.
+  const css = readFileSync(join(UI, 'tokens/themes/poiesis.css'), 'utf8');
+  for (const [, name, value] of css.matchAll(/(--atom-[\w-]+)\s*:\s*([^;]+);/g)) {
+    atoms = atoms.replace(new RegExp(`^(\\s*${name}\\s*:\\s*)[^;]+;`, 'm'), `$1${value.trim()};`);
   }
-  return atoms.replace(
-    'Poiesis UI · atoms:',
-    `Poiesis UI · atoms (preset "${preset}", style "${style}", palette "${palette}", typefaces "${typeface}", poiesis-ui ${VERSION}):`,
-  );
+  return atoms.replace('Poiesis UI · atoms:', `Poiesis UI · atoms (theme "poiesis", poiesis-ui ${VERSION}):`);
 }
 
 if (!flag('audit-only')) {
   if (!config.styles) {
     console.error('Missing --styles <dir> (where the CSS goes).');
-    process.exit(2);
-  }
-  if (!flag('update') && !PRESETS.includes(config.preset)) {
-    console.error(`Missing or unknown --preset (${PRESETS.join(', ')}).`);
-    process.exit(2);
-  }
-  if (!TYPEFACES.includes(config.typeface)) {
-    console.error(`Unknown --typeface (${TYPEFACES.join(', ')}).`);
-    process.exit(2);
-  }
-  if (!PALETTES.includes(config.palette)) {
-    console.error(`Unknown --palette (${PALETTES.join(', ')}).`);
-    process.exit(2);
-  }
-  if (!STYLES.includes(config.style)) {
-    console.error(`Unknown --style (${STYLES.join(', ')}).`);
     process.exit(2);
   }
   const styles = join(root, config.styles);
@@ -94,7 +64,7 @@ if (!flag('audit-only')) {
 
   const atomsPath = join(styles, 'atoms.css');
   if (!existsSync(atomsPath)) {
-    writeFileSync(atomsPath, atomsFromPreset(config.preset ?? 'tool', config.style, config.palette, config.typeface));
+    writeFileSync(atomsPath, atomsFromTheme());
     console.log(`  wrote ${relative(root, atomsPath)} (yours to tune)`);
   } else console.log(`  kept ${relative(root, atomsPath)} (project-owned)`);
 

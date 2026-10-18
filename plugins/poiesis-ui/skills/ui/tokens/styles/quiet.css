@@ -1,8 +1,0 @@
-/* Style · quiet: square, no lines, no shadows; structure from space and grey steps; selected = inverted. */
-:root {
-  --atom-radius: 0rem;
-  --atom-line: 0px;
-  --atom-elevation: 0;
-  --atom-select-ink: 1;
-  --atom-motion: 1;
-}

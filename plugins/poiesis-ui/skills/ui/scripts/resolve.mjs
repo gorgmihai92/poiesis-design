@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Shows what the atoms produce: type and space scales in px, colors in both themes, and the contrast of every
 // semantic pair (C3, T12). Exit code 1 when a pair fails, so it can gate a build.
-// Usage: node resolve.mjs <atoms.css> [<preset.css>] <cells.css> [more token files] [--vw 1280] [--json]
+// Usage: node resolve.mjs <atoms.css> [<theme.css>] <cells.css> [more token files] [--vw 1280] [--json]
 // Later files override earlier ones. "@pair --fg on --bg 3" comments in any file add checks.
 
 import { readTokens, makeResolver } from './lib/tokens.mjs';
@@ -26,7 +26,7 @@ const vwAt = argv.indexOf('--vw');
 const vw = vwAt >= 0 ? Number(argv[vwAt + 1]) : 1280;
 const files = argv.filter((a, i) => !a.startsWith('--') && argv[i - 1] !== '--vw');
 if (!files.length) {
-  console.error('usage: node resolve.mjs <atoms.css> [preset.css] <cells.css> [...] [--vw 1280] [--json]');
+  console.error('usage: node resolve.mjs <atoms.css> [theme.css] <cells.css> [...] [--vw 1280] [--json]');
   process.exit(2);
 }
 

@@ -1,8 +1,0 @@
-/* Style · bold: round corners, strong lines, raised; selected = inverted. Confident, expressive pages. */
-:root {
-  --atom-radius: 0.75rem;
-  --atom-line: 2px;
-  --atom-elevation: 1;
-  --atom-select-ink: 1;
-  --atom-motion: 1.2;
-}

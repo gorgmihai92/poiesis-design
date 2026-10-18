@@ -7,7 +7,7 @@ import { join, extname, relative } from 'node:path';
 
 const EXT = new Set(['.css', '.scss', '.less', '.html', '.jsx', '.tsx', '.vue', '.svelte', '.astro']);
 const SKIP = new Set(['node_modules', '.git', 'dist', 'build', '.next', 'out', 'coverage', '.vercel', 'vendor', '.turbo']);
-const TOKEN_FILE = /(^|\/)(atoms|cells)(\.[\w-]+)?\.css$|\/(presets|styles)\//;
+const TOKEN_FILE = /(^|\/)(atoms|cells)(\.[\w-]+)?\.css$|\/themes\//;
 const num = String.raw`-?\d*\.?\d+`;
 const hairline = /^(?:0|0?\.5px|-?1px|-?2px)$/;
 

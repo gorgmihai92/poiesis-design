@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.0 (poiesis-ui) · 0.5.4 (poiesis-components)
+- One theme. The styles (`soft`, `crisp`, `bold`, `quiet`), presets (`tool`, `reading`, `expressive`), palette and
+  typeface files are gone: `quiet`, the palette and the typefaces only repeated the defaults in `atoms.css`, and
+  nothing used the rest. `themes/poiesis.css` now holds only its own atoms (`--atom-fill`, `--atom-section`,
+  `--atom-pace`); a page that imports it looks the same as before.
+- `init.mjs` sets a project up from the defaults and the theme's atoms; `--preset`, `--style`, `--palette` and
+  `--typeface` are gone, and `config.json` no longer records them. Shape is tuned with the shape atoms.
+
 ## 0.5.3 (poiesis-components)
 - Input, button and toggle: an invalid control has one edge, its 1px danger border, instead of the border with a
   danger ring around it; the ring appears only on focus, in danger. Switch, which has no border, keeps its ring.
