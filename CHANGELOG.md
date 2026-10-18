@@ -5,9 +5,7 @@ Rules learned while reviewing a workshop page for a teacher, where the page had 
 stay still while the reader used it.
 - poiesis-copy: **Q7** the client's own words stay theirs; added sentences are marked and shown first. **X7**
   English numbers and dates ("1,234.56", "17 Oct 2026", "$49"), each language in its own format, never mixed.
-  **Y5** encouragement answers an action. **Z3** "no source" only after the sources were read. **Z4** propose
-  copy changes as a table before rewriting. `patterns.md`: a person's offer (class, workshop, service) as a path,
-  doubts answered in the FAQ.
+  `patterns.md`: a person's offer (class, workshop, service) as a path, doubts answered in the FAQ.
 - poiesis-ui: **S5** side-by-side panels share one height. **T8** type by job (handwriting never carries a
   sentence). **T9** short items fit on one line. **G5** one icon set per product. **G6** one mark per meaning.
 - poiesis-ux: **F7** reveals unlock in order, the next action keeps its place. **F8** small tasks show progress.

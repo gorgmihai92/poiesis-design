@@ -128,10 +128,6 @@ anything about money or data (M5).
 platforms (G; no study shows it reads faster than Title Case; don't claim it does). **No ALL CAPS for more than a
 few words:** running text in capitals reads about 10–14% slower (Tinker 1963); a short label set in capitals by
 the `ui` style is a styling choice, written in sentence case in the source.
-**Y5 · should · Encouragement answers an action.** A short reassurance appears after something the reader did
-(a box ticked, an answer revealed, a step finished), changes as they go, and ends on the outcome in the product's
-own words. Rare and specific to what was done; never cheering by default, no exclamation pile-ups, no emoji
-(convention).
 
 ## Languages (X)
 
@@ -164,7 +160,3 @@ the other unchanged. Changing or aligned figures use `tabular-nums` (`ui` T5). (
 invent a string, file or line; say what could not be checked.
 **Z2 · should · Review before release,** next to `ui-auditor` and `ux-tester`: the reviewer reads every
 user-facing string that changed, in every language.
-**Z3 · must · "No source" is a finding only after the sources were read:** the live page, the client's
-documents, earlier versions. The finding says which were checked.
-**Z4 · should · Propose before rewriting.** Changes to existing copy are shown first as a table (now / proposed /
-source / why); only what is approved is applied, and what was not mentioned is asked about, not changed.
