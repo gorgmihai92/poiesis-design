@@ -10,7 +10,7 @@ default you may break on purpose, with the reason in the project's design notes.
 **T1 · must · Sizes from the scale.** Every font size is a cell (`--text-*` or a role size), in `rem`. No literal
 sizes, nothing under 12px.
 **T6 · must · One size for component text, two weights.** All text inside a UI component (controls, labels,
-captions, descriptions, its content) is `--text-ui` (`--atom-text-ui`, 13px by default): `--weight-strong` (700) on
+captions, descriptions, its content) is `--text-ui` (`--atom-text-ui`, 13px by default, 12px in the poiesis theme): `--weight-strong` (700) on
 buttons, toggles, tabs and the titles of cards and empty states, `--weight-regular` (400) everywhere else.
 Page text outside components (titles, headings, running text) keeps the scale; color, not size or weight, tells
 a component's parts apart.

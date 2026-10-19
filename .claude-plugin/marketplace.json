@@ -10,7 +10,7 @@
     {
       "name": "poiesis-ui",
       "description": "How your interface looks: text sizes, hierarchy, spacing, color and shape (corners, lines, shadows), all derived from a few values you choose. Rules, an auditor that checks your code, and a gate that holds back publishing until the check passes.",
-      "version": "0.10.0",
+      "version": "0.10.1",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"

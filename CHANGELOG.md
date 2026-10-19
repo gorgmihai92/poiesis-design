@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.1 (poiesis-ui)
+- The poiesis theme sets component text to 12px (`--atom-text-ui: 0.75rem`), the smallest size T1 allows. The
+  default in `atoms.css` stays 13px, so a project without the theme keeps it.
+
 ## 0.10.0 (poiesis-ui) · 0.5.4 (poiesis-components)
 - One theme. The styles (`soft`, `crisp`, `bold`, `quiet`), presets (`tool`, `reading`, `expressive`), palette and
   typeface files are gone: `quiet`, the palette and the typefaces only repeated the defaults in `atoms.css`, and

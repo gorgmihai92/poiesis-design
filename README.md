@@ -235,7 +235,7 @@ switch, field, input, label, alert, card, collapsible, empty state, status dot, 
 separator, toggle and toggle group. Three are the page around them: masthead, page section and section
 navigation. They are [shadcn/ui](https://ui.shadcn.com) components (plus status dot, meter and the three page
 parts, built the same way) that use only role names; poiesis-ui's `poiesis.css` maps those onto the cells. Round
-controls follow the corner atom (square by default). All component text is one size (13px by default), bold only on
+controls follow the corner atom (square by default). All component text is one size (13px by default, 12px in the poiesis theme), bold only on
 buttons, toggles, tabs and the titles of cards and empty states. `catalog.md` lists them.
 
 Every component has a keyboard path, a visible focus, an accessible name and motion that respects reduced motion,

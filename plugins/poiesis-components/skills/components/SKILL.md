@@ -32,8 +32,8 @@ with values of their own. Change a component's look by changing atoms, not its c
   spacing steps; heights, padding and icons from the density cells (`h-(--control-md)`, `px-(--control-pad)`,
   `p-(--block-pad)`, `size-(--icon)`). No `dark:` classes (the cells handle dark), no `text-xs`, no `text-[…]`,
   no literal px.
-- **All component text is one size: `text-ui`** (T6; `--atom-text-ui`, 13px), containers included (cards, tab
-  panels, collapsible content, empty states), so text inside them is 13px whatever the page uses. Weight:
+- **All component text is one size: `text-ui`** (T6; `--atom-text-ui`, 12px in the poiesis theme), containers included (cards, tab
+  panels, collapsible content, empty states), so text inside them is that one size whatever the page uses. Weight:
   `font-strong` (700) on buttons, toggles, tabs and the titles of cards and empty states, `font-regular` (400) everywhere else. Color tells the other parts
   apart: `text-muted` for secondary text, a role's own color for colored text. All text is the sans face.
 - Page titles and headings use the role classes from `poiesis.css` (`type-title`, `type-heading`,

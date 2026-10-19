@@ -3,6 +3,7 @@
    Projects import poiesis.css, then this file. */
 
 :root {
+  --atom-text-ui: 0.75rem;      /* component text 12px, the smallest size T1 allows: controls stay compact beside the page text */
   --atom-fill: 0;               /* sections apart by lines and white space, not grey steps */
   --atom-section: 16rem;        /* sections far apart: each one breathes */
   --atom-pace: 4;               /* levels of space clearly apart: parts of a section a quarter of the space between sections */
