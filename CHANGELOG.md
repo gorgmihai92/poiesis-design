@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.2 (poiesis-components)
+- **Button:** a button-looking link marked `aria-current` (the current one of a set, like a chosen period) looks
+  selected, as `aria-pressed` does; the pressable primitive already said so.
+
 ## 0.12.1 (poiesis-components)
 - **List:** only an item with a checkbox carries the (transparent) strike that fades in when it's done. Before, every
   item's text had it, and selecting the text showed a line through it.

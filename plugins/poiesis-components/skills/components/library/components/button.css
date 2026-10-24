@@ -50,13 +50,13 @@
   .po-button[data-shape="icon"][data-size="sm"] { inline-size: var(--control-sm); }
   .po-button[data-shape="icon"][data-size="lg"] { inline-size: var(--control-lg); }
 
-  /* Pressed: selected in any variant (G3). */
-  .po-button:is([aria-pressed="true"], :has(> input:checked)) {
+  /* Pressed, or the current one of a set of links (aria-current, e.g. a period to show): selected in any variant (G3). */
+  .po-button:is([aria-pressed="true"], [aria-current]:not([aria-current="false"]), :has(> input:checked)) {
     background: var(--selected-bg);
     color: var(--selected-fg);
     box-shadow: inset 0 0 0 var(--selected-ring) var(--ink);
   }
-  .po-button:is([aria-pressed="true"], :has(> input:checked)):hover { background: var(--selected-bg); opacity: var(--hover); }
+  .po-button:is([aria-pressed="true"], [aria-current]:not([aria-current="false"]), :has(> input:checked)):hover { background: var(--selected-bg); opacity: var(--hover); }
 
   /* The checkbox covers the whole button, unseen: the label is what shows. */
   .po-button > input[type="checkbox"] {
