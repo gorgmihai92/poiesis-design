@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.13.1 (poiesis-components)
+- **Icon:** `image` (a frame, a sun, hills), for a picture's place: an empty image slot, a thumbnail with no photo yet.
+
 ## 0.13.0 (poiesis-components)
 - **Form field** (`patterns/form-field.css`, `.po-form-field`, `.po-form-hint`, `.po-form-error`): a control with its
   label, hint and error as one group (label 6px above, hint and error 4px under, no margins), so fields read as
