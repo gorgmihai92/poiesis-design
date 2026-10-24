@@ -1,35 +1,45 @@
 # Catalog
 
-The Poiesis component set: what each is for and its file in `library/`. All are shadcn/ui (radix-nova) except
-status dot, meter, masthead, page section and section nav, built the same way; `utils.ts` holds `cn`. poiesis-gallery shows each one in its states.
+The Poiesis library: each primitive and component, what it is for, its markup and its file in `library/`. All
+plain CSS on poiesis-ui's tokens; tabs and tooltip add a custom element. poiesis-gallery shows each one in its
+states.
 
-| Component | For | File |
-|---|---|---|
-| Button | one action: `default` (primary, once per view, H3), `secondary`, `outline`, `ghost`, `danger`, `link`, `quiet` (a link that is not an action: a byline or credit, in the text's own color); size `inline` for a link inside a sentence; sizes `xs`–`lg` and icon sizes | button.tsx |
-| Tabs | sections of a screen: `line` (main navigation) or the default segmented control (views of the same content) | tabs.tsx |
-| Tooltip | a short explanation on hover and focus, Esc closes; never the native `title` | tooltip.tsx |
-| Switch | an on/off setting that applies at once, next to its label (in a `Field`) | switch.tsx |
-| Field | a labelled control with description and error: `Field`, `FieldLabel`, `FieldDescription`, `FieldError`, `FieldSet`, `FieldGroup` | field.tsx |
-| Input, Label | a text input; its label | input.tsx, label.tsx |
-| Alert | a status message in a role color (`info`, `success`, `warning`, `caution`, `danger`, `new`) with title, description and action | alert.tsx |
-| Card | one item or group as a block (on a grey step or apart by a line, `--atom-fill`) | card.tsx |
-| Collapsible | secondary content under its trigger | collapsible.tsx |
-| Empty | an empty view that says why and what to do | empty.tsx |
-| StatusDot | a process `active` (pulsing), `paused`, `stopped` or `error`, by color and shape; give it an `aria-label` | status-dot.tsx |
-| Meter | a level 1–3 as rising bars, the tone repeating the count | meter.tsx |
-| Progress | how much of a known amount is done | progress.tsx |
-| Spinner | something loading, for an unknown time | spinner.tsx |
-| Separator | a divider between groups | separator.tsx |
-| Masthead | the top of a page or app: `MastheadTitle` holding `MastheadName` and a muted `MastheadByline`, a muted `MastheadDescription` (what it is), then one `default` button as the call to action | masthead.tsx |
-| PageSection | one section of a long page: divider on top, content near it, `--section-space` after; parts `--subsection-space` apart. `PageSectionHeader`, `-Title`, `-Description` | page-section.tsx |
-| SectionNav | navigation for a page of sections, in a side column: passed rows stack at the top, coming rows at the bottom, rows ride up with their sections; the current one ink with its description, the rest faint, darkening as they near (`text-nearness`); a wrapped list on narrow screens | section-nav.tsx |
-| Toggle, ToggleGroup | a pressed / not pressed control; a group of them | toggle.tsx, toggle-group.tsx |
+## Primitives
 
-Colors: one color per role, the palette's, for icons, small shapes, lines, text and fills alike (`text-danger`,
-`border-danger`, `bg-danger`); everything else is grey. Alerts sit on the paper inside a grey divider line, with no fill;
-the role shown by the icon's color, ink text. Danger is red throughout: text, line and icon.
+| Primitive | For | Markup | File |
+|---|---|---|---|
+| Layout | placing things: stack, row (wraps), grid (as many columns as fit), padded box; widths | `.po-stack` `.po-row` `.po-grid` `.po-box` with `--po-gap`, `--po-pad`, `--po-min`; `.po-measure`, `.po-narrow` | primitives/layout.css |
+| Text | the page text roles, and component text | `.po-title` `.po-heading` `.po-subheading` `.po-body` `.po-caption` `.po-code` `.po-ui` `.po-muted` | primitives/text.css |
+| Surface | what things sit on | `.po-paper` `.po-block` `.po-layer` | primitives/surface.css |
+| Pressable | the base of everything pressed: text, cursor, hover, selected, disabled | `.po-pressable` | primitives/pressable.css |
+| Field | the base of everything typed into: edge, placeholder, invalid, disabled | `.po-field` | primitives/field.css |
+| Focus | the one focus ring, for pressables, fields and `.po-focus` | (applies itself) | primitives/focus.css |
 
-Text: every component's text is `text-ui` (T6, 12px in the poiesis theme), containers included, in the sans face; `font-strong` (700) on
-buttons, toggles, tabs and the titles of cards and empty states, `font-regular` (400) elsewhere;
-secondary text `text-muted`. States (selected, hover, disabled) and sizes (control height,
-padding, icon) come from their cells, so density, selection style and motion follow the theme.
+## Components
+
+| Component | For | Markup | File |
+|---|---|---|---|
+| Icon | the one icon set (G5): chevron-down, close, check, grid, filter, spinner, and one per role (info, success, warning, caution, danger, new) | `<span class="po-icon" data-icon="grid" aria-hidden="true">` | components/icon.css |
+| Button | one action: `data-variant` primary (default, once per view, H3), secondary, outline, ghost, danger, link, quiet (a byline or credit in running text); `data-size` sm, lg; `data-shape="icon"` | `<button class="po-pressable po-button">` or `<a …>` | components/button.css |
+| Toggle | a control pressed or not; a checkbox inside, so no script | `<label class="po-pressable po-toggle"><input type="checkbox">Bold</label>` | components/toggle.css |
+| Switch | a setting on or off that applies at once, next to its label | `<input type="checkbox" role="switch" class="po-focus po-switch">` | components/switch.css |
+| Input | a line of text; `aria-invalid` and `aria-describedby` for its error | `<input class="po-field po-input">` | components/input.css |
+| Label | the name of a control | `<label class="po-label" for="…">` | components/label.css |
+| Tabs | sections of one screen: segmented (default) or `data-variant="line"`; arrow keys, Home, End | `<po-tabs value="…">` with `[role=tablist]`, `[role=tab].po-pressable[data-value]`, `[role=tabpanel][data-value]` | components/tabs.css, tabs.js |
+| Tooltip | a short explanation on hover and focus; stays while hovered; Esc closes; never the native `title` | `<po-tooltip class="po-layer" for="id">` | components/tooltip.css, tooltip.js |
+| Collapsible | secondary content under its trigger | `<details class="po-collapsible"><summary class="po-pressable">` | components/collapsible.css |
+| Alert | a status message; `data-role` info, success, warning, caution, danger, new shows a mark of that role's shape and color | `<div class="po-alert" data-role="success" role="status">` | components/alert.css |
+| Card | one item or group as a block; `.po-card-title` for its title | `<article class="po-block po-card">` | components/card.css |
+| Separator | a divider between groups; `aria-orientation="vertical"` in a row | `<hr class="po-separator">` | components/separator.css |
+| Progress | how much of a known amount is done; without a value, waiting for an unknown time | `<progress class="po-progress" value="64" max="100">` | components/progress.css |
+| Meter | a level 1–3 as rising bars; `data-tone` repeats the count | `<span class="po-meter" data-value="2" role="img" aria-label="…">` | components/meter.css |
+| Spinner | something loading for an unknown time | `<span class="po-spinner" role="status" aria-label="Loading">` | components/spinner.css |
+| Status dot | a process active (pulsing), paused, stopped or error, by shape and color | `<span class="po-status-dot" data-state="paused" role="img" aria-label="…">` | components/status-dot.css |
+
+Colors: one color per role, the palette's, for icons, marks, lines, text and fills alike; everything else is
+grey. Text stays ink for contrast (C3): a danger alert is red in its mark and edge, a danger button's text is `--on-color`.
+
+Text: every component's text is `--text-ui` (T6), in the sans face; `--weight-strong` on buttons, toggles, tabs
+and card titles, `--weight-regular` elsewhere; secondary text `--muted`. States (selected, hover, disabled) and
+sizes (control height, padding, icon) come from their cells, so density, selection style and motion follow the
+theme.

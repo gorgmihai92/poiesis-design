@@ -1,0 +1,29 @@
+/* Component · toggle. A control that is pressed or not. A native checkbox inside a pressable label, so it is
+   reached with Tab, pressed with Space, and sent with its form, with no script. Pressed looks selected (G3).
+
+     <label class="po-pressable po-toggle"><input type="checkbox" name="bold">Bold</label>
+     <label class="po-pressable po-toggle" data-shape="icon">
+       <input type="checkbox" aria-label="Filter"><span class="po-icon" data-icon="filter" aria-hidden="true"></span>
+     </label>
+
+   data-size  sm · md (default) · lg      data-shape  icon (square; the input carries the aria-label, I3) */
+
+@layer poiesis.components {
+  .po-toggle {
+    block-size: var(--control-md);
+    min-inline-size: var(--control-md);
+    padding-inline: var(--control-pad);
+  }
+  /* The checkbox covers the whole control, unseen: the label is what shows. */
+  .po-toggle > input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+
+  .po-toggle[data-size="sm"] { block-size: var(--control-sm); min-inline-size: var(--control-sm); }
+  .po-toggle[data-size="lg"] { block-size: var(--control-lg); min-inline-size: var(--control-lg); }
+  .po-toggle[data-shape="icon"] { padding: 0; }
+}

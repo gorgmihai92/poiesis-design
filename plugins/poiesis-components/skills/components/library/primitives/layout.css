@@ -1,0 +1,37 @@
+/* Primitive · layout. Boxes that place things: a padded box, a stack (one under another), a row (side by side,
+   wrapping), a grid (as many columns as fit). Space is a step of the --space cell, set with --po-gap / --po-pad
+   (a number: 2 is twice the unit), so every gap stays on the scale (S1).
+
+     <div class="po-stack" style="--po-gap: 4">…</div>
+     <div class="po-row">…</div>
+     <div class="po-grid" style="--po-min: 12rem">…</div> */
+
+@layer poiesis.primitives {
+  .po-box {
+    box-sizing: border-box;
+    padding: calc(var(--space) * var(--po-pad, 4));
+  }
+
+  .po-stack {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--space) * var(--po-gap, 2));
+  }
+
+  .po-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--space) * var(--po-gap, 2));
+  }
+
+  .po-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--po-min, 10rem), 100%), 1fr));
+    gap: calc(var(--space) * var(--po-gap, 2));
+  }
+
+  /* Widths: running text stops at the measure; tooltips, short forms and notices at half of it. */
+  .po-measure { max-inline-size: var(--measure); }
+  .po-narrow { max-inline-size: var(--measure-narrow); }
+}

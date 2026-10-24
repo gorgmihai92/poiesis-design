@@ -1,0 +1,17 @@
+/* Component · separator. A divider between groups. Horizontal by default; aria-orientation="vertical" for one
+   between items in a row. An <hr> is announced as a separator; role="presentation" hides one that only decorates.
+
+     <hr class="po-separator"> */
+
+@layer poiesis.components {
+  .po-separator {
+    flex: none;
+    align-self: stretch;
+    margin: 0;
+    border: 0;
+    block-size: 1px;
+    inline-size: auto;
+    background: var(--divider);
+  }
+  .po-separator[aria-orientation="vertical"] { block-size: auto; inline-size: 1px; }
+}

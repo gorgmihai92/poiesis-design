@@ -1,0 +1,41 @@
+/* Component · progress. How much of a known amount is done. Native <progress>: its value is announced, with no
+   script. Without a value it is waiting for an unknown time: a segment slides along it, or, when motion is
+   reduced (I5), the track shows a striped fill so it never reads as 0%.
+
+     <progress class="po-progress" value="64" max="100" aria-label="Upload"></progress> */
+
+@layer poiesis.components {
+  .po-progress {
+    display: block;
+    inline-size: 100%;
+    block-size: var(--space);
+    margin: 0;
+    border: 0;
+    border-radius: var(--radius-round);
+    overflow: hidden;
+    background: var(--surface);
+    color: var(--ink);
+    appearance: none;
+  }
+  .po-progress::-webkit-progress-bar { background: var(--surface); }
+  .po-progress::-webkit-progress-value { background: var(--ink); }
+  .po-progress::-moz-progress-bar { background: var(--ink); }
+
+  .po-progress:indeterminate {
+    background: repeating-linear-gradient(90deg, var(--line-color) 0 calc(var(--space) * 2), var(--surface) 0 calc(var(--space) * 4));
+  }
+  .po-progress:indeterminate::-webkit-progress-bar { background: transparent; }
+  .po-progress:indeterminate::-moz-progress-bar { background: transparent; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .po-progress:indeterminate {
+      background: linear-gradient(var(--ink), var(--ink)) no-repeat var(--surface);
+      background-size: 30% 100%;
+      animation: po-progress-slide calc(var(--duration-base) * 7) var(--ease) infinite;
+    }
+  }
+  @keyframes po-progress-slide {
+    from { background-position: -50% 0; }
+    to { background-position: 150% 0; }
+  }
+}

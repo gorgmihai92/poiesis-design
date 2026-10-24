@@ -1,0 +1,66 @@
+/* Component · tabs. Sections of one screen, one shown at a time. The behavior is <po-tabs> (tabs.js); the tabs
+   are pressables. Two looks: segmented (default: views of the same content) and line (main navigation).
+
+     <po-tabs value="overview" data-variant="line">
+       <div role="tablist" aria-label="Report">
+         <button class="po-pressable" role="tab" data-value="overview">Overview</button>
+         <button class="po-pressable" role="tab" data-value="activity">Activity</button>
+       </div>
+       <div role="tabpanel" data-value="overview">3 imports this week.</div>
+       <div role="tabpanel" data-value="activity">Last change 2 hours ago.</div>
+     </po-tabs> */
+
+@layer poiesis.components {
+  po-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--space) * 2);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  po-tabs[orientation="vertical"] { flex-direction: row; }
+
+  /* Before the script runs, only the first panel shows, so the page does not jump when it does (K3). */
+  po-tabs:not(:defined) [role="tabpanel"] ~ [role="tabpanel"] { display: none; }
+
+  po-tabs [role="tablist"] {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-self: flex-start;
+    block-size: var(--control-md);
+    padding: calc(var(--space) * 0.5);
+    border-radius: var(--radius-m);
+    background: var(--surface);
+  }
+  po-tabs[orientation="vertical"] [role="tablist"] { flex-direction: column; block-size: auto; }
+
+  po-tabs [role="tab"] {
+    flex: 1;
+    block-size: 100%;
+    padding-inline: calc(var(--space) * 2.5);
+  }
+  po-tabs [role="tab"]:not([aria-selected="true"]) { color: var(--muted); }
+  po-tabs [role="tab"]:not([aria-selected="true"]):hover { background: transparent; color: var(--ink); }
+  po-tabs[orientation="vertical"] [role="tab"] { justify-content: flex-start; block-size: var(--control-sm); }
+
+  /* Line: no track; the selected tab is ink, marked by a bar under it (beside it when vertical). */
+  po-tabs[data-variant="line"] [role="tablist"] { gap: var(--space); padding: 0; border-radius: 0; background: transparent; }
+  po-tabs[data-variant="line"] [role="tab"][aria-selected="true"] { background: transparent; color: var(--ink); box-shadow: none; opacity: 1; }
+  po-tabs[data-variant="line"] [role="tab"][aria-selected="true"]::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: calc(var(--space) * -1);
+    block-size: calc(var(--space) * 0.5);
+    background: var(--ink);
+  }
+  po-tabs[data-variant="line"][orientation="vertical"] [role="tab"][aria-selected="true"]::after {
+    inset-inline: auto calc(var(--space) * -1);
+    inset-block: 0;
+    inline-size: calc(var(--space) * 0.5);
+    block-size: auto;
+  }
+
+  po-tabs [role="tabpanel"] { flex: 1; }
+  po-tabs [role="tabpanel"]:focus-visible { outline: var(--ring) solid var(--info); outline-offset: 0; }
+}

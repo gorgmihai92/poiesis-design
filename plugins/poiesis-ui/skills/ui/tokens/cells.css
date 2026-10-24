@@ -60,8 +60,9 @@
   --code-leading: var(--leading-ui);
   --code-tracking: var(--tracking-body);
 
-  /* Size. Spacing steps are multiples of --atom-space (Tailwind's p-*, gap-*); controls and blocks also follow
+  /* Size. Spacing steps are multiples of --space: calc(var(--space) * 4); controls and blocks also follow
      --atom-density. */
+  --space: var(--atom-space);
   --control-xs: calc(var(--atom-control) * 0.75 * var(--atom-density));
   --control-sm: calc(var(--atom-control) * 0.875 * var(--atom-density));
   --control-md: calc(var(--atom-control) * var(--atom-density));

@@ -1,0 +1,42 @@
+/* Component · status dot. The state of a process, by shape and color together (C4): active (a square that
+   pulses), paused (two bars), stopped (an outline), error (a square with a mark).
+
+     <span class="po-status-dot" data-state="active" role="img" aria-label="Active"></span> */
+
+@layer poiesis.components {
+  .po-status-dot {
+    --po-dot: var(--po-dot-active);
+    position: relative;
+    display: inline-block;
+    flex: none;
+    inline-size: calc(var(--space) * 2.5);
+    block-size: calc(var(--space) * 2.5);
+    color: var(--success);
+    vertical-align: middle;
+  }
+  .po-status-dot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    -webkit-mask: var(--po-dot) center / contain no-repeat;
+    mask: var(--po-dot) center / contain no-repeat;
+  }
+
+  .po-status-dot[data-state="paused"] { --po-dot: var(--po-dot-paused); color: var(--warning); }
+  .po-status-dot[data-state="stopped"] { --po-dot: var(--po-dot-stopped); color: var(--muted); }
+  .po-status-dot[data-state="error"] { --po-dot: var(--po-dot-error); color: var(--danger); }
+
+  /* Active pulses outward, only when motion is allowed (I5). */
+  @media (prefers-reduced-motion: no-preference) {
+    .po-status-dot:is(:not([data-state]), [data-state="active"])::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: currentColor;
+      opacity: 0.4;
+      animation: po-pulse calc(var(--duration-base) * 5) cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+  }
+  @keyframes po-pulse { 75%, 100% { scale: 2; opacity: 0; } }
+}

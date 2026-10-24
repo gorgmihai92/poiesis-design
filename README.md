@@ -46,7 +46,7 @@ Research ──► Insight ──► Frontier ──► Design
 | **poiesis-ui** | **how the interface looks:** text sizes, what stands out, spacing and color | `ui-auditor`, which reads your code | `atoms.css`, `poiesis/cells.css`, `.poiesis-design/config.json` |
 | **poiesis-ux** | **how the app behaves:** what happens when people click, wait, make a mistake or use only a keyboard | `ux-tester`, which does your app's main tasks | `.poiesis-design/ux.md` |
 | **poiesis-copy** | **what it says:** buttons, errors, empty states, landing pages, ads and email, in English and Romanian | `copy-reviewer`, which reads your text | `.poiesis-design/voice.md` |
-| **poiesis-components** | **the pieces a screen is made of:** buttons, tabs, fields, notices and more, built on the first two | `ui-auditor` and `ux-tester` | the components you copy, e.g. `src/components/ui/` |
+| **poiesis-components** | **the pieces a screen is made of:** primitives, then buttons, tabs, inputs, notices and more, built on the first two | `ui-auditor` and `ux-tester` | the library files you copy, e.g. `src/poiesis/` |
 
 Take a single button. Its size, weight and color are UI. Whether something visibly happens when you press it
 and whether you can reach it with the Tab key are UX. Whether its label says what it will do is copy. A screen can
@@ -66,7 +66,8 @@ In Claude Code:
 /plugin install poiesis-components@poiesis-design
 ```
 
-poiesis-components needs poiesis-ui (`poiesis.css`) and a React 18+ project with Tailwind v4. poiesis-ui needs
+poiesis-components needs poiesis-ui's tokens and nothing else: plain CSS and two small script modules, in any web
+project, with or without a framework. poiesis-ui needs
 **Node 18+**; the tokens it writes need a recent browser (Chrome 123, Safari 17.5, Firefox 120). poiesis-ux needs
 nothing else; it drives the running app when Claude in Chrome is available. poiesis-copy needs nothing else.
 
@@ -224,19 +225,21 @@ how people read on screens and of manipulative design, EU consumer law and, for 
 
 ### poiesis-components: pieces that already pass both
 
-- **Copies the components you ask for** into your project, with what they import (`add.mjs`). The copies are
-  yours to change, the way shadcn/ui works.
+- **Copies the components you ask for** into your project, with the primitives they sit on (`add.mjs`). The
+  copies are yours to change; nothing links them back.
 - **Builds screens from them** before writing new controls, so a new screen starts from pieces that pass.
 - **Restyles every component at once** when you change the atoms, because they hold no values of their own.
 - **Makes new components** that keep the same rules, and adds them to the catalog and the gallery.
 
-One set of twenty-one components. Eighteen are the pieces a screen is usually made of: button, tabs, tooltip,
-switch, field, input, label, alert, card, collapsible, empty state, status dot, meter, progress, spinner,
-separator, toggle and toggle group. Three are the page around them: masthead, page section and section
-navigation. They are [shadcn/ui](https://ui.shadcn.com) components (plus status dot, meter and the three page
-parts, built the same way) that use only role names; poiesis-ui's `poiesis.css` maps those onto the cells. Round
-controls follow the corner atom (square by default). All component text is one size (13px by default, 12px in the poiesis theme), bold only on
-buttons, toggles, tabs and the titles of cards and empty states. `catalog.md` lists them.
+One library in three layers, each built only from the one before, all written from scratch with no
+dependencies. **Tokens** are poiesis-ui's atoms and cells. **Primitives** are layout (stack, row, grid, box),
+text roles, surfaces (paper, block, layer), the pressable and field bases, and the focus ring. **Components** are
+bare, one thing each: button, toggle, switch, input, label, tabs, tooltip, collapsible, alert, card, separator,
+progress, meter, spinner, status dot and the icon set. They are plain CSS on native HTML (a switch is a checkbox,
+a collapsible is `<details>`), with a small custom element only where behavior needs script (`<po-tabs>`,
+`<po-tooltip>`), so they work in any framework or none. Round controls follow the corner atom (square by default).
+All component text is one size (13px by default, 12px in the poiesis theme), bold only on buttons, toggles, tabs
+and card titles. `catalog.md` lists them.
 
 Every component has a keyboard path, a visible focus, an accessible name and motion that respects reduced motion,
 so those UX rules already hold in the pieces you copy. [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery)
@@ -321,7 +324,7 @@ plugins/
       tokens/
         atoms.css              the atoms and their defaults
         cells.css              the cells derived from them
-        poiesis.css            the cells as Tailwind names, for React + Tailwind projects
+        poiesis.css            the tokens in one import: atoms, then cells
         themes/poiesis.css     the Poiesis theme: the atoms it sets on top of the defaults
       scripts/                 Node 18+, no dependencies
         init.mjs               set up a project from the theme, or refresh its cells
@@ -363,9 +366,13 @@ plugins/
     skills/components/
       SKILL.md                 entry point: set up, copy, build, make a new component, check
       catalog.md               each component and what it is for
-      library/                 one .tsx per component (shadcn/ui on poiesis.css), plus utils.ts
+      library/
+        poiesis-components.css the whole library in one import, in its layers
+        poiesis-components.js  the behavior of tabs and tooltip
+        primitives/            layout, text, surface, pressable, field, focus
+        components/            one .css per component, and tabs.js, tooltip.js
       scripts/
-        add.mjs                copy components and what they import into a project
+        add.mjs                copy components and the primitives they sit on into a project
 research/                      the sources behind the evidence-based rules: one note per study
 CHANGELOG.md                   what changed in each version
 LICENSE                        MIT

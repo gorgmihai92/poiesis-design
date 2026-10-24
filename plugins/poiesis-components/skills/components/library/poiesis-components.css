@@ -1,0 +1,36 @@
+/* Poiesis components · the whole library in one import, after the tokens:
+
+     @import "<poiesis-ui>/skills/ui/tokens/poiesis.css";
+     @import "<poiesis-ui>/skills/ui/tokens/themes/poiesis.css";
+     @import "<poiesis-components>/library/poiesis-components.css";
+
+   Three layers, each built only from the one before: tokens (atoms and cells, in poiesis-ui), primitives (layout,
+   text, surface, pressable, field, focus) and components. Cascade layers keep that order, so a component always
+   wins over a primitive, and a project's own CSS, outside the layers, wins over both. Import single files instead
+   to take only what a project uses. Tabs and tooltip also need their script: poiesis-components.js. */
+
+@layer poiesis.primitives, poiesis.components;
+
+@import "./primitives/layout.css";
+@import "./primitives/text.css";
+@import "./primitives/surface.css";
+@import "./primitives/pressable.css";
+@import "./primitives/field.css";
+@import "./primitives/focus.css";
+
+@import "./components/icon.css";
+@import "./components/button.css";
+@import "./components/toggle.css";
+@import "./components/switch.css";
+@import "./components/input.css";
+@import "./components/label.css";
+@import "./components/tabs.css";
+@import "./components/tooltip.css";
+@import "./components/collapsible.css";
+@import "./components/alert.css";
+@import "./components/card.css";
+@import "./components/separator.css";
+@import "./components/progress.css";
+@import "./components/meter.css";
+@import "./components/spinner.css";
+@import "./components/status-dot.css";

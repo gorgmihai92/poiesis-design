@@ -29,7 +29,7 @@ When one doesn't, the text is shortened before the type is made smaller (`copy` 
 ## Hierarchy (H)
 
 **H1 · must · Every page text is one role:** title, heading, subheading, body, caption or code, using that role's
-size, weight, leading, font and tracking cells together (`type-*` with `poiesis.css`). Text inside a component is
+size, weight, leading, font and tracking cells together (the `.po-title` … `.po-code` classes in poiesis-components). Text inside a component is
 not a role: it is `--text-ui` in `--weight-strong` (T6). All text is the sans face; code is mono.
 **H2 · should · Weight, color and space before size.** Two weights: `--weight-regular` (400) and `--weight-strong` (700); secondary text is `--muted`, not
 smaller and lighter and greyer at once. A dense tool or index page can set all its text in `--text-ui`: titles
@@ -47,8 +47,8 @@ are.
 
 ## Spacing (S)
 
-**S1 · must · Spacing from the scale.** Margin, padding and gap are multiples of `--atom-space` (Tailwind's
-`p-4`, `gap-2`…). Controls and blocks take their size from the density cells: `--control-xs` … `--control-lg`,
+**S1 · must · Spacing from the scale.** Margin, padding and gap are multiples of the `--space` cell
+(`calc(var(--space) * 4)`). Controls and blocks take their size from the density cells: `--control-xs` … `--control-lg`,
 `--control-pad`, `--block-pad`, `--icon`; page sections `--section-space` apart, their parts `--subsection-space` (S2). Only 0, 1px and 2px are allowed as
 literals.
 **S2 · must · Proximity shows grouping.** Space inside a group is at least one step smaller than space between
@@ -86,8 +86,8 @@ density.
 
 **G1 · must · Shape from cells.** Corner radius, border width and color, shadows and transition lengths use
 `--radius-*`, `--line`, `--block-line`, `--line-color`, `--ring`, `--shadow-*`, `--duration-*`, `--ease`. Only 0 and hairlines (1–2px) are literal. Round
-controls (pills, switch tracks) use `--radius-round`, never a fixed full radius: square when `--atom-radius` is 0. With
-`poiesis.css`, Tailwind's named radii map onto the cells and `rounded-pill` replaces `rounded-full`.
+controls (pills, switch tracks) use `--radius-round`, never a fixed full radius: square when `--atom-radius` is 0. In a
+Tailwind project, map its named radii onto the cells and use a pill class on `--radius-round`, never `rounded-full`.
 **G2 · must · Lines are optional, boundaries are not.** With `--line` at 0, a control or tile still differs from
 what is around it by a surface step; an input's boundary, when it is the only cue, keeps 3:1 (W 1.4.11).
 **G3 · must · States use the state cells.** Selected, pressed, active and open: `--selected-bg`, `--selected-fg`

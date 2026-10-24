@@ -54,8 +54,8 @@ const checks = [
   { id: 'A2', what: 'atom set outside atoms.css (needs data-atoms there)', test: (l) => (/data-atoms/.test(l) ? null : l.match(/--atom-[\w-]+\s*:/)?.[0] ?? null) },
 ];
 
-// A project that imports poiesis.css has Tailwind's named radii (rounded-sm … rounded-4xl, rounded-pill) mapped
-// onto the radius cells, so only rounded-full and arbitrary literals bypass them.
+// A project that imports poiesis.css is taken to map Tailwind's named radii (rounded-sm … rounded-4xl) onto the
+// radius cells if it uses Tailwind, so only rounded-full and arbitrary literals bypass them.
 let themed = false;
 const hits = [];
 const sizes = new Set();

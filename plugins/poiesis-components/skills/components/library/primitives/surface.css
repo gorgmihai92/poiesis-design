@@ -1,0 +1,28 @@
+/* Primitive · surface. What things sit on: the paper (the page), a block (one item or group, on a grey step or
+   apart by a line, by --atom-fill), and a layer (something floating above the page: a tooltip, a menu). */
+
+@layer poiesis.primitives {
+  .po-paper {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .po-block {
+    box-sizing: border-box;
+    background: var(--block-bg);
+    color: var(--ink);
+    border: var(--block-line) solid var(--divider);
+    border-radius: var(--radius-l);
+    box-shadow: var(--shadow-1);
+  }
+
+  /* Inverted, so it reads as apart from whatever it floats over. */
+  .po-layer {
+    box-sizing: border-box;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-2);
+    z-index: var(--layer-float);
+  }
+}

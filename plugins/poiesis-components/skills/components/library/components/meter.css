@@ -1,0 +1,33 @@
+/* Component · meter. A level from 1 to 3 as rising bars; the color repeats the count, never replaces it (C4).
+
+     <span class="po-meter" data-value="2" role="img" aria-label="Level 2 of 3"></span>
+
+   data-value  1 · 2 · 3      data-tone  info · success · warning · caution · danger · new (default: ink) */
+
+@layer poiesis.components {
+  .po-meter {
+    --po-bar-1: currentColor;
+    --po-bar-2: currentColor;
+    --po-bar-3: currentColor;
+    display: inline-block;
+    flex: none;
+    inline-size: calc(var(--space) * 3.5);
+    block-size: calc(var(--space) * 3);
+    color: var(--ink);
+    vertical-align: middle;
+    /* Three bars on a 14 × 12 grid: 4 wide, 1 apart, 5, 8.5 and 12 tall. */
+    background:
+      linear-gradient(var(--po-bar-1), var(--po-bar-1)) 0 100% / calc(100% * 4 / 14) calc(100% * 5 / 12) no-repeat,
+      linear-gradient(var(--po-bar-2), var(--po-bar-2)) 50% 100% / calc(100% * 4 / 14) calc(100% * 8.5 / 12) no-repeat,
+      linear-gradient(var(--po-bar-3), var(--po-bar-3)) 100% 100% / calc(100% * 4 / 14) 100% no-repeat;
+  }
+  .po-meter[data-value="1"] { --po-bar-2: var(--divider); --po-bar-3: var(--divider); }
+  .po-meter[data-value="2"] { --po-bar-3: var(--divider); }
+
+  .po-meter[data-tone="info"] { color: var(--info); }
+  .po-meter[data-tone="success"] { color: var(--success); }
+  .po-meter[data-tone="warning"] { color: var(--warning); }
+  .po-meter[data-tone="caution"] { color: var(--caution); }
+  .po-meter[data-tone="danger"] { color: var(--danger); }
+  .po-meter[data-tone="new"] { color: var(--new); }
+}

@@ -1,0 +1,15 @@
+/* Component · label. The name of a control, next to it (I3).
+
+     <label class="po-label" for="name">Project name</label> */
+
+@layer poiesis.components {
+  .po-label {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--space) * 2);
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  .po-label:has(+ :disabled), :disabled + .po-label { opacity: var(--disabled); }
+}

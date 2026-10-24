@@ -1,0 +1,17 @@
+/* Primitive · text. The page text roles (H1), one class each: size, weight, leading, face and tracking together,
+   and how lines wrap (T7: headings balanced, running text pretty). .po-ui is component text (T6): one size for
+   everything inside a component. .po-muted is secondary text. */
+
+@layer poiesis.primitives {
+  .po-title, .po-heading, .po-subheading, .po-body, .po-caption, .po-code, .po-ui { margin: 0; }
+
+  .po-title { font: var(--title-weight) var(--title-size) / var(--title-leading) var(--font-sans); letter-spacing: var(--title-tracking); text-wrap: balance; }
+  .po-heading { font: var(--heading-weight) var(--heading-size) / var(--heading-leading) var(--font-sans); letter-spacing: var(--heading-tracking); text-wrap: balance; }
+  .po-subheading { font: var(--subheading-weight) var(--subheading-size) / var(--subheading-leading) var(--font-sans); letter-spacing: var(--subheading-tracking); text-wrap: balance; }
+  .po-body { font: var(--body-weight) var(--body-size) / var(--body-leading) var(--font-sans); letter-spacing: var(--body-tracking); text-wrap: pretty; }
+  .po-caption { font: var(--caption-weight) var(--caption-size) / var(--caption-leading) var(--font-sans); letter-spacing: var(--caption-tracking); text-wrap: pretty; }
+  .po-code { font: var(--code-weight) var(--code-size) / var(--code-leading) var(--font-mono); letter-spacing: var(--code-tracking); }
+  .po-ui { font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans); letter-spacing: var(--tracking-body); }
+
+  .po-muted { color: var(--muted); }
+}

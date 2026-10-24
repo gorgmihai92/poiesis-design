@@ -1,0 +1,16 @@
+/* Component · input. A line of text. Built on field (edge, states, focus).
+
+     <input class="po-field po-input" id="name" placeholder="Untitled">
+
+   Give it a label (<label for>) and, when it is invalid, aria-invalid="true" and aria-describedby pointing at the
+   message that says why (I3). */
+
+@layer poiesis.components {
+  .po-input {
+    display: block;
+    inline-size: 100%;
+    min-inline-size: 0;
+    block-size: var(--control-md);
+    padding-inline: var(--control-pad);
+  }
+}

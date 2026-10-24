@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.7.0 (poiesis-components) · 0.11.0 (poiesis-ui)
+A library of its own, from scratch, with no dependencies: tokens, then primitives, then bare components.
+- **No outside code.** shadcn/ui, Radix, class-variance-authority, clsx, tailwind-merge, lucide-react,
+  tw-animate-css, Tailwind and React are gone from the components. They are plain CSS on poiesis-ui's tokens, in
+  cascade layers (`poiesis.primitives`, `poiesis.components`), with a script only where behavior needs one.
+- **Primitives** (`library/primitives/`): layout (`.po-stack`, `.po-row`, `.po-grid`, `.po-box`, widths), text
+  roles (`.po-title` … `.po-code`, `.po-ui`, `.po-muted`), surface (`.po-paper`, `.po-block`, `.po-layer`),
+  pressable (hover, selected, disabled), field (edge, invalid, disabled) and one focus ring.
+- **Bare components** (`library/components/`), one thing each: button, toggle, switch, input, label, tabs,
+  tooltip, collapsible, alert, card, separator, progress, meter, spinner, status dot and the icon set. Native
+  first: a switch is a checkbox with the switch role, a toggle a checkbox in a pressable label, a collapsible
+  `<details>`, progress `<progress>`, the tooltip a popover. Two custom elements: `<po-tabs>` (arrow keys, Home,
+  End, one tab stop, a `change` event) and `<po-tooltip>` (hover and keyboard focus, stays while hovered, Esc
+  closes it first).
+- **Removed**, because they combine components: field, empty, toggle group, masthead, page section and section
+  nav. They come back as their own layer when needed.
+- Fixed on the way: every alert role carries a mark of its own shape (C4); progress without a value no longer
+  reads as 0%; the error status dot's mark is cut out of the square; the input's error is tied to it with
+  `aria-describedby`; motion only under `prefers-reduced-motion: no-preference`.
+- `add.mjs` copies the primitives, the icon set and the components named, with entry files that load just those.
+- poiesis-ui: `poiesis.css` is plain CSS, the atoms and cells in one import; the Tailwind mapping, its state
+  variants and the `type-*` utilities are gone (the text roles are poiesis-components' text primitive). New cell
+  `--space`, the spacing unit, so code never reads `--atom-space` (C1).
+
 ## 0.10.1 (poiesis-ui)
 - The poiesis theme sets component text to 12px (`--atom-text-ui: 0.75rem`), the smallest size T1 allows. The
   default in `atoms.css` stays 13px, so a project without the theme keeps it.

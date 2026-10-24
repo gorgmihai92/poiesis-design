@@ -1,0 +1,49 @@
+/* Component · switch. A setting that applies at once, on or off. A native checkbox with the switch role, so it
+   is reached with Tab, flipped with Space, labelled by <label for>, and sent with its form, with no script.
+
+     <input type="checkbox" role="switch" class="po-focus po-switch" id="weekly" checked>
+     <label class="po-label" for="weekly">Email me a weekly summary</label>
+
+   On, it takes the selected state (G3): the selected fill with the selected text color as its thumb, and the
+   selected ring when the theme selects by ring. Off, the line grey with a paper thumb. Its focus ring is the
+   shared one (po-focus). */
+
+@layer poiesis.components {
+  .po-switch {
+    --po-switch-thumb: calc(var(--space) * 4);
+    --po-switch-inset: calc(var(--space) * 0.5);
+    box-sizing: border-box;
+    flex: none;
+    inline-size: calc(var(--po-switch-thumb) * 2);
+    block-size: calc(var(--po-switch-thumb) + var(--po-switch-inset) * 2);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-round);
+    background-color: var(--line-color);
+    /* The thumb: a square of paper, an even inset from the edge, at the start when off and at the end when on. */
+    background-image: linear-gradient(var(--paper), var(--paper));
+    background-size: var(--po-switch-thumb) var(--po-switch-thumb);
+    background-repeat: no-repeat;
+    background-position: left var(--po-switch-inset) center;
+    cursor: pointer;
+    appearance: none;
+    vertical-align: middle;
+  }
+  .po-switch:checked {
+    background-color: var(--selected-bg);
+    background-image: linear-gradient(var(--selected-fg), var(--selected-fg));
+    background-position: right var(--po-switch-inset) center;
+    box-shadow: inset 0 0 0 var(--selected-ring) var(--ink);
+  }
+  .po-switch:hover { opacity: var(--hover); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .po-switch { transition: background-position var(--duration-fast) var(--ease), background-color var(--duration-fast) var(--ease); }
+  }
+
+  .po-switch[data-size="sm"] { --po-switch-thumb: calc(var(--space) * 2.5); }
+  /* Invalid: a danger ring around the track, apart from the focus outline, so focus still shows (I2). */
+  .po-switch[aria-invalid="true"] { box-shadow: 0 0 0 var(--ring) var(--danger); }
+  .po-switch:disabled { opacity: var(--disabled); cursor: not-allowed; }
+}

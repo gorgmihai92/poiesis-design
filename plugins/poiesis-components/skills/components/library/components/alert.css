@@ -1,0 +1,44 @@
+/* Component · alert. A status message. Its role shows as a mark in the role's color and shape together, so it
+   never rests on color alone (C4); danger also turns its edge red. The text stays ink, for contrast (C3).
+
+     <div class="po-alert" data-role="success" role="status">All 3 sources imported.</div>
+     <div class="po-alert" data-role="danger" role="alert">The import failed. Check the file and try again.</div>
+
+   data-role  info · success · warning · caution · danger · new (none: a plain notice, no mark)
+   role       "alert" for what needs attention now, "status" for the rest */
+
+@layer poiesis.components {
+  .po-alert {
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--space) * 2);
+    padding: var(--control-pad-sm) var(--control-pad);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-m);
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    text-wrap: pretty;
+  }
+  .po-alert > * { margin: 0; }
+
+  /* The mark: an icon from the set, centred on the first line. */
+  .po-alert[data-role]::before {
+    content: "";
+    flex: none;
+    inline-size: var(--icon);
+    block-size: var(--icon);
+    margin-block: calc((1lh - var(--icon)) / 2);
+    background: var(--po-alert-color);
+    -webkit-mask: var(--po-alert-icon) center / contain no-repeat;
+    mask: var(--po-alert-icon) center / contain no-repeat;
+  }
+
+  .po-alert[data-role="info"] { --po-alert-color: var(--info); --po-alert-icon: var(--po-icon-info); }
+  .po-alert[data-role="success"] { --po-alert-color: var(--success); --po-alert-icon: var(--po-icon-success); }
+  .po-alert[data-role="warning"] { --po-alert-color: var(--warning); --po-alert-icon: var(--po-icon-warning); }
+  .po-alert[data-role="caution"] { --po-alert-color: var(--caution); --po-alert-icon: var(--po-icon-caution); }
+  .po-alert[data-role="danger"] { --po-alert-color: var(--danger); --po-alert-icon: var(--po-icon-danger); border-color: var(--danger); }
+  .po-alert[data-role="new"] { --po-alert-color: var(--new); --po-alert-icon: var(--po-icon-new); }
+}

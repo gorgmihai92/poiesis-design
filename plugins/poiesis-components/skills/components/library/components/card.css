@@ -1,0 +1,21 @@
+/* Component · card. One item or group as a block. Built on block (fill or line, corners, shadow).
+
+     <article class="po-block po-card">
+       <h3 class="po-card-title">Quarterly costs</h3>
+       <p class="po-muted">Updated 14 Oct · 3 sources</p>
+     </article>
+
+   Its text is component text (T6); the title strong, the rest regular. */
+
+@layer poiesis.components {
+  .po-card {
+    display: grid;
+    align-content: start;
+    gap: calc(var(--space) * 1);
+    padding: var(--block-pad);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  .po-card > * { margin: 0; }
+  .po-card-title { font: inherit; font-weight: var(--weight-strong); }
+}

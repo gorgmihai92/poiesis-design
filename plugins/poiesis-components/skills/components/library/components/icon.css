@@ -1,0 +1,54 @@
+/* Component · icon. The one icon set (G5): drawn on a 24-unit grid, a 2-unit line with square ends and corners,
+   in the current text color. Each shape is a mask, so it takes any color and any size from where it sits.
+   Decorative: the control or text beside it gives the name (I3), and it never carries meaning by color alone (C4).
+
+     <span class="po-icon" data-icon="grid" aria-hidden="true"></span>
+
+   The shapes are cells too (--po-icon-*), so alerts, the spinner and the status dot draw from this one set. A new
+   icon is drawn here, on the same grid. */
+
+:root {
+  --po-icon-chevron-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  --po-icon-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E");
+  --po-icon-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E");
+  --po-icon-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'/%3E%3C/svg%3E");
+  --po-icon-filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M4 6h16M7 12h10M10 18h4'/%3E%3C/svg%3E");
+  --po-icon-spinner: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M12 3a9 9 0 1 1-9 9'/%3E%3C/svg%3E");
+  --po-icon-info: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 11v5M12 8v.01'/%3E%3C/svg%3E");
+  --po-icon-success: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M8 12l3 3 5-6'/%3E%3C/svg%3E");
+  --po-icon-warning: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M12 3l10 18H2z'/%3E%3Cpath d='M12 10v4M12 17v.01'/%3E%3C/svg%3E");
+  --po-icon-caution: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M8 3h8l5 5v8l-5 5H8l-5-5V8z'/%3E%3Cpath d='M12 8v5M12 16v.01'/%3E%3C/svg%3E");
+  --po-icon-danger: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M9 9l6 6M15 9l-6 6'/%3E%3C/svg%3E");
+  --po-icon-new: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M12 3c0 5 4 9 9 9-5 0-9 4-9 9 0-5-4-9-9-9 5 0 9-4 9-9z'/%3E%3C/svg%3E");
+  /* The status dot's shapes, on its own 10-unit grid: a square, two bars, an outline, a square with a mark. */
+  --po-dot-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect width='10' height='10'/%3E%3C/svg%3E");
+  --po-dot-paused: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 0h3v10H1zM6 0h3v10H6z'/%3E%3C/svg%3E");
+  --po-dot-stopped: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect x='0.75' y='0.75' width='8.5' height='8.5' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E");
+  --po-dot-error: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath fill-rule='evenodd' d='M0 0h10v10H0zM4.25 2h1.5v4h-1.5zM4.25 7h1.5v1.5h-1.5z'/%3E%3C/svg%3E");
+}
+
+@layer poiesis.components {
+  .po-icon {
+    display: inline-block;
+    flex: none;
+    inline-size: var(--icon);
+    block-size: var(--icon);
+    background: currentColor;
+    -webkit-mask: var(--po-icon) center / contain no-repeat;
+    mask: var(--po-icon) center / contain no-repeat;
+    vertical-align: middle;
+  }
+
+  .po-icon[data-icon="chevron-down"] { --po-icon: var(--po-icon-chevron-down); }
+  .po-icon[data-icon="close"] { --po-icon: var(--po-icon-close); }
+  .po-icon[data-icon="check"] { --po-icon: var(--po-icon-check); }
+  .po-icon[data-icon="grid"] { --po-icon: var(--po-icon-grid); }
+  .po-icon[data-icon="filter"] { --po-icon: var(--po-icon-filter); }
+  .po-icon[data-icon="spinner"] { --po-icon: var(--po-icon-spinner); }
+  .po-icon[data-icon="info"] { --po-icon: var(--po-icon-info); }
+  .po-icon[data-icon="success"] { --po-icon: var(--po-icon-success); }
+  .po-icon[data-icon="warning"] { --po-icon: var(--po-icon-warning); }
+  .po-icon[data-icon="caution"] { --po-icon: var(--po-icon-caution); }
+  .po-icon[data-icon="danger"] { --po-icon: var(--po-icon-danger); }
+  .po-icon[data-icon="new"] { --po-icon: var(--po-icon-new); }
+}

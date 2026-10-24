@@ -1,0 +1,32 @@
+/* Primitive · field. The base of everything typed into: one 1px edge in the line color (G2), the component text
+   (T6, regular), a muted placeholder, and the shared states:
+     invalid   the edge turns danger (aria-invalid="true"); the ring appears only on focus, in danger
+     disabled  the surface behind it, faded to --disabled
+   Its focus ring is in focus.css. */
+
+@layer poiesis.primitives {
+  .po-field {
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid var(--line-color);
+    border-radius: var(--radius-m);
+    background: transparent;
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    appearance: none;
+  }
+
+  .po-field::placeholder { color: var(--muted); opacity: 1; }
+
+  .po-field:focus-visible { border-color: var(--info); }
+
+  .po-field[aria-invalid="true"] { border-color: var(--danger); }
+  .po-field[aria-invalid="true"]:focus-visible { outline-color: var(--danger); }
+
+  .po-field:disabled {
+    background: var(--surface);
+    opacity: var(--disabled);
+    cursor: not-allowed;
+  }
+}

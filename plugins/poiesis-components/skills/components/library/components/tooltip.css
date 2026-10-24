@@ -1,0 +1,45 @@
+/* Component · tooltip. A short explanation of a control, on hover and keyboard focus. The behavior is
+   <po-tooltip> (tooltip.js); its surface is a layer. It never holds the only copy of something people need (R3).
+
+     <button class="po-pressable po-button" id="export">Export</button>
+     <po-tooltip class="po-layer" for="export">Exports the visible rows</po-tooltip>
+
+   side  top (default) · bottom · left · right; it moves to the other side when there is no room. */
+
+@layer poiesis.components {
+  po-tooltip {
+    /* Reset the browser's own popover box: no frame, placed by the script. */
+    position: fixed;
+    inset: auto;
+    box-sizing: border-box;
+    max-inline-size: var(--measure-narrow);
+    margin: 0;
+    padding: calc(var(--space) * 1.5) calc(var(--space) * 3);
+    border: 0;
+    overflow: visible;
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    text-wrap: pretty;
+  }
+  po-tooltip:not([popover]), po-tooltip:not(:popover-open) { display: none; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    po-tooltip:popover-open { animation: po-fade-in var(--duration-fast) var(--ease); }
+  }
+  @keyframes po-fade-in { from { opacity: 0; } }
+
+  /* The arrow: a turned square on the edge facing the control, half outside, at --po-arrow along that edge. */
+  po-tooltip::before {
+    content: "";
+    position: absolute;
+    inline-size: calc(var(--space) * 2.5);
+    block-size: calc(var(--space) * 2.5);
+    border-radius: var(--radius-s);
+    background: inherit;
+    rotate: 45deg;
+  }
+  po-tooltip[data-side="top"]::before { inset-block-end: 0; left: var(--po-arrow); translate: -50% 50%; }
+  po-tooltip[data-side="bottom"]::before { inset-block-start: 0; left: var(--po-arrow); translate: -50% -50%; }
+  po-tooltip[data-side="left"]::before { right: 0; top: var(--po-arrow); translate: 50% -50%; }
+  po-tooltip[data-side="right"]::before { left: 0; top: var(--po-arrow); translate: -50% -50%; }
+}

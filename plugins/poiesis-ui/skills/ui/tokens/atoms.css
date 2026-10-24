@@ -19,7 +19,7 @@
   --atom-measure: 68ch;        /* running text line length, 45–75ch */
 
   /* Space and size */
-  --atom-space: 0.25rem;       /* unit; every spacing step is a multiple (Tailwind p-4 = 4 × unit) */
+  --atom-space: 0.25rem;       /* unit; every spacing step is a multiple (the --space cell) */
   --atom-density: 1;           /* controls and blocks: height and padding. Dense 0.85–0.9, airy 1.1–1.25 */
   --atom-control: 2rem;        /* default control height (button, input, tab list) at density 1 */
   --atom-icon: 1rem;           /* icon size inside controls */

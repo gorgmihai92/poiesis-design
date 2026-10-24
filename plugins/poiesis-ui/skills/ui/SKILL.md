@@ -19,7 +19,7 @@ this folder (`${CLAUDE_PLUGIN_ROOT}/skills/ui`).
 **Set up** without asking questions first.
 `node $UI/scripts/init.mjs --styles src/styles --ui src` writes the project's `atoms.css` (the defaults with the
 theme's atoms), the managed `poiesis/cells.css`, an `index.css` and `.poiesis-design/config.json` (turns on the publish gate). A project
-with its own system: `--audit-only`. With Tailwind, import `tokens/poiesis.css` (it maps the cells and clears Tailwind's own scales), then `tokens/themes/poiesis.css`.
+with its own system: `--audit-only`. To read the tokens in place instead, import `tokens/poiesis.css` (atoms and cells), then `tokens/themes/poiesis.css`; poiesis-components builds on them.
 
 **Tune.** Change atoms, then `node $UI/scripts/resolve.mjs <styles>/atoms.css <styles>/poiesis/cells.css`: scales
 in px, colors in both themes, contrast of every pair; exit 1 on a failure. Denser → `--atom-density`,

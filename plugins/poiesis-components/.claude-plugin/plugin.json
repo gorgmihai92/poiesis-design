@@ -1,7 +1,7 @@
 {
   "name": "poiesis-components",
-  "version": "0.5.4",
-  "description": "The Poiesis component set: shadcn/ui components themed by poiesis-ui's poiesis.css, copied into a React + Tailwind project; change the atoms and every component follows.",
+  "version": "0.7.0",
+  "description": "The Poiesis component library: tokens, primitives and bare components, all its own, plain CSS with two small custom elements and no dependencies, copied into any web project; change the atoms and every component follows.",
   "author": {
     "name": "George Mihai",
     "email": "hi@georgemihai.com"
@@ -11,10 +11,9 @@
   "license": "MIT",
   "keywords": [
     "components",
-    "react",
+    "css",
+    "web-components",
     "design-system",
-    "shadcn",
-    "radix",
     "tokens",
     "accessibility"
   ]
