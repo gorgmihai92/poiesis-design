@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.12.3 (poiesis-components)
+- **Pager:** `of-label` names the word between the range and the total („1–10 din 31”); "of" stays the default.
+
 ## 0.12.2 (poiesis-components)
 - **Button:** a button-looking link marked `aria-current` (the current one of a set, like a chosen period) looks
   selected, as `aria-pressed` does; the pressable primitive already said so.

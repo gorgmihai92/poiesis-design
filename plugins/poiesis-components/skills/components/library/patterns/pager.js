@@ -2,7 +2,8 @@
 // the part before and after. It draws itself from its attributes, with a button (button, icon) and a tooltip for
 // each arrow:
 //   - total, size (per part, 5 by default) and from (the first shown, counting from 0) say where the list stands;
-//   - note adds words after the range ("3 done");
+//   - note adds words after the range ("3 done"); of-label is the word between the range and the total ("of" by
+//     default, „din” in Romanian);
 //   - the arrows are named by prev-label and next-label ("Newer feedback", "Earlier feedback"), and turn off at the
 //     ends; an arrow that turns off while it has the focus hands it to the other one (I1);
 //   - the range is a live region, so a screen reader hears the new part (I3).
@@ -13,7 +14,7 @@
 let count = 0
 
 class PoPager extends HTMLElement {
-  static observedAttributes = ["total", "size", "from", "note", "prev-label", "next-label"]
+  static observedAttributes = ["total", "size", "from", "note", "of-label", "prev-label", "next-label"]
   #id = `po-pager-${++count}`
   #range = null
   #prev = null
@@ -62,7 +63,8 @@ class PoPager extends HTMLElement {
     const from = Math.min(this.#from, this.#last)
     const to = Math.min(total, from + this.#size)
     const note = this.getAttribute("note")
-    this.#range.textContent = `${total ? from + 1 : 0}–${to} of ${total}${note ? ` · ${note}` : ""}`
+    const of = this.getAttribute("of-label") ?? "of"
+    this.#range.textContent = `${total ? from + 1 : 0}–${to} ${of} ${total}${note ? ` · ${note}` : ""}`
     const label = (side) => this.getAttribute(`${side}-label`) ?? (side === "prev" ? "Previous" : "Next")
     for (const [[button, tip], side, off] of [[this.#prev, "prev", from === 0], [this.#next, "next", from >= this.#last]]) {
       button.setAttribute("aria-label", label(side))
