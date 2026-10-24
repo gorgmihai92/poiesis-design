@@ -1,0 +1,55 @@
+/* Pattern · frame. The page of an app or site with a side column: the side holds the masthead, the nav and what
+   belongs to the whole app (signing out), the main holds the page. On narrow screens the side sits above the page;
+   from 64rem it is a column of its own that stays in view (scrolling by itself when taller than the screen),
+   then a free column as wide as it, then the page. The whole frame is centered at the page width. CSS only.
+
+     <div class="po-frame">
+       <aside class="po-frame-side">
+         <header class="po-masthead">…</header>
+         <nav class="po-nav" aria-label="Sections">…</nav>
+       </aside>
+       <main class="po-frame-main">…</main>
+     </div>
+
+   --po-side sets the width of the side column and of the free column after it (16rem by default). */
+
+@layer poiesis.patterns {
+  .po-frame {
+    --po-side: 16rem;
+    box-sizing: border-box;
+    display: grid;
+    gap: calc(var(--space) * 8);
+    max-inline-size: var(--page);
+    margin-inline: auto;
+    padding-inline: calc(var(--space) * 4);
+  }
+  .po-frame-side {
+    display: grid;
+    align-content: start;
+    gap: var(--block-pad);
+    padding-block: calc(var(--space) * 8) 0;
+  }
+  .po-frame-main {
+    display: grid;
+    align-content: start;
+    min-inline-size: 0;
+    padding-block: 0 calc(var(--space) * 8);
+  }
+
+  @media (min-width: 64rem) {
+    .po-frame {
+      grid-template-columns: var(--po-side) var(--po-side) minmax(0, 1fr);
+      gap: calc(var(--space) * 16);
+      padding-inline: calc(var(--space) * 8);
+    }
+    .po-frame-side {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-block-size: 100svh;
+      overflow-y: auto;
+      padding-block: calc(var(--space) * 8);
+    }
+    .po-frame-main { grid-column: 3; padding-block: calc(var(--space) * 8); }
+  }
+}

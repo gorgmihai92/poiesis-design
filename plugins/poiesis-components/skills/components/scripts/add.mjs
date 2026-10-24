@@ -40,6 +40,8 @@ const PARTS = {
   empty: ['button'],
   masthead: ['button'],
   sections: [],
+  nav: [],
+  frame: [],
 };
 
 if (argv.includes('--list') || !names.length) {

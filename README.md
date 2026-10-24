@@ -240,7 +240,8 @@ lines, size), label, checkbox (check or switch), list (lines or options), tabs, 
 progress (bar or level), status dot and separator. **Patterns** join components with the behavior that joins them:
 a combobox (an input with suggestions under it), a picker (a search line and what it finds), a date pick, a line
 form (one line to add or edit an item), a pager, a toast (what just happened, with Undo), bars, an empty state, a
-masthead and sections (a long page whose section names always show). They are plain CSS on native HTML (a switch
+masthead, sections (a long page whose section names always show), a nav (the places of an app, the current
+one strong) and a frame (a side column with the masthead and nav, and the page). They are plain CSS on native HTML (a switch
 is a checkbox, a collapsible is `<details>`, a closed fold is `inert`), with a small custom element only where
 behavior needs script (`<po-morph>`, `<po-tabs>`, `<po-tooltip>`, and the patterns' `<po-combobox>`,
 `<po-picker>`, `<po-date-pick>`, `<po-line-form>`, `<po-pager>`, `<po-toast>`, `<po-sections>`), so they work in
@@ -379,7 +380,7 @@ plugins/
         primitives/            layout, text, surface, pressable, field, focus, motion (and motion.js)
         components/            the fundamentals: one .css each, and tabs.js, tooltip.js
         patterns/              components joined: combobox, picker, date pick, line form, pager, toast, bars,
-                               empty, masthead, sections; a .css, and a .js where they behave
+                               empty, masthead, sections, nav, frame; a .css, and a .js where they behave
       scripts/
         add.mjs                copy components and the primitives they sit on into a project
 research/                      the sources behind the evidence-based rules: one note per study

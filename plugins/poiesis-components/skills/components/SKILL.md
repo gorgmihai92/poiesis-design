@@ -1,6 +1,6 @@
 ---
 name: components
-description: The Poiesis component library, all its own and with no dependencies - tokens (from poiesis-ui), primitives (layout, text, surface, pressable, field, focus, motion), thirteen fundamental components where every variant is a setting (icon, button, input, label, checkbox, list, tabs, tooltip, collapsible, alert, progress, status dot, separator) and patterns built from them (combobox, picker, date pick, line form, pager, toast, bars, empty, masthead, sections), in plain CSS with small custom elements (<po-morph>, <po-tabs>, <po-tooltip>, and the patterns' <po-combobox>, <po-picker>, <po-date-pick>, <po-line-form>, <po-pager>, <po-toast>, <po-sections>) where behavior needs script. Use when building or restyling an interface, adding one of these pieces, or making a new primitive, component or pattern that follows the poiesis-ui and poiesis-ux rules.
+description: The Poiesis component library, all its own and with no dependencies - tokens (from poiesis-ui), primitives (layout, text, surface, pressable, field, focus, motion), thirteen fundamental components where every variant is a setting (icon, button, input, label, checkbox, list, tabs, tooltip, collapsible, alert, progress, status dot, separator) and patterns built from them (combobox, picker, date pick, line form, pager, toast, bars, empty, masthead, sections, nav, frame), in plain CSS with small custom elements (<po-morph>, <po-tabs>, <po-tooltip>, and the patterns' <po-combobox>, <po-picker>, <po-date-pick>, <po-line-form>, <po-pager>, <po-toast>, <po-sections>) where behavior needs script. Use when building or restyling an interface, adding one of these pieces, or making a new primitive, component or pattern that follows the poiesis-ui and poiesis-ux rules.
 ---
 
 # Poiesis Components
@@ -20,7 +20,7 @@ CSS framework, no icon or animation package. It is four layers, each built only 
    a `.js` only for tabs and tooltip. What each is for, its settings and its markup: `catalog.md`.
 4. **Patterns** (`library/patterns/`): components joined, with the behavior that joins them: combobox (an input
    with suggestions), picker (a search and what it finds), date pick, line form, pager, toast, bars, empty,
-   masthead and sections.
+   masthead, sections, nav (the places of an app, the current one strong) and frame (a side column and the page).
 
 `$C` is this folder (`${CLAUDE_PLUGIN_ROOT}/skills/components`).
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.12.0 (poiesis-components)
+Two patterns that poiesis-gallery already used in its own CSS and every app with a side column needs, so the apps
+stop drawing their own.
+- **Nav** (`patterns/nav.css`, `.po-nav`): the places of an app or site, or the sections of a long page. Every link
+  ink, the current one (`aria-current`) ink and strong, not a selected fill; pressable rows with the surface on
+  hover; groups under a muted name; across the page on narrow screens, a column from 64rem.
+- **Frame** (`patterns/frame.css`, `.po-frame`, `.po-frame-side`, `.po-frame-main`): a side column with the
+  masthead and nav, and the page; from 64rem the side stays in view, a free column as wide as it, then the page,
+  centered at the page width. `--po-side` sets the columns' width.
+
 ## 0.11.0 (poiesis-components)
 The fundamentals only: one component for each thing people use, every variant a setting of it, nothing composed.
 Thirteen components, down from twenty-four; the compositions become patterns built on them. No app loads the
