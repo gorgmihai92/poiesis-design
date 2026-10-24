@@ -1,7 +1,7 @@
 # poiesis-components
 
 The Poiesis component library: tokens, primitives, bare components and compositions, all its own, in plain CSS
-on poiesis-ui's tokens, with a few small custom elements (tabs, tooltip, morph, combobox, sections) and no
+on poiesis-ui's tokens, with a few small custom elements (tabs, tooltip, morph and the compositions) and no
 dependencies. Copy the ones you need into any web project, with or without a framework; to change how the whole
 interface looks, change the atoms, and every component follows. See them in
 [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery).

@@ -28,7 +28,12 @@ const components = list('components').filter((n) => n !== 'icon');
 const compositions = list('compositions');
 const available = [...components, ...compositions];
 // The components each composition is built from, copied with it.
-const PARTS = { combobox: ['input', 'fold', 'options'], sections: [] };
+const PARTS = {
+  combobox: ['input', 'line', 'fold', 'options'],
+  'date-pick': ['button', 'options', 'due', 'fold'],
+  'line-form': ['line', 'button', 'fold', 'date-pick'],
+  sections: [],
+};
 
 if (argv.includes('--list') || !names.length) {
   console.log(`Components: ${['icon', ...components].join(', ')}\nCompositions: ${compositions.join(', ')}\nUsage: node add.mjs <names…|all> --to <dir> [--force]`);
@@ -47,7 +52,8 @@ if (unknown.length) {
 
 const all = names.includes('all');
 const wanted = new Set(available.filter((n) => all || names.includes(n)));
-for (const n of [...wanted]) for (const part of PARTS[n] ?? []) wanted.add(part);
+// A composition's parts, and theirs (a line form brings the date pick, and the date pick its options).
+for (const n of wanted) for (const part of PARTS[n] ?? []) wanted.add(part);
 const dirOf = (n) => (compositions.includes(n) ? 'compositions' : 'components');
 const chosen = available.filter((n) => wanted.has(n));
 const scripts = chosen.filter((n) => existsSync(join(LIB, dirOf(n), `${n}.js`)));

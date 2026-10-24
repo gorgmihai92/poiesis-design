@@ -1,49 +1,76 @@
-/* Component · options. A short list to choose one from: suggestions under a field, search results, quick
-   choices. It sits in the page, under what it serves, and pushes what follows down instead of covering it. It
-   shows five options at most; what is left is counted on a muted line after the list ("+3 more"), and typing
-   narrows it (ux W4).
+/* Component · options. A short list to choose one from: suggestions under a field, quick dates, search results.
+   It opens in the page, under what it serves (put it in a fold, in from the words with po-line-indent), and pushes
+   what follows down instead of covering it. Rows are rounded, grey when highlighted; a row's detail (a day, a
+   count) sits at its end, muted. Five rows at most; what is left is counted on a muted line after them ("+3 more")
+   and typing narrows it (ux W4).
 
      <ul class="po-options" role="listbox" aria-label="Suggestions">
-       <li class="po-option" role="option" id="o1">Write</li>
-       <li class="po-option" role="option" id="o2" aria-selected="true">Read</li>
+       <li class="po-option" role="option" aria-selected="true"><strong>Write</strong><span class="po-option-note">#1</span></li>
+       <li class="po-option" role="option"><strong>Read</strong></li>
      </ul>
      <p class="po-options-more">+3 more</p>
 
-   The highlighted option is aria-selected="true", on the surface step. Nothing is highlighted when the list
-   opens: only an arrow key or the pointer moving over an option highlights one (ux W5), which <po-combobox> does.
-   An option's own detail (a count, a date) goes in a po-muted span inside it. */
+   Options in a listbox are highlighted with aria-selected="true", which only an arrow key or the pointer moving
+   over a row sets (ux W5; <po-combobox> does it). Options that act at once are buttons (<button class="po-option">),
+   grey on hover and on keyboard focus; aria-current="true" marks the one in use, in strong. A row holding a field
+   (<label class="po-option"> with <input class="po-option-field">) takes a value typed in. */
 
 @layer poiesis.components {
   .po-options {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     margin: 0;
-    padding: 0;
+    padding-block: calc(var(--space) * 2);
     list-style: none;
   }
+  /* No inset of its own, so po-line-indent can set it in from the words. */
+  :where(.po-options) { padding-inline: 0; }
 
   .po-option {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    gap: calc(var(--space) * 1);
-    min-block-size: var(--control-sm);
-    padding-inline: var(--control-pad);
+    justify-content: space-between;
+    gap: calc(var(--space) * 2);
+    inline-size: 100%;
+    margin: 0;
+    padding: calc(var(--space) * 1.5) var(--control-pad);
+    border: 0;
     border-radius: var(--radius-m);
+    background: transparent;
     color: var(--ink);
     font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
     letter-spacing: var(--tracking-body);
-    cursor: pointer;
+    text-align: start;
+    cursor: default;
     user-select: none;
   }
-  .po-option[aria-selected="true"] { background: var(--surface); }
-  .po-option[aria-disabled="true"] { opacity: var(--disabled); cursor: not-allowed; }
+  .po-option[aria-selected="true"],
+  button.po-option:hover,
+  button.po-option:focus-visible,
+  .po-option:has(> .po-option-field:focus-visible) { background: var(--surface); outline: none; }
+  .po-option[aria-current="true"] { font-weight: var(--weight-strong); }
+  .po-option[aria-disabled="true"], .po-option:disabled { opacity: var(--disabled); cursor: not-allowed; }
   .po-option[hidden] { display: none; }
+
+  .po-option-note { flex: none; color: var(--muted); font-weight: var(--weight-regular); }
+
+  .po-option-field {
+    flex: 1;
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    letter-spacing: inherit;
+    outline: none;
+  }
+  .po-option-field::placeholder { color: var(--muted); opacity: 1; }
 
   .po-options-more {
     margin: 0;
-    padding-inline: var(--control-pad);
-    padding-block: calc(var(--space) * 1);
+    padding: calc(var(--space) * 1.5) var(--control-pad);
     color: var(--muted);
     font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
     letter-spacing: var(--tracking-body);

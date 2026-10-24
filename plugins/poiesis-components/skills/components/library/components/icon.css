@@ -20,6 +20,10 @@
   --po-icon-caution: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M8 3h8l5 5v8l-5 5H8l-5-5V8z'/%3E%3Cpath d='M12 8v5M12 16v.01'/%3E%3C/svg%3E");
   --po-icon-danger: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M9 9l6 6M15 9l-6 6'/%3E%3C/svg%3E");
   --po-icon-new: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M12 3c0 5 4 9 9 9-5 0-9 4-9 9 0-5-4-9-9-9 5 0 9-4 9-9z'/%3E%3C/svg%3E");
+  --po-icon-circle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3C/svg%3E");
+  --po-icon-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E");
+  --po-icon-pencil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M4 20v-4L15 5l4 4L8 20zM12 8l4 4'/%3E%3C/svg%3E");
+  --po-icon-calendar-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M4 6h16v14H4zM4 10h16M8 3v3M16 3v3M12 13v5M9.5 15.5h5'/%3E%3C/svg%3E");
   /* The status dot's shapes, on its own 10-unit grid: a square, two bars, an outline, a square with a mark. */
   --po-dot-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect width='10' height='10'/%3E%3C/svg%3E");
   --po-dot-paused: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 0h3v10H1zM6 0h3v10H6z'/%3E%3C/svg%3E");
@@ -51,4 +55,8 @@
   .po-icon[data-icon="caution"] { --po-icon: var(--po-icon-caution); }
   .po-icon[data-icon="danger"] { --po-icon: var(--po-icon-danger); }
   .po-icon[data-icon="new"] { --po-icon: var(--po-icon-new); }
+  .po-icon[data-icon="circle"] { --po-icon: var(--po-icon-circle); }
+  .po-icon[data-icon="plus"] { --po-icon: var(--po-icon-plus); }
+  .po-icon[data-icon="pencil"] { --po-icon: var(--po-icon-pencil); }
+  .po-icon[data-icon="calendar-plus"] { --po-icon: var(--po-icon-calendar-plus); }
 }

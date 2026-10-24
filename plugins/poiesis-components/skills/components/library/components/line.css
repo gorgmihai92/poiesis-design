@@ -1,55 +1,132 @@
-/* Component · line. One item in a list, as a row: a mark column (a check, an icon, a toggle, or nothing), then
-   its words, with a hairline rule under the words only, so the marks stand in a column of their own and every
-   line's words start in the same place. The mark column is a control high, a step taller on touch screens, so
-   marks are easy to hit (I4). Words wrap under themselves, never under the mark.
+/* Component · line. One item of a list as a row, the same everywhere a list is: a mark column (a check, a faint
+   plus or pen, a fold's chevron, or nothing), then the words, with a hairline rule under the words only, so the
+   marks stand in a column of their own and every row's words start in the same place. The mark column is a control
+   high, a step taller on touch screens (I4). Words take one line and what doesn't fit is cut with an ellipsis;
+   data-wrap lets them wrap, the first line level with the mark.
 
      <div class="po-line">
        <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Send the contract"></label></span>
-       <div class="po-line-text">Send the contract <span class="po-muted">· due Friday</span></div>
+       <div class="po-line-text"><strong>Send</strong> the contract <span class="po-due" data-urgency="warning">· due tomorrow</span></div>
+       <div class="po-line-actions">…icon buttons…</div>
      </div>
 
-   An empty po-line-mark keeps the words in line with the others (a field to add a line, a heading row).
-   data-state  done (the words turn muted and are struck through, after the check: --po-step as in check.css)
-   data-rule   none (no rule under the words: the last line, a line inside a block) */
+   Written in place, the field is the line's own: no box, its words where the row's words are, the rule under it
+   for an edge, turning info while it has keyboard focus (I2); a textarea keeps its first line level with the mark.
+
+     <div class="po-line" data-rule="none">
+       <span class="po-line-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
+       <input class="po-line-field" placeholder="Add a task…" aria-label="Add a task">
+     </div>
+
+   po-line-actions  the row's other actions: with a mouse they show over the end of the line while the row is
+                    hovered, or one of them has focus or is open (ux I7); on touch screens they stay in the row.
+   po-line-indent   puts anything under a row (its steps, a list that opens under it) where its words start.
+   data-state       done: the words turn muted and are struck through, after the check (--po-step as in check.css).
+   data-rule        none: no rule (the last line of a list, the line that adds one more). */
 
 @layer poiesis.components {
-  .po-line {
+  .po-line, .po-line-indent {
     --po-mark: var(--control-sm);
+    --po-line-gap: calc(var(--space) * 2);
+  }
+  @media (pointer: coarse) {
+    .po-line, .po-line-indent { --po-mark: var(--control-md); }
+  }
+
+  .po-line {
+    position: relative;
     display: grid;
-    grid-template-columns: var(--po-mark) minmax(0, 1fr);
-    column-gap: calc(var(--space) * 2);
-    align-items: start;
+    grid-template-columns: var(--po-mark) minmax(0, 1fr) auto;
+    column-gap: var(--po-line-gap);
+    align-items: center;
+    min-block-size: var(--po-mark);
     color: var(--ink);
     font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
     letter-spacing: var(--tracking-body);
   }
-  @media (pointer: coarse) {
-    .po-line { --po-mark: var(--control-md); }
+  .po-line[data-wrap] { align-items: start; }
+
+  /* The rule: from where the words start, not under the mark. */
+  .po-line::after {
+    content: "";
+    position: absolute;
+    inset-inline: calc(var(--po-mark) + var(--po-line-gap)) 0;
+    bottom: 0;
+    border-block-end: 1px solid var(--divider);
+    pointer-events: none;
   }
+  .po-line[data-rule="none"]::after { border-block-end-color: transparent; }
+  .po-line:has(> .po-line-field:focus-visible)::after { border-block-end-color: var(--info); }
 
   .po-line-mark {
     display: grid;
     place-items: center;
+    inline-size: var(--po-mark);
     block-size: var(--po-mark);
+    color: var(--faint);
+    --icon: var(--icon-sm);
   }
 
   .po-line-text {
-    box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    column-gap: calc(var(--space) * 1);
-    min-block-size: var(--po-mark);
-    padding-block: calc(var(--space) * 1);
-    border-block-end: 1px solid var(--divider);
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-decoration: line-through transparent;
   }
-  .po-line[data-rule="none"] > .po-line-text { border-block-end-color: transparent; }
-
+  .po-line[data-wrap] > .po-line-text {
+    white-space: normal;
+    padding-block: calc((var(--po-mark) - 1lh) / 2);
+  }
   .po-line[data-state="done"] > .po-line-text {
     color: var(--muted);
     text-decoration-color: currentColor;
   }
+
+  .po-line-field {
+    box-sizing: border-box;
+    inline-size: 100%;
+    min-inline-size: 0;
+    block-size: var(--po-mark);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    letter-spacing: inherit;
+    outline: none;
+    appearance: none;
+  }
+  .po-line-field::placeholder { color: var(--muted); opacity: 1; }
+  textarea.po-line-field {
+    block-size: auto;
+    padding-block: calc((var(--po-mark) - 1lh) / 2);
+    resize: none;
+    field-sizing: content;
+  }
+  .po-line:has(> textarea.po-line-field) { align-items: start; }
+
+  .po-line-actions {
+    display: flex;
+    align-items: center;
+  }
+  @media (pointer: fine) {
+    .po-line-actions {
+      position: absolute;
+      inset-block: 0;
+      inset-inline-end: 0;
+      padding-inline-start: var(--po-line-gap);
+      background: var(--paper);
+      opacity: 0;
+    }
+    .po-line:hover > .po-line-actions,
+    .po-line-actions:focus-within,
+    .po-line-actions:has([aria-expanded="true"]) { opacity: 1; }
+  }
+
+  .po-line-indent { padding-inline-start: calc(var(--po-mark) + var(--po-line-gap)); }
 
   @media (prefers-reduced-motion: no-preference) {
     .po-line-text {
@@ -58,5 +135,6 @@
       transition-timing-function: var(--ease);
       transition-delay: calc(var(--po-step, 0) * var(--duration-fast));
     }
+    .po-line::after { transition: border-color var(--duration-fast) var(--ease); }
   }
 }

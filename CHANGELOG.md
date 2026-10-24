@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.9.0 (poiesis-components)
+The list pieces as Today, the app they came from, uses them: 0.8 had simplified versions.
+- **line**:
+  - The mark column is faint (a plus, a pen or a chevron), and the words take one line, cut with an ellipsis
+    (`data-wrap` lets them wrap).
+  - The rule now runs under the words only, as a hairline from where they start.
+  - New `.po-line-actions`: with a mouse they show over the end of the row on hover or focus; on touch screens
+    they stay in the row.
+  - New `.po-line-field`: the line's own field, with no box, using the rule as its edge, which turns info on focus.
+  - New `.po-line-indent`: sets what follows in from the words.
+- **check**: a faint circle in a quiet square becomes the set's circle with a tick, in success, and grows in.
+- **options**: rounded rows with a detail at the end (`.po-option-note`). Buttons act at once, grey on hover and
+  focus, with `aria-current` in strong. A row can hold a field (`.po-option-field`).
+- **New component due:** when something is due, in words, colored by how near it is (`data-urgency`).
+- **New compositions:**
+  - **date pick** (`<po-date-pick>`): the calendar icon, or the date in words and its urgency. Its list opens under
+    the line with five quick dates, "No date", and a field for any other day ("12 Nov", "in 3 weeks", "next
+    Tuesday"). It opens when the keyboard reaches it.
+  - **line form** (`<po-line-form>`): the line that adds or edits an item. It stays quiet until written. Enter saves,
+    and leaving the line saves an edit or, with `add-on-blur`, adds. Esc empties it, and its buttons keep the focus
+    in the field.
+- Four icons added to the set: circle, plus, pencil, calendar-plus.
+- `add.mjs` brings a composition's parts and theirs (a line form brings the date pick and its options).
+
 ## 0.8.0 (poiesis-components) · 0.12.0 (poiesis-ui) · 0.8.0 (poiesis-ux)
 Pieces and rules learned while building Today, a daily planner, on Poiesis: one motion for everything that opens
 and closes, lists under fields, and long pages of sections that work on phones as on wide screens.

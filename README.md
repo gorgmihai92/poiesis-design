@@ -235,12 +235,13 @@ One library in four layers, each built only from the ones before, all written fr
 dependencies. **Tokens** are poiesis-ui's atoms and cells. **Primitives** are layout (stack, row, grid, box),
 text roles, surfaces (paper, block, layer), the pressable and field bases, and the focus ring. **Components** are
 bare, one thing each: button, toggle, switch, input, label, tabs, tooltip, collapsible, fold, morph, line, check,
-options, alert, card, separator, progress, meter, spinner, status dot and the icon set. **Compositions** join
-components with the behavior that joins them: a combobox (a field with suggestions under it) and sections (a long
-page whose section names always show, on phones and wide screens alike, and never leaves a blank screen). They are
+options, due, alert, card, separator, progress, meter, spinner, status dot and the icon set. **Compositions** join
+components with the behavior that joins them: a combobox (a field with suggestions under it), a date pick (a date
+button and its short list), a line form (one line to add or edit an item, as a list's last row) and sections (a
+long page whose section names always show, on phones and wide screens alike, and never leaves a blank screen). They are
 plain CSS on native HTML (a switch is a checkbox, a collapsible is `<details>`, a closed fold is `inert`), with a
 small custom element only where behavior needs script (`<po-tabs>`, `<po-tooltip>`, `<po-morph>`,
-`<po-combobox>`, `<po-sections>`), so they work in any framework or none. Everything that opens, closes or swaps
+`<po-combobox>`, `<po-date-pick>`, `<po-line-form>`, `<po-sections>`), so they work in any framework or none. Everything that opens, closes or swaps
 moves the same way: its height glides as it fades, on the motion cells. Round controls follow the corner atom (square by default).
 All component text is one size (13px by default, 12px in the poiesis theme), bold only on buttons, toggles, tabs
 and card titles. `catalog.md` lists them.
@@ -372,10 +373,10 @@ plugins/
       catalog.md               each component and what it is for
       library/
         poiesis-components.css the whole library in one import, in its layers
-        poiesis-components.js  the behavior of tabs, tooltip, morph, combobox and sections
+        poiesis-components.js  the behavior of tabs, tooltip, morph and the compositions
         primitives/            layout, text, surface, pressable, field, focus
         components/            one .css per component, and tabs.js, tooltip.js, morph.js
-        compositions/          components joined: combobox and sections, each a .css and a .js
+        compositions/          components joined: combobox, date pick, line form, sections; a .css and a .js each
       scripts/
         add.mjs                copy components and the primitives they sit on into a project
 research/                      the sources behind the evidence-based rules: one note per study

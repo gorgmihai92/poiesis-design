@@ -1,6 +1,6 @@
 ---
 name: components
-description: The Poiesis component library, all its own and with no dependencies - tokens (from poiesis-ui), primitives (layout, text, surface, pressable, field, focus), bare components (button, input, label, card, alert, switch, toggle, collapsible, fold, morph, line, check, options, tabs, tooltip, separator, progress, meter, spinner, status dot, icon) and compositions (combobox, sections) in plain CSS, with small custom elements (<po-tabs>, <po-tooltip>, <po-morph>, <po-combobox>, <po-sections>) for the behavior that needs script. Use when building or restyling an interface, adding one of these components, or making a new primitive or component that follows the poiesis-ui and poiesis-ux rules.
+description: The Poiesis component library, all its own and with no dependencies - tokens (from poiesis-ui), primitives (layout, text, surface, pressable, field, focus), bare components (button, input, label, card, alert, switch, toggle, collapsible, fold, morph, line, check, options, due, tabs, tooltip, separator, progress, meter, spinner, status dot, icon) and compositions (combobox, date pick, line form, sections) in plain CSS, with small custom elements (<po-tabs>, <po-tooltip>, <po-morph>, <po-combobox>, <po-date-pick>, <po-line-form>, <po-sections>) for the behavior that needs script. Use when building or restyling an interface, adding one of these components, or making a new primitive or component that follows the poiesis-ui and poiesis-ux rules.
 ---
 
 # Poiesis Components
@@ -17,7 +17,8 @@ CSS framework, no icon or animation package. It is four layers, each built only 
 3. **Components** (`library/components/`): one `.css` each, and a `.js` only for tabs, tooltip and morph. What
    each is for and its markup: `catalog.md`.
 4. **Compositions** (`library/compositions/`): components joined, with the behavior that joins them, a `.css` and
-   a `.js` each: combobox (input, fold and options) and sections (the page's section names and its scroll).
+   a `.js` each: combobox (a field, fold and options), date pick (a button and its list of dates), line form (a
+   line that adds or edits, with its date pick) and sections (the page's section names and its scroll).
 
 `$C` is this folder (`${CLAUDE_PLUGIN_ROOT}/skills/components`).
 

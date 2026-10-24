@@ -1,0 +1,24 @@
+/* Composition · date pick. A date button and the short list it opens (date-pick.js for the behavior and markup).
+   The icon is faint until hovered, as the marks in a line's column; open, the button keeps its look (the list
+   under it shows that it is open). With no place under a line, the list floats under the button, on a block. */
+
+@layer poiesis.compositions {
+  po-date-pick { position: relative; display: inline-flex; flex: none; }
+  po-date-pick > .po-button { font-weight: var(--weight-regular); }
+  po-date-pick > .po-date-pick-icon { color: var(--faint); }
+  po-date-pick > .po-date-pick-icon:hover { color: var(--ink); }
+
+  .po-date-pick-float {
+    position: absolute;
+    inset-inline-end: 0;
+    top: 100%;
+    z-index: var(--layer-float);
+    inline-size: calc(var(--measure-narrow) * 0.75);
+    margin-block-start: var(--space);
+    padding: var(--space);
+    background: var(--paper);
+    border: var(--block-line) solid var(--divider);
+    border-radius: var(--radius-l);
+    box-shadow: var(--shadow-2);
+  }
+}
