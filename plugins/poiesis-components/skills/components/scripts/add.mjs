@@ -32,6 +32,11 @@ const PARTS = {
   combobox: ['input', 'line', 'fold', 'options'],
   'date-pick': ['button', 'options', 'due', 'fold'],
   'line-form': ['line', 'button', 'fold', 'date-pick'],
+  picker: ['line', 'options'],
+  pager: ['button', 'tooltip'],
+  toast: ['alert', 'button'],
+  empty: ['button'],
+  masthead: ['button'],
   sections: [],
 };
 

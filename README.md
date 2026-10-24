@@ -235,13 +235,16 @@ One library in four layers, each built only from the ones before, all written fr
 dependencies. **Tokens** are poiesis-ui's atoms and cells. **Primitives** are layout (stack, row, grid, box),
 text roles, surfaces (paper, block, layer), the pressable and field bases, and the focus ring. **Components** are
 bare, one thing each: button, toggle, switch, input, label, tabs, tooltip, collapsible, fold, morph, line, check,
-options, due, alert, card, separator, progress, meter, spinner, status dot and the icon set. **Compositions** join
-components with the behavior that joins them: a combobox (a field with suggestions under it), a date pick (a date
-button and its short list), a line form (one line to add or edit an item, as a list's last row) and sections (a
-long page whose section names always show, on phones and wide screens alike, and never leaves a blank screen). They are
+options, due, bars, line tip, alert, card, separator, progress, meter, spinner, status dot and the icon set.
+**Compositions** join components with the behavior that joins them: a combobox (a field with suggestions under it),
+a date pick (a date button and its short list), a line form (one line to add or edit an item, as a list's last
+row), a picker (a search line and what it finds), a pager, a toast (what just happened, with Undo), an empty state,
+a masthead and sections (a long page whose section names always show, on phones and wide screens alike, and never
+leaves a blank screen). They are
 plain CSS on native HTML (a switch is a checkbox, a collapsible is `<details>`, a closed fold is `inert`), with a
 small custom element only where behavior needs script (`<po-tabs>`, `<po-tooltip>`, `<po-morph>`,
-`<po-combobox>`, `<po-date-pick>`, `<po-line-form>`, `<po-sections>`), so they work in any framework or none. Everything that opens, closes or swaps
+`<po-line-tip>`, `<po-combobox>`, `<po-date-pick>`, `<po-line-form>`, `<po-picker>`, `<po-pager>`, `<po-toast>`,
+`<po-sections>`), so they work in any framework or none. Everything that opens, closes or swaps
 moves the same way: its height glides as it fades, on the motion cells. Round controls follow the corner atom (square by default).
 All component text is one size (13px by default, 12px in the poiesis theme), bold only on buttons, toggles, tabs
 and card titles. `catalog.md` lists them.
@@ -376,7 +379,8 @@ plugins/
         poiesis-components.js  the behavior of tabs, tooltip, morph and the compositions
         primitives/            layout, text, surface, pressable, field, focus
         components/            one .css per component, and tabs.js, tooltip.js, morph.js
-        compositions/          components joined: combobox, date pick, line form, sections; a .css and a .js each
+        compositions/          components joined: combobox, date pick, line form, picker, pager, toast, empty,
+                               masthead, sections; a .css, and a .js where they behave
       scripts/
         add.mjs                copy components and the primitives they sit on into a project
 research/                      the sources behind the evidence-based rules: one note per study

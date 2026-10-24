@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.10.0 (poiesis-components)
+The rest of Today's general pieces.
+- **New components:**
+  - **bars**: a few counts side by side, each with its number.
+  - **line tip** (`<po-line-tip>`): a hint under a line, on one line. Several tips take turns every 3.5 s.
+  - **cheer**: a state of the line. `data-cheer` shows a few words in success in place of the item's words, sliding
+    in, and a row of several lines folds to one.
+- **New compositions:**
+  - **picker** (`<po-picker>`): a search line and what it finds. It shows five and counts the rest, every word
+    typed must match, ↓ ↑ move between results, and there are words for when nothing is found.
+  - **pager** (`<po-pager>`): "1–5 of 12 · 3 done", with arrows and tooltips.
+  - **toast** (`<po-toast>`): Undo. It closes after 3 s but waits while pointed at or focused, a danger toast stays,
+    and Esc closes it. It sits above the section names stacked on a phone.
+  - **empty**: a title, a line and one action in a box with a line around it.
+  - **masthead**: name and byline, a one-line description, and one action.
+  - Empty and masthead come back as compositions after leaving the components in 0.7.0.
+- `po-options-more` is now the list's last row (`role="presentation"`), so it lines up with indented options; the
+  combobox and the picker add it there.
+- Three icons added to the set: search, arrow-left, arrow-right.
+
 ## 0.9.0 (poiesis-components)
 The list pieces as Today, the app they came from, uses them: 0.8 had simplified versions.
 - **line**:

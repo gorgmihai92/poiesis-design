@@ -22,7 +22,10 @@
                     hovered, or one of them has focus or is open (ux I7); on touch screens they stay in the row.
    po-line-indent   puts anything under a row (its steps, a list that opens under it) where its words start.
    data-state       done: the words turn muted and are struck through, after the check (--po-step as in check.css).
-   data-rule        none: no rule (the last line of a list, the line that adds one more). */
+   data-rule        none: no rule (the last line of a list, the line that adds one more).
+   data-cheer       a few words for the moment after the item is done ("Nice, one less"), in a po-line-cheer after
+                    its words: they take the words' place, in success, sliding in, and a row of several lines folds
+                    to one; the page removes data-cheer after about 2 s (a status, never the only copy, K4). */
 
 @layer poiesis.components {
   .po-line, .po-line-indent {
@@ -83,6 +86,19 @@
     text-decoration-color: currentColor;
   }
 
+  /* Cheer: the words give their place, folding to one row, to a few words in success. */
+  .po-line-cheer { display: none; }
+  .po-line[data-cheer] > .po-line-text { visibility: hidden; block-size: var(--po-mark); }
+  .po-line[data-cheer] > .po-line-cheer {
+    display: flex;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 1;
+    block-size: var(--po-mark);
+    color: var(--success);
+    font-weight: var(--weight-strong);
+  }
+
   .po-line-field {
     box-sizing: border-box;
     inline-size: 100%;
@@ -136,5 +152,11 @@
       transition-delay: calc(var(--po-step, 0) * var(--duration-fast));
     }
     .po-line::after { transition: border-color var(--duration-fast) var(--ease); }
+    .po-line[data-wrap] { interpolate-size: allow-keywords; }
+    .po-line[data-wrap] > .po-line-text { transition-property: color, text-decoration-color, block-size; }
+    .po-line[data-cheer] > .po-line-cheer { animation: po-line-cheer var(--duration-fast) var(--ease) both; }
+  }
+  @keyframes po-line-cheer {
+    from { opacity: 0; translate: calc(var(--space) * -2) 0; }
   }
 }

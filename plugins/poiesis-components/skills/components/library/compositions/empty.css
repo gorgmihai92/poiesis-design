@@ -1,0 +1,30 @@
+/* Composition · empty. What an empty place is for, and how to fill it (ux F2: an empty state says why and what to
+   do): a title, a line under it, and one action, centered in a box with a line around it. CSS only.
+
+     <div class="po-empty">
+       <p class="po-empty-title">Add a project you’re working on now</p>
+       <p class="po-empty-text">Today picks your five from the tasks of ongoing projects.</p>
+       <button class="po-pressable po-button" data-variant="outline" data-size="sm">Guide me</button>
+     </div> */
+
+@layer poiesis.compositions {
+  .po-empty {
+    box-sizing: border-box;
+    display: grid;
+    justify-items: center;
+    gap: calc(var(--space) * 2);
+    padding: calc(var(--space) * 12) var(--block-pad);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-l);
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    text-align: center;
+    text-wrap: balance;
+  }
+  .po-empty > * { margin: 0; max-inline-size: var(--measure); }
+  .po-empty-title { font-weight: var(--weight-strong); }
+  .po-empty-text { color: var(--muted); }
+  /* The action stands a step apart from the words. */
+  .po-empty > :not(.po-empty-title, .po-empty-text) { margin-block-start: calc(var(--space) * 2); }
+}

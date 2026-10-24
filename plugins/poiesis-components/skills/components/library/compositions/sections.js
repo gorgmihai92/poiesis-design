@@ -61,6 +61,7 @@ class PoSections extends HTMLElement {
 
   disconnectedCallback() {
     this.#structure.disconnect()
+    document.documentElement.style.removeProperty("--po-sections-n")
     this.removeEventListener("click", this.#onClick)
     removeEventListener("scroll", this.#onScroll)
     removeEventListener("popstate", this.#onPop)
@@ -79,6 +80,8 @@ class PoSections extends HTMLElement {
     this.#heads = [...this.querySelectorAll(":scope > .po-sections-head")]
     this.#sections = [...this.querySelectorAll(":scope > section")]
     this.style.setProperty("--po-n", String(this.#heads.length))
+    // The page's root knows too, for what floats above the names stacked at the bottom (a toast).
+    document.documentElement.style.setProperty("--po-sections-n", String(this.#heads.length))
     this.#heads.forEach((head, i) => {
       head.style.setProperty("--po-i", String(i))
       const section = this.#sections[i]

@@ -1,6 +1,6 @@
 ---
 name: components
-description: The Poiesis component library, all its own and with no dependencies - tokens (from poiesis-ui), primitives (layout, text, surface, pressable, field, focus), bare components (button, input, label, card, alert, switch, toggle, collapsible, fold, morph, line, check, options, due, tabs, tooltip, separator, progress, meter, spinner, status dot, icon) and compositions (combobox, date pick, line form, sections) in plain CSS, with small custom elements (<po-tabs>, <po-tooltip>, <po-morph>, <po-combobox>, <po-date-pick>, <po-line-form>, <po-sections>) for the behavior that needs script. Use when building or restyling an interface, adding one of these components, or making a new primitive or component that follows the poiesis-ui and poiesis-ux rules.
+description: The Poiesis component library, all its own and with no dependencies - tokens (from poiesis-ui), primitives (layout, text, surface, pressable, field, focus), bare components (button, input, label, card, alert, switch, toggle, collapsible, fold, morph, line, check, options, due, bars, line tip, tabs, tooltip, separator, progress, meter, spinner, status dot, icon) and compositions (combobox, date pick, line form, picker, pager, toast, empty, masthead, sections) in plain CSS, with small custom elements (<po-tabs>, <po-tooltip>, <po-morph>, <po-line-tip>, <po-combobox>, <po-date-pick>, <po-line-form>, <po-picker>, <po-pager>, <po-toast>, <po-sections>) for the behavior that needs script. Use when building or restyling an interface, adding one of these components, or making a new primitive or component that follows the poiesis-ui and poiesis-ux rules.
 ---
 
 # Poiesis Components
@@ -14,11 +14,12 @@ CSS framework, no icon or animation package. It is four layers, each built only 
    `text` (the roles `.po-title` … `.po-code`, `.po-ui`, `.po-muted`), `surface` (`.po-paper`, `.po-block`,
    `.po-layer`), `pressable` (`.po-pressable`: component text, cursor, hover, selected, disabled), `field`
    (`.po-field`: the edge, placeholder, invalid, disabled) and `focus` (the one focus ring).
-3. **Components** (`library/components/`): one `.css` each, and a `.js` only for tabs, tooltip and morph. What
+3. **Components** (`library/components/`): one `.css` each, and a `.js` only for tabs, tooltip, morph and line tip. What
    each is for and its markup: `catalog.md`.
 4. **Compositions** (`library/compositions/`): components joined, with the behavior that joins them, a `.css` and
    a `.js` each: combobox (a field, fold and options), date pick (a button and its list of dates), line form (a
-   line that adds or edits, with its date pick) and sections (the page's section names and its scroll).
+   line that adds or edits, with its date pick), picker (a search line and what it finds), pager, toast (what just
+   happened, with Undo), empty and masthead (CSS only) and sections (the page's section names and its scroll).
 
 `$C` is this folder (`${CLAUDE_PLUGIN_ROOT}/skills/components`).
 

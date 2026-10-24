@@ -1,0 +1,15 @@
+/* Composition · pager. Which part of a long list shows, and arrows to the parts before and after (pager.js for
+   the attributes): the range in muted words on the left, the arrows at the end of the row. */
+
+@layer poiesis.compositions {
+  po-pager {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: calc(var(--space) * 2);
+    color: var(--muted);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  .po-pager-arrows { display: flex; gap: var(--space); margin-inline-start: auto; }
+}

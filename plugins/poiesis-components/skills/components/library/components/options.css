@@ -1,19 +1,20 @@
 /* Component · options. A short list to choose one from: suggestions under a field, quick dates, search results.
    It opens in the page, under what it serves (put it in a fold, in from the words with po-line-indent), and pushes
    what follows down instead of covering it. Rows are rounded, grey when highlighted; a row's detail (a day, a
-   count) sits at its end, muted. Five rows at most; what is left is counted on a muted line after them ("+3 more")
+   count) sits at its end, muted. Five rows at most; what is left is counted on a muted last row ("+3 more")
    and typing narrows it (ux W4).
 
      <ul class="po-options" role="listbox" aria-label="Suggestions">
        <li class="po-option" role="option" aria-selected="true"><strong>Write</strong><span class="po-option-note">#1</span></li>
        <li class="po-option" role="option"><strong>Read</strong></li>
+       <li class="po-options-more" role="presentation">+3 more</li>
      </ul>
-     <p class="po-options-more">+3 more</p>
 
    Options in a listbox are highlighted with aria-selected="true", which only an arrow key or the pointer moving
    over a row sets (ux W5; <po-combobox> does it). Options that act at once are buttons (<button class="po-option">),
    grey on hover and on keyboard focus; aria-current="true" marks the one in use, in strong. A row holding a field
-   (<label class="po-option"> with <input class="po-option-field">) takes a value typed in. */
+   (<label class="po-option"> with <input class="po-option-field">) takes a value typed in. A row of two lines puts
+   them in a po-option-text, the second a po-option-detail. */
 
 @layer poiesis.components {
   .po-options {
@@ -53,6 +54,9 @@
   .po-option[hidden] { display: none; }
 
   .po-option-note { flex: none; color: var(--muted); font-weight: var(--weight-regular); }
+  /* A row of two lines: the item, then what it belongs to, muted. */
+  .po-option-text { display: grid; min-inline-size: 0; }
+  .po-option-detail { color: var(--muted); font-weight: var(--weight-regular); }
 
   .po-option-field {
     flex: 1;

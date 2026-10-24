@@ -1,0 +1,15 @@
+/* Composition · picker. A search line and what it finds under it (picker.js for the markup and the keys): the
+   line, then the options in from the words, each a button that may hold two lines (the item, then what it belongs
+   to, muted), then the count of the rest, or the words for nothing found. */
+
+@layer poiesis.compositions {
+  po-picker { display: block; }
+  po-picker .po-options[hidden], po-picker [hidden] { display: none; }
+  .po-picker-empty {
+    margin: 0;
+    padding-block: calc(var(--space) * 2);
+    color: var(--muted);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+}

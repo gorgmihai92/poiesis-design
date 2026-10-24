@@ -1,0 +1,29 @@
+/* Composition · toast. What just happened, on one line at the bottom of the screen, with its action (toast.js for
+   the markup and the timing): an alert on the paper, as wide as its words, centered, above the section names
+   stacked at the bottom of a phone screen. It fades in. */
+
+@layer poiesis.compositions {
+  po-toast {
+    position: fixed;
+    inset-inline: calc(var(--space) * 4);
+    bottom: calc(var(--space) * 4 + var(--po-sections-below, 0rem));
+    z-index: var(--layer-float);
+    display: none;
+    inline-size: fit-content;
+    max-inline-size: var(--measure);
+    margin-inline: auto;
+    background: var(--paper);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-2);
+  }
+  po-toast[open] { display: block; }
+  po-toast .po-alert { align-items: center; }
+  po-toast .po-alert > :first-child { min-inline-size: 0; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    po-toast[open] { animation: po-toast-in var(--duration-base) var(--ease); }
+  }
+  @keyframes po-toast-in {
+    from { opacity: 0; translate: 0 var(--space); }
+  }
+}

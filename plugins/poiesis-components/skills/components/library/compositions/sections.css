@@ -95,6 +95,11 @@
     background: var(--paper);
   }
 
+  /* Narrow screens: what floats at the bottom (a toast) stays above the names stacked there. */
+  @media not (min-width: 64rem) {
+    :root { --po-sections-below: calc(var(--control-sm) * (var(--po-sections-n, 1) - 1)); }
+  }
+
   /* Wide screens: the names in their own column, each level with its section. */
   @media (min-width: 64rem) {
     po-sections {

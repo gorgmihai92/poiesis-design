@@ -8,8 +8,8 @@
    text, surface, pressable, field, focus), components (one thing each) and compositions (components joined, with
    the behavior that joins them). Cascade layers keep that order, so a component always wins over a primitive, a
    composition over a component, and a project's own CSS, outside the layers, wins over all. Import single files
-   instead to take only what a project uses. Tabs, tooltip, morph and every composition also need their script:
-   poiesis-components.js. */
+   instead to take only what a project uses. Tabs, tooltip, morph, line tip and the compositions with behavior also
+   need their script: poiesis-components.js. */
 
 @layer poiesis.primitives, poiesis.components, poiesis.compositions;
 
@@ -35,6 +35,8 @@
 @import "./components/check.css";
 @import "./components/options.css";
 @import "./components/due.css";
+@import "./components/bars.css";
+@import "./components/line-tip.css";
 @import "./components/alert.css";
 @import "./components/card.css";
 @import "./components/separator.css";
@@ -46,4 +48,9 @@
 @import "./compositions/combobox.css";
 @import "./compositions/date-pick.css";
 @import "./compositions/line-form.css";
+@import "./compositions/picker.css";
+@import "./compositions/pager.css";
+@import "./compositions/toast.css";
+@import "./compositions/empty.css";
+@import "./compositions/masthead.css";
 @import "./compositions/sections.css";

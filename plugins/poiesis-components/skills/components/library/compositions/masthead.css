@@ -1,0 +1,25 @@
+/* Composition · masthead. The top of a page or app: its name in strong with a quiet byline on the same line (who
+   made it, or today's date), what it is in one muted line under them, so the first screen says it (copy O2), and
+   at most one action (H3). CSS only. As the first name of <po-sections>, the byline follows the name's grey when
+   another section is current, and is muted beside it when this one is.
+
+     <header class="po-masthead">
+       <p><span class="po-masthead-name">Today</span> <span class="po-masthead-byline">· Saturday 24 October</span></p>
+       <p class="po-masthead-description">Five tasks a day from all your projects.</p>
+       <a class="po-pressable po-button" data-size="sm" href="/start">Start</a>
+     </header> */
+
+@layer poiesis.compositions {
+  .po-masthead {
+    display: grid;
+    justify-items: start;
+    gap: calc(var(--space) * 2);
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  .po-masthead > * { margin: 0; }
+  .po-masthead-name { font-weight: var(--weight-strong); }
+  .po-masthead-byline, .po-masthead-description { color: var(--muted); font-weight: var(--weight-regular); }
+  .po-sections-head a:not([aria-current="location"]) .po-masthead-byline { color: inherit; }
+}

@@ -48,11 +48,13 @@ class PoCombobox extends HTMLElement {
     input.setAttribute("aria-autocomplete", "list")
     input.setAttribute("aria-controls", list.id)
     input.setAttribute("autocomplete", "off")
-    this.#more = this.querySelector(".po-options-more")
+    // The count of the rest, as the list's last row, so it lines up with the options.
+    this.#more = list.querySelector(".po-options-more")
     if (!this.#more) {
-      this.#more = document.createElement("p")
+      this.#more = document.createElement("li")
       this.#more.className = "po-options-more"
-      list.after(this.#more)
+      this.#more.setAttribute("role", "presentation")
+      list.append(this.#more)
     }
     input.addEventListener("input", this.#onInput)
     input.addEventListener("keydown", this.#onKey)
@@ -93,6 +95,7 @@ class PoCombobox extends HTMLElement {
     const rest = Math.max(0, matches.length - max)
     this.#more.textContent = rest ? `+${rest} more` : ""
     this.#more.hidden = !this.#open || rest === 0
+    this.#list.append(this.#more)
     if (this.#active?.hidden) this.#highlight(null)
     this.#observer.observe(this.#list, { childList: true, subtree: true, characterData: true })
     return matches.length > 0
