@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.0 (poiesis-components)
+- **Form field** (`patterns/form-field.css`, `.po-form-field`, `.po-form-hint`, `.po-form-error`): a control with its
+  label, hint and error as one group (label 6px above, hint and error 4px under, no margins), so fields read as
+  groups and the form's gap sets them apart (ui S2). Before, each app spaced these by hand and the hint picked up the
+  browser's paragraph margin.
+
 ## 0.12.3 (poiesis-components)
 - **Pager:** `of-label` names the word between the range and the total („1–10 din 31”); "of" stays the default.
 

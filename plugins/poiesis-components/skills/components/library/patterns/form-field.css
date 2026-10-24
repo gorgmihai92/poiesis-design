@@ -1,0 +1,26 @@
+/* Pattern · form field. A control with its name, its hint and its error, as one group: the label close above the
+   control, the hint and the error closer still under it, so a field reads as one thing and stands apart from the next
+   (ui S2: space inside a group is smaller than between groups; the form sets the space between fields). CSS only;
+   no outer margin (S4). The hint and the error are tied to the control with aria-describedby; the error is announced.
+
+     <div class="po-form-field">
+       <label class="po-label" for="name">Name</label>
+       <input class="po-field po-input" id="name" aria-describedby="name-hint name-error" aria-invalid="true">
+       <p class="po-form-hint" id="name-hint">As customers see it.</p>
+       <p class="po-form-error" id="name-error" role="alert">Write the name.</p>
+     </div> */
+
+@layer poiesis.patterns {
+  .po-form-field {
+    display: grid;
+    justify-items: stretch;
+    gap: var(--space);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  .po-form-field > * { margin: 0; }
+  /* The name a little apart from the control; the hint and the error stay on it. */
+  .po-form-field > .po-label { margin-block-end: calc(var(--space) * 0.5); justify-self: start; }
+  .po-form-hint { margin: 0; color: var(--muted); }
+  .po-form-error { margin: 0; color: var(--danger); }
+}

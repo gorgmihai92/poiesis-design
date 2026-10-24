@@ -42,6 +42,7 @@ const PARTS = {
   sections: [],
   nav: [],
   frame: [],
+  'form-field': ['label', 'input'],
 };
 
 if (argv.includes('--list') || !names.length) {
