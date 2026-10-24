@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.1 (poiesis-components)
+- **List:** only an item with a checkbox carries the (transparent) strike that fades in when it's done. Before, every
+  item's text had it, and selecting the text showed a line through it.
+
 ## 0.12.0 (poiesis-components)
 Two patterns that poiesis-gallery already used in its own CSS and every app with a side column needs, so the apps
 stop drawing their own.

@@ -77,8 +77,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-decoration: line-through transparent;
   }
+  /* Only an item that can be done carries its strike, transparent until done, so the strike fades in; on any other
+     item there is none, so selecting its text never shows a line through it. */
+  .po-item:has(> .po-item-mark .po-checkbox) > .po-item-text { text-decoration: line-through transparent; }
   .po-item-detail { display: block; color: var(--muted); font-weight: var(--weight-regular); }
   .po-item-note { flex: none; color: var(--muted); font-weight: var(--weight-regular); white-space: nowrap; }
   .po-item-actions { display: flex; align-items: center; }
@@ -87,7 +89,7 @@
 
   .po-item[data-wrap] { align-items: start; }
   .po-item[data-wrap] > .po-item-text { white-space: normal; padding-block: calc((var(--po-mark) - 1lh) / 2); }
-  .po-item[data-state="done"] > .po-item-text { color: var(--muted); text-decoration-color: currentColor; }
+  .po-item[data-state="done"] > .po-item-text { color: var(--muted); text-decoration-line: line-through; text-decoration-color: currentColor; }
 
   .po-list-indent { padding-inline-start: calc(var(--po-mark) + var(--po-gap-x)); }
 
