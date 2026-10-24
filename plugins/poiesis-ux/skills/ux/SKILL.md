@@ -25,6 +25,9 @@ situations, apply the patterns:
 | Waiting | answer within about 1 s; progress for long work, honest, slow stages first | F1, F4, F5 |
 | Delete, archive, send | routine and reversible: act and offer undo; rare or irreversible: confirm, naming what happens | K2, K6 |
 | Lists and menus | items stay where people left them; suggestions in a separate labelled area; pin or reorder by hand | K3, K7 |
+| Suggestions and quick choices | open in the page under their field, pushing what follows; five, then "+N more"; nothing highlighted until an arrow key or the pointer moves; Enter takes only a highlighted one; Esc closes the list first | K10, K11, W4, W5 |
+| Editing in place | leaving the line saves it; Enter saves; Esc on an empty line lets go; the change shows at once, with undo | W6, F9, K6 |
+| A long page of sections | names always in view (passed above, coming below, current in ink); opened on a section, it shows once there; no blank screen between sections, one section per scroll | R4, R5, K13, K5 |
 | Notifications | non-urgent ones wait for the end of the step; urgent ones at once | K8 |
 | A view changes in place | a simple transition shows where things went, within reduced motion | F6, I5 |
 | Choices and defaults | default = what serves the person; never pre-select a cost or data sharing; no deceptive patterns | D1, D2, D3, W3 |

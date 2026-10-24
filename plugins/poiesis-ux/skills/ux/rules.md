@@ -34,6 +34,9 @@ count (`ui` H5). The next action sits on the same row as the steps and keeps its
 step it becomes "start again". In a narrow container it shrinks to an icon with a name (I3).
 **F8 · should · Small tasks show progress too:** a box per item, or a path that fills in; the last state names
 the result in the product's own words, and each change is announced (F3).
+**F9 · should · A person's own change shows at once.** Marking, moving or editing something they own changes on
+screen in the same frame, before the server answers; if the server refuses, it goes back with the reason (E2), and
+a routine change offers undo (K6).
 
 ## Control (K)
 
@@ -60,6 +63,19 @@ Mark et al. 2008).
 **K9 · should · What the person changes keeps its place.** A reveal, a toggle or a next step the person
 causes (allowed by K3) still does not resize or move what is around it: the element reserves room for its largest
 state (states stacked in one cell, or a minimum height), so the control they used stays under the pointer.
+**K10 · must · Esc works from the inside out.** Each Esc closes the innermost thing open (a list under a field,
+then what the field holds, then the dialog or mode) and keeps the key for itself, so one press never closes two
+things; with nothing open inside, Esc goes on to what holds it (refines K1).
+**K11 · should · Suggestions open in the page, under their field.** A list of suggestions or quick choices opens
+under what it serves and pushes what follows down instead of covering it (the person still sees the rest of the
+form and its own words); a list that must float, for lack of room, opens on the side with room.
+**K12 · should · One panel open at a time** among panels of the same kind on a screen (a reply box, a list of
+alternatives, a detail): opening one closes the other, so the screen keeps one focus.
+**K13 · should · A page of sections leaves no blank screen.** When each section is followed by room so the next
+arrives under its name, and the scroll comes to rest with more than half the screen empty after a section's
+content, the page glides on to the next section, or back to the end of this one when scrolling up. One scroll
+moves one section (the rest of a wheel's or trackpad's momentum is held back), nothing moves while a finger is on
+the screen, a short section resting in its place stays, and under reduced motion it jumps (refines K5).
 
 ## Consistency (N)
 
@@ -89,6 +105,12 @@ options are on screen, not only in a shortcut (N6).
 "user-engagement").
 **R3 · should · Help where it is needed:** a short hint at the point of doubt; tooltips never hold the only copy
 of needed information (N10).
+**R4 · should · A long page keeps its section names in view.** On a page of sections, the names of sections passed
+stay stacked at the top and those to come at the bottom, the current one between them in ink (`ui` H5), at every
+width; a name takes you to its section, and the address follows the current one.
+**R5 · should · A page opened on a place shows once it is there.** A link or a reload that names a section or item
+keeps the page unseen until it stands there, then shows it in one step, never later than 1 s, so it doesn't jump
+from the top (K3).
 
 ## Effort (W)
 
@@ -98,6 +120,16 @@ of needed information (N10).
 **W3 · should · Each element earns its place.** Remove what does not help a task on this screen (N8). Fewer
 options is not a universal rule: when choosing among comparable alternatives, offer a sensible default and a way
 to compare (Chernev et al. 2015).
+**W4 · should · Short lists: a few, then a count.** A list to choose from as you type or tap (suggestions,
+search results, quick dates) shows five options at most, the same number across the product, and counts the rest on
+a muted line ("+3 more"); typing narrows it. A product decision rather than a finding: W3 still holds where people
+compare alternatives.
+**W5 · should · Nothing is highlighted until the person points.** A list opens with no option highlighted; an
+arrow key or the pointer moving over an option highlights one, so Enter never takes an option the person didn't
+choose and a list opening under a resting pointer doesn't light up.
+**W6 · should · Leaving a line saves it.** Editing in place saves when the person clicks or tabs away; Enter saves
+and, in a list, adds the next; Esc on an emptied line lets it go. Its buttons don't take focus from the field, and
+focus moving inside the line, or the window losing focus, doesn't count as leaving.
 
 ## Access (I)
 
@@ -110,6 +142,8 @@ How it behaves for keyboard, screen-reader and zoom users. Contrast and color-al
 **I5 · must · Motion is optional.** Non-essential animation runs only under `prefers-reduced-motion:
 no-preference`; nothing flashes more than 3 times a second (W 2.3.1, 2.3.3).
 **I6 · must · Works at 200% zoom and 320 px width** without loss or two-way scrolling (W 1.4.4, 1.4.10).
+**I7 · must · What shows on hover also shows on focus and on touch.** Actions that appear when the pointer rests
+on a row appear when the row or its field takes keyboard focus, and on a tap on touch screens (W 1.4.13, 2.1.1).
 
 ## Honesty (D)
 

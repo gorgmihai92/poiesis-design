@@ -1,0 +1,8 @@
+/* Composition · combobox. A field with suggestions under it: an input, then a fold holding a list of options and
+   the line counting the rest (combobox.js for the markup and the keys). The list opens in the page, under the
+   field, a step of space below it, and folds open and closed like any fold. */
+
+@layer poiesis.compositions {
+  po-combobox { display: block; }
+  po-combobox .po-options { padding-block-start: calc(var(--space) * 1); }
+}

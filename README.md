@@ -66,7 +66,7 @@ In Claude Code:
 /plugin install poiesis-components@poiesis-design
 ```
 
-poiesis-components needs poiesis-ui's tokens and nothing else: plain CSS and two small script modules, in any web
+poiesis-components needs poiesis-ui's tokens and nothing else: plain CSS and a few small script modules, in any web
 project, with or without a framework. poiesis-ui needs
 **Node 18+**; the tokens it writes need a recent browser (Chrome 123, Safari 17.5, Firefox 120). poiesis-ux needs
 nothing else; it drives the running app when Claude in Chrome is available. poiesis-copy needs nothing else.
@@ -231,13 +231,17 @@ how people read on screens and of manipulative design, EU consumer law and, for 
 - **Restyles every component at once** when you change the atoms, because they hold no values of their own.
 - **Makes new components** that keep the same rules, and adds them to the catalog and the gallery.
 
-One library in three layers, each built only from the one before, all written from scratch with no
+One library in four layers, each built only from the ones before, all written from scratch with no
 dependencies. **Tokens** are poiesis-ui's atoms and cells. **Primitives** are layout (stack, row, grid, box),
 text roles, surfaces (paper, block, layer), the pressable and field bases, and the focus ring. **Components** are
-bare, one thing each: button, toggle, switch, input, label, tabs, tooltip, collapsible, alert, card, separator,
-progress, meter, spinner, status dot and the icon set. They are plain CSS on native HTML (a switch is a checkbox,
-a collapsible is `<details>`), with a small custom element only where behavior needs script (`<po-tabs>`,
-`<po-tooltip>`), so they work in any framework or none. Round controls follow the corner atom (square by default).
+bare, one thing each: button, toggle, switch, input, label, tabs, tooltip, collapsible, fold, morph, line, check,
+options, alert, card, separator, progress, meter, spinner, status dot and the icon set. **Compositions** join
+components with the behavior that joins them: a combobox (a field with suggestions under it) and sections (a long
+page whose section names always show, on phones and wide screens alike, and never leaves a blank screen). They are
+plain CSS on native HTML (a switch is a checkbox, a collapsible is `<details>`, a closed fold is `inert`), with a
+small custom element only where behavior needs script (`<po-tabs>`, `<po-tooltip>`, `<po-morph>`,
+`<po-combobox>`, `<po-sections>`), so they work in any framework or none. Everything that opens, closes or swaps
+moves the same way: its height glides as it fades, on the motion cells. Round controls follow the corner atom (square by default).
 All component text is one size (13px by default, 12px in the poiesis theme), bold only on buttons, toggles, tabs
 and card titles. `catalog.md` lists them.
 
@@ -368,9 +372,10 @@ plugins/
       catalog.md               each component and what it is for
       library/
         poiesis-components.css the whole library in one import, in its layers
-        poiesis-components.js  the behavior of tabs and tooltip
+        poiesis-components.js  the behavior of tabs, tooltip, morph, combobox and sections
         primitives/            layout, text, surface, pressable, field, focus
-        components/            one .css per component, and tabs.js, tooltip.js
+        components/            one .css per component, and tabs.js, tooltip.js, morph.js
+        compositions/          components joined: combobox and sections, each a .css and a .js
       scripts/
         add.mjs                copy components and the primitives they sit on into a project
 research/                      the sources behind the evidence-based rules: one note per study

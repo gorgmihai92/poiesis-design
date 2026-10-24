@@ -1,8 +1,8 @@
 # Catalog
 
-The Poiesis library: each primitive and component, what it is for, its markup and its file in `library/`. All
-plain CSS on poiesis-ui's tokens; tabs and tooltip add a custom element. poiesis-gallery shows each one in its
-states.
+The Poiesis library: each primitive, component and composition, what it is for, its markup and its file in
+`library/`. All plain CSS on poiesis-ui's tokens; tabs, tooltip, morph and the compositions add a custom element.
+poiesis-gallery shows each one in its states.
 
 ## Primitives
 
@@ -27,7 +27,12 @@ states.
 | Label | the name of a control | `<label class="po-label" for="…">` | components/label.css |
 | Tabs | sections of one screen: segmented (default) or `data-variant="line"`; arrow keys, Home, End | `<po-tabs value="…">` with `[role=tablist]`, `[role=tab].po-pressable[data-value]`, `[role=tabpanel][data-value]` | components/tabs.css, tabs.js |
 | Tooltip | a short explanation on hover and focus; stays while hovered; Esc closes; never the native `title` | `<po-tooltip class="po-layer" for="id">` | components/tooltip.css, tooltip.js |
-| Collapsible | secondary content under its trigger | `<details class="po-collapsible"><summary class="po-pressable">` | components/collapsible.css |
+| Collapsible | secondary content under its trigger; the content folds open and closed | `<details class="po-collapsible"><summary class="po-pressable">` | components/collapsible.css |
+| Fold | content that opens and closes in place, opened by a control of the page's own: its height glides as it fades, what follows moves with it, a closed fold leaves no gap; closed is `inert`; one plain child holds the spacing | `<div class="po-fold" inert><div>…</div></div>` | components/fold.css |
+| Morph | one place whose content is swapped (a button that becomes its form): its height glides between them, the new content fades in | `<po-morph>…</po-morph>` | components/morph.css, morph.js |
+| Line | one item of a list: a mark column, its words, a rule under the words only; `data-state="done"` mutes and strikes the words; `data-rule="none"` | `<div class="po-line"><span class="po-line-mark">…</span><div class="po-line-text">…</div></div>` | components/line.css |
+| Check | marks an item done; the tick grows in; several at once go in sequence with `--po-step` | `<label class="po-check"><input type="checkbox" aria-label="Done: …"></label>` | components/check.css |
+| Options | a short list to choose one from, in the page under what it serves; five at most, the rest counted on a muted line; the highlighted option `aria-selected` | `<ul class="po-options" role="listbox">` with `<li class="po-option" role="option">`, then `<p class="po-options-more">` | components/options.css |
 | Alert | a status message; `data-role` info, success, warning, caution, danger, new shows a mark of that role's shape and color | `<div class="po-alert" data-role="success" role="status">` | components/alert.css |
 | Card | one item or group as a block; `.po-card-title` for its title | `<article class="po-block po-card">` | components/card.css |
 | Separator | a divider between groups; `aria-orientation="vertical"` in a row | `<hr class="po-separator">` | components/separator.css |
@@ -43,3 +48,12 @@ Text: every component's text is `--text-ui` (T6), in the sans face; `--weight-st
 and card titles, `--weight-regular` elsewhere; secondary text `--muted`. States (selected, hover, disabled) and
 sizes (control height, padding, icon) come from their cells, so density, selection style and motion follow the
 theme.
+
+## Compositions
+
+Components joined, with the behavior that joins them. Each brings the components it is built from (`add.mjs`).
+
+| Composition | For | Markup | File |
+|---|---|---|---|
+| Combobox | a field with suggestions under it: typing narrows them, five show and the rest are counted, nothing is highlighted until ↓ ↑ or the pointer moves, Enter takes only a highlighted one, Tab the highlighted or first, Esc closes the list first; sends `change` | `<po-combobox>` with an input, then a fold holding `.po-options` | compositions/combobox.css, combobox.js |
+| Sections | a long page whose section names always show: passed ones stacked at the top, coming ones at the bottom, the current one in ink, the address following it; across the page on narrow screens, in a column level with each section from 64rem, with what the current one is for under its name; a page opened on a section shows once it is there; no blank screen between sections (the scroll glides on, one section per scroll; `no-advance` turns it off) | `<po-sections>` with, per section, `.po-sections-head` (an `h2` with a link, `.po-sections-about`) and its `<section id>` | compositions/sections.css, sections.js |

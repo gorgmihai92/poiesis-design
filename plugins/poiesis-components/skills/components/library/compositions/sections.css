@@ -1,0 +1,123 @@
+/* Composition · sections. A long page of sections whose names always show (ux R4): the names of sections passed
+   stack at the top, those to come at the bottom, and the current one rides with its section between them, in
+   ink, the others muted (ui H5). One markup for every width: on narrow screens the names sit across the page
+   above their sections; from 64rem, in a column of their own, each level with the start of its section, with what
+   the current section is for under its name. sections.js keeps the names, the address and the scroll in step.
+
+     <po-sections>
+       <div class="po-sections-head">
+         <h2><a class="po-focus" href="#today">Today</a></h2>
+         <div class="po-sections-about">Five tasks a day from all your projects.</div>
+       </div>
+       <section id="today">
+         <p class="po-sections-lead po-muted">Five tasks a day from all your projects.</p>
+         …
+       </section>
+       … a head and its section for each
+     </po-sections>
+
+   po-sections-about (wide screens, under the current name) and po-sections-lead (narrow screens, at the top of
+   the section) hold the same words; give the about only words and actions, as it rides above the page.
+   Every section is followed by room enough for the next one to arrive only once this one has gone past the names
+   above, so a section starts where its name rests; the last one is tall enough to reach its place. --po-nav sets
+   the width of the names' column (half the measure by default). */
+
+@layer poiesis.compositions {
+  po-sections {
+    --po-row: var(--control-sm);
+    --po-top: 0rem;
+    --po-bottom: calc(var(--space) * 4);
+    --po-nav: var(--measure-narrow);
+    --po-room: calc(100svh - var(--po-top) - var(--po-bottom) - var(--po-n, 1) * var(--po-row));
+    display: block;
+    padding-block-start: var(--po-top);
+  }
+  po-sections[data-placing] { opacity: 0; }
+
+  /* The names: sticky in one list, a row each, later ones above earlier ones so an arriving name covers the about
+     of the one before it. */
+  .po-sections-head {
+    position: sticky;
+    z-index: calc(var(--po-i, 0) + 1);
+    top: calc(var(--po-top) + var(--po-i, 0) * var(--po-row));
+    bottom: calc(var(--po-bottom) + (var(--po-n, 1) - 1 - var(--po-i, 0)) * var(--po-row));
+    block-size: var(--po-row);
+    background: var(--paper);
+  }
+  .po-sections-head > h2 { block-size: 100%; margin: 0; font: inherit; }
+  .po-sections-head > h2 > a {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    block-size: 100%;
+    padding-inline: var(--control-pad);
+    border-radius: var(--radius-m);
+    color: var(--muted);
+    font: var(--weight-strong) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .po-sections-head > h2 > a:hover { background: var(--surface); }
+  .po-sections-head > h2 > a[aria-current="location"] { color: var(--ink); }
+
+  .po-sections-about {
+    display: none;
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    padding: calc(var(--space) * 1) var(--control-pad) calc(var(--space) * 2);
+    background: var(--paper);
+    color: var(--muted);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+
+  /* Narrow screens: the content lines up with the names' words. */
+  po-sections > section {
+    scroll-margin-top: calc(var(--po-top) + (var(--po-i, 0) + 1) * var(--po-row));
+    padding-inline: var(--control-pad);
+    padding-block-end: var(--po-room);
+  }
+  po-sections > section:last-of-type {
+    min-block-size: var(--po-room);
+    padding-block-end: var(--po-bottom);
+  }
+
+  /* Narrow screens: content scrolling past the names stacked at the bottom doesn't show under them. */
+  po-sections::after {
+    content: "";
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: calc(var(--po-n, 1) + 1);
+    block-size: var(--po-bottom);
+    background: var(--paper);
+  }
+
+  /* Wide screens: the names in their own column, each level with its section. */
+  @media (min-width: 64rem) {
+    po-sections {
+      --po-top: calc(var(--space) * 8);
+      --po-bottom: calc(var(--space) * 8);
+    }
+    .po-sections-head {
+      inline-size: var(--po-nav);
+      margin-block-end: calc(var(--po-row) * -1);
+    }
+    .po-sections-head:has(a[aria-current="location"]) > .po-sections-about { display: block; }
+    po-sections > section {
+      margin-inline-start: calc(var(--po-nav) + var(--space) * 8);
+      padding-inline: 0;
+      scroll-margin-top: calc(var(--po-top) + var(--po-i, 0) * var(--po-row));
+    }
+    /* Level with its name rather than under it, so it starts a row higher and needs a row more to reach it. */
+    po-sections > section:last-of-type { min-block-size: calc(var(--po-room) + var(--po-row)); }
+    .po-sections-lead { display: none; }
+    po-sections::after { display: none; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    po-sections { transition: opacity var(--duration-base) var(--ease); }
+  }
+}

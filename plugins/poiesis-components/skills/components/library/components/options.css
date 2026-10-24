@@ -1,0 +1,52 @@
+/* Component · options. A short list to choose one from: suggestions under a field, search results, quick
+   choices. It sits in the page, under what it serves, and pushes what follows down instead of covering it. It
+   shows five options at most; what is left is counted on a muted line after the list ("+3 more"), and typing
+   narrows it (ux W4).
+
+     <ul class="po-options" role="listbox" aria-label="Suggestions">
+       <li class="po-option" role="option" id="o1">Write</li>
+       <li class="po-option" role="option" id="o2" aria-selected="true">Read</li>
+     </ul>
+     <p class="po-options-more">+3 more</p>
+
+   The highlighted option is aria-selected="true", on the surface step. Nothing is highlighted when the list
+   opens: only an arrow key or the pointer moving over an option highlights one (ux W5), which <po-combobox> does.
+   An option's own detail (a count, a date) goes in a po-muted span inside it. */
+
+@layer poiesis.components {
+  .po-options {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .po-option {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--space) * 1);
+    min-block-size: var(--control-sm);
+    padding-inline: var(--control-pad);
+    border-radius: var(--radius-m);
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    cursor: pointer;
+    user-select: none;
+  }
+  .po-option[aria-selected="true"] { background: var(--surface); }
+  .po-option[aria-disabled="true"] { opacity: var(--disabled); cursor: not-allowed; }
+  .po-option[hidden] { display: none; }
+
+  .po-options-more {
+    margin: 0;
+    padding-inline: var(--control-pad);
+    padding-block: calc(var(--space) * 1);
+    color: var(--muted);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  .po-options-more[hidden] { display: none; }
+}

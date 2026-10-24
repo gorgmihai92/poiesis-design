@@ -1,0 +1,62 @@
+/* Component · check. Marks one item done, or not. A native checkbox inside a round label, as in the toggle, so it
+   is reached with Tab, flipped with Space and sent with its form, with no script. Unchecked, a round edge in the
+   line color; checked, filled with ink and the set's tick in paper, so "done" has one mark everywhere (G6) and
+   never color alone (C4).
+
+     <label class="po-check"><input type="checkbox" aria-label="Done: Send the contract"></label>
+
+   The tick grows in as it is checked. Several checked at once (the steps of a task done with it) go one after
+   another: give each a step, style="--po-step: 1" (2, 3 …), and each waits that many --duration-fast; a line set
+   done with the same step strikes its words just after its check (line.css). Its focus ring is the shared one. */
+
+@layer poiesis.components {
+  .po-check {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: var(--icon);
+    block-size: var(--icon);
+    border: 1px solid var(--line-color);
+    border-radius: var(--radius-round);
+    cursor: pointer;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* The checkbox covers the whole mark, unseen: the label is what shows. */
+  .po-check > input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+  .po-check::after {
+    content: "";
+    inline-size: 70%;
+    block-size: 70%;
+    background: var(--paper);
+    -webkit-mask: var(--po-icon-check) center / contain no-repeat;
+    mask: var(--po-icon-check) center / contain no-repeat;
+    scale: 0;
+  }
+
+  .po-check:hover { background: var(--surface); }
+  .po-check:has(> input:checked) { border-color: var(--ink); background: var(--ink); }
+  .po-check:has(> input:checked)::after { scale: 1; }
+  .po-check:has(> input:checked):hover { opacity: var(--hover); }
+
+  .po-check:has(> input:focus-visible) { outline: var(--ring) solid var(--info); outline-offset: var(--ring); }
+  .po-check:has(> input:disabled) { opacity: var(--disabled); cursor: not-allowed; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .po-check, .po-check::after {
+      transition-duration: var(--duration-base);
+      transition-timing-function: var(--ease);
+      transition-delay: calc(var(--po-step, 0) * var(--duration-fast));
+    }
+    .po-check { transition-property: background-color, border-color; }
+    .po-check::after { transition-property: scale; }
+  }
+}

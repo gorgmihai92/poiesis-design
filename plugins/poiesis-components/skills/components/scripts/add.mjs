@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 // Copies components into a project: the primitives and the icon set (every component is built on them), the
-// components asked for (their .css, and their .js when they have behavior), and an entry stylesheet and script
-// that load exactly those. The copies are the project's own: change them freely; nothing is linked back.
+// components and compositions asked for (their .css, and their .js when they have behavior), the components a
+// composition is built from, and an entry stylesheet and script that load exactly those. The copies are the project's own: change them freely; nothing is linked back.
 //
 //   node add.mjs button tabs alert --to src/poiesis   some components
 //   node add.mjs all --to src/poiesis                 every component
 //   node add.mjs --list                               what there is
 //
-// Existing files are kept unless --force. Needs no package: plain CSS and, for tabs and tooltip, a script module.
+// Existing files are kept unless --force. Needs no package: plain CSS and, where behavior needs it, a script module.
 // The project's CSS imports poiesis-ui's tokens (poiesis.css and a theme) before the entry stylesheet.
 
 import { copyFileSync, existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
@@ -23,12 +23,15 @@ const opt = (name) => {
 const names = argv.filter((a, i) => !a.startsWith('--') && argv[i - 1] !== '--to');
 const PRIMITIVES = ['layout', 'text', 'surface', 'pressable', 'field', 'focus'];
 // The icon set is shared: alerts, the collapsible, the spinner and the status dot draw from it.
-const available = readdirSync(join(LIB, 'components'))
-  .filter((f) => f.endsWith('.css') && f !== 'icon.css')
-  .map((f) => f.replace(/\.css$/, ''));
+const list = (dir) => readdirSync(join(LIB, dir)).filter((f) => f.endsWith('.css')).map((f) => f.replace(/\.css$/, ''));
+const components = list('components').filter((n) => n !== 'icon');
+const compositions = list('compositions');
+const available = [...components, ...compositions];
+// The components each composition is built from, copied with it.
+const PARTS = { combobox: ['input', 'fold', 'options'], sections: [] };
 
 if (argv.includes('--list') || !names.length) {
-  console.log(`Components: ${['icon', ...available].join(', ')}\nUsage: node add.mjs <names…|all> --to <dir> [--force]`);
+  console.log(`Components: ${['icon', ...components].join(', ')}\nCompositions: ${compositions.join(', ')}\nUsage: node add.mjs <names…|all> --to <dir> [--force]`);
   process.exit(names.length || argv.includes('--list') ? 0 : 2);
 }
 const to = opt('to');
@@ -42,13 +45,17 @@ if (unknown.length) {
   process.exit(2);
 }
 
-const chosen = names.includes('all') ? available : available.filter((n) => names.includes(n));
-const scripts = chosen.filter((n) => existsSync(join(LIB, 'components', `${n}.js`)));
+const all = names.includes('all');
+const wanted = new Set(available.filter((n) => all || names.includes(n)));
+for (const n of [...wanted]) for (const part of PARTS[n] ?? []) wanted.add(part);
+const dirOf = (n) => (compositions.includes(n) ? 'compositions' : 'components');
+const chosen = available.filter((n) => wanted.has(n));
+const scripts = chosen.filter((n) => existsSync(join(LIB, dirOf(n), `${n}.js`)));
 const files = [
   ...PRIMITIVES.map((p) => `primitives/${p}.css`),
   'components/icon.css',
-  ...chosen.map((n) => `components/${n}.css`),
-  ...scripts.map((n) => `components/${n}.js`),
+  ...chosen.map((n) => `${dirOf(n)}/${n}.css`),
+  ...scripts.map((n) => `${dirOf(n)}/${n}.js`),
 ];
 
 const dest = resolve(to);
@@ -70,7 +77,7 @@ write('poiesis-components.css', (target) => writeFileSync(target, [
   '/* Poiesis components: the primitives, the icon set and the components this project uses. Import after',
   '   poiesis-ui\'s tokens (poiesis.css, then a theme). */',
   '',
-  '@layer poiesis.primitives, poiesis.components;',
+  '@layer poiesis.primitives, poiesis.components, poiesis.compositions;',
   '',
   ...files.filter((f) => f.endsWith('.css')).map((f) => `@import "./${f}";`),
   '',
@@ -78,7 +85,7 @@ write('poiesis-components.css', (target) => writeFileSync(target, [
 if (scripts.length)
   write('poiesis-components.js', (target) => writeFileSync(target, [
     '// Poiesis components: the behavior of the components that need it. Load once, as a module.',
-    ...scripts.map((n) => `import "./components/${n}.js"`),
+    ...scripts.map((n) => `import "./${dirOf(n)}/${n}.js"`),
     '',
   ].join('\n')));
 

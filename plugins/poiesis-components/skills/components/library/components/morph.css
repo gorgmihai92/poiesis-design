@@ -1,0 +1,20 @@
+/* Component · morph. One place whose content is swapped: its height glides between the old content and the new,
+   and the new content fades in (morph.js). Use it where one state replaces another in the same spot; for content
+   that opens and closes under a control, use a fold.
+
+     <po-morph>
+       <button class="po-pressable po-button" data-variant="outline">Send feedback</button>
+     </po-morph>
+
+   Its children carry their own spacing; it adds none. It is clipped only while its height moves, so focus rings
+   show once it rests (I2). The transition values are what the script reads; nothing transitions in CSS. */
+
+@layer poiesis.components {
+  po-morph {
+    display: block;
+    transition-property: none;
+    transition-duration: var(--duration-base);
+    transition-timing-function: var(--ease);
+  }
+  po-morph[data-moving] { overflow: clip; }
+}

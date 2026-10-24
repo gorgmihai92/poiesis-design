@@ -10,7 +10,7 @@
     {
       "name": "poiesis-ui",
       "description": "How your interface looks: text sizes, hierarchy, spacing, color and shape (corners, lines, shadows), all derived from a few values you choose. Rules, an auditor that checks your code, and a gate that holds back publishing until the check passes.",
-      "version": "0.11.0",
+      "version": "0.12.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"
@@ -22,7 +22,7 @@
     {
       "name": "poiesis-ux",
       "description": "How your app behaves for the people using it: rules for feedback, errors, control, keyboard use and honest choices, and a tester that does your app's main tasks the way a person would and reports what gets in their way.",
-      "version": "0.7.0",
+      "version": "0.8.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"
@@ -45,8 +45,8 @@
     },
     {
       "name": "poiesis-components",
-      "description": "The Poiesis component library: tokens, primitives and bare components, all its own, plain CSS with two small custom elements and no dependencies, copied into any web project; change the atoms and every component follows. Shown in poiesis-gallery.",
-      "version": "0.7.0",
+      "description": "The Poiesis component library: tokens, primitives, bare components and compositions, all its own, plain CSS with a few small custom elements and no dependencies, copied into any web project; change the atoms and every component follows. Shown in poiesis-gallery.",
+      "version": "0.8.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"

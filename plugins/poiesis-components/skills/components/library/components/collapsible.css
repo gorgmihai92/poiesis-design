@@ -1,5 +1,7 @@
 /* Component · collapsible. Secondary content under its trigger. Native <details>: Enter and Space open and close
-   it, and it says whether it is open, with no script. The trigger is a pressable; a chevron turns when open.
+   it, and it says whether it is open, with no script. The trigger is a pressable; a chevron turns when open, and
+   the content folds open and closed like a fold (fold.css): its height glides as it fades, clipped, on
+   --duration-base. Browsers that can't animate to its natural height open it at once.
 
      <details class="po-collapsible">
        <summary class="po-pressable">Advanced options</summary>
@@ -27,8 +29,20 @@
     mask: var(--po-icon-chevron-down) center / contain no-repeat;
   }
   .po-collapsible[open] > summary::after { rotate: 180deg; }
+
   @media (prefers-reduced-motion: no-preference) {
     .po-collapsible > summary::after { transition: rotate var(--duration-fast) var(--ease); }
+    .po-collapsible { interpolate-size: allow-keywords; }
+    .po-collapsible::details-content {
+      block-size: 0;
+      opacity: 0;
+      overflow: clip;
+      transition:
+        block-size var(--duration-base) var(--ease),
+        opacity var(--duration-base) var(--ease),
+        content-visibility var(--duration-base) allow-discrete;
+    }
+    .po-collapsible[open]::details-content { block-size: auto; opacity: 1; }
   }
 
   .po-collapsible > :not(summary) { margin: 0; padding: calc(var(--space) * 2) var(--control-pad) 0; }

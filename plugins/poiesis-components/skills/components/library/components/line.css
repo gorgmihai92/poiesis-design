@@ -1,0 +1,62 @@
+/* Component · line. One item in a list, as a row: a mark column (a check, an icon, a toggle, or nothing), then
+   its words, with a hairline rule under the words only, so the marks stand in a column of their own and every
+   line's words start in the same place. The mark column is a control high, a step taller on touch screens, so
+   marks are easy to hit (I4). Words wrap under themselves, never under the mark.
+
+     <div class="po-line">
+       <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Send the contract"></label></span>
+       <div class="po-line-text">Send the contract <span class="po-muted">· due Friday</span></div>
+     </div>
+
+   An empty po-line-mark keeps the words in line with the others (a field to add a line, a heading row).
+   data-state  done (the words turn muted and are struck through, after the check: --po-step as in check.css)
+   data-rule   none (no rule under the words: the last line, a line inside a block) */
+
+@layer poiesis.components {
+  .po-line {
+    --po-mark: var(--control-sm);
+    display: grid;
+    grid-template-columns: var(--po-mark) minmax(0, 1fr);
+    column-gap: calc(var(--space) * 2);
+    align-items: start;
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  @media (pointer: coarse) {
+    .po-line { --po-mark: var(--control-md); }
+  }
+
+  .po-line-mark {
+    display: grid;
+    place-items: center;
+    block-size: var(--po-mark);
+  }
+
+  .po-line-text {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: calc(var(--space) * 1);
+    min-block-size: var(--po-mark);
+    padding-block: calc(var(--space) * 1);
+    border-block-end: 1px solid var(--divider);
+    text-decoration: line-through transparent;
+  }
+  .po-line[data-rule="none"] > .po-line-text { border-block-end-color: transparent; }
+
+  .po-line[data-state="done"] > .po-line-text {
+    color: var(--muted);
+    text-decoration-color: currentColor;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .po-line-text {
+      transition-property: color, text-decoration-color;
+      transition-duration: var(--duration-base);
+      transition-timing-function: var(--ease);
+      transition-delay: calc(var(--po-step, 0) * var(--duration-fast));
+    }
+  }
+}

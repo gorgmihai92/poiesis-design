@@ -1,9 +1,9 @@
 # poiesis-components
 
-The Poiesis component library: tokens, primitives and bare components, all its own, in plain CSS on poiesis-ui's
-tokens, with two small custom elements (tabs, tooltip) and no dependencies. Copy the ones you need into any web
-project, with or without a framework; to change how the whole interface looks, change the atoms, and every component
-follows. See them in
+The Poiesis component library: tokens, primitives, bare components and compositions, all its own, in plain CSS
+on poiesis-ui's tokens, with a few small custom elements (tabs, tooltip, morph, combobox, sections) and no
+dependencies. Copy the ones you need into any web project, with or without a framework; to change how the whole
+interface looks, change the atoms, and every component follows. See them in
 [poiesis-gallery](https://github.com/gorgmihai92/poiesis-gallery).
 
 One of the four plugins of [Poiesis Design](https://github.com/gorgmihai92/poiesis-design), with poiesis-ui,

@@ -41,9 +41,9 @@ competes with the action.
 same for a section: its content starts near its top edge (`--block-pad` below the divider) and the section's
 space comes after it (`--section-space`), so a divider belongs to the section below it.
 **H5 · should · Position in greys, choice in fills.** Where the reader is in a sequence (the current section,
-steps done, items read) is shown by text greys: `--ink` here, `--faint` far or passed, between them by nearness
-(`text-nearness`). Selected fills (G3) are for what the user chose (a tab, a pressed toggle), not for where they
-are.
+steps done, items read) is shown by text greys: `--ink` here, `--muted` everywhere else (names that can be chosen
+keep 4.5:1, C3; `--faint` only for what can't be). Selected fills (G3) are for what the user chose (a tab, a
+pressed toggle), not for where they are.
 
 ## Spacing (S)
 
@@ -100,6 +100,30 @@ opacity of their own.
 `--icon`, one color per role (C2). Never outlined and filled icons together, nor icons from two sets (N4).
 **G6 · must · One mark per meaning.** A meaning such as "done" or "correct" has one shape everywhere (one tick),
 and no other icon reuses that shape (C2, `ux` N1).
+
+Motion: how things open, close and change. It runs only when the person allows it (`ux` I5); the cells are 0 under
+reduced motion, so every motion below has its still version for free.
+
+**G7 · must · One motion for everything that opens and closes.** Content that expands or collapses (a fold, a
+collapsible, a list under a field, a reply box) grows from no height as it fades in and shrinks as it fades out, on
+`--duration-base` and `--ease`; a chevron that shows it turns on `--duration-fast`. Never a jump, a slide from the
+side or a second easing for the same kind of change.
+**G8 · must · What leaves stays until it has gone.** Content folding away keeps its place and its words until the
+motion ends, then is removed; it can't be pressed meanwhile. Content replaced by other content in the same place
+goes at once, and the place's height glides to the new content (G10), so the two never show together.
+**G9 · must · Folds clip, never scroll, and take their space with them.** Moving content is clipped, so a field
+focused inside it can't scroll it into a jump; once open nothing is clipped (focus rings show, `ux` I2). The
+spacing around folding content goes inside it, never as a gap or margin beside it, so the space opens and closes
+with it and a closed fold leaves no step of space behind.
+**G10 · should · Swapped states share one place.** When one state replaces another in the same spot (a button that
+becomes its form, a question that becomes its answer), they share one box whose height glides between them
+(`--duration-base`), and the new state fades in, so what follows moves once, smoothly.
+**G11 · should · Changes that happen together go in sequence.** When one action changes several marks at once (the
+steps checked with their task, items added together), each follows the one before by `--duration-fast`, so the eye
+can follow them; the whole stays under about half a second.
+**G12 · should · Motion is checked by its frames.** Before a change to something that moves is done, its height
+or position is sampled every frame, opening and closing: it moves in one direction, without a jump at the start or
+the end, and what follows moves with it (`ui-auditor` asks for the samples, or takes them).
 
 ## Atoms (A)
 

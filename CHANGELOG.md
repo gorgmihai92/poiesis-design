@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.8.0 (poiesis-components) · 0.12.0 (poiesis-ui) · 0.8.0 (poiesis-ux)
+Pieces and rules learned while building Today, a daily planner, on Poiesis: one motion for everything that opens
+and closes, lists under fields, and long pages of sections that work on phones as on wide screens.
+- **poiesis-components, new components:**
+  - **fold**: content that opens and closes in place, its height gliding as it fades. Closed is `inert`. It is
+    clipped while it moves and never scrolls, and a closed fold gives back the gap beside it in a stack.
+  - **morph** (`<po-morph>`): one place whose content is swapped; its height glides from the old content to the new.
+  - **line**: an item as a row, with a mark column, its words and a rule under the words only. `data-state="done"`
+    mutes and strikes the words.
+  - **check**: a round checkbox whose tick grows in; several at once go in sequence with `--po-step`.
+  - **options**: a short list to choose from, in the page, five at most, with the rest counted.
+  - **collapsible**: its content now folds open and closed the same way.
+- **poiesis-components, new layer `compositions/`:** components joined with the behavior that joins them, in
+  `@layer poiesis.compositions`.
+  - **combobox** (`<po-combobox>`): a field with suggestions. Nothing is highlighted until ↓ ↑ or the pointer
+    moves, Enter takes only a highlighted option, Tab takes the highlighted or first one, and Esc closes the list
+    first.
+  - **sections** (`<po-sections>`): the section navigation is back, in one markup for every width. Section names
+    always show: passed ones stacked at the top, coming ones at the bottom, the current one in ink, and the address
+    follows it. On phones the names run across the page; from 64rem they sit in a column level with each section,
+    with what the current one is for under its name. A page opened or reloaded on a section shows once it is
+    there. There is no blank screen between sections: the scroll glides on, one section per scroll, holding back
+    momentum, waiting while a finger is down, and jumping under reduced motion.
+  - `add.mjs` copies compositions with the components they are built from.
+- **poiesis-ui, motion rules in Shape:**
+  - **G7** one motion for everything that opens and closes
+  - **G8** what leaves stays until it has gone
+  - **G9** folds clip, never scroll, and take their space with them
+  - **G10** swapped states share one place
+  - **G11** changes that happen together go in sequence
+  - **G12** motion is checked by its frames
+  - **H5** drops the nearness greys: the current position is `--ink` and the rest `--muted`, so names that can be
+    chosen keep 4.5:1. `ui-auditor` reads motion too.
+- **poiesis-ux, new rules:**
+  - **F9** a person's own change shows at once
+  - **K10** Esc works from the inside out
+  - **K11** suggestions open in the page, under their field
+  - **K12** one panel open at a time
+  - **K13** a page of sections leaves no blank screen
+  - **R4** a long page keeps its section names in view
+  - **R5** a page opened on a place shows once it is there
+  - **W4** short lists: a few, then a count
+  - **W5** nothing is highlighted until the person points
+  - **W6** leaving a line saves it
+  - **I7** what shows on hover also shows on focus and on touch
+  - New patterns in the skill: suggestions, editing in place, and a long page of sections.
+  - The version skips 0.7.0, which the marketplace already listed.
+
 ## 0.7.0 (poiesis-components) · 0.11.0 (poiesis-ui)
 A library of its own, from scratch, with no dependencies: tokens, then primitives, then bare components.
 - **No outside code.** shadcn/ui, Radix, class-variance-authority, clsx, tailwind-merge, lucide-react,

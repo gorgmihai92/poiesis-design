@@ -1,0 +1,46 @@
+/* Component · fold. Content that opens and closes in place: it grows from no height as it fades in, and shrinks
+   back as it fades out, on --duration-base and --ease, so what follows moves with it instead of jumping (K3, K9).
+   Closed is the native inert attribute: the content stays in the page, out of the tab order and away from screen
+   readers, so it can fold away before anything removes it. The control that opens it says so (aria-expanded).
+
+     <button class="po-pressable po-button" data-variant="ghost" aria-expanded="false" aria-controls="more">More</button>
+     <div class="po-fold" id="more" inert>
+       <div><p class="po-body">…</p></div>
+     </div>
+
+   It holds one plain child, with no padding, border or margin of its own: the content's spacing goes inside that
+   child, so it folds with the content. In a stack, a closed fold also gives back the gap beside it, so a fold never
+   leaves a step of space behind. The child is clipped while it moves and never scrolls, so a field focused inside
+   can't push it; once open, nothing is clipped and focus rings show (I2). A framework that removes closed content
+   waits --duration-base after closing, so it has folded away first. */
+
+@layer poiesis.components {
+  .po-fold {
+    display: grid;
+    grid-template-rows: 1fr;
+  }
+  .po-fold[inert] {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+  .po-fold > * {
+    min-block-size: 0;
+    overflow: visible;
+  }
+  .po-fold[inert] > * { overflow: clip; }
+
+  /* Closed in a stack: no gap left beside it. */
+  .po-stack > .po-fold[inert]:not(:first-child) { margin-block-start: calc(var(--space) * var(--po-gap, 2) * -1); }
+  .po-stack > .po-fold[inert]:first-child:not(:last-child) { margin-block-end: calc(var(--space) * var(--po-gap, 2) * -1); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .po-fold {
+      transition-property: grid-template-rows, opacity, margin;
+      transition-duration: var(--duration-base);
+      transition-timing-function: var(--ease);
+    }
+    /* Clipped from the moment it starts to close until it has finished opening. */
+    .po-fold > * { transition: overflow calc(var(--duration-base) * 0) var(--duration-base) allow-discrete; }
+    .po-fold[inert] > * { transition-delay: 0s; }
+  }
+}
