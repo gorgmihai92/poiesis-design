@@ -1,16 +1,23 @@
-/* Component · button. One action. Built on pressable (states, focus) and its own fill.
+/* Component · button. One action, or one thing pressed or not. Built on pressable (states, focus) and its own fill.
 
      <button class="po-pressable po-button">Save</button>
      <a class="po-pressable po-button" data-variant="outline" href="/plans">See plans</a>
 
+   Pressed or not (a toggle): a checkbox inside, so it is reached with Tab, pressed with Space and sent with its
+   form, with no script; or aria-pressed on a button that a script flips. Pressed looks selected (G3).
+
+     <label class="po-pressable po-button" data-variant="ghost"><input type="checkbox" name="bold">Bold</label>
+
    data-variant  primary (default: once per view, H3) · secondary · outline · ghost · danger · link · quiet
                  (quiet: a link that is not an action, such as a byline, in the color and weight of its text)
    data-size     sm · md (default) · lg
-   data-shape    icon (square; give it an aria-label, I3) */
+   data-shape    icon (square; the button or its checkbox carries the aria-label, I3)
+   An icon inside takes the button's icon size by itself. */
 
 @layer poiesis.components {
   .po-button {
     block-size: var(--control-md);
+    min-inline-size: var(--control-md);
     padding-inline: var(--control-pad);
     background: var(--ink);
     color: var(--paper);
@@ -34,14 +41,29 @@
   .po-button:is([data-variant="link"], [data-variant="quiet"]):hover { background: transparent; opacity: 1; text-decoration: underline; }
   .po-button[data-variant="link"] { color: var(--info); }
   /* In running text: no box, the line's own height, color and weight. */
-  .po-button[data-variant="quiet"] { block-size: auto; padding: 0; color: inherit; font: inherit; vertical-align: baseline; }
+  .po-button[data-variant="quiet"] { block-size: auto; min-inline-size: 0; padding: 0; color: inherit; font: inherit; vertical-align: baseline; }
 
-  .po-button[data-size="sm"] { block-size: var(--control-sm); }
-  .po-button[data-size="lg"] { block-size: var(--control-lg); }
-  /* A small button sets the icon cell for what it holds, so an icon inside takes the small size by itself. */
-  .po-button[data-size="sm"] { --icon: var(--icon-sm); }
+  .po-button[data-size="sm"] { block-size: var(--control-sm); min-inline-size: var(--control-sm); --icon: var(--icon-sm); }
+  .po-button[data-size="lg"] { block-size: var(--control-lg); min-inline-size: var(--control-lg); }
 
   .po-button[data-shape="icon"] { inline-size: var(--control-md); padding: 0; }
   .po-button[data-shape="icon"][data-size="sm"] { inline-size: var(--control-sm); }
   .po-button[data-shape="icon"][data-size="lg"] { inline-size: var(--control-lg); }
+
+  /* Pressed: selected in any variant (G3). */
+  .po-button:is([aria-pressed="true"], :has(> input:checked)) {
+    background: var(--selected-bg);
+    color: var(--selected-fg);
+    box-shadow: inset 0 0 0 var(--selected-ring) var(--ink);
+  }
+  .po-button:is([aria-pressed="true"], :has(> input:checked)):hover { background: var(--selected-bg); opacity: var(--hover); }
+
+  /* The checkbox covers the whole button, unseen: the label is what shows. */
+  .po-button > input[type="checkbox"] {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
 }

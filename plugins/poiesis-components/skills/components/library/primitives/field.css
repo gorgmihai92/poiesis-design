@@ -2,6 +2,8 @@
    (T6, regular), a muted placeholder, and the shared states:
      invalid   the edge turns danger (aria-invalid="true"); the ring appears only on focus, in danger
      disabled  the surface behind it, faded to --disabled
+   It sits on the control itself (<input class="po-field">) or on a box that holds the control and its icons
+   (<div class="po-field"><span class="po-icon"></span><input></div>); the states follow the control inside.
    Its focus ring is in focus.css. */
 
 @layer poiesis.primitives {
@@ -19,12 +21,12 @@
 
   .po-field::placeholder { color: var(--muted); opacity: 1; }
 
-  .po-field:focus-visible { border-color: var(--info); }
+  .po-field:is(:focus-visible, :has(> :focus-visible)) { border-color: var(--info); }
 
-  .po-field[aria-invalid="true"] { border-color: var(--danger); }
-  .po-field[aria-invalid="true"]:focus-visible { outline-color: var(--danger); }
+  .po-field:is([aria-invalid="true"], :has(> [aria-invalid="true"])) { border-color: var(--danger); }
+  .po-field:is([aria-invalid="true"], :has(> [aria-invalid="true"])):is(:focus-visible, :has(> :focus-visible)) { outline-color: var(--danger); }
 
-  .po-field:disabled {
+  .po-field:is(:disabled, :has(> :disabled)) {
     background: var(--surface);
     opacity: var(--disabled);
     cursor: not-allowed;

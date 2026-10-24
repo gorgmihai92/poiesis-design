@@ -1,0 +1,167 @@
+/* Component · list. Items one under another, the same everywhere a list is. Each item is a row: a mark column (a
+   checkbox, a faint icon, or nothing), the words, and at the end a note or the item's actions. Two looks:
+
+   lines (default): items of a list you work through (tasks, steps). The marks stand in a column of their own and
+   a hairline rule runs under the words only, so every row's words start in the same place. Words take one line,
+   cut with an ellipsis (data-wrap lets them wrap). The actions show over the end of the row while it is hovered
+   or one of them has focus or is open (ux I7); on touch screens they stay in the row.
+
+     <ul class="po-list">
+       <li class="po-item">
+         <span class="po-item-mark"><label class="po-checkbox"><input type="checkbox" aria-label="Done: Send the contract"></label></span>
+         <span class="po-item-text">Send the contract <span class="po-text" data-tone="warning">· due tomorrow</span></span>
+         <span class="po-item-actions">…icon buttons…</span>
+       </li>
+     </ul>
+
+   options: a short list to choose one from (suggestions under a field, quick dates, results). Rounded rows, grey
+   when highlighted; five at most, the rest counted in a po-list-more row (ux W4). Rows that act at once are
+   buttons, grey on hover and focus; in a listbox, aria-selected highlights (set only by an arrow key or the
+   pointer, ux W5) and aria-current marks the one in use, in strong.
+
+     <ul class="po-list" data-variant="options" role="listbox" aria-label="Suggestions">
+       <li class="po-item" role="option">Write <span class="po-item-note">#1</span></li>
+       <li class="po-list-more" role="presentation">+3 more</li>
+     </ul>
+
+   Parts      po-item-mark · po-item-text (po-item-detail for a muted second line) · po-item-note (muted, at the
+              end) · po-item-actions. A field typed into in place is a bare input as the item's text
+              (<input class="po-field po-input" data-variant="bare">); the row's rule is its edge.
+   Item       data-state="done" (muted and struck through, after its check: --po-step as in checkbox.css) ·
+              data-rule="none" (no rule: the last line, the line that adds one more) · data-wrap · hidden
+   po-list-indent  puts anything under a row (its steps, a list that opens under it) where the words start. */
+
+@layer poiesis.components {
+  .po-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .po-list, .po-item, .po-list-indent {
+    --po-mark: var(--control-sm);
+    --po-gap-x: calc(var(--space) * 2);
+  }
+  @media (pointer: coarse) {
+    .po-list, .po-item, .po-list-indent { --po-mark: var(--control-md); }
+  }
+
+  .po-item {
+    box-sizing: border-box;
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--po-mark) minmax(0, 1fr) auto;
+    column-gap: var(--po-gap-x);
+    align-items: center;
+    min-block-size: var(--po-mark);
+    margin: 0;
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    text-align: start;
+  }
+  .po-item[hidden], .po-list-more[hidden] { display: none; }
+  /* A row with no mark still keeps the column, so its words line up with the others. */
+  .po-item > .po-item-text:first-child, .po-item > .po-input:first-child { grid-column: 2; }
+
+  .po-item-mark {
+    display: grid;
+    place-items: center;
+    inline-size: var(--po-mark);
+    block-size: var(--po-mark);
+    color: var(--faint);
+    --icon: var(--icon-sm);
+  }
+  .po-item-text {
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: line-through transparent;
+  }
+  .po-item-detail { display: block; color: var(--muted); font-weight: var(--weight-regular); }
+  .po-item-note { flex: none; color: var(--muted); font-weight: var(--weight-regular); white-space: nowrap; }
+  .po-item-actions { display: flex; align-items: center; }
+
+  .po-item > .po-input { block-size: var(--po-mark); }
+
+  .po-item[data-wrap] { align-items: start; }
+  .po-item[data-wrap] > .po-item-text { white-space: normal; padding-block: calc((var(--po-mark) - 1lh) / 2); }
+  .po-item[data-state="done"] > .po-item-text { color: var(--muted); text-decoration-color: currentColor; }
+
+  .po-list-indent { padding-inline-start: calc(var(--po-mark) + var(--po-gap-x)); }
+
+  /* Lines: the rule under the words, from where they start; a bare field inside has no rule of its own. */
+  .po-item::after {
+    content: "";
+    position: absolute;
+    inset-inline: calc(var(--po-mark) + var(--po-gap-x)) 0;
+    bottom: 0;
+    border-block-end: 1px solid var(--divider);
+    pointer-events: none;
+  }
+  .po-item[data-rule="none"]::after { border-block-end-color: transparent; }
+  .po-item:has(> .po-input:focus-visible, > .po-input :focus-visible)::after { border-block-end-color: var(--info); }
+  .po-item > .po-input[data-variant="bare"] { border-block-end-color: transparent; }
+  .po-item > .po-input[data-variant="bare"]:is(:focus-visible, :has(> :focus-visible)) { border-block-end-color: transparent; }
+
+  @media (pointer: fine) {
+    .po-item-actions {
+      position: absolute;
+      inset-block: 0;
+      inset-inline-end: 0;
+      padding-inline-start: var(--po-gap-x);
+      background: var(--paper);
+      opacity: 0;
+    }
+    .po-item:hover > .po-item-actions,
+    .po-item-actions:focus-within,
+    .po-item-actions:has([aria-expanded="true"]) { opacity: 1; }
+  }
+
+  /* Options: rounded rows, no mark column unless one is given, the note at the end. */
+  .po-list[data-variant="options"] { padding-block: calc(var(--space) * 2); }
+  .po-list[data-variant="options"] .po-item {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--space) * 2);
+    inline-size: 100%;
+    min-block-size: 0;
+    padding: calc(var(--space) * 1.5) var(--control-pad);
+    border: 0;
+    border-radius: var(--radius-m);
+    background: transparent;
+    cursor: default;
+    user-select: none;
+  }
+  .po-list[data-variant="options"] .po-item[hidden] { display: none; }
+  .po-list[data-variant="options"] .po-item > .po-item-text { flex: 1; }
+  .po-list[data-variant="options"] .po-item::after { content: none; }
+  .po-list[data-variant="options"] .po-item-actions { position: static; padding: 0; background: none; opacity: 1; }
+  .po-list[data-variant="options"] .po-item:is([aria-selected="true"], button:hover, button:focus-visible, :has(> .po-input:focus-visible)) {
+    background: var(--surface);
+  }
+  /* Keyboard focus on a row that acts: the shared ring (I2), on top of the grey. */
+  .po-list[data-variant="options"] .po-item:focus-visible { outline: var(--ring) solid var(--info); outline-offset: 0; }
+  .po-list[data-variant="options"] .po-item[aria-current="true"] { font-weight: var(--weight-strong); }
+  .po-list[data-variant="options"] .po-item:is([aria-disabled="true"], :disabled) { opacity: var(--disabled); cursor: not-allowed; }
+  .po-list[data-variant="options"] .po-item > .po-input { block-size: auto; flex: 1; border: 0; }
+
+  .po-list-more {
+    margin: 0;
+    padding: calc(var(--space) * 1.5) var(--control-pad);
+    color: var(--muted);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .po-item-text {
+      transition-property: color, text-decoration-color;
+      transition-duration: var(--duration-base);
+      transition-timing-function: var(--ease);
+      transition-delay: calc(var(--po-step, 0) * var(--duration-fast));
+    }
+    .po-item::after { transition: border-color var(--duration-fast) var(--ease); }
+  }
+}

@@ -1,4 +1,4 @@
-// Composition · date pick: the behavior of <po-date-pick>, a date button and the short list it opens. It draws
+// Pattern · date pick: the behavior of <po-date-pick>, a date button and the short list it opens. It draws
 // both itself, from a button (button, icon), a list of options (options) and the fold it opens in:
 //   - without a date, the set's calendar icon, faint; with one, the date in words, colored by how near it is
 //     (due: "due tomorrow" in warning, "2 days late" in danger), so the date reads as it does in the row;
@@ -124,8 +124,8 @@ class PoDatePick extends HTMLElement {
     const urgency = days < 0 ? "danger" : days === 0 ? "caution" : days === 1 ? "warning" : ""
     b.innerHTML = ""
     const due = document.createElement("span")
-    due.className = "po-due"
-    if (urgency) due.dataset.urgency = urgency
+    due.className = "po-text"
+    due.dataset.tone = urgency || "muted"
     due.textContent = words.trim()
     b.append(due)
   }
@@ -141,7 +141,8 @@ class PoDatePick extends HTMLElement {
     const value = this.value
     const list = document.createElement("div")
     list.id = `${this.#id}-list`
-    list.className = "po-options"
+    list.className = "po-list"
+    list.dataset.variant = "options"
     list.setAttribute("role", "group")
     list.setAttribute("aria-label", `Pick a ${this.#label}`)
     const quick = QUICK.map((name) => ({ name, day: readDay(name, today) }))
@@ -151,9 +152,9 @@ class PoDatePick extends HTMLElement {
     const row = (name, note, pick) => {
       const b = document.createElement("button")
       b.type = "button"
-      b.className = "po-option"
+      b.className = "po-item"
       b.append(name)
-      if (note) { const n = document.createElement("span"); n.className = "po-option-note"; n.textContent = note; b.append(n) }
+      if (note) { const n = document.createElement("span"); n.className = "po-item-note"; n.textContent = note; b.append(n) }
       b.addEventListener("click", pick)
       return b
     }
@@ -165,13 +166,14 @@ class PoDatePick extends HTMLElement {
     if (value) list.append(row("No date", "", () => this.#pick("")))
     // Any other day, written as a person would; the day it means shows beside it, and Enter takes it.
     const other = document.createElement("label")
-    other.className = "po-option"
+    other.className = "po-item"
     const field = document.createElement("input")
-    field.className = "po-option-field"
+    field.className = "po-field po-input"
+    field.dataset.variant = "bare"
     field.placeholder = "Other day, like 12 Nov"
     field.setAttribute("aria-label", `Type another ${this.#label}`)
     const note = document.createElement("span")
-    note.className = "po-option-note"
+    note.className = "po-item-note"
     note.setAttribute("aria-live", "polite")
     field.addEventListener("input", () => {
       const day = readDay(field.value, today)
@@ -228,14 +230,18 @@ class PoDatePick extends HTMLElement {
   #pick(value) {
     this.value = value
     this.#close()
+    // Back on the button after a pick, the list stays closed: only reaching the button opens it.
+    this.#returning = true
     this.#button.focus({ preventScroll: true })
+    this.#returning = false
     this.dispatchEvent(new CustomEvent("change", { bubbles: true, detail: { value } }))
   }
 
   #inside(node) { return !!node && (this.contains(node) || !!this.#list?.contains(node)) }
   #toggle = () => (this.#open ? this.#close() : this.#show())
   // Reached by the keyboard, not a click (which toggles it itself): the list opens.
-  #onFocus = () => { if (this.#button.matches(":focus-visible")) this.#show() }
+  #returning = false
+  #onFocus = () => { if (!this.#returning && this.#button.matches(":focus-visible")) this.#show() }
   #onKey = (e) => {
     if (e.key !== "Escape" || !this.#open) return
     e.preventDefault()

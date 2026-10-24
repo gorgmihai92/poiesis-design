@@ -1,6 +1,6 @@
 /* Component · collapsible. Secondary content under its trigger. Native <details>: Enter and Space open and close
    it, and it says whether it is open, with no script. The trigger is a pressable; a chevron turns when open, and
-   the content folds open and closed like a fold (fold.css): its height glides as it fades, clipped, on
+   the content folds open and closed like a fold (motion.css): its height glides as it fades, clipped, on
    --duration-base. Browsers that can't animate to its natural height open it at once.
 
      <details class="po-collapsible">

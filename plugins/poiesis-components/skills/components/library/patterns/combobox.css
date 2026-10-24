@@ -1,7 +1,7 @@
-/* Composition · combobox. A field with suggestions under it: the field (an input, or a line's own field), then a
+/* Pattern · combobox. A field with suggestions under it: the field (an input, or a line's own field), then a
    fold holding a list of options and the line counting the rest (combobox.js for the markup and the keys). The list
    opens in the page, under the field, and folds open and closed like any fold. */
 
-@layer poiesis.compositions {
+@layer poiesis.patterns {
   po-combobox { display: block; }
 }

@@ -1,0 +1,93 @@
+/* Component · checkbox. One thing on or off. A native checkbox inside a quiet square, so it is reached with Tab,
+   flipped with Space, sent with its form and named by a label, with no script; the square is the hit area, a control
+   high (a step taller on touch screens), grey on hover.
+
+     <label class="po-checkbox"><input type="checkbox" aria-label="Done: Send the contract"></label>
+     <label class="po-checkbox" data-variant="switch"><input type="checkbox" role="switch" id="weekly" checked></label>
+     <label class="po-label" for="weekly">Email me a weekly summary</label>
+
+   data-variant  check (default: marks an item done; a faint circle that turns into the circle with a tick, in
+                 success, one mark for done everywhere, G6) · switch (a setting that applies at once: on, the
+                 selected fill with its thumb at the end, G3; off, the line grey)
+
+   The tick grows in as it is checked. Several checked at once go one after another: give each a step,
+   style="--po-step: 1" (2, 3 …), and each waits that many --duration-fast. In a list row's mark column it takes the
+   column's size. Its focus ring is the shared one (focus.css). */
+
+@layer poiesis.components {
+  .po-checkbox {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: var(--po-mark, var(--control-sm));
+    block-size: var(--po-mark, var(--control-sm));
+    border-radius: var(--radius-m);
+    color: var(--faint);
+    cursor: pointer;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+  }
+  @media (pointer: coarse) {
+    .po-checkbox { inline-size: var(--po-mark, var(--control-md)); block-size: var(--po-mark, var(--control-md)); }
+  }
+  /* The checkbox covers the whole square, unseen: the mark is what shows. */
+  .po-checkbox > input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+  .po-checkbox:has(> input:disabled) { opacity: var(--disabled); cursor: not-allowed; pointer-events: none; }
+  .po-checkbox:has(> input[aria-invalid="true"]) { box-shadow: 0 0 0 var(--ring) var(--danger); }
+
+  /* Check */
+  .po-checkbox:not([data-variant="switch"])::after {
+    content: "";
+    inline-size: var(--icon);
+    block-size: var(--icon);
+    background: currentColor;
+    -webkit-mask: var(--po-icon-circle) center / contain no-repeat;
+    mask: var(--po-icon-circle) center / contain no-repeat;
+  }
+  .po-checkbox:not([data-variant="switch"]):hover { background: var(--surface); color: var(--ink); }
+  .po-checkbox:not([data-variant="switch"]):has(> input:checked) { color: var(--success); }
+  .po-checkbox:not([data-variant="switch"]):has(> input:checked)::after {
+    -webkit-mask-image: var(--po-icon-success);
+    mask-image: var(--po-icon-success);
+  }
+
+  /* Switch: the track and a square thumb, a paper square inset evenly from the edge. */
+  .po-checkbox[data-variant="switch"] {
+    --po-thumb: calc(var(--space) * 4);
+    --po-inset: calc(var(--space) * 0.5);
+    inline-size: calc(var(--po-thumb) * 2);
+    block-size: calc(var(--po-thumb) + var(--po-inset) * 2);
+    border-radius: var(--radius-round);
+    background-color: var(--line-color);
+    background-image: linear-gradient(var(--paper), var(--paper));
+    background-size: var(--po-thumb) var(--po-thumb);
+    background-repeat: no-repeat;
+    background-position: left var(--po-inset) center;
+  }
+  .po-checkbox[data-variant="switch"]:has(> input:checked) {
+    background-color: var(--selected-bg);
+    background-image: linear-gradient(var(--selected-fg), var(--selected-fg));
+    background-position: right var(--po-inset) center;
+    box-shadow: inset 0 0 0 var(--selected-ring) var(--ink);
+  }
+  .po-checkbox[data-variant="switch"]:hover { opacity: var(--hover); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .po-checkbox { transition: background-color var(--duration-fast) var(--ease), background-position var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease); }
+    .po-checkbox:not([data-variant="switch"]):has(> input:checked)::after {
+      animation: po-check-in var(--duration-base) var(--ease) both;
+      animation-delay: calc(var(--po-step, 0) * var(--duration-fast));
+    }
+  }
+  @keyframes po-check-in {
+    from { opacity: 0; scale: 0.5; }
+  }
+}

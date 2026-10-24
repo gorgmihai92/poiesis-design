@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.11.0 (poiesis-components)
+The fundamentals only: one component for each thing people use, every variant a setting of it, nothing composed.
+Thirteen components, down from twenty-four; the compositions become patterns built on them. No app loads the
+library yet (Today still runs its own copies), so the old names go without aliases; when an app moves onto it:
+
+| Was | Now |
+|---|---|
+| `po-toggle` | `po-button` with a checkbox inside (or `aria-pressed`): pressed looks selected in any variant |
+| `po-switch` (on the input) | `<label class="po-checkbox" data-variant="switch">` around the input (`role="switch"` stays) |
+| `po-check` | `po-checkbox` (check is its default look) |
+| `po-line`, `po-line-mark`, `-text`, `-actions`, `-indent` | `po-item` in a `po-list`; `po-item-mark`, `-text`, `-actions`; `po-list-indent` |
+| `po-options`, `po-option`, `-note`, `-text`, `-detail`, `po-options-more` | `po-list data-variant="options"`, `po-item`, `po-item-note`, `-text`, `-detail`, `po-list-more` |
+| `po-line-field`, `po-option-field` | `po-field po-input data-variant="bare"` |
+| `po-due data-urgency` | `po-text data-tone` (`muted` for none) |
+| `po-meter data-value` | `po-progress data-variant="level" data-value` |
+| `po-spinner` | `po-icon data-icon="spinner" data-spin` |
+| `po-card`, `po-card-title` | `po-block po-box po-ui`, a strong title |
+| `po-fold`, `<po-morph>` (components) | the same names, now the motion primitive (`primitives/motion.css`, `motion.js`) |
+| `po-bar` in bars | `<progress class="po-progress">` |
+| `po-alert data-role` | `po-alert data-tone`: one attribute for a role's color everywhere |
+| compositions (`compositions/`, `@layer poiesis.compositions`) | patterns (`patterns/`, `@layer poiesis.patterns`) |
+
+- **Input** gains its settings: `data-variant="bare"` (no box, a rule under the words), `data-size`, icons at
+  either end (the box holds them and the control, and the field states follow the control), and several lines
+  (`textarea`).
+- **Button** gains pressed (the toggle) and an icon size that follows `data-size`.
+- **Checkbox** is new: check (the done mark) and switch, one native checkbox each, no script.
+- **List** is new: lines (rows with a mark column, a rule under the words, actions on hover) and options (a short
+  list to choose from), with one set of parts.
+- **Progress** gains level and tone; **icon** gains spin; **text** gains tone (`.po-text data-tone`).
+- **Removed, left to the app that needs them:** line tip (`<po-line-tip>`) and the line's cheer.
+- **Patterns:** combobox, picker, date pick, line form, pager, toast, bars, empty, masthead and sections, on the new
+  names; bars is built on progress.
+- `add.mjs` copies patterns with the components they are built from, and always the motion primitive.
+- Patterns, from a UX test: the combobox hides the suggestions that don't match again; a date picked with the
+  keyboard no longer opens the list again; the pager hands the focus to the other arrow at an end and announces
+  its range; the picker announces "nothing found"; the line form keeps the focus on Esc and announces a save; the
+  toast gives the focus back when it closes and Ctrl/⌘ Z presses its Undo from anywhere.
+- Focus: bare inputs and options rows show the shared focus ring; checkboxes join it in focus.css.
+
 ## 0.10.0 (poiesis-components)
 The rest of Today's general pieces.
 - **New components:**

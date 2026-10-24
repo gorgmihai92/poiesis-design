@@ -4,7 +4,12 @@
 
      <span class="po-icon" data-icon="grid" aria-hidden="true"></span>
 
-   The shapes are cells too (--po-icon-*), so alerts, the spinner and the status dot draw from this one set. A new
+   Spin: data-spin turns it, for something loading for an unknown time; when motion is reduced (I5) it stays still
+   and its label still says it is loading.
+
+     <span class="po-icon" data-icon="spinner" data-spin role="status" aria-label="Loading"></span>
+
+   The shapes are cells too (--po-icon-*), so alerts, checkboxes and the status dot draw from this one set. A new
    icon is drawn here, on the same grid. */
 
 :root {
@@ -65,4 +70,9 @@
   .po-icon[data-icon="search"] { --po-icon: var(--po-icon-search); }
   .po-icon[data-icon="arrow-left"] { --po-icon: var(--po-icon-arrow-left); }
   .po-icon[data-icon="arrow-right"] { --po-icon: var(--po-icon-arrow-right); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .po-icon[data-spin] { animation: po-spin calc(var(--duration-base) * 5) linear infinite; }
+  }
+  @keyframes po-spin { to { rotate: 360deg; } }
 }

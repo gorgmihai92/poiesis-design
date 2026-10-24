@@ -5,13 +5,13 @@
      @import "<poiesis-components>/library/poiesis-components.css";
 
    Four layers, each built only from the ones before: tokens (atoms and cells, in poiesis-ui), primitives (layout,
-   text, surface, pressable, field, focus), components (one thing each) and compositions (components joined, with
-   the behavior that joins them). Cascade layers keep that order, so a component always wins over a primitive, a
-   composition over a component, and a project's own CSS, outside the layers, wins over all. Import single files
-   instead to take only what a project uses. Tabs, tooltip, morph, line tip and the compositions with behavior also
-   need their script: poiesis-components.js. */
+   text, surface, pressable, field, focus, motion), components (the fundamentals: one thing each, every variant a
+   setting) and patterns (components joined, with the behavior that joins them). Cascade layers keep that order,
+   so a component wins over a primitive, a pattern over a component, and a project's own CSS, outside the layers,
+   wins over all. Import single files instead to take only what a project uses. Morph, tabs, tooltip and the
+   patterns with behavior also need their script: poiesis-components.js. */
 
-@layer poiesis.primitives, poiesis.components, poiesis.compositions;
+@layer poiesis.primitives, poiesis.components, poiesis.patterns;
 
 @import "./primitives/layout.css";
 @import "./primitives/text.css";
@@ -19,38 +19,29 @@
 @import "./primitives/pressable.css";
 @import "./primitives/field.css";
 @import "./primitives/focus.css";
+@import "./primitives/motion.css";
 
 @import "./components/icon.css";
 @import "./components/button.css";
-@import "./components/toggle.css";
-@import "./components/switch.css";
 @import "./components/input.css";
 @import "./components/label.css";
+@import "./components/checkbox.css";
+@import "./components/list.css";
 @import "./components/tabs.css";
 @import "./components/tooltip.css";
 @import "./components/collapsible.css";
-@import "./components/fold.css";
-@import "./components/morph.css";
-@import "./components/line.css";
-@import "./components/check.css";
-@import "./components/options.css";
-@import "./components/due.css";
-@import "./components/bars.css";
-@import "./components/line-tip.css";
 @import "./components/alert.css";
-@import "./components/card.css";
-@import "./components/separator.css";
 @import "./components/progress.css";
-@import "./components/meter.css";
-@import "./components/spinner.css";
 @import "./components/status-dot.css";
+@import "./components/separator.css";
 
-@import "./compositions/combobox.css";
-@import "./compositions/date-pick.css";
-@import "./compositions/line-form.css";
-@import "./compositions/picker.css";
-@import "./compositions/pager.css";
-@import "./compositions/toast.css";
-@import "./compositions/empty.css";
-@import "./compositions/masthead.css";
-@import "./compositions/sections.css";
+@import "./patterns/combobox.css";
+@import "./patterns/picker.css";
+@import "./patterns/date-pick.css";
+@import "./patterns/line-form.css";
+@import "./patterns/pager.css";
+@import "./patterns/toast.css";
+@import "./patterns/bars.css";
+@import "./patterns/empty.css";
+@import "./patterns/masthead.css";
+@import "./patterns/sections.css";

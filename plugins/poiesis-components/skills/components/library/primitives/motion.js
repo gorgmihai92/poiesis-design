@@ -1,10 +1,10 @@
-// Component · morph: the behavior of <po-morph>. One place whose content is swapped for other content (a button
+// Primitive · motion: the behavior of <po-morph>. One place whose content is swapped for other content (a button
 // that becomes its form, a question that becomes its answer, an empty state that becomes a list):
 //   - its height glides from the old content's to the new content's instead of jumping, so what follows moves
 //     smoothly (K3, K9), and a swap during a glide carries on from where the height is;
 //   - new content fades in; old content goes at once, so the two never show together.
 // Nothing to set: it follows whatever is put inside it. The length and easing are the cells --duration-base and
-// --ease (morph.css), so under reduced motion, where the cells are 0, the height changes at once (I5).
+// --ease (motion.css), so under reduced motion, where the cells are 0, the height changes at once (I5).
 
 class PoMorph extends HTMLElement {
   #height = -1

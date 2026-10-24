@@ -1,8 +1,8 @@
-/* Composition · toast. What just happened, on one line at the bottom of the screen, with its action (toast.js for
+/* Pattern · toast. What just happened, on one line at the bottom of the screen, with its action (toast.js for
    the markup and the timing): an alert on the paper, as wide as its words, centered, above the section names
    stacked at the bottom of a phone screen. It fades in. */
 
-@layer poiesis.compositions {
+@layer poiesis.patterns {
   po-toast {
     position: fixed;
     inset-inline: calc(var(--space) * 4);

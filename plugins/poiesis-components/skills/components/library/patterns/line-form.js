@@ -1,5 +1,5 @@
-// Composition · line form: the behavior of <po-line-form>, one line to add or edit an item, the same everywhere:
-// a line (line) with its own field, a date pick, a ✓ that saves and an optional ✕, and under it the place where the
+// Pattern · line form: the behavior of <po-line-form>, one line to add or edit an item, the same everywhere:
+// a list item (list) with its own bare field (input), a date pick, a ✓ that saves and an optional ✕, and under it the place where the
 // date list opens (a fold). The page renders the markup; this keeps it working as one line (ux W6, K10):
 //   - quiet until written: the ✓ and ✕ show once there are words; the date button too, or from the start with
 //     date-always (a date can be picked first);
@@ -7,8 +7,9 @@
 //   - leaving the line (a click or Tab away) saves an edit, and adds a new item with add-on-blur, so words written
 //     are never lost; a new line left empty lets go of a date picked alone; focus moving inside the line or its list,
 //     or the window losing focus, is not leaving;
-//   - Esc empties a line with words in it and lets go of the focus (an edit closes); on an empty line Esc goes on to
-//     whatever holds it; the date list takes the first Esc for itself;
+//   - Esc empties a line with words in it and keeps the focus there, ready for new words (an edit closes); on an
+//     empty line Esc goes on to whatever holds it; the date list takes the first Esc for itself;
+//   - a save is said to screen readers ("Added: …", "Saved"), as the new row may appear elsewhere (I3);
 //   - its buttons don't take the focus from the field, so using them is not leaving the line, and a date picked
 //     brings the focus back to the field.
 // It sends "save" (detail.text, detail.due, detail.via: "enter" or "blur"), cancelable, and "cancel". After a save
@@ -16,31 +17,37 @@
 // item follows another). edit marks a line editing an item: its first words and date are what "changed" compares.
 //
 //   <po-line-form date-always add-on-blur clear-on-save stay>
-//     <form class="po-line" data-rule="none">
-//       <span class="po-line-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
-//       <input class="po-line-field" placeholder="Add a task…" aria-label="Add a task">
+//     <form class="po-item" data-rule="none">
+//       <span class="po-item-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
+//       <input class="po-field po-input" data-variant="bare" placeholder="Add a task…" aria-label="Add a task">
 //       <span class="po-line-form-controls">
 //         <po-date-pick label="date"></po-date-pick>
 //         <button type="submit" class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon"
 //           aria-label="Add task"><span class="po-icon" data-icon="check" aria-hidden="true"></span></button>
 //       </span>
 //     </form>
-//     <div class="po-fold" inert><div><div class="po-line-indent" data-below></div></div></div>
+//     <div class="po-fold" inert><div><div class="po-list-indent" data-below></div></div></div>
 //   </po-line-form>
 
 class PoLineForm extends HTMLElement {
   #initial = { text: "", due: "" }
-  #dropped = false
+  #status = null
   #saving = false
 
   get #form() { return this.querySelector("form") }
-  get #field() { return this.querySelector(".po-line-field") }
+  get #field() { return this.querySelector("form .po-input") }
   get #date() { return this.querySelector("po-date-pick") }
   get #text() { return (this.#field?.value ?? "").trim() }
   get #due() { return this.#date?.value ?? "" }
 
   connectedCallback() {
     this.#initial = { text: this.#text, due: this.#due }
+    if (!this.#status) {
+      this.#status = document.createElement("span")
+      this.#status.className = "po-line-form-status"
+      this.#status.setAttribute("role", "status")
+      this.append(this.#status)
+    }
     this.addEventListener("submit", this.#onSubmit)
     this.addEventListener("input", this.#written)
     this.addEventListener("keydown", this.#onKey)
@@ -78,6 +85,7 @@ class PoLineForm extends HTMLElement {
     const go = this.dispatchEvent(new CustomEvent("save", { bubbles: true, cancelable: true, detail: { text: this.#text, due: this.#due, via } }))
     this.#saving = false
     if (!go) return
+    this.#status.textContent = this.hasAttribute("edit") ? "Saved" : `Added: ${this.#text}`
     if (this.hasAttribute("edit")) this.#initial = { text: this.#text, due: this.#due }
     if (this.hasAttribute("clear-on-save")) {
       this.#reset()
@@ -100,9 +108,7 @@ class PoLineForm extends HTMLElement {
       this.#cancel()
     } else if (this.#text) {
       e.preventDefault()
-      this.#dropped = true
       this.#reset()
-      this.#field?.blur()
     }
   }
 
@@ -122,7 +128,6 @@ class PoLineForm extends HTMLElement {
   #onLeave = () => {
     setTimeout(() => {
       if (!this.isConnected || !document.hasFocus() || this.contains(document.activeElement)) return
-      if (this.#dropped) { this.#dropped = false; return }
       if (this.hasAttribute("edit")) {
         if (this.#text && this.#changed) this.#save("blur")
         else this.#cancel()

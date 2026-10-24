@@ -1,4 +1,4 @@
-/* Composition · empty. What an empty place is for, and how to fill it (ux F2: an empty state says why and what to
+/* Pattern · empty. What an empty place is for, and how to fill it (ux F2: an empty state says why and what to
    do): a title, a line under it, and one action, centered in a box with a line around it. CSS only.
 
      <div class="po-empty">
@@ -7,7 +7,7 @@
        <button class="po-pressable po-button" data-variant="outline" data-size="sm">Guide me</button>
      </div> */
 
-@layer poiesis.compositions {
+@layer poiesis.patterns {
   .po-empty {
     box-sizing: border-box;
     display: grid;

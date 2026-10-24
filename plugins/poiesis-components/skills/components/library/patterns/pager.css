@@ -1,7 +1,7 @@
-/* Composition · pager. Which part of a long list shows, and arrows to the parts before and after (pager.js for
+/* Pattern · pager. Which part of a long list shows, and arrows to the parts before and after (pager.js for
    the attributes): the range in muted words on the left, the arrows at the end of the row. */
 
-@layer poiesis.compositions {
+@layer poiesis.patterns {
   po-pager {
     display: flex;
     flex-wrap: wrap;

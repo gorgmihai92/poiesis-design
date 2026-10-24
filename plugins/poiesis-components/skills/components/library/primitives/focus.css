@@ -1,11 +1,14 @@
-/* Primitive · focus. One focus ring for everything that takes focus: full strength, in the info color (C3, I2).
-   An outline, so it also shows in forced-colors mode and never changes the size of what it surrounds (K3). */
+/* Primitive · focus. One focus ring for everything that takes focus (pressables, fields, checkboxes, .po-focus):
+   full strength, in the info color (C3, I2). An outline, so it also shows in forced-colors mode and never changes
+   the size of what it surrounds (K3). */
 
 @layer poiesis.primitives {
   .po-focus:focus-visible,
   .po-pressable:focus-visible,
   .po-pressable:has(> input:focus-visible),
-  .po-field:focus-visible {
+  .po-checkbox:has(> input:focus-visible),
+  .po-field:focus-visible,
+  .po-field:has(> :focus-visible) {
     outline: var(--ring) solid var(--info);
     outline-offset: 0;
   }

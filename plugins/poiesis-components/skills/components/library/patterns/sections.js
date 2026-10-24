@@ -1,4 +1,4 @@
-// Composition · sections: the behavior of <po-sections> (sections.css for the markup). It keeps the names, the
+// Pattern · sections: the behavior of <po-sections> (sections.css for the markup). It keeps the names, the
 // address and the scroll in step:
 //   - the current section is the last one that has reached its name's resting place; its name is the current one
 //     (aria-current="location"), and the address follows it (replaceState, so Back isn't filled with every

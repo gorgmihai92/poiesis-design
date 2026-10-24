@@ -1,6 +1,13 @@
 /* Primitive · text. The page text roles (H1), one class each: size, weight, leading, face and tracking together,
    and how lines wrap (T7: headings balanced, running text pretty). .po-ui is component text (T6): one size for
-   everything inside a component. .po-muted is secondary text. */
+   everything inside a component. .po-muted is secondary text.
+
+   Tone: a role's color on any text, for words whose color adds to what they say (how near a date is, a state).
+   The words carry the meaning too (C4); text in a role color is for short words beside ink text, not running text.
+
+     <span class="po-text" data-tone="warning">due tomorrow</span>
+
+   data-tone  info · success · warning · caution · danger · new · muted */
 
 @layer poiesis.primitives {
   .po-title, .po-heading, .po-subheading, .po-body, .po-caption, .po-code, .po-ui { margin: 0; }
@@ -13,5 +20,11 @@
   .po-code { font: var(--code-weight) var(--code-size) / var(--code-leading) var(--font-mono); letter-spacing: var(--code-tracking); }
   .po-ui { font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans); letter-spacing: var(--tracking-body); }
 
-  .po-muted { color: var(--muted); }
+  .po-muted, .po-text[data-tone="muted"] { color: var(--muted); }
+  .po-text[data-tone="info"] { color: var(--info); }
+  .po-text[data-tone="success"] { color: var(--success); }
+  .po-text[data-tone="warning"] { color: var(--warning); }
+  .po-text[data-tone="caution"] { color: var(--caution); }
+  .po-text[data-tone="danger"] { color: var(--danger); }
+  .po-text[data-tone="new"] { color: var(--new); }
 }

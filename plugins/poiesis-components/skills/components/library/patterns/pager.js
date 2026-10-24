@@ -1,10 +1,11 @@
-// Composition · pager: the behavior of <po-pager>, which part of a long list shows ("1–5 of 12"), and arrows to
+// Pattern · pager: the behavior of <po-pager>, which part of a long list shows ("1–5 of 12"), and arrows to
 // the part before and after. It draws itself from its attributes, with a button (button, icon) and a tooltip for
 // each arrow:
 //   - total, size (per part, 5 by default) and from (the first shown, counting from 0) say where the list stands;
 //   - note adds words after the range ("3 done");
 //   - the arrows are named by prev-label and next-label ("Newer feedback", "Earlier feedback"), and turn off at the
-//     ends.
+//     ends; an arrow that turns off while it has the focus hands it to the other one (I1);
+//   - the range is a live region, so a screen reader hears the new part (I3).
 // An arrow sends "change" (detail.from) and sets from; the page shows that part.
 //
 //   <po-pager total="12" from="0" note="3 done" prev-label="Newer feedback" next-label="Earlier feedback"></po-pager>
@@ -27,6 +28,7 @@ class PoPager extends HTMLElement {
     if (!this.#range) {
       this.#range = document.createElement("span")
       this.#range.className = "po-pager-range"
+      this.#range.setAttribute("aria-live", "polite")
       const arrows = document.createElement("span")
       arrows.className = "po-pager-arrows"
       this.#prev = this.#arrow("prev", "arrow-left")
@@ -73,6 +75,10 @@ class PoPager extends HTMLElement {
     const from = Math.min(Math.max(0, to), this.#last)
     if (from === this.#from) return
     this.setAttribute("from", String(from))
+    const [prev] = this.#prev
+    const [next] = this.#next
+    if (document.activeElement?.disabled && (document.activeElement === prev || document.activeElement === next))
+      (document.activeElement === prev ? next : prev).focus()
     this.dispatchEvent(new CustomEvent("change", { bubbles: true, detail: { from } }))
   }
 }

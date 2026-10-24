@@ -1,16 +1,75 @@
-/* Component · input. A line of text. Built on field (edge, states, focus).
+/* Component · input. Text typed in: one line, or several. Built on field (edge, states, focus).
 
      <input class="po-field po-input" id="name" placeholder="Untitled">
+     <textarea class="po-field po-input" id="note" rows="3"></textarea>
+
+   With icons, the box holds them and the control; the states follow the control (field.css):
+
+     <div class="po-field po-input">
+       <span class="po-icon" data-icon="search" aria-hidden="true"></span>
+       <input type="search" aria-label="Find a task">
+     </div>
+
+   data-variant  box (default: a 1px edge) · bare (no box: the words where the line's words are, a rule under them
+                 for an edge, info and the focus ring while it has keyboard focus; in a list row the row's rule is
+                 its edge)
+   data-size     sm · md (default) · lg
 
    Give it a label (<label for>) and, when it is invalid, aria-invalid="true" and aria-describedby pointing at the
-   message that says why (I3). */
+   message that says why (I3). Suggestions under it are the combobox pattern. */
 
 @layer poiesis.components {
   .po-input {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--space) * 2);
     inline-size: 100%;
     min-inline-size: 0;
     block-size: var(--control-md);
     padding-inline: var(--control-pad);
   }
+  .po-input[data-size="sm"] { block-size: var(--control-sm); --icon: var(--icon-sm); }
+  .po-input[data-size="lg"] { block-size: var(--control-lg); }
+
+  /* Several lines: as tall as its words, from one control high. */
+  textarea.po-input, .po-input:has(> textarea) {
+    block-size: auto;
+    min-block-size: var(--control-md);
+    padding-block: calc((var(--control-md) - 1lh) / 2);
+    resize: none;
+    field-sizing: content;
+  }
+  .po-input:has(> textarea) { align-items: start; }
+
+  /* The control inside a box with icons: no box of its own; the box shows the states. */
+  .po-input > :is(input, textarea) {
+    flex: 1;
+    min-inline-size: 0;
+    block-size: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    outline: none;
+    appearance: none;
+    resize: none;
+    field-sizing: content;
+  }
+  .po-input > textarea { block-size: auto; }
+  .po-input > :is(input, textarea)::placeholder { color: var(--muted); opacity: 1; }
+  .po-input > .po-icon { color: var(--muted); }
+
+  /* Bare: no box; a rule under the words, info on keyboard focus, with the shared ring (I2). */
+  .po-input[data-variant="bare"] {
+    padding-inline: 0;
+    border-width: 0 0 1px;
+    border-radius: 0;
+    border-color: var(--divider);
+  }
+  .po-input[data-variant="bare"]:is(:focus-visible, :has(> :focus-visible)) { border-color: var(--info); }
+  .po-input[data-variant="bare"]:is([aria-invalid="true"], :has(> [aria-invalid="true"])) { border-color: var(--danger); }
+  .po-input[data-variant="bare"]:is(:disabled, :has(> :disabled)) { background: transparent; }
 }

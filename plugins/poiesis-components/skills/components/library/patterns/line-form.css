@@ -1,10 +1,19 @@
-/* Composition · line form. One line to add or edit an item: a line with its own field, then its controls (a date
+/* Pattern · line form. One line to add or edit an item: a line with its own field, then its controls (a date
    pick, ✓, ✕), and under it the place where the date list opens (line-form.js for the markup and the keys). Quiet
    until written: only the field shows (and the date button with date-always); the controls come with the words. */
 
-@layer poiesis.compositions {
+@layer poiesis.patterns {
   po-line-form { display: block; }
   .po-line-form-controls { display: flex; align-items: center; }
+  /* What a save says to screen readers: read, never seen. */
+  .po-line-form-status {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
   po-line-form:not([data-written]) .po-line-form-controls > :not(po-date-pick),
   po-line-form:not([data-written]):not([date-always]) .po-line-form-controls > po-date-pick { display: none; }
 }

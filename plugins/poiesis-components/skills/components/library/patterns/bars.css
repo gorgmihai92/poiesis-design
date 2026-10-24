@@ -1,0 +1,25 @@
+/* Pattern · bars. A few counts side by side, as rows: a name, a progress bar as long as its count against the
+   largest, and the count itself, so the number is always read in words too (C4). For a handful of categories
+   (kinds of work, times of day, weekdays); one series, one color, no axis.
+
+     <p class="po-ui"><strong>Kinds of work done</strong></p>
+     <div class="po-bars">
+       <span>write</span><progress class="po-progress" value="6" max="6" aria-label="write: 6"></progress><span>6</span>
+       <span>build</span><progress class="po-progress" value="3" max="6" aria-label="build: 3"></progress><span>3</span>
+     </div>
+
+   Each bar's max is the largest count, so the longest bar fills its row. */
+
+@layer poiesis.patterns {
+  .po-bars {
+    display: grid;
+    grid-template-columns: minmax(0, calc(var(--space) * 24)) minmax(0, 1fr) calc(var(--space) * 8);
+    align-items: center;
+    gap: calc(var(--space) * 2);
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  .po-bars > :nth-child(3n + 1) { color: var(--muted); }
+  .po-bars > :nth-child(3n) { text-align: end; font-variant-numeric: tabular-nums; }
+}

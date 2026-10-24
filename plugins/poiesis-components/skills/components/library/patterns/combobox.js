@@ -1,5 +1,5 @@
-// Composition · combobox: the behavior of <po-combobox>, a field with suggestions under it. It joins an input
-// (po-input), a fold (po-fold) and a list of options (po-options) already in it:
+// Pattern · combobox: the behavior of <po-combobox>, a field with suggestions under it. It joins an input
+// (po-input), a fold (po-fold) and a list of options (po-list, options look) already in it:
 //   - typing opens the list under the field, in the page (ux K11), with the options that have a word starting with
 //     what is typed, in the list's own order (ux K7); at most `max` (5 by default) show, and a muted line counts the
 //     rest (ux W4); filter="none" leaves filtering to the page, which then only puts the options it wants inside;
@@ -17,8 +17,8 @@
 //   <po-combobox>
 //     <input class="po-field po-input" aria-label="Verb">
 //     <div class="po-fold" inert><div>
-//       <ul class="po-options" role="listbox" aria-label="Verbs">
-//         <li class="po-option" role="option">Write</li> …
+//       <ul class="po-list" data-variant="options" role="listbox" aria-label="Verbs">
+//         <li class="po-item" role="option">Write</li> …
 //       </ul>
 //     </div></div>
 //   </po-combobox>
@@ -49,10 +49,10 @@ class PoCombobox extends HTMLElement {
     input.setAttribute("aria-controls", list.id)
     input.setAttribute("autocomplete", "off")
     // The count of the rest, as the list's last row, so it lines up with the options.
-    this.#more = list.querySelector(".po-options-more")
+    this.#more = list.querySelector(".po-list-more")
     if (!this.#more) {
       this.#more = document.createElement("li")
-      this.#more.className = "po-options-more"
+      this.#more.className = "po-list-more"
       this.#more.setAttribute("role", "presentation")
       list.append(this.#more)
     }

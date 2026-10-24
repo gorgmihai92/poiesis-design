@@ -1,4 +1,4 @@
-/* Composition · sections. A long page of sections whose names always show (ux R4): the names of sections passed
+/* Pattern · sections. A long page of sections whose names always show (ux R4): the names of sections passed
    stack at the top, those to come at the bottom, and the current one rides with its section between them, in
    ink, the others muted (ui H5). One markup for every width: on narrow screens the names sit across the page
    above their sections; from 64rem, in a column of their own, each level with the start of its section, with what
@@ -22,7 +22,7 @@
    above, so a section starts where its name rests; the last one is tall enough to reach its place. --po-nav sets
    the width of the names' column (half the measure by default). */
 
-@layer poiesis.compositions {
+@layer poiesis.patterns {
   po-sections {
     --po-row: var(--control-sm);
     --po-top: 0rem;

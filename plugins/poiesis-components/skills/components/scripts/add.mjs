@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-// Copies components into a project: the primitives and the icon set (every component is built on them), the
-// components and compositions asked for (their .css, and their .js when they have behavior), the components a
-// composition is built from, and an entry stylesheet and script that load exactly those. The copies are the project's own: change them freely; nothing is linked back.
+// Copies the library into a project: the primitives and the icon set (every component is built on them), the
+// components and patterns asked for (their .css, and their .js when they have behavior), the components a pattern
+// is built from, and an entry stylesheet and script that load exactly those. The copies are the project's own:
+// change them freely; nothing is linked back.
 //
 //   node add.mjs button tabs alert --to src/poiesis   some components
 //   node add.mjs all --to src/poiesis                 every component
@@ -21,27 +22,28 @@ const opt = (name) => {
   return i >= 0 ? argv[i + 1] : undefined;
 };
 const names = argv.filter((a, i) => !a.startsWith('--') && argv[i - 1] !== '--to');
-const PRIMITIVES = ['layout', 'text', 'surface', 'pressable', 'field', 'focus'];
-// The icon set is shared: alerts, the collapsible, the spinner and the status dot draw from it.
+const PRIMITIVES = ['layout', 'text', 'surface', 'pressable', 'field', 'focus', 'motion'];
+// The icon set is shared: alerts, checkboxes, the collapsible and the status dot draw from it.
 const list = (dir) => readdirSync(join(LIB, dir)).filter((f) => f.endsWith('.css')).map((f) => f.replace(/\.css$/, ''));
 const components = list('components').filter((n) => n !== 'icon');
-const compositions = list('compositions');
-const available = [...components, ...compositions];
-// The components each composition is built from, copied with it.
+const patterns = list('patterns');
+const available = [...components, ...patterns];
+// The components each pattern is built from, copied with it.
 const PARTS = {
-  combobox: ['input', 'line', 'fold', 'options'],
-  'date-pick': ['button', 'options', 'due', 'fold'],
-  'line-form': ['line', 'button', 'fold', 'date-pick'],
-  picker: ['line', 'options'],
+  combobox: ['input', 'list'],
+  picker: ['input', 'list'],
+  'date-pick': ['button', 'input', 'list'],
+  'line-form': ['input', 'list', 'button', 'date-pick'],
   pager: ['button', 'tooltip'],
   toast: ['alert', 'button'],
+  bars: ['progress'],
   empty: ['button'],
   masthead: ['button'],
   sections: [],
 };
 
 if (argv.includes('--list') || !names.length) {
-  console.log(`Components: ${['icon', ...components].join(', ')}\nCompositions: ${compositions.join(', ')}\nUsage: node add.mjs <names…|all> --to <dir> [--force]`);
+  console.log(`Components: ${['icon', ...components].join(', ')}\nPatterns: ${patterns.join(', ')}\nUsage: node add.mjs <names…|all> --to <dir> [--force]`);
   process.exit(names.length || argv.includes('--list') ? 0 : 2);
 }
 const to = opt('to');
@@ -57,15 +59,16 @@ if (unknown.length) {
 
 const all = names.includes('all');
 const wanted = new Set(available.filter((n) => all || names.includes(n)));
-// A composition's parts, and theirs (a line form brings the date pick, and the date pick its options).
+// A pattern's parts, and theirs (a line form brings the date pick, and the date pick its list).
 for (const n of wanted) for (const part of PARTS[n] ?? []) wanted.add(part);
-const dirOf = (n) => (compositions.includes(n) ? 'compositions' : 'components');
+const dirOf = (n) => (patterns.includes(n) ? 'patterns' : 'components');
 const chosen = available.filter((n) => wanted.has(n));
 const scripts = chosen.filter((n) => existsSync(join(LIB, dirOf(n), `${n}.js`)));
 const files = [
   ...PRIMITIVES.map((p) => `primitives/${p}.css`),
   'components/icon.css',
   ...chosen.map((n) => `${dirOf(n)}/${n}.css`),
+  'primitives/motion.js',
   ...scripts.map((n) => `${dirOf(n)}/${n}.js`),
 ];
 
@@ -88,18 +91,19 @@ write('poiesis-components.css', (target) => writeFileSync(target, [
   '/* Poiesis components: the primitives, the icon set and the components this project uses. Import after',
   '   poiesis-ui\'s tokens (poiesis.css, then a theme). */',
   '',
-  '@layer poiesis.primitives, poiesis.components, poiesis.compositions;',
+  '@layer poiesis.primitives, poiesis.components, poiesis.patterns;',
   '',
   ...files.filter((f) => f.endsWith('.css')).map((f) => `@import "./${f}";`),
   '',
 ].join('\n')));
-if (scripts.length)
-  write('poiesis-components.js', (target) => writeFileSync(target, [
-    '// Poiesis components: the behavior of the components that need it. Load once, as a module.',
-    ...scripts.map((n) => `import "./${dirOf(n)}/${n}.js"`),
-    '',
-  ].join('\n')));
+write('poiesis-components.js', (target) => writeFileSync(target, [
+  '// Poiesis components: the behavior of the pieces that need it (the morph, and these components and patterns).',
+  '// Load once, as a module.',
+  'import "./primitives/motion.js"',
+  ...scripts.map((n) => `import "./${dirOf(n)}/${n}.js"`),
+  '',
+].join('\n')));
 
-console.log('\nNo packages to install. Import poiesis-ui\'s tokens, then poiesis-components.css'
-  + (scripts.length ? ', and load poiesis-components.js as a module.' : '.'));
+console.log('\nNo packages to install. Import poiesis-ui\'s tokens, then poiesis-components.css, and load'
+  + ' poiesis-components.js as a module.');
 console.log('Then check with poiesis-ui:ui-auditor and poiesis-ux:ux-tester.');
