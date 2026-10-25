@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.6 (poiesis-components)
+- **Nav:** the links you are not on are lighter (between muted and faint), so the current one stands out clearly;
+  they stay strong and turn ink when pointed at.
+
 ## 0.13.5 (poiesis-components)
 - **Icons:** `arrow-up` and `arrow-down`, for a change in a figure (a price higher or lower than before), in a role's
   colour beside its words.
