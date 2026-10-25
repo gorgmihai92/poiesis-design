@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.8 (poiesis-components)
+- **Icons:** `home`, `box` (products), `chart` (analytics) and `gear` (settings), for an app's places.
+- **Nav:** a link may start with an icon; it takes the link's colour.
+
 ## 0.13.7 (poiesis-components)
 - **Icons:** `card` (a payment card: payments), `document` (a page: invoices, documents), `key` (signing in, a
   secret) and `calendar` (a date; `calendar-plus` stays for adding one).
