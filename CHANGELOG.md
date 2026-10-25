@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.13.3 (poiesis-components)
+- **Icons:** `user` (a person: an account, a profile) and `plug` (a plug: a connection to another service, integrations).
+
 ## 0.13.2 (poiesis-components)
 - **Icon:** `mail` (an envelope), for an email: a message the app sends, a list of emails.
 

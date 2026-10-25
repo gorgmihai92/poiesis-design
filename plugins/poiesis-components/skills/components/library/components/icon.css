@@ -17,6 +17,8 @@
   --po-icon-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E");
   --po-icon-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E");
   --po-icon-mail: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M3 5h18v14H3z'/%3E%3Cpath d='M3 6l9 7 9-7'/%3E%3C/svg%3E");
+  --po-icon-user: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21c0-4 3.6-7 8-7s8 3 8 7'/%3E%3C/svg%3E");
+  --po-icon-plug: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M9 3v5M15 3v5M6 8h12v4a6 6 0 0 1-12 0zM12 18v3'/%3E%3C/svg%3E");
   --po-icon-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M3 5h18v14H3z'/%3E%3Cpath d='M3 16l5-5 5 5 3-3 5 5'/%3E%3Ccircle cx='15.5' cy='9' r='1.5'/%3E%3C/svg%3E");
   --po-icon-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'/%3E%3C/svg%3E");
   --po-icon-filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M4 6h16M7 12h10M10 18h4'/%3E%3C/svg%3E");
@@ -59,6 +61,8 @@
   .po-icon[data-icon="grid"] { --po-icon: var(--po-icon-grid); }
   .po-icon[data-icon="image"] { --po-icon: var(--po-icon-image); }
   .po-icon[data-icon="mail"] { --po-icon: var(--po-icon-mail); }
+  .po-icon[data-icon="user"] { --po-icon: var(--po-icon-user); }
+  .po-icon[data-icon="plug"] { --po-icon: var(--po-icon-plug); }
   .po-icon[data-icon="filter"] { --po-icon: var(--po-icon-filter); }
   .po-icon[data-icon="spinner"] { --po-icon: var(--po-icon-spinner); }
   .po-icon[data-icon="info"] { --po-icon: var(--po-icon-info); }
