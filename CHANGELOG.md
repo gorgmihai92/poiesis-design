@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.5 (poiesis-components)
+- **Icons:** `arrow-up` and `arrow-down`, for a change in a figure (a price higher or lower than before), in a role's
+  colour beside its words.
+
 ## 0.13.4 (poiesis-components)
 - **Nav:** every link strong; the others muted, the current one ink (no fill), so the names keep their width when
   the current one moves and where you are reads by contrast. Pointing at a link turns it ink.
