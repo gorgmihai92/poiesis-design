@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.7 (poiesis-components)
+- **Icons:** `card` (a payment card: payments), `document` (a page: invoices, documents), `key` (signing in, a
+  secret) and `calendar` (a date; `calendar-plus` stays for adding one).
+
 ## 0.13.6 (poiesis-components)
 - **Nav:** the links you are not on are lighter (between muted and faint), so the current one stands out clearly;
   they stay strong and turn ink when pointed at.
