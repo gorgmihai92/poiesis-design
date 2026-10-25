@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.4 (poiesis-components)
+- **Nav:** every link strong; the others muted, the current one ink (no fill), so the names keep their width when
+  the current one moves and where you are reads by contrast. Pointing at a link turns it ink.
+
 ## 0.13.3 (poiesis-components)
 - **Icons:** `user` (a person: an account, a profile) and `plug` (a plug: a connection to another service, integrations).
 

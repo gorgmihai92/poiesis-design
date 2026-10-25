@@ -1,6 +1,6 @@
 {
   "name": "poiesis-components",
-  "version": "0.13.3",
+  "version": "0.13.4",
   "description": "The Poiesis component library: tokens, primitives, thirteen fundamental components (every variant a setting) and patterns built from them, all its own, plain CSS with a few small custom elements and no dependencies, copied into any web project; change the atoms and every component follows.",
   "author": {
     "name": "George Mihai",

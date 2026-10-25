@@ -1,8 +1,9 @@
 /* Pattern · nav. The places of an app or site, or the sections of a long page: links one under another (across
    the page on narrow screens, in a column from 64rem), in groups with a muted name if there are many. Every link
-   is ink, so the list reads at full contrast; the one you are on (aria-current: page for a page, location for a
-   section) is ink and strong, not a selected fill, so the list stays quiet. Links are pressables: a row each,
-   the surface behind the one pointed at. CSS only; the app sets aria-current.
+   is strong; the others are muted and the one you are on (aria-current: page for a page, location for a section)
+   is ink, so where you are reads by contrast alone, never by a selected fill, and the names don't shift when it
+   moves. Links are pressables: a row each, the surface behind the one pointed at, ink while pointed at. CSS only;
+   the app sets aria-current.
 
      <nav class="po-nav" aria-label="Sections">
        <p class="po-nav-group">Settings</p>
@@ -36,13 +37,13 @@
     inline-size: 100%;
     block-size: var(--control-sm);
     padding-inline: var(--control-pad);
-    color: var(--ink);
-    font-weight: var(--weight-regular);
+    color: var(--muted);
+    font-weight: var(--weight-strong);
   }
+  .po-nav a:hover { color: var(--ink); }
   .po-nav a[aria-current]:not([aria-current="false"]) {
     background: transparent;
     color: var(--ink);
-    font-weight: var(--weight-strong);
     box-shadow: none;
     opacity: 1;
   }
