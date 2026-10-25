@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.13.2 (poiesis-components)
+- **Icon:** `mail` (an envelope), for an email: a message the app sends, a list of emails.
+
 ## 0.13.1 (poiesis-components)
 - **Icon:** `image` (a frame, a sun, hills), for a picture's place: an empty image slot, a thumbnail with no photo yet.
 
