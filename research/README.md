@@ -1,7 +1,9 @@
 # Sources behind the rules
 
-The sources behind the evidence-based rules and patterns in `plugins/poiesis-ux/skills/ux/` and
-`plugins/poiesis-copy/skills/copy/` (each rule names its source). One note per source in `notes/`; source files stay local (closed licences).
+The sources behind the evidence-based rules and patterns in `plugins/poiesis-ux/skills/ux/`,
+`plugins/poiesis-copy/skills/copy/` and `plugins/poiesis-studio/skills/` (each rule names its source). One note per
+source in `notes/`; source files stay local (closed licences). The notes written for poiesis-studio carry a
+**Read** line that says how much of the source was read: full text, part of the text, abstract only or title only.
 
 - **Forms:** [Seckler et al. 2014](notes/seckler-2014-web-forms.md), 20 form guidelines tested together;
   [Bargas-Avila et al. 2007](notes/bargas-avila-2007-error-timing.md), errors after completion, not while typing;
@@ -36,3 +38,23 @@ The sources behind the evidence-based rules and patterns in `plugins/poiesis-ux/
   [Mathur et al. 2019](notes/mathur-2019-dark-patterns.md);
   [Tiemessen et al. 2023](notes/tiemessen-2023-countdown-timers.md), countdown timers.
 - **Letter case:** [Tinker 1963](notes/tinker-1963-legibility.md), all capitals in running text.
+
+**Design exploration and reports** (poiesis-studio):
+- **Variants side by side:** [Dow et al. 2010](notes/dow-2010-parallel-prototyping.md), critique after several
+  prototypes instead of after each (part of the text);
+  [Tohidi et al. 2006](notes/tohidi-2006-right-design.md), one design seen alone is praised more than the same
+  design among three (most of the text).
+- **Judging early work:** [Greenberg & Buxton 2008](notes/greenberg-2008-usability-evaluation-harmful.md), an
+  argument against testing sketches as if they were products (part of the text).
+- **Pattern cards:** [Höök & Löwgren 2012](notes/hook-2012-strong-concepts.md), knowledge between one design and a
+  theory (abstract only).
+- **Saying it is a prototype:** [Coulton et al. 2016](notes/coulton-2016-design-fiction-deception.md), fictions
+  taken for real even when labelled (full text).
+- **Showing data:** [Franconeri et al. 2021](notes/franconeri-2021-visual-data-communication.md), a review of what
+  is known about charts for non-specialists (full text of the body);
+  [Cleveland & McGill 1984](notes/cleveland-1984-graphical-perception.md), the origin of the ranking of marks
+  (abstract only);
+  [Hullman et al. 2019](notes/hullman-2019-uncertainty-evaluation.md), how displays of uncertainty have been
+  evaluated (part of the text).
+- **Verdicts and numbers on a page:** [published pages from recorded runs](notes/poiesis-lab-2026-recorded-pages.md), observations
+  from the lab's recorded runs.
