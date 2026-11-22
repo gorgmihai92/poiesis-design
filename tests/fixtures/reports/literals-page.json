@@ -1,0 +1,191 @@
+{
+  "title": "Literals page, rebuilt",
+  "about": "Synthetic, for the test: a page that held its data in its own script, rebuilt from a data file and from the page's literals. Nothing here is data about anything.",
+  "sections": [
+    {
+      "heading": "Six topics",
+      "text": "Each dot is a topic of a made-up corpus. Further right, its share grew faster each year from 2020 to 2025; higher, it was a larger share of the corpus in 2025 (a logarithmic scale). A dot's mark is the verdict of the conclusion about it.",
+      "blocks": [
+        {
+          "type": "dots",
+          "from": "fixtures/literals-page/page_data.json",
+          "items": "topics",
+          "things": "topics",
+          "key": "id",
+          "name": "name",
+          "x": "momentum",
+          "y": "size",
+          "x_label": "Share growth a year, 2020–25",
+          "y_label": "Share of the corpus, 2025",
+          "x_unit": "%",
+          "y_unit": "%",
+          "x_signed": true,
+          "y_scale": "log",
+          "label": ["a", "b", "c"],
+          "verdicts": {
+            "from": "topics",
+            "map": {
+              "d": "b"
+            }
+          }
+        },
+        {
+          "type": "table",
+          "from": "fixtures/literals-page/page_data.json",
+          "items": "topics",
+          "things": "topics",
+          "key": "id",
+          "label": "Six topics",
+          "columns": [
+            { "field": "name", "name": "Topic" },
+            { "field": "size", "name": "Share, 2025", "number": true, "digits": 2, "unit": "%" },
+            { "field": "n25", "name": "Records, 2025", "number": true, "digits": 0 },
+            { "field": "momentum", "name": "Share growth a year, 2020–25", "number": true, "digits": 1, "signed": true, "unit": "%" },
+            { "field": "momentum_prev", "name": "2015–20", "number": true, "digits": 1, "signed": true, "unit": "%" }
+          ]
+        },
+        {
+          "type": "conclusions",
+          "name": "topics",
+          "heading": "What survived the challenge",
+          "from": "fixtures/literals-page/page-literals.json",
+          "rows": "TOPIC_VERDICTS",
+          "id_field": "id",
+          "text": "claim",
+          "shown": "v",
+          "fields": [{ "field": "why", "name": "Why" }]
+        },
+        {
+          "type": "series",
+          "heading": "Share of the corpus over time",
+          "from": "fixtures/literals-page/page_data.json",
+          "items": "topics",
+          "things": "topics",
+          "key": "id",
+          "values": "share",
+          "periods": "universe",
+          "period_label": "Year",
+          "focus": "a",
+          "digits": 2,
+          "unit": "% of the corpus"
+        },
+        {
+          "type": "series",
+          "heading": "The corpus a year",
+          "from": "fixtures/literals-page/page_data.json",
+          "rows": "universe",
+          "things": "universe",
+          "period": "key",
+          "period_label": "Year",
+          "digits": 0,
+          "unit": "records",
+          "columns": [{ "field": "value", "name": "Records" }]
+        },
+        {
+          "type": "series",
+          "heading": "Where two topics meet: records a year",
+          "from": "fixtures/literals-page/page_data.json",
+          "items": "cross",
+          "things": "cross",
+          "key": "id",
+          "values": "counts",
+          "periods": "universe",
+          "period_label": "Year",
+          "digits": 0,
+          "unit": "records a year"
+        }
+      ]
+    },
+    {
+      "heading": "Three studies",
+      "blocks": [
+        {
+          "type": "conclusions",
+          "from": "fixtures/literals-page/page-literals.json",
+          "rows": "FINDINGS",
+          "id_field": "id",
+          "text": "claim",
+          "shown": "v",
+          "fields": [{ "field": "why", "name": "Why" }]
+        },
+        {
+          "type": "table",
+          "from": "fixtures/literals-page/page-literals.json",
+          "rows": "STUDIES",
+          "things": "studies",
+          "key": "id",
+          "label": "Studies and what each found for three parties",
+          "columns": [
+            { "field": "cite", "name": "Study" },
+            { "field": "what", "name": "What it varied" },
+            { "field": "venue", "name": "Where and how many" },
+            { "field": "x.0", "name": "Party X" },
+            { "field": "x.1", "name": "Note" },
+            { "field": "y.0", "name": "Party Y" },
+            { "field": "y.1", "name": "Note" },
+            { "field": "z.0", "name": "Party Z" },
+            { "field": "z.1", "name": "Note" }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Two concepts",
+      "blocks": [
+        {
+          "type": "table",
+          "from": "fixtures/literals-page/page-literals.json",
+          "rows": "CHAIN",
+          "things": "chain",
+          "key": "3",
+          "label": "From purpose to concept",
+          "columns": [
+            { "field": "0", "name": "Purpose" },
+            { "field": "1", "name": "What must be true, and its source" },
+            { "field": "2", "name": "Principle" },
+            { "field": "3", "name": "Concept" }
+          ]
+        },
+        {
+          "type": "table",
+          "from": "fixtures/literals-page/page-literals.json",
+          "rows": "CONCEPTS",
+          "things": "concepts",
+          "key": "name",
+          "label": "Concepts and their tests",
+          "caption": "The marks ready and sharpen are about each test's design. They are not challenge verdicts.",
+          "columns": [
+            { "field": "name", "name": "Concept" },
+            { "field": "v", "name": "Test design" },
+            { "field": "ifthen", "name": "If, then" },
+            { "field": "assume", "name": "Riskiest assumption" },
+            { "field": "test", "name": "Smallest test" },
+            { "field": "kill", "name": "Kill criterion" }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Sources",
+      "blocks": [
+        {
+          "type": "table",
+          "from": "fixtures/literals-page/page-literals.json",
+          "rows": "SOURCES",
+          "things": "sources",
+          "key": "1",
+          "label": "Sources",
+          "columns": [
+            { "field": "0", "name": "Source" },
+            { "field": "1", "name": "Id" },
+            { "field": "2", "name": "Note" }
+          ]
+        }
+      ]
+    }
+  ],
+  "not_checked": [
+    "Anything about the world: the page, its data and its sources are synthetic, made for the test.",
+    "This page was rebuilt by poiesis-studio from page_data.json and from the page's own literals, copied out by script. Its verdicts come from challenge records written for the test over the page's wording."
+  ]
+}

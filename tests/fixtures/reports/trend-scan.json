@@ -1,0 +1,406 @@
+{
+  "title": "Frontier Tech Trend Scan",
+  "about": "Five areas, 2010–2026. Each number is the area's share of all articles, reviews and preprints indexed that year, per 100,000, so growth of the database itself doesn't count as growth of the field. 2026 is a partial year and is left out of every test.",
+  "sections": [
+    {
+      "heading": "Where each area stands in 2025",
+      "blocks": [
+        {
+          "type": "table",
+          "from": "fixtures/trend-scan/checks.json",
+          "things": "checks",
+          "key": "area_id",
+          "label": "Where each area stands in 2025",
+          "columns": [
+            {
+              "field": "area",
+              "name": "Area"
+            },
+            {
+              "field": "status",
+              "name": "Status"
+            },
+            {
+              "field": "share_2025",
+              "name": "Per 100k articles, 2025",
+              "number": true,
+              "digits": 1
+            },
+            {
+              "field": "cagr_15_20",
+              "name": "Growth a year, 2015–20",
+              "number": true,
+              "digits": 0,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "cagr_20_25",
+              "name": "Growth a year, 2020–25",
+              "number": true,
+              "digits": 0,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "z_2025",
+              "name": "2025 against its usual range",
+              "number": true,
+              "digits": 1,
+              "signed": true,
+              "unit": " SD"
+            },
+            {
+              "field": "reading",
+              "name": "Reading"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Share of all research, per 100,000 articles",
+      "text": "The published page switches between three measures; here each has its own figure. 2026 is a partial year, dashed.",
+      "blocks": [
+        {
+          "type": "series",
+          "heading": "Per 100,000 articles, reviews and preprints",
+          "from": "fixtures/trend-scan/series.json",
+          "things": "share",
+          "period": "year",
+          "period_label": "Year",
+          "series": "area",
+          "key": "area_id",
+          "value": "share",
+          "partial": "partial",
+          "digits": 1,
+          "unit": "works per 100,000 articles, reviews and preprints"
+        },
+        {
+          "type": "series",
+          "heading": "Per 100,000 of all records",
+          "from": "fixtures/trend-scan/series.json",
+          "things": "share_all",
+          "period": "year",
+          "period_label": "Year",
+          "series": "area",
+          "key": "area_id",
+          "value": "share_all",
+          "partial": "partial",
+          "digits": 1,
+          "unit": "works per 100,000 records of every type"
+        },
+        {
+          "type": "series",
+          "heading": "Raw count",
+          "from": "fixtures/trend-scan/series.json",
+          "things": "works",
+          "period": "year",
+          "period_label": "Year",
+          "series": "area",
+          "key": "area_id",
+          "value": "works",
+          "partial": "partial",
+          "digits": 0,
+          "unit": "works a year"
+        }
+      ]
+    },
+    {
+      "heading": "Signal or noise: recent growth against each area's usual range",
+      "text": "The published page draws these as dots on a scale of standard deviations. A table holds the same numbers: the dot map pattern places two numbers, and this test has one.",
+      "blocks": [
+        {
+          "type": "table",
+          "from": "fixtures/trend-scan/checks.json",
+          "things": "checks",
+          "key": "area_id",
+          "label": "Growth against the usual range",
+          "columns": [
+            {
+              "field": "area",
+              "name": "Area"
+            },
+            {
+              "field": "g_2023",
+              "name": "Share growth 2023",
+              "number": true,
+              "digits": 0,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "g_2024",
+              "name": "2024",
+              "number": true,
+              "digits": 0,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "g_2025",
+              "name": "2025",
+              "number": true,
+              "digits": 0,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "z_2023",
+              "name": "2023, SD from usual",
+              "number": true,
+              "digits": 1,
+              "signed": true
+            },
+            {
+              "field": "z_2024",
+              "name": "2024, SD",
+              "number": true,
+              "digits": 1,
+              "signed": true
+            },
+            {
+              "field": "z_2025",
+              "name": "2025, SD",
+              "number": true,
+              "digits": 1,
+              "signed": true
+            },
+            {
+              "field": "z_raw_2025",
+              "name": "2025 on raw counts, SD",
+              "number": true,
+              "digits": 1,
+              "signed": true
+            },
+            {
+              "field": "base_mean",
+              "name": "Usual growth a year",
+              "number": true,
+              "digits": 0,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "base_sd",
+              "name": "Give or take, points",
+              "number": true,
+              "digits": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Why raw counts mislead: OpenAlex grew sharply in 2025",
+      "blocks": [
+        {
+          "type": "series",
+          "from": "fixtures/trend-scan/corpus.json",
+          "things": "corpus-lines",
+          "period": "year",
+          "period_label": "Year",
+          "partial": "partial",
+          "digits": 0,
+          "unit": "records indexed each publication year",
+          "columns": [
+            {
+              "field": "all_works",
+              "name": "All records"
+            },
+            {
+              "field": "articles",
+              "name": "Articles, reviews and preprints"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "from": "fixtures/trend-scan/corpus.json",
+          "things": "corpus",
+          "key": "year",
+          "label": "Records indexed each year",
+          "columns": [
+            {
+              "field": "year",
+              "name": "Year"
+            },
+            {
+              "field": "all_works",
+              "name": "All records",
+              "number": true,
+              "digits": 0
+            },
+            {
+              "field": "all_growth_pct",
+              "name": "Change",
+              "number": true,
+              "digits": 1,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "articles",
+              "name": "Articles, reviews, preprints",
+              "number": true,
+              "digits": 0
+            },
+            {
+              "field": "articles_growth_pct",
+              "name": "Change",
+              "number": true,
+              "digits": 1,
+              "signed": true,
+              "unit": "%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Checking the synthetic biology jump, 2024 to 2025",
+      "blocks": [
+        {
+          "type": "table",
+          "from": "fixtures/trend-scan/synbio.json",
+          "things": "synbio",
+          "key": "country",
+          "label": "Synthetic biology by country",
+          "columns": [
+            {
+              "field": "country",
+              "name": "Country"
+            },
+            {
+              "field": "works_2024",
+              "name": "Works 2024",
+              "number": true,
+              "digits": 0
+            },
+            {
+              "field": "works_2025",
+              "name": "Works 2025",
+              "number": true,
+              "digits": 0
+            },
+            {
+              "field": "growth_pct",
+              "name": "Change",
+              "number": true,
+              "digits": 0,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "corpus_growth_pct",
+              "name": "Country's overall change",
+              "number": true,
+              "digits": 0,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "share_2024",
+              "name": "Per 100k 2024",
+              "number": true,
+              "digits": 1
+            },
+            {
+              "field": "share_2025",
+              "name": "Per 100k 2025",
+              "number": true,
+              "digits": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Who produces it, 2023–2025",
+      "blocks": [
+        {
+          "type": "table",
+          "from": "fixtures/trend-scan/checks.json",
+          "things": "checks",
+          "key": "area_id",
+          "label": "Who produces it",
+          "columns": [
+            {
+              "field": "area",
+              "name": "Area"
+            },
+            {
+              "field": "works_23_25",
+              "name": "Works",
+              "number": true,
+              "digits": 0
+            },
+            {
+              "field": "top_inst",
+              "name": "Top institution"
+            },
+            {
+              "field": "top_inst_pct",
+              "name": "Its share",
+              "number": true,
+              "digits": 1,
+              "unit": "%"
+            },
+            {
+              "field": "top_country",
+              "name": "Top country"
+            },
+            {
+              "field": "top_country_pct",
+              "name": "Its share",
+              "number": true,
+              "digits": 1,
+              "unit": "%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "What survived the challenge",
+      "blocks": [
+        {
+          "type": "conclusions",
+          "from": "fixtures/trend-scan/challenge.published.json",
+          "id_field": "id",
+          "text": "claim",
+          "shown": "verdict",
+          "fields": [
+            {
+              "field": "reason",
+              "name": "Why"
+            },
+            {
+              "field": "restated",
+              "name": "Now reads"
+            },
+            {
+              "field": "confidence",
+              "name": "Confidence"
+            },
+            {
+              "field": "rivals",
+              "name": "Rivals weighed"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "not_checked": [
+    "Patents, code, startups, funding and policy are not in this scan, so it can't say how far along the pipeline any area is. Patents need a free key from a patent office or Lens.org.",
+    "The search terms were not validated by reading a sample of matching works, so some matches are off-topic and some relevant work uses other words.",
+    "The usual range rests on 10 years of growth, so it is imprecise; a z near 2 or 3 is a lead, not proof.",
+    "OpenAlex changed its coverage in 2025. Shares correct for its size, not for which fields the new sources favour.",
+    "The second pass, with the article-only base and the synthetic biology checks, was not sent back to the challenger.",
+    "Institution and country shares count works of every type, not only articles.",
+    "No hold-out data were set aside, and 5 areas × 3 years is 15 comparisons. Synthetic biology's 2025 value (4.7 SD) survives that correction; values near 2 would not.",
+    "This is a quick run of the method, not a forecast. Nothing here says which area matters for you.",
+    "This page was rebuilt by poiesis-studio from the recorded run's files. Its verdicts come from challenge records written on 2026-11-22 over the published page's wording, with the challenger's recorded verdicts (fixtures/challenge-verdicts.json)."
+  ]
+}

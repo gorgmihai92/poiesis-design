@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Literals page (synthetic, for the test)</title>
+<!-- Synthetic, for the test. Nothing on this page is data about anything: the topics, studies, concepts and
+     sources are placeholders, and the numbers were made up to give the test a shape. It stands for a published
+     page that holds its data in its first script as literals, with the verdicts typed in beside the claims. -->
+</head>
+<body>
+<main id="page"></main>
+<script>
+const FIELD = {
+  years: [2020, 2021, 2022, 2023, 2024, 2025],
+  universe: [1000, 1100, 1250, 1300, 1420, 1600],
+  topics: [
+    { id: 'a', name: 'Topic A', size: 4.00, momentum: 32.0, prev: 10.5, n25: 64, share: [1.00, 1.30, 1.80, 2.40, 3.10, 4.00] },
+    { id: 'b', name: 'Topic B', size: 12.50, momentum: 4.2, prev: 6.0, n25: 200, share: [10.20, 10.60, 11.00, 11.50, 12.00, 12.50] },
+    { id: 'c', name: 'Topic C', size: 0.75, momentum: -3.1, prev: 1.4, n25: 12, share: [0.88, 0.85, 0.83, 0.80, 0.78, 0.75] },
+    { id: 'd', name: 'Topic D', size: 6.25, momentum: 5.0, prev: 5.5, n25: 100, share: [4.90, 5.10, 5.40, 5.70, 6.00, 6.25] },
+    { id: 'e', name: 'Topic E', size: 2.50, momentum: 0.0, prev: -2.0, n25: 40, share: [2.50, 2.40, 2.50, 2.60, 2.50, 2.50] },
+    { id: 'f', name: 'Topic F', size: 20.00, momentum: -1.0, prev: 0.5, n25: 320, share: [21.00, 20.80, 20.60, 20.40, 20.20, 20.00] },
+  ],
+  cross: [
+    { id: 'ab', name: 'A and B', counts: [2, 3, 5, 6, 8, 11] },
+    { id: 'ad', name: 'A and D', counts: [1, 1, 2, 2, 3, 4] },
+    { id: 'cf', name: 'C and F', counts: [0, 1, 0, 1, 1, 2] },
+  ],
+};
+const TOPIC_VERDICTS = [
+  { id: 'a', v: 'kept', claim: 'Topic A grew fastest of the six topics, from 1.00% to 4.00% of the corpus.', why: 'A placeholder reason.' },
+  { id: 'b', v: 'weakened', claim: 'Topic B and topic D grew together.', why: 'A placeholder reason.' },
+  { id: 'c', v: 'dropped', claim: 'Topic C is shrinking.', why: 'A placeholder reason.' },
+];
+const VERDICT_COLOR = { kept: '#2a7', weakened: '#c80', dropped: '#c33' };
+const topicVerdict = { a: 'kept', b: 'weakened', c: 'dropped', d: 'weakened' };
+const STUDIES = [
+  { id: 's1', cite: 'Study one', venue: 'Place one, n = 100', doi: 'synthetic-s1', what: 'Condition one', x: ['more', 'a note'], y: ['less', 'a note'], z: ['some'] },
+  { id: 's2', cite: 'Study two', venue: 'Place two, n = 200', doi: 'synthetic-s2', what: 'Condition two', x: ['more', 'a note'], y: ['some', 'a note'], z: ['less'] },
+  { id: 's3', cite: 'Study three', venue: 'Place three', doi: 'synthetic-s3', what: 'Condition three', x: ['less', 'a note'], y: ['more', 'a note'], z: ['some'] },
+];
+const FINDINGS = [
+  { id: 'F1', v: 'weakened', claim: 'Study one and study two agree on party X.', why: 'A placeholder reason.', studies: ['s1', 's2'] },
+  { id: 'F2', v: 'dropped', claim: 'Party Z is named in every study.', why: 'A placeholder reason.', studies: ['s1', 's2', 's3'] },
+];
+const CHAIN = [
+  ['Purpose one', 'Condition one, from study one', 'Principle one', 'Concept one'],
+  ['Purpose two', 'Condition two, from study two', 'Principle two', 'Concept two'],
+];
+const CONCEPTS = [
+  { rank: 1, v: 'ready', name: 'Concept one', ifthen: 'If one, then two.', assume: 'Assumption one.', test: 'Test one.', kill: 'Kill criterion one.', lead: true },
+  { rank: 2, v: 'sharpen', name: 'Concept two', ifthen: 'If three, then four.', assume: 'Assumption two.', test: 'Test two.', kill: 'Kill criterion two.', lead: false },
+];
+const STORY = [];
+const SOURCES = [
+  ['Source one', 'synthetic-1', 'A note'],
+  ['Source two', 'synthetic-2', 'A note'],
+  ['Source three', 'synthetic-3', 'A note'],
+];
+</script>
+<script>
+// The page's drawing code is left out: the test reads only the first script.
+</script>
+</body>
+</html>
