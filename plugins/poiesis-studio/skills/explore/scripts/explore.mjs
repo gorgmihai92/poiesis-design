@@ -33,6 +33,11 @@ const words = argv.slice(1).filter((a, i, rest) => !a.startsWith('--') && !(rest
 const root = resolve(opt('root') ?? '.');
 const fail = (message, code = 2) => { console.error(message); process.exit(code); };
 const escape = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+// A value for a properties block: a YAML double-quoted string (JSON's escapes are YAML's), with the two characters
+// YAML 1.1 read as line breaks escaped too.
+const yamlText = (s) => JSON.stringify(String(s)).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+// `from` as a list of quoted items, an id as a link: `\n  - "[[SK-002]]"`, or ` []`.
+const yamlFrom = (items) => items.map((f) => `\n  - ${yamlText(/^[A-Z]{1,3}-\d+$/.test(f) ? `[[${f}]]` : f)}`).join('') || ' []';
 const template = (name, values) =>
   readFileSync(join(TEMPLATES, name), 'utf8').replace(/\{\{(\w+)\}\}/g, (all, key) => (key in values ? values[key] : all));
 const write = (path, text) => {
@@ -112,6 +117,7 @@ if (command === 'next') {
   }
   write(join(dir, 'notes.md'), template('exploration.md', {
     question,
+    topic: yamlText(question),
     date: day,
     theme: `poiesis-ui ${material.tokens.version}`,
     sketches: ids.map((id) => `### ${id}: <name it once it exists>\n\n- **Id:** ${id}\n- **Written:** ${day}\n- **Generator:** <which one, from generators.md>\n- **Tries:** <what this sketch does differently, in one line>\n- **File:** ${id}.html\n`).join('\n'),
@@ -133,7 +139,7 @@ if (command === 'next') {
   const [id] = nextIds(root, 'PT');
   const path = join(root, 'design/patterns', `${id}-${slug(name)}.md`);
   write(path, template('pattern-card.md', {
-    id, name, date: today(), from: from.join(', '), exploration: relative(dirname(path), dir).split('\\').join('/'),
+    id, name, topic: yamlText(name), from_links: yamlFrom(from), date: today(), from: from.join(', '), exploration: relative(dirname(path), dir).split('\\').join('/'),
   }));
   console.log('The Decision line is the owner\'s. Leave it as it is.');
 } else if (command === 'check') {
