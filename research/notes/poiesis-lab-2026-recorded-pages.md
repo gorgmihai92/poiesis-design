@@ -1,14 +1,15 @@
 # Two published pages from recorded runs (observations, 2026-11-17 and 2026-11-22)
 
 - **Source:** the Poiesis Lab notebook, a private repository: `fixtures/trend-scan/`, `fixtures/responsibility-map/`,
-  `fixtures/challenge-verdicts.json`, `fixtures/README.md` and `lab/plan.md`. The files are not in this repository.
+  `fixtures/challenge-verdicts.json`, `fixtures/README.md`, `lab/plan.md`, `CLAUDE.md` and `PROTOCOL.md`. The files
+  are not in this repository.
 - **File:** none here.
 - **Licence:** the owner's own data.
 - **Evidence:** observation (O) · two pages published from runs of the Poiesis plugins on 2026-11-17, with the data
   files each page was built from.
-- **Read:** both `page.html` files in full (396 and 575 lines), `fixtures/README.md`, `lab/plan.md` and
-  `challenge-verdicts.json` in full; the data files by script (their keys, row counts and first rows), on
-  2026-11-22. The agents' raw reports were not saved, so they were not read.
+- **Read:** both `page.html` files in full (396 and 575 lines), `fixtures/README.md`, `lab/plan.md`, `CLAUDE.md`,
+  `PROTOCOL.md` and `challenge-verdicts.json` in full; the data files by script (their keys, row counts and first
+  rows), on 2026-11-22. The agents' raw reports were not saved, so they were not read.
 
 ## What it says
 
@@ -43,6 +44,13 @@
 - Both pages end with a list of what was not checked.
 - The colors are hand-picked values in each page, different on the two pages. Neither page uses the library's
   components.
+
+### The notebook's own rules
+- `CLAUDE.md`, rule 1: nothing invented; a fact comes from a source read, data a script computed, or
+  documentation read. Rule 3: a verdict is written once, by the challenge step, and not retyped elsewhere. Rule 5:
+  every report ends with "Not checked". Rule 7: in `design/lab/` no design rule applies.
+- `PROTOCOL.md`, "Entry gates": for poiesis-studio's `report`, a verdict is shown from its stamp, and anything
+  without one is shown as not challenged.
 
 ## What it means for the plugin
 - Rule U1: a verdict is shown from its stamp, by the script that verified the stamp, and is never typed into a page

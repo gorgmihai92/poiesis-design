@@ -22,7 +22,8 @@ each section blocks that point to files.
 | `dots` | things placed by two numbers (the dot map pattern), with a verdict's mark when `verdicts` links them to a conclusions block | rows of a file; `x`, `y`, `x_scale`/`y_scale` `log` |
 | `conclusions` | each conclusion with its verdict label (the verdict pattern), the reason, and the fields named | a note in `insights/` (headings with an `Id` line), or rows of a JSON file (`id_field`, `text`, `shown`) |
 
-A report's file holds references and prose only: no number, no verdict (U10). A field may be a path into a row
+A report's file holds references and prose only: the numbers in its figures and tables, and its verdicts, are
+read from files (U10). Prose may quote a number; it is the report's own words, and the page says so. A field may be a path into a row
 (`human.0`). An object of values (`{"2010": 919}`) is read as rows of `key` and `value`. `not_checked` is a list
 of lines and is required (U11).
 

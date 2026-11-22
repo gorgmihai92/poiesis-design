@@ -2,7 +2,7 @@
 // the small helpers that pick a value out of a row and write a number the way a page shows it. Reads only.
 
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { isAbsolute, join, relative, resolve } from 'node:path';
 
 export class ReportError extends Error {}
@@ -14,6 +14,8 @@ export function locate(root, path) {
   const rel = relative(resolve(root), full);
   if (isAbsolute(path) || rel.startsWith('..')) throw new ReportError(`${path}: a report reads only files inside its project`);
   if (!existsSync(full)) throw new ReportError(`${path}: no such file`);
+  // A link that leads outside the project is outside it.
+  if (relative(realpathSync(root), realpathSync(full)).startsWith('..')) throw new ReportError(`${path}: a report reads only files inside its project`);
   return full;
 }
 
