@@ -1,0 +1,20 @@
+{
+  "name": "poiesis-studio",
+  "version": "0.1.0",
+  "description": "Design exploration and reports for a lab notebook: several working sketches of one interaction, side by side, made from the Poiesis theme and held to no design rule, with pattern cards for what is worth keeping; and a showroom page built from the notebook's own files, where every verdict is read from its challenge record and never retyped.",
+  "author": {
+    "name": "George Mihai",
+    "email": "hi@georgemihai.com"
+  },
+  "homepage": "https://github.com/gorgmihai92/poiesis-design",
+  "repository": "https://github.com/gorgmihai92/poiesis-design",
+  "license": "MIT",
+  "keywords": [
+    "design-exploration",
+    "prototyping",
+    "sketches",
+    "reports",
+    "data-visualization",
+    "research"
+  ]
+}

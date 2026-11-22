@@ -1,0 +1,2 @@
+{"v": 1, "id": "IN-001", "verdict": "kept", "date": "2026-11-17", "text_sha256": "1cfc409a489f37cbecaf51e6f09ca2ed46c1998874a4cf0329037b0e99d6b2a3", "seal": "b01bcd5a320064ddc53040b8017817dd3c7e41644198a1a3c8cffbe4db4b278f", "by": "agent", "where": "insights/2026-11-17-gate-example.md"}
+{"v": 1, "id": "IN-002", "verdict": "dropped", "date": "2026-11-17", "text_sha256": "3ee864b74ecaed2674ce1558690536f1adcc97968ad1ef8c4f0fcf7241e8349b", "seal": "d147c5cf25cb32d8fc04457e26a23774ee4941854f9ad455c4fd72fa4c420f50", "by": "agent", "where": "insights/2026-11-17-gate-example.md"}

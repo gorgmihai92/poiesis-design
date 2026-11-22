@@ -1,0 +1,58 @@
+{
+  "about": "Three test vectors for the challenge stamp of poiesis-insight 2.0.0. `text` is the conclusion's sentence as it is found; `normalised` is what is hashed (UTF-8). The same vectors are in challenge-stamp-format.md.",
+  "seal_head": "poiesis-challenge-stamp v1",
+  "vectors": [
+    {
+      "name": "plain: one line, with an en dash and a per cent sign that stay as typed",
+      "id": "IN-001",
+      "verdict": "kept",
+      "date": "2026-11-22",
+      "text": "Topic A has more works each year than the year before, from 12 (2016) to 40 (2024). Its share of the sample went from 0.5% to 1.5%, growing about 20% a year in 2016–20 and about 10% in 2020–24.",
+      "normalised": "Topic A has more works each year than the year before, from 12 (2016) to 40 (2024). Its share of the sample went from 0.5% to 1.5%, growing about 20% a year in 2016–20 and about 10% in 2020–24.",
+      "normalised_utf8_bytes": 197,
+      "stamp": {
+        "v": 1,
+        "id": "IN-001",
+        "verdict": "kept",
+        "date": "2026-11-22",
+        "text_sha256": "bf03ddde74b33985d716e6ecfc31e9cb13136603a8ff75b67a2a9acac52d20f8",
+        "seal": "0bbd6bad818a305d2a0b2e69367d9d1212aae8677727fc8537c31bbf51887a1d"
+      }
+    },
+    {
+      "name": "layout and accents: wrapped lines, a tab, double spaces, a carriage return, and letters typed as a base letter plus a combining mark",
+      "id": "IN-002",
+      "verdict": "weakened",
+      "date": "2026-11-22",
+      "text": "  Această propoziție e inventată pentru test: rânduri rupte,\r\n  un tab\tși spații duble,  iar fiecare ă e scris ca literă plus semn. ",
+      "normalised": "Această propoziție e inventată pentru test: rânduri rupte, un tab și spații duble, iar fiecare ă e scris ca literă plus semn.",
+      "normalised_utf8_bytes": 133,
+      "stamp": {
+        "v": 1,
+        "id": "IN-002",
+        "verdict": "weakened",
+        "date": "2026-11-22",
+        "text_sha256": "41293bebaa79754e1f5341a2273bbc57f114d275051e2a3b5680ef70add2bb05",
+        "seal": "7ce4f26318c05fc79189fb90e9f93a853538c672dc7647a29000a7cce19b1396"
+      }
+    },
+    {
+      "name": "from a note: the sentence is the heading above the Id line",
+      "id": "IN-003",
+      "verdict": "dropped",
+      "date": "2026-11-22",
+      "note": "## Dropped\n\n### Depot B is the \"slowest\" depot.\n\n- **Id:** IN-003\n- **Challenge:** dropped · synthetic, for the test; its late parcels all came in one week of snow\n",
+      "text": "Depot B is the \"slowest\" depot.",
+      "normalised": "Depot B is the \"slowest\" depot.",
+      "normalised_utf8_bytes": 31,
+      "stamp": {
+        "v": 1,
+        "id": "IN-003",
+        "verdict": "dropped",
+        "date": "2026-11-22",
+        "text_sha256": "8ced9dc4dde8be53c07f678581b88bc385ff5f508218aab8c0a0dde875128135",
+        "seal": "07b49ad056612e86666e1a4825a14b6c0f64fe65e383a344d6bb11127b13e00c"
+      }
+    }
+  ]
+}
