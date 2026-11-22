@@ -328,13 +328,13 @@ test('explore writes the block with the question quoted and the card\'s sources 
   const notes = readFileSync(join(dir, lab, 'notes.md'), 'utf8');
   assert.deepEqual(blockOf(notes), ['type: exploration', 'plugin: poiesis-studio', 'date: 2026-11-22', 'topic: "How \\"else\\" could: a delete # work?\\u0085"']);
   blockRules('notes.md', blockOf(notes));
-  const card = run(EXPLORE, ['card', lab, '--name', 'Undo: the "confirmation"', '--from', 'SK-002,SK-003,@key2020'], dir);
+  const card = run(EXPLORE, ['card', lab, '--name', 'Undo: the "confirmation"', '--from', 'SK-002,SK-003,@key2020,E-001'], dir);
   assert.equal(card.status, 0, card.stderr);
   const text = readFileSync(join(dir, 'design/patterns/PT-001-undo-the-confirmation.md'), 'utf8');
   const block = blockOf(text);
-  assert.deepEqual(block.slice(4), ['id: "PT-001"', 'from:', '  - "[[SK-002]]"', '  - "[[SK-003]]"', '  - "@key2020"']);
+  assert.deepEqual(block.slice(4), ['id: "PT-001"', 'from:', '  - "[[SK-002]]"', '  - "[[SK-003]]"', '  - "@key2020"', '  - "E-001"']);
   blockRules('pattern card', block);
-  assert.match(text, /^- \*\*From:\*\* SK-002, SK-003, @key2020$/m);
+  assert.match(text, /^- \*\*From:\*\* SK-002, SK-003, @key2020, E-001$/m);
   assert.match(text, /^- \*\*Id:\*\* PT-001$/m);
   // The board still takes the question from the title, not from the block.
   assert.match(readFileSync(join(dir, lab, 'index.html'), 'utf8'), /How &quot;else&quot; could: a delete # work\?|How "else" could: a delete # work\?/);

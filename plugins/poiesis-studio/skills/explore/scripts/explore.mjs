@@ -37,8 +37,9 @@ const escape = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', 
 // character (C0, DEL, C1: U+0085 is a line break to YAML 1.1), the two separators and U+FFFE, U+FFFF escaped too.
 const yamlText = (s) => JSON.stringify(String(s))
   .replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029\ufffe\uffff]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, '0')}`);
-// `from` as a list of quoted items, an id as a link: `\n  - "[[SK-002]]"`, or ` []`.
-const yamlFrom = (items) => items.map((f) => `\n  - ${yamlText(/^[A-Z]{1,3}-\d+$/.test(f) ? `[[${f}]]` : f)}`).join('') || ' []';
+// `from` as a list of quoted items, an id as a link: `\n  - "[[SK-002]]"`, or ` []`. An experiment's id stays text:
+// frontier's result for E-001 and the notebook's card for it share the name.
+const yamlFrom = (items) => items.map((f) => `\n  - ${yamlText(/^(?!E-)[A-Z]{1,3}-\d+$/.test(f) ? `[[${f}]]` : f)}`).join('') || ' []';
 const template = (name, values) =>
   readFileSync(join(TEMPLATES, name), 'utf8').replace(/\{\{(\w+)\}\}/g, (all, key) => (key in values ? values[key] : all));
 const write = (path, text) => {
