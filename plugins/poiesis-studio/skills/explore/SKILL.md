@@ -119,7 +119,7 @@ Ids run per project and are never used twice: `node $X/scripts/explore.mjs next 
 and citation keys separated by commas, with no `|` in it.
 
 Each Markdown file above starts with a block of Obsidian properties (since 0.2.0): `type`, `plugin`, `date`,
-`topic`, and for a pattern card `id`, `status` and `from`. `explore.mjs` writes it in `notes.md` and in a card; a
+`topic`, and for a pattern card `id` and `from`. `explore.mjs` writes it in `notes.md` and in a card; a
 session copies it from `$X/templates/session.md`. It is a copy for Obsidian's views: the lines in the table above
 stay the record. In the block no line starts with `#` and text values are quoted. Never put a link in a heading
 or an **Id** line, or a link with an alias (`[[a|b]]`) in a table.

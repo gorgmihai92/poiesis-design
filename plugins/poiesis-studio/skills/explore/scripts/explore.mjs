@@ -33,9 +33,10 @@ const words = argv.slice(1).filter((a, i, rest) => !a.startsWith('--') && !(rest
 const root = resolve(opt('root') ?? '.');
 const fail = (message, code = 2) => { console.error(message); process.exit(code); };
 const escape = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-// A value for a properties block: a YAML double-quoted string (JSON's escapes are YAML's), with the two characters
-// YAML 1.1 read as line breaks escaped too.
-const yamlText = (s) => JSON.stringify(String(s)).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+// A value for a properties block: a YAML double-quoted string (JSON's escapes are YAML's), with every control
+// character (C0, DEL, C1: U+0085 is a line break to YAML 1.1), the two separators and U+FFFE, U+FFFF escaped too.
+const yamlText = (s) => JSON.stringify(String(s))
+  .replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029\ufffe\uffff]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, '0')}`);
 // `from` as a list of quoted items, an id as a link: `\n  - "[[SK-002]]"`, or ` []`.
 const yamlFrom = (items) => items.map((f) => `\n  - ${yamlText(/^[A-Z]{1,3}-\d+$/.test(f) ? `[[${f}]]` : f)}`).join('') || ' []';
 const template = (name, values) =>
