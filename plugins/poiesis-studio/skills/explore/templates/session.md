@@ -1,3 +1,9 @@
+---
+type: session
+plugin: poiesis-studio
+date: <YYYY-MM-DD, the Date line>
+topic: "<the question>"
+---
 # Sketches shown: <the question>
 
 - **Date:** <YYYY-MM-DD>
