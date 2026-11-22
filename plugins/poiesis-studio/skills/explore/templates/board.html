@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototypes · {{question}}</title>
+<link rel="stylesheet" href="theme.css">
+<style>
+  /* The board: every sketch of one exploration, side by side. Written by explore.mjs from the sketches' own
+     files; run "explore.mjs board" again after a sketch gets its name. */
+  body { margin: 0; padding: calc(var(--space) * 6); background: var(--paper); color: var(--ink); font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans); }
+  header { display: grid; gap: calc(var(--space) * 2); max-inline-size: var(--measure); margin-block-end: calc(var(--space) * 8); }
+  h1 { margin: 0; font: var(--heading-weight) var(--heading-size) / var(--heading-leading) var(--font-sans); letter-spacing: var(--heading-tracking); text-wrap: balance; }
+  p { margin: 0; }
+  .notice { padding: calc(var(--space) * 2) calc(var(--space) * 3); background: var(--ink); color: var(--paper); justify-self: start; }
+  .muted { color: var(--muted); }
+  .sketches { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(24rem, 100%), 1fr)); gap: calc(var(--space) * 8) calc(var(--space) * 6); }
+  .sketch { display: grid; gap: calc(var(--space) * 2); margin: 0; min-inline-size: 0; }
+  .sketch a { color: var(--info); margin-inline-start: calc(var(--space) * 2); }
+  iframe { inline-size: 100%; block-size: 34rem; border: 1px solid var(--divider); background: var(--paper); }
+</style>
+</head>
+<body>
+<header>
+  <p class="notice">Prototypes</p>
+  <h1>{{question}}</h1>
+  <p class="muted">{{count}} sketches of one question, made to be compared. None is a finished or planned product. Each one works: try the same thing in all of them before choosing between them.</p>
+</header>
+<main class="sketches">
+{{frames}}
+</main>
+</body>
+</html>
