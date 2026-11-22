@@ -10,7 +10,7 @@
          <thead><tr><th scope="col">Year</th><th scope="col" data-focus>Quantum computing</th><th scope="col">Synthetic biology</th></tr></thead>
          <tbody>
            <tr><th scope="row">2024</th><td>84.2</td><td>27.2</td></tr>
-           <tr data-partial="partial"><th scope="row">2026</th><td>44.1</td><td>15.9</td></tr>
+           <tr data-partial="partial"><th scope="row" data-value="2026">2026 (partial)</th><td>44.1</td><td>15.9</td></tr>
          </tbody>
        </table>
      </po-series>

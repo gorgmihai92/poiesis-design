@@ -21,8 +21,8 @@
    Cell   data-type="number" (a figure: set to the end of its column) · data-state="none" (the source does not
           say: muted, and it still holds its words, never an empty cell) · data-state="gap" (nothing was found
           for this place: a grey step)
-   Row    data-state="on" marks the rows a statement rests on: with data-filter on the box they stay ink and
-          the other rows turn muted, with nothing moving (ux K3)
+   Row    data-state="on" marks the rows a statement rests on: with data-filter on the box they stay ink with an
+          edge at their start and the other rows turn muted, with nothing moving (ux K3)
    The box takes the keyboard focus so it can be scrolled by keyboard (ux I1); name it with aria-label. */
 
 @layer poiesis.patterns {
@@ -57,7 +57,7 @@
     vertical-align: top;
     text-wrap: pretty;
   }
-  .po-evidence :is(th, td):first-child { padding-inline-start: 0; }
+  .po-evidence :is(th, td):first-child { padding-inline-start: calc(var(--space) * 2); }
   .po-evidence :is(th, td):last-child { padding-inline-end: 0; }
   .po-evidence thead th {
     border-block-end-color: var(--line-color);
@@ -91,6 +91,8 @@
   .po-evidence td[data-state="gap"] { background: var(--surface); }
   .po-evidence td[data-state="gap"]:is(:first-child, :last-child) { padding-inline: calc(var(--space) * 2); }
 
-  /* The rows a statement rests on stay ink; the others step back. */
+  /* The rows a statement rests on stay ink with an edge at their start (an inset ring: nothing moves, K3); the
+     others step back. Not by color alone (C4). */
+  .po-evidence[data-filter] tbody tr[data-state="on"] > :first-child { box-shadow: inset var(--ring) 0 0 var(--ink); }
   .po-evidence[data-filter] tbody tr:not([data-state="on"]) :is(th, td) { color: var(--muted); }
 }

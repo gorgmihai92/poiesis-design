@@ -1,5 +1,5 @@
 // Tests for poiesis-studio 0.1.0 and the four patterns of poiesis-components 0.14.0. Node's own test runner, no
-// packages, no network:  node --test tests/
+// packages, no network:  node --test tests/studio.test.mjs
 // The tests that rebuild the lab's recorded trend scan need the notebook (POIESIS_LAB, else ~/Poiesis Lab) and are
 // skipped, saying so, where it is absent; the synthetic literals page (tests/fixtures/literals-page) needs none.
 
@@ -11,7 +11,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { HAVE_NOTEBOOK, makeLiteralsPage, makeProjects, NOTEBOOK } from './fixture-pages.mjs';
-import { compare, modelOf } from '../plugins/poiesis-studio/skills/report/scripts/report.mjs';
+import { compare } from '../plugins/poiesis-studio/skills/report/scripts/report.mjs';
 import { readNote, readStamps, sealOf, textSha256, verify } from '../plugins/poiesis-studio/skills/report/scripts/lib/stamp.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -70,6 +70,24 @@ test('a report over the gate example shows each verdict from its record, and the
   assert.deepEqual(blocks.map((b) => Object.keys(b).sort()), [['from', 'type']], 'the report names the note and nothing about its verdicts');
 });
 
+test('on the page, no record and a changed sentence both show as not challenged, with the reason', () => {
+  const dir = scratch();
+  mkdirSync(join(dir, 'insights'), { recursive: true });
+  const note = readFileSync(join(FIX, 'gate/insights/2026-11-17-gate-example.md'), 'utf8').replace('North depot delivered the most', 'North depot delivers the most');
+  writeFileSync(join(dir, 'insights/2026-11-17-gate-example.md'), note);
+  writeFileSync(join(dir, 'insights/challenge-stamps.jsonl'), readFileSync(join(FIX, 'gate/insights/challenge-stamps.jsonl')));
+  writeFileSync(join(dir, 'report.json'), readFileSync(join(FIX, 'gate/design/showroom/gate/report.json')));
+  const r = run(REPORT, ['build', 'report.json', '--root', '.', '--out', 'page.html', '--date', '2026-11-22'], dir);
+  assert.equal(r.status, 0, r.stderr);
+  const html = readFileSync(join(dir, 'page.html'), 'utf8');
+  const item = (id) => html.match(new RegExp(`<li id="conclusion-${id}">([\\s\\S]*?)</li>`))[1];
+  assert.match(item('IN-001'), /<span class="po-verdict">Not challenged<\/span>/);
+  assert.match(item('IN-001'), /the sentence changed after it was challenged \(kept, 2026-11-17\)/);
+  assert.match(item('IN-002'), /data-state="dropped">Dropped</);
+  assert.match(item('IN-003'), /<span class="po-verdict">Not challenged<\/span>/);
+  assert.match(item('IN-003'), /No challenge is recorded for it\./);
+});
+
 test('a report refuses to build when a file it points to is missing, and writes nothing', () => {
   const dir = scratch();
   writeFileSync(join(dir, 'report.json'), JSON.stringify({ title: 't', sections: [{ heading: 'h', blocks: [{ type: 'table', from: 'nowhere.json', columns: [{ field: 'a' }] }] }], not_checked: ['x'] }));
@@ -106,8 +124,8 @@ test('the trend scan is rebuilt: every series and number the same, and c6 shows 
     const r = run(REPORT, ['build', `design/showroom/${which}/report.json`, '--root', '.', '--date', '2026-11-22'], p);
     assert.equal(r.status, 0, r.stderr);
   }
-  const model = (w) => modelOf(readFileSync(join(p, `design/showroom/${w}/report.html`), 'utf8'));
-  const pub = compare(model('published'), expected('published'));
+  const page = (w) => readFileSync(join(p, `design/showroom/${w}/report.html`), 'utf8');
+  const pub = compare(page('published'), expected('published'));
   assert.equal(pub.series.compared, 255);
   assert.equal(pub.series.same, pub.series.compared);
   assert.equal(pub.numbers.compared, 188);
@@ -117,15 +135,27 @@ test('the trend scan is rebuilt: every series and number the same, and c6 shows 
   assert.match(pub.verdicts.lines[0], /^c6: the page shows "kept"; the report shows "weakened"/);
   const html = readFileSync(join(p, 'design/showroom/published/report.html'), 'utf8');
   assert.match(html, /The file shows “kept”; the challenge recorded weakened/);
-  const cor = compare(model('corrected'), expected('corrected'));
+  const cor = compare(page('corrected'), expected('corrected'));
   assert.equal(cor.differ, 0);
+  // The comparison reads what the page renders: a broken page fails it.
+  const broken = [
+    [page('published').replace('data-state="weakened">Weakened</span> <span class="report-id">c6', 'data-state="weakened">Kept</span> <span class="report-id">c6'), 'a label that does not match its mark'],
+    [page('published').replace(/(<td data-type="number" data-value="38\.6"[^>]*>)38\.6</, '$199.9<'), 'a number written wrong'],
+    [page('published').replace(/(<td data-value="113\.6)/, '<td data-value="1">1</td>$1'), 'a series row with a cell too many'],
+  ];
+  const found = (r) => [...r.series.lines, ...r.numbers.lines, ...r.verdicts.lines, ...r.faults];
+  for (const [html, what] of broken) {
+    assert.notEqual(html, page('published'), `the mutation for ${what} applied`);
+    const extra = found(compare(html, expected('published'))).filter((l) => !found(pub).includes(l));
+    assert.ok(extra.length > 0, `${what} is caught`);
+  }
 });
 
 test('the literals page is rebuilt: every series, number and verdict label the same', () => {
   const p = makeLiteralsPage(scratch());
   const r = run(REPORT, ['build', 'design/showroom/page/report.json', '--root', '.', '--date', '2026-11-22'], p);
   assert.equal(r.status, 0, r.stderr);
-  const result = compare(modelOf(readFileSync(join(p, 'design/showroom/page/report.html'), 'utf8')), JSON.parse(readFileSync(join(p, 'expected.json'), 'utf8')));
+  const result = compare(readFileSync(join(p, 'design/showroom/page/report.html'), 'utf8'), JSON.parse(readFileSync(join(p, 'expected.json'), 'utf8')));
   assert.equal(result.differ, 0, JSON.stringify(result, null, 1));
   assert.deepEqual([result.series.compared, result.numbers.compared, result.verdicts.compared], [60, 24, 11]);
   assert.equal(result.names.length, 3, 'three series are named differently in the data than on the page');
@@ -191,6 +221,13 @@ test('poiesis-studio has no agent, no hook and no dependency, and its scripts st
   assert.equal('dependencies' in manifest, false);
   assert.equal(existsSync(join(STUDIO, 'agents')), false);
   assert.equal(existsSync(join(STUDIO, 'hooks')), false);
+  // Where the skill's own words name a rule check, they say not to run it.
+  const skill = readFileSync(join(STUDIO, 'skills/explore/SKILL.md'), 'utf8').replace(/\n(?!\s*\n|\s*(?:[-*|]|\d+\.)\s)\s*/g, ' ');
+  for (const sentence of skill.split(/(?<=[.:])\s+|\n/)) {
+    if (/ui-auditor|ux-tester|copy-reviewer|init\.mjs|scan\.mjs|resolve\.mjs|\.poiesis-design/.test(sentence)) {
+      assert.match(sentence, /\b(do not|never|not|no|looks for)\b/i, `explore/SKILL.md names a check without saying not to run it: ${sentence.trim()}`);
+    }
+  }
   const scripts = filesUnder(STUDIO).filter((f) => f.endsWith('.mjs'));
   for (const f of scripts) {
     const text = readFileSync(join(STUDIO, f), 'utf8');
