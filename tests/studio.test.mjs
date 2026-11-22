@@ -162,7 +162,8 @@ test('the exploration check finds starting files, a missing mark and a .poiesis-
   let r = run(EXPLORE, ['check', lab], dir);
   assert.equal(r.status, 1);
   assert.match(r.stdout, /SK-001\.html: still the starting file/);
-  const sketch = (id, mark = true) => readFileSync(join(dir, lab, `${id}.html`), 'utf8')
+  const start = Object.fromEntries(['SK-001', 'SK-002', 'SK-003'].map((id) => [id, readFileSync(join(dir, lab, `${id}.html`), 'utf8')]));
+  const sketch = (id, mark = true) => start[id]
     .replace(/<main>[\s\S]*?<\/main>/, '<main><button type="button">Delete</button></main>')
     .replace(mark ? /$^/ : /<p class="prototype-mark">[^<]*<\/p>/, '');
   for (const id of ['SK-001', 'SK-002', 'SK-003']) writeFileSync(join(dir, lab, `${id}.html`), sketch(id, id !== 'SK-003'));
