@@ -1,5 +1,6 @@
 // Challenge stamps, format 1: reading them and verifying a conclusion against its stamp. Written from the format's
-// description alone (poiesis-insight, skills/insight/stamp-format.md); it needs neither that plugin nor its script.
+// description alone (poiesis-insight 2.0.0, skills/insight/stamp-format.md, as merged on 2026-11-22, with its
+// stricter rules for reading a note); it needs neither that plugin nor its script.
 // A report shows a verdict only from a stamp that verifies. It never writes one.
 //
 // A stamp is one JSON line in insights/challenge-stamps.jsonl:
@@ -13,6 +14,7 @@ import { existsSync, readFileSync } from 'node:fs';
 export const VERDICTS = ['kept', 'weakened', 'dropped'];
 export const STAMP_FILE = 'insights/challenge-stamps.jsonl';
 
+const ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/;
 const sha256 = (text) => createHash('sha256').update(text, 'utf8').digest('hex');
 
 // The sentence as it is hashed: NFC, every run of tab, line feed, vertical tab, form feed, carriage return and
@@ -25,22 +27,22 @@ export const sealOf = (id, verdict, date, hash) => sha256(['poiesis-challenge-st
 // can be trusted to be the last word on any id.
 export function readStamps(path) {
   if (!path || !existsSync(path)) return { path, exists: false, damaged: false, last: new Map(), count: 0 };
-  const text = readFileSync(path, 'utf8').replace(/^﻿/, '');
+  const text = readFileSync(path, 'utf8').replace(/^\uFEFF/, '');
   const last = new Map();
   let damaged = false;
   let count = 0;
-  text.split('\n').forEach((line, i) => {
+  // Lines are split at line feeds only; a carriage return before one is dropped.
+  text.split('\n').map((l) => l.replace(/\r$/, '')).forEach((line, i) => {
     if (!line.trim()) return;
     let stamp;
     try { stamp = JSON.parse(line); } catch { damaged = true; return; }
-    if (!stamp || typeof stamp !== 'object' || Array.isArray(stamp) || typeof stamp.id !== 'string') { damaged = true; return; }
+    if (!stamp || typeof stamp !== 'object' || Array.isArray(stamp) || typeof stamp.id !== 'string' || !ID.test(stamp.id)) { damaged = true; return; }
     count++;
     last.set(stamp.id, { ...stamp, line: i + 1 });
   });
   return { path, exists: true, damaged, last, count };
 }
 
-const ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/;
 const realDate = (d) => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d) && new Date(`${d}T00:00:00Z`).toISOString().slice(0, 10) === d;
 const intact = (s) =>
   s.v === 1 && ID.test(s.id) && VERDICTS.includes(s.verdict) && realDate(s.date) &&
@@ -63,28 +65,44 @@ export function verify({ id, text, shown = null }, stamps) {
   if (!intact(stamp)) return { id, status: 'stamp altered', verdict: null, line: stamp.line };
   const { verdict, date, by = null, again = null } = stamp;
   if (stamp.text_sha256 !== textSha256(text)) return { id, status: 'text changed', verdict: null, was: verdict, date };
-  const label = shown === null ? null : (String(shown).match(/[A-Za-z]+/)?.[0] ?? '').toLowerCase();
-  if (label !== null && label !== verdict) return { id, status: 'verdict retyped', verdict, date, by, again, shown: String(shown).trim() };
+  if (shown !== null) {
+    const words = verdictWords(shown);
+    if (words.length !== 1 || words[0] !== verdict) return { id, status: 'verdict retyped', verdict, date, by, again, shown: String(shown).split('·')[0].trim() };
+  }
   return { id, status: 'ok', verdict, date, by, again };
+}
+
+// The verdict words a label holds: up to its first "·", every whole word kept, weakened or dropped; none when the
+// label also holds a word of negation (not, no, never, or a word starting with "un"): "not challenged" holds none.
+export function verdictWords(label) {
+  const part = String(label).split('·')[0];
+  const found = [...new Set((part.match(/\b(kept|weakened|dropped)\b/gi) ?? []).map((w) => w.toLowerCase()))];
+  return found.length && /\b(not|no|never|un\w*)\b/i.test(part) ? [] : found;
 }
 
 // The conclusions of a Markdown note: every heading with an Id line under it. For each: the sentence (the
 // heading, whole), the verdict shown on its Challenge line (the words after the label, as typed), and its other
 // labelled lines. An id under two headings cannot be verified: both are returned with `twice`.
 export function readNote(markdown) {
-  const lines = markdown.replace(/^﻿/, '').split(/\r?\n/);
+  const lines = markdown.replace(/^﻿/, '').split('\n').map((l) => l.replace(/\r$/, ''));
   const blocks = [];
-  let fenced = false;
+  let fence = null;
   let block = null;
   for (const line of lines) {
-    if (/^[ \t]*(```|~~~)/.test(line)) { fenced = !fenced; continue; }
-    if (fenced) continue;
+    // A fence opens with three or more backticks or tildes, and closes only with a line of the same character, at
+    // least as many, and nothing else.
+    if (fence) {
+      if (new RegExp(`^[ \\t]*\\${fence.char}{${fence.count},}[ \\t]*$`).test(line)) fence = null;
+      continue;
+    }
+    const open = line.match(/^[ \t]*(`{3,}|~{3,})/);
+    if (open) { fence = { char: open[1][0], count: open[1].length }; continue; }
     const heading = line.match(/^#{1,6}[ \t]+(.*)$/);
     if (heading) { block = { text: heading[1], id: null, challenge: null, fields: [] }; blocks.push(block); continue; }
     if (!block) continue;
-    const id = line.match(/^[ \t]*[-*+][ \t]+\*\*id:?\*\*:?[ \t]*(\S+)[ \t]*$/i);
+    const id = line.match(/^[ \t]*(?:[-*+][ \t]+(?:\*\*)?|\*\*)id(?:\*\*)?[ \t]*:(?:\*\*)?[ \t]*(\S+)[ \t]*$/i);
     if (id) { block.id ??= id[1]; continue; }
-    const challenge = line.match(/^[ \t]*[-*+][ \t]+\*\*challenge:?\*\*:?[ \t]*(.*)$/i);
+    const challenge = line.match(/^[ \t]*(?:[-*+][ \t]+(?:[*_]{1,2})?|[*_]{1,2})challenge[a-z ]*?(?:[*_]{1,2})?[ \t]*(?::(?:[*_]{1,2})?|(?:[*_]{1,2})?:|[*_]{2}[ \t])[ \t]*(.*)$/i);
     if (challenge) { block.challenge ??= challenge[1]; continue; }
     const field = line.match(/^[ \t]*[-*+][ \t]+\*\*([^*:]+):?\*\*:?[ \t]*(.*)$/);
     if (field) block.fields.push({ label: field[1].trim(), text: field[2].trim() });

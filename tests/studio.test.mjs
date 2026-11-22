@@ -54,6 +54,12 @@ test('a retyped label, a changed sentence, an altered record and a damaged file 
   assert.equal(verify({ id: 'IN-001', text: first.text, shown: null }, stamps(lines.replace('"kept"', '"weakened"'))).status, 'stamp altered');
   assert.equal(verify({ id: 'IN-001', text: first.text, shown: null }, stamps(`${lines}<<<<<<< HEAD\n`)).status, 'file damaged');
   assert.equal(readNote(`${note}\n### Another\n\n- **Id:** IN-001\n`).filter((c) => c.id === 'IN-001').every((c) => c.twice), true);
+  // The merged reference's stricter label rule: exactly one verdict word, and no negation.
+  assert.equal(verify({ id: 'IN-001', text: first.text, shown: 'weakened → kept after review' }, stamps(lines)).status, 'verdict retyped');
+  assert.equal(verify({ id: 'IN-001', text: first.text, shown: 'not challenged' }, stamps(lines)).status, 'verdict retyped');
+  assert.equal(verify({ id: 'IN-001', text: first.text, shown: '**Kept** · with caveats' }, stamps(lines)).status, 'ok');
+  assert.equal(readStamps(join(dir, 's.jsonl')).damaged, false);
+  assert.equal(stamps(lines.replace('"IN-001"', '"IN 001"')).damaged, true, 'an id not of the form is a damaged line');
 });
 
 // ---- The report ---------------------------------------------------------------------------------------------
