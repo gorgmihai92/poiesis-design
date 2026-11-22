@@ -27,7 +27,8 @@
 
 ## What it means for the plugin
 - No rule about how to draw uncertainty rests on this article: it gives none.
-- Rule U7 takes two things from it. A confidence stated by a challenger is a judgment in words, so the report shows
-  it in those words and never as a number, a bar or a tint (p. 8). Saying what is uncertain in text is a legitimate
-  form, not a fallback (p. 9).
+- Rule U7 takes one thing from it: stated confidence is not a direct function of statistical confidence (p. 8),
+  so the report shows a challenger's confidence in its words, never as a number, a bar or a tint. That last step is
+  a product decision. The survey's remark that few studies compare a display with text (p. 9) is not used as a
+  reason for anything.
 - The patterns here have not been evaluated at all, for accuracy or for decisions. The report's rules say so.
