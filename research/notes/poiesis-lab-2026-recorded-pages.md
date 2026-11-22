@@ -1,16 +1,16 @@
 # Published pages from recorded runs (observations, 2026-11-17 and 2026-11-22)
 
 - **Source:** the Poiesis Lab notebook, a private repository: `fixtures/trend-scan/`, `fixtures/README.md`,
-  `fixtures/challenge-verdicts.json` and `lab/plan.md`. The notebook also holds a second recorded page, which is
-  not described here. The files are not in this repository.
+  `fixtures/challenge-verdicts.json`, `lab/plan.md`, `CLAUDE.md` and `PROTOCOL.md`. The notebook also holds a
+  second recorded page, which is not described here. The files are not in this repository.
 - **File:** none here.
 - **Licence:** the owner's own data.
 - **Evidence:** observation (O) · the page published from a trend scan run with the Poiesis plugins on 2026-11-17,
   with the data files it was built from.
-- **Read:** the trend scan's `page.html` in full (396 lines), `fixtures/README.md`, `lab/plan.md` and
-  `challenge-verdicts.json` in full; the data files by script (their keys, row counts and first rows), on
-  2026-11-22. Where the page's colors come from was checked again on 2026-11-26. The agents' raw reports were not
-  saved, so they were not read.
+- **Read:** the trend scan's `page.html` in full (396 lines), `fixtures/README.md`, `lab/plan.md`, `CLAUDE.md`,
+  `PROTOCOL.md` and `challenge-verdicts.json` in full; the data files by script (their keys, row counts and first
+  rows), on 2026-11-22. Where the page's colors come from was checked again on 2026-11-26. The agents' raw reports
+  were not saved, so they were not read.
 
 ## What it says
 
@@ -33,6 +33,13 @@
 - The page ends with a list of what was not checked.
 - The styles are the page's own classes over color variables of the host it was published on. It uses none of the
   library's components.
+
+### The notebook's own rules
+- `CLAUDE.md`, rule 1: nothing invented; a fact comes from a source read, data a script computed, or
+  documentation read. Rule 3: a verdict is written once, by the challenge step, and not retyped elsewhere. Rule 5:
+  every report ends with "Not checked". Rule 7: in `design/lab/` no design rule applies.
+- `PROTOCOL.md`, "Entry gates": for poiesis-studio's `report`, a verdict is shown from its stamp, and anything
+  without one is shown as not challenged.
 
 ## What it means for the plugin
 - Rule U1: a verdict is shown from its stamp, by the script that verified the stamp, and is never typed into a page

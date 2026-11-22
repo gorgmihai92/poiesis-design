@@ -70,6 +70,10 @@ function resolveSeries(root, block, seen) {
       key: String(it[key]), name: String(it[block.name ?? 'name'] ?? it[key]),
       values: (it[block.values] ?? []).map((v, i) => num(v, `${it[key]} ${periods[i]}`)),
     }));
+    for (const s of series) {
+      if (s.values.length > periods.length) unread.push(`${s.key}: ${s.values.length - periods.length} value(s) past the last period`);
+      s.values = periods.map((_, i) => s.values[i] ?? null);
+    }
   } else {
     const rows = rowsOf(root, block, seen);
     if (block.columns) {
@@ -110,6 +114,7 @@ function rowsFor(root, block, seen) {
 
 function resolveTable(root, block, seen) {
   const rows = rowsFor(root, block, seen);
+  if (!Array.isArray(block.columns) || !block.columns.length) throw new ReportError(`a table from ${block.from} has no "columns": it does not say what to show`);
   const key = block.key ?? block.columns[0].field;
   return { type: 'table', things: thingsOf(block), from: block.from, caption: block.caption ?? '', label: block.label ?? '',
     columns: block.columns.map((c) => ({ name: c.name ?? c.field, number: Boolean(c.number) })),
@@ -156,7 +161,9 @@ function resolveConclusions(root, block, stamps, seen) {
 
 export function collect(reportPath, { root = '.' } = {}) {
   root = resolve(root);
-  const report = JSON.parse(readFileSync(reportPath, 'utf8'));
+  let report;
+  try { report = JSON.parse(readFileSync(reportPath, 'utf8')); }
+  catch (e) { throw new ReportError(`${reportPath}: not valid JSON (${e.message})`); }
   const seen = new Map();
   const problems = [];
   const stampsPath = report.stamps ?? STAMP_FILE;
@@ -220,26 +227,28 @@ function verdictLabel(show) {
 }
 
 function seriesHtml(b) {
-  const head = `<tr><th scope="col">${esc(b.period_label)}</th>${b.series.map((s) => `<th scope="col"${b.focus === s.key || b.focus === s.name ? ' data-focus' : ''}>${esc(s.name)}</th>`).join('')}</tr>`;
-  const body = b.periods.map((p, i) => `<tr${b.partial[i] ? ` data-partial="${esc(b.partial[i])}"` : ''}><th scope="row">${esc(p)}</th>${b.series.map((s) => {
+  const head = `<tr><th scope="col">${esc(b.period_label)}</th>${b.series.map((s) => `<th scope="col" data-key="${esc(s.key)}"${b.focus === s.key || b.focus === s.name ? ' data-focus' : ''}>${esc(s.name)}</th>`).join('')}</tr>`;
+  // A period that is not complete says so in the table too, the copy a screen reader reads (U7).
+  const body = b.periods.map((p, i) => `<tr${b.partial[i] ? ` data-partial="${esc(b.partial[i])}"` : ''}><th scope="row" data-value="${esc(p)}">${esc(p)}${b.partial[i] ? ` <span class="po-muted">(${esc(b.partial[i])})</span>` : ''}</th>${b.series.map((s) => {
     const v = s.values[i];
     return v === null ? '<td></td>' : `<td data-value="${v}">${esc(write(v, { digits: b.digits }))}</td>`;
   }).join('')}</tr>`).join('\n');
   const min = b.min === null ? '' : ` min="${esc(b.min)}"`;
-  return `<po-series unit="${esc(b.unit)}"${min}>\n<table><thead>${head}</thead><tbody>\n${body}\n</tbody></table>\n</po-series>`;
+  return `<po-series data-things="${esc(b.things)}" unit="${esc(b.unit)}"${min}>\n<table><thead>${head}</thead><tbody>\n${body}\n</tbody></table>\n</po-series>`;
 }
 
 function tableHtml(b) {
   const head = `<tr>${b.columns.map((c) => `<th scope="col">${esc(c.name)}</th>`).join('')}</tr>`;
-  const body = b.rows.map((r) => `<tr>${r.cells.map((c, i) => {
+  const body = b.rows.map((r) => `<tr data-key="${esc(r.key)}">${r.cells.map((c, i) => {
     const col = b.columns[i];
     const empty = c.text === '';
-    const attrs = `${col.number ? ' data-type="number"' : ''}${empty || /^not stated$/i.test(c.text) ? ' data-state="none"' : ''}`;
+    const value = col.number && c.value !== null && c.value !== undefined ? ` data-value="${c.value}"` : '';
+    const attrs = `${col.number ? ' data-type="number"' : ''}${value}${empty || /^not stated$/i.test(c.text) ? ' data-state="none"' : ''}`;
     const text = empty ? 'not given' : c.text;
     return i === 0 ? `<th scope="row"${attrs}>${esc(text)}</th>` : `<td${attrs}>${esc(text)}</td>`;
   }).join('')}</tr>`).join('\n');
   const label = b.label || b.caption || b.heading || 'Table';
-  return `<div class="po-evidence" role="region" aria-label="${esc(label)}" tabindex="0">\n<table>${b.caption ? `<caption>${esc(b.caption)}</caption>` : ''}<thead>${head}</thead><tbody>\n${body}\n</tbody></table>\n</div>`;
+  return `<div class="po-evidence" data-things="${esc(b.things)}" role="region" aria-label="${esc(label)}" tabindex="0">\n<table>${b.caption ? `<caption>${esc(b.caption)}</caption>` : ''}<thead>${head}</thead><tbody>\n${body}\n</tbody></table>\n</div>`;
 }
 
 function dotsHtml(b) {
@@ -250,16 +259,16 @@ function dotsHtml(b) {
   const body = b.rows.map((r) => {
     const state = r.verdict ? ` data-state="${r.verdict.state ?? 'none'}"` : '';
     const cell = (v, signed, unit) => (v === null || Number.isNaN(v) ? '<td></td>' : `<td data-value="${v}">${esc(write(v, { signed, unit }))}</td>`);
-    return `<tr${state}${r.label ? ' data-label' : ''}><th scope="row">${esc(r.name)}</th>${cell(r.x, b.x_signed, b.x_unit)}${cell(r.y, b.y_signed, b.y_unit)}${withVerdicts ? `<td>${verdictLabel(r.verdict)}</td>` : ''}</tr>`;
+    return `<tr data-key="${esc(r.key)}"${state}${r.label ? ' data-label' : ''}><th scope="row">${esc(r.name)}</th>${cell(r.x, b.x_signed, b.x_unit)}${cell(r.y, b.y_signed, b.y_unit)}${withVerdicts ? `<td>${verdictLabel(r.verdict)}</td>` : ''}</tr>`;
   }).join('\n');
-  return `<po-dot-map${attrs}>\n<table><thead>${head}</thead><tbody>\n${body}\n</tbody></table>\n</po-dot-map>`;
+  return `<po-dot-map data-things="${esc(b.things)}"${attrs}>\n<table><thead>${head}</thead><tbody>\n${body}\n</tbody></table>\n</po-dot-map>`;
 }
 
 function conclusionsHtml(b) {
   return `<ol class="report-conclusions">\n${b.items.map((it) => `<li id="conclusion-${esc(it.id)}">
   <p class="report-conclusion-head">${verdictLabel(it.show)} <span class="report-id">${esc(it.id)}</span></p>
   <p class="report-conclusion-text">${esc(it.text)}</p>
-  <p class="report-conclusion-note"${it.show.warn ? ' data-warn' : ''}>${esc(it.show.note)}</p>
+  <p class="report-conclusion-note"${it.show.warn ? ' data-warn' : ''}>${it.show.warn ? '<strong>Note:</strong> ' : ''}${esc(it.show.note)}</p>
   ${it.fields.map((f) => `<p class="report-conclusion-field"><span>${esc(f.name)}:</span> ${esc(f.text)}</p>`).join('\n  ')}
 </li>`).join('\n')}\n</ol>`;
 }
@@ -304,7 +313,7 @@ ${scripts}
 <header class="report-head">
   <h1 class="po-title">${esc(model.title)}</h1>
   ${paragraphs(model.about)}
-  <p class="po-muted">Built ${esc(date)} by poiesis-studio from ${model.sources.length} file${model.sources.length === 1 ? '' : 's'} of the project; no number and no verdict on this page was typed into it. ${esc(stampsLine)}</p>
+  <p class="po-muted">Built ${esc(date)} by poiesis-studio from ${model.sources.length} file${model.sources.length === 1 ? '' : 's'} of the project: every figure, table and verdict on it is read from those files; the prose is the report's own. ${esc(stampsLine)}</p>
 </header>
 ${model.sections.map((s) => `<section class="report-section">
   <h2 class="po-heading">${esc(s.heading)}</h2>
@@ -332,36 +341,81 @@ ${model.not_checked.map((l) => `    <li>${esc(l)}</li>`).join('\n')}
 
 // ---- Compare: this page against another page's series, numbers and verdict labels ---------------------------
 
-export function shownBy(model) {
-  const series = {}, names = {}, numbers = {}, verdicts = {};
-  const add = (thing, v) => { if (v === null || v === undefined || Number.isNaN(v)) return; (numbers[thing] ??= []).push(v); };
-  for (const b of model.sections.flatMap((s) => s.blocks)) {
-    if (b.type === 'series') for (const s of b.series) {
-      const key = `${b.things}:${s.key}`;
-      series[key] = Object.fromEntries(b.periods.map((p, i) => [p, s.values[i]]).filter(([, v]) => v !== null));
-      names[key] = s.name;
+const unescape = (s) => s.replace(/<[^>]+>/g, '').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').trim();
+const attr = (tag, name) => { const m = tag.match(new RegExp(`\\b${name}="([^"]*)"`)); return m ? unescape(m[1]) : null; };
+const cellsOf = (row) => [...row.matchAll(/<(th|td)\b([^>]*)>([\s\S]*?)<\/\1>/g)].map((m) => ({ tag: m[2], text: unescape(m[3]) }));
+// A number as the page writes it ("−1,234.5 SD", "+14%"), with the precision it is written to.
+const read = (text) => {
+  const m = text.replace(/−/g, '-').replace(/,/g, '').match(/[-+]?\d+(?:\.(\d+))?/);
+  return m ? { value: Number(m[0]), digits: (m[1] ?? '').length } : null;
+};
+
+// What a built page shows, read from its markup: the series in each series table, the numbers in each table and
+// dot map (from the text a reader sees, with the value it was written from), and each verdict label.
+export function shownIn(html) {
+  const series = {}, names = {}, numbers = {}, verdicts = {}, faults = [];
+  const add = (thing, cell, value) => {
+    const written = read(cell.text);
+    if (value === null || Number.isNaN(value)) return;
+    (numbers[thing] ??= []).push({ value, written });
+  };
+  for (const m of html.matchAll(/<po-series\b([^>]*)>([\s\S]*?)<\/po-series>/g)) {
+    const things = attr(m[1], 'data-things');
+    const keys = [...m[2].matchAll(/<th scope="col"([^>]*)>([\s\S]*?)<\/th>/g)].slice(1).map((h) => ({ key: attr(h[1], 'data-key'), name: unescape(h[2]) }));
+    for (const k of keys) { series[`${things}:${k.key}`] = {}; names[`${things}:${k.key}`] = k.name; }
+    const body = m[2].slice(m[2].indexOf('<tbody>'));
+    for (const row of body.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)) {
+      const cells = cellsOf(row[1]);
+      const period = attr(cells[0].tag, 'data-value') ?? cells[0].text;
+      if (cells.length !== keys.length + 1) faults.push(`${things} ${period}: ${cells.length - 1} cells under ${keys.length} series`);
+      keys.forEach((k, i) => {
+        const cell = cells[i + 1];
+        if (!cell || cell.text === '') return;
+        const value = Number(attr(cell.tag, 'data-value'));
+        series[`${things}:${k.key}`][period] = { value, written: read(cell.text) };
+      });
     }
-    if (b.type === 'table') for (const r of b.rows) for (const c of r.cells) add(`${b.things}:${r.key}`, c.value);
-    if (b.type === 'dots') for (const r of b.rows) {
-      add(`${b.things}:${r.key}`, r.x); add(`${b.things}:${r.key}`, r.y);
-      if (r.verdict) verdicts[`dot:${r.key}`] = r.verdict.label.toLowerCase();
-    }
-    if (b.type === 'conclusions') for (const it of b.items) verdicts[it.id] = it.show.label.toLowerCase();
   }
-  return { series, names, numbers, verdicts };
+  for (const m of html.matchAll(/<(?:div class="po-evidence"|po-dot-map)(?=[\s>])([^>]*)>([\s\S]*?)<\/table>/g)) {
+    const things = attr(m[1], 'data-things');
+    for (const row of m[2].matchAll(/<tr data-key="([^"]*)"[^>]*>([\s\S]*?)<\/tr>/g)) {
+      const key = unescape(row[1]);
+      for (const cell of cellsOf(row[2])) {
+        const v = attr(cell.tag, 'data-value');
+        if (v !== null && v !== '') add(`${things}:${key}`, cell, Number(v));
+      }
+      const label = row[2].match(/<span class="po-verdict"[^>]*>([\s\S]*?)<\/span>/);
+      if (label && m[0].startsWith('<po-dot-map')) verdicts[`dot:${key}`] = unescape(label[1]).toLowerCase();
+    }
+  }
+  for (const m of html.matchAll(/<li id="conclusion-([^"]*)">([\s\S]*?)<\/li>/g)) {
+    const label = m[2].match(/<span class="po-verdict"([^>]*)>([\s\S]*?)<\/span>/);
+    const note = m[2].match(/<p class="report-conclusion-note"[^>]*>([\s\S]*?)<\/p>/);
+    verdicts[unescape(m[1])] = label ? unescape(label[2]).toLowerCase() : 'nothing';
+    verdicts[`note:${unescape(m[1])}`] = note ? unescape(note[1]) : '';
+    const state = label ? attr(label[1], 'data-state') : null;
+    if (label && (state ? LABEL[state] : 'Not challenged') !== unescape(label[2])) faults.push(`${unescape(m[1])}: its label says "${unescape(label[2])}" and its mark ${state ?? 'none'}`);
+  }
+  return { series, names, numbers, verdicts, faults };
 }
 
 const same = (a, b) => a === b || (typeof a === 'number' && typeof b === 'number' && Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(a)));
 
-export function compare(model, expected) {
-  const shown = shownBy(model);
-  const out = { series: { compared: 0, same: 0, lines: [] }, numbers: { compared: 0, same: 0, lines: [] }, verdicts: { compared: 0, same: 0, lines: [] }, names: [] };
+// The value a cell was written from equals the page's, and the words a reader sees say the same number, to the
+// precision they are written to.
+const agrees = (got, value) => got && same(got.value, value) && got.written !== null &&
+  Math.abs(got.written.value - value) <= 0.5 * 10 ** -got.written.digits + 1e-9 * Math.max(1, Math.abs(value));
+
+export function compare(html, expected) {
+  const shown = shownIn(html);
+  const out = { series: { compared: 0, same: 0, lines: [] }, numbers: { compared: 0, same: 0, lines: [] }, verdicts: { compared: 0, same: 0, lines: [] }, names: [], faults: shown.faults };
   for (const [key, points] of Object.entries(expected.series ?? {})) {
     const got = shown.series[key];
     for (const [period, value] of Object.entries(points)) {
+      if (value === null) continue;
       out.series.compared++;
-      if (got && same(got[period], value)) out.series.same++;
-      else out.series.lines.push(got ? `${key} ${period}: the page shows ${value}; the report ${got[period] ?? 'nothing'}` : `${key} ${period}: the page shows ${value}; the report has no such series`);
+      if (got && agrees(got[period], value)) out.series.same++;
+      else out.series.lines.push(got ? `${key} ${period}: the page shows ${value}; the report ${got[period] ? `writes ${got[period].written?.value ?? 'no number'}` : 'nothing'}` : `${key} ${period}: the page shows ${value}; the report has no such series`);
     }
     if (expected.names?.[key] && shown.names[key] && expected.names[key] !== shown.names[key]) {
       out.names.push(`${key}: the page names it "${expected.names[key]}"; the data file, which the report shows, "${shown.names[key]}"`);
@@ -371,7 +425,7 @@ export function compare(model, expected) {
     const got = shown.numbers[thing] ?? [];
     for (const value of values) {
       out.numbers.compared++;
-      if (got.some((g) => same(g, value))) out.numbers.same++;
+      if (got.some((g) => agrees(g, value))) out.numbers.same++;
       else out.numbers.lines.push(`${thing}: the page shows ${value}; the report does not`);
     }
   }
@@ -379,12 +433,9 @@ export function compare(model, expected) {
     out.verdicts.compared++;
     const got = shown.verdicts[id];
     if (got === label.toLowerCase()) out.verdicts.same++;
-    else {
-      const item = model.sections.flatMap((s) => s.blocks).filter((b) => b.type === 'conclusions').flatMap((b) => b.items).find((it) => it.id === id);
-      out.verdicts.lines.push(`${id}: the page shows "${label}"; the report shows "${got ?? 'nothing'}"${item ? ` (${item.show.note})` : ''}`);
-    }
+    else out.verdicts.lines.push(`${id}: the page shows "${label}"; the report shows "${got ?? 'nothing'}"${shown.verdicts[`note:${id}`] ? ` (${shown.verdicts[`note:${id}`]})` : ''}`);
   }
-  out.differ = out.series.lines.length + out.numbers.lines.length + out.verdicts.lines.length;
+  out.differ = out.series.lines.length + out.numbers.lines.length + out.verdicts.lines.length + out.faults.length;
   return out;
 }
 
@@ -393,6 +444,7 @@ export function compareText(result, expected) {
   return [
     `Compared with ${expected.page ?? 'the expected page'}.`,
     ...part('Series values', result.series), ...part('Numbers', result.numbers), ...part('Verdict labels', result.verdicts),
+    ...(result.faults.length ? ['Faults in the page:', ...result.faults.map((l) => `  ${l}`)] : []),
     ...(result.names.length ? ['Names (not counted as differences):', ...result.names.map((l) => `  ${l}`)] : []),
   ].join('\n');
 }
@@ -449,7 +501,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     } else if (command === 'compare') {
       if (!args[1]) fail('Usage: report.mjs compare <report.html> <expected.json>');
       const expected = JSON.parse(readFileSync(args[1], 'utf8'));
-      const result = compare(modelOf(readFileSync(args[0], 'utf8')), expected);
+      const result = compare(readFileSync(args[0], 'utf8'), expected);
       console.log(compareText(result, expected));
       process.exit(result.differ ? 1 : 0);
     } else fail('Usage: report.mjs collect|build|verdicts|compare … (see the top of this file)');

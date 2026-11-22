@@ -6,7 +6,9 @@
 //     cell is a gap in its line, never a zero. A cell whose words are not a number is left out and counted, and
 //     the count is said under the lines (unread-label), so nothing disappears quietly;
 //   - a row with data-partial is a period that is not complete: the line reaches it dashed, its point is hollow
-//     and its tick carries the attribute's word ("partial" when it has none);
+//     and its tick carries the attribute's word ("partial" when it has none). Say it in the row's header too,
+//     which is what a screen reader reads, and give the header the period alone as data-value:
+//     <th scope="row" data-value="2026">2026 (partial)</th>;
 //   - the scale starts at zero. min="…" starts it elsewhere (a number, or "auto" for just under the lowest
 //     value), and then the line above the drawing says so, in the words of from-label ("the scale starts at");
 //   - each line is named at its end by a button. Pressing one keeps that line in ink and sends "change"
@@ -132,7 +134,7 @@ class PoSeries extends HTMLElement {
   #read(table) {
     const head = [...table.tHead.rows[0].cells]
     const rows = [...table.tBodies[0].rows]
-    const periods = rows.map((r) => r.cells[0]?.textContent.trim() ?? "")
+    const periods = rows.map((r) => (r.cells[0]?.dataset.value ?? r.cells[0]?.textContent ?? "").trim())
     const numbers = periods.map(Number)
     const even = !periods.length || periods.some((p, i) => p === "" || !Number.isFinite(numbers[i]))
     const first = even ? 0 : Math.min(...numbers)

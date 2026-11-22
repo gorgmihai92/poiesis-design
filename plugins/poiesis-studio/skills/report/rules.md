@@ -18,16 +18,19 @@ typed into the page, the report's file or a data file the page reads. A conclusi
 was altered, or a sentence that changed since its challenge shows as **not challenged**, with the reason. When a
 file shows another label than the record, the record is shown and the page says that the two disagree.
 *Rests on:* observation, `poiesis-lab-2026-recorded-pages.md` (a label retyped by hand changed from weakened to
-kept); the entry gate of the lab's `PROTOCOL.md`; the record format of poiesis-insight 2.0.0.
+kept), which also records the entry gate the lab's `PROTOCOL.md` sets for reports; the record format of
+poiesis-insight 2.0.0 (its `stamp-format.md`).
 
-**U10 · must · Every number says where it comes from.** A report's own file holds references and prose. Numbers
-are read from the files they live in when the page is built, and the page lists those files with a hash of each.
-A count shown on the page (how many studies, how many sources) is computed from the list it counts.
-*Rests on:* the lab's rule "nothing invented"; observation, `poiesis-lab-2026-recorded-pages.md` (a verdict
-typed again by hand changed on the way, the case under U1). Computing counts from their lists is a product
-decision (P) that follows from both.
+**U10 · must · Every number says where it comes from.** A report's own file holds references and prose. The
+numbers in its figures and tables are read from the files they live in when the page is built, and the page lists
+those files with a hash of each. A count shown on the page (how many studies, how many sources) is computed from
+the list it counts. Prose may quote a number; the prose is the report's own and the page says so.
+*Rests on:* the lab's rule "nothing invented" (`CLAUDE.md` of the notebook, recorded in
+`poiesis-lab-2026-recorded-pages.md`); observation in that note (a verdict typed again by hand changed on the
+way, the case under U1). Computing counts from their lists is a product decision (P) that follows from both.
 
-**U11 · must · The page ends with "Not checked".** *Rests on:* the lab's rule 5.
+**U11 · must · The page ends with "Not checked".** *Rests on:* the lab's rule 5 (`CLAUDE.md` of the notebook,
+recorded in `poiesis-lab-2026-recorded-pages.md`); the recorded trend scan's page ends so (same note).
 
 ## How numbers are drawn
 
@@ -62,13 +65,14 @@ and named; a missing value is a gap, never a zero; a value that could not be rea
 bars for readers who are not specialists: they are read as the range of the data. A confidence a challenger gave
 is shown in its words, never turned into a number, a bar or a shade.
 *Rests on:* observation (the recorded trend scan marks its partial year); Franconeri et al. 2021, p. 31–33;
-Hullman et al. 2019, p. 8–9 (part of the text: stated confidence is not statistical confidence; text is a valid
-way to state uncertainty).
+Hullman et al. 2019, p. 8 (part of the text: stated confidence is not a direct function of statistical
+confidence). Keeping a confidence in words is a product decision (P) that follows from it.
 
-**U8 · should · A table to look a value up, a figure to see a pattern; the table is always there.** Every figure
-holds its numbers as a table on the page, for the keyboard, for a screen reader and for anyone who needs the
-value.
-*Rests on:* Franconeri et al. 2021, p. 4 and 21.
+**U8 · should · The table is always there.** Every figure holds its numbers as a table on the page, for the
+keyboard, for a screen reader and for anyone who needs a value.
+*Rests on:* a product decision (P), for ux I1 (a keyboard path) and I3 (a name for every control); the figures'
+drawings are hidden from screen readers, so the table is their copy. No source read here compares tables with
+figures for looking a value up.
 
 **U9 · should · Familiar forms and directions.** More is up and to the right. A form the reader may not know (a dot
 map on a logarithmic scale) gets one sentence that says how to read it.

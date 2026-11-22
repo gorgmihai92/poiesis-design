@@ -40,8 +40,10 @@ export function readStamps(path) {
   return { path, exists: true, damaged, last, count };
 }
 
+const ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/;
+const realDate = (d) => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d) && new Date(`${d}T00:00:00Z`).toISOString().slice(0, 10) === d;
 const intact = (s) =>
-  s.v === 1 && VERDICTS.includes(s.verdict) && typeof s.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s.date) &&
+  s.v === 1 && ID.test(s.id) && VERDICTS.includes(s.verdict) && realDate(s.date) &&
   typeof s.text_sha256 === 'string' && /^[0-9a-f]{64}$/.test(s.text_sha256) &&
   s.seal === sealOf(s.id, s.verdict, s.date, s.text_sha256);
 

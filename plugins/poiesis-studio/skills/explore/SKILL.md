@@ -48,7 +48,8 @@ tell the owner what is missing and offer the choices the script prints.
    a concept or a scenario by id, or "the owner's question".
 2. **Six sketches, three at the least, all made before any is judged.** In the one study read, people who made
    several prototypes before getting any critique produced better and more varied work than people critiqued
-   after each one (Dow et al. 2010: 33 mostly student participants, web banners, part of the text read).
+   after each one (Dow et al. 2010: 33 mostly student participants, web banners; read in part, from the
+   submitted draft, whose numbers may differ from the published article's).
    Variety was not shown to cause the better result; the sketches differ so that the space is seen.
 3. **Different on purpose.** Use the generators in `generators.md`, a different one for each sketch where that is
    possible, and write which one in the sketch's `<meta name="sketch:generator">` and in `notes.md`. Two sketches
@@ -91,10 +92,10 @@ later), when that plugin is installed. Without it, write "Nearest existing thing
 ## When a sketch is shown to people
 
 - **Say it is a prototype,** before anything else, and leave the mark on the sketch. In the cases Coulton,
-  Lindley & Akmal (2016, full text read) describe, a fiction in a familiar form was taken for real even when it
-  was labelled: reviewers of a fictional paper, a filmmaker who saw a video. The paper does not test whether
-  saying so is enough. This line is a product decision informed by those cases, and it is the only instruction
-  here that is not about exploring.
+  Lindley & Akmal (2016, full text read) describe, fictions in a familiar form were taken for real: reviewers of
+  a fictional research paper that named itself design fiction in its keywords and its conclusion, and a filmmaker
+  who saw an unlabelled video. The paper does not test whether saying so is enough. This line is a product
+  decision informed by those cases, and it is the only instruction here that is not about exploring.
 - **Show several, never one.** In one study each design was rated higher when seen alone than among three (for
   two of the three designs the difference was clear), drew more compliments, and was never rejected (Tohidi et
   al. 2006: 48 students and recent graduates, paper prototypes of a thermostat, most of the text read).
