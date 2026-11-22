@@ -123,6 +123,8 @@ Each Markdown file above starts with a block of Obsidian properties (since 0.2.0
 session copies it from `$X/templates/session.md`. It is a copy for Obsidian's views: the lines in the table above
 stay the record. In the block no line starts with `#` and text values are quoted. Never put a link in a heading
 or an **Id** line, or a link with an alias (`[[a|b]]`) in a table.
+When the question or the date changes, change the block in the same edit. Inside a quoted value write `\"` for a
+quotation mark and `\\` for a backslash. An experiment's id (`E-001`) is never a link.
 
 ## What is not known
 
