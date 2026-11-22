@@ -1,0 +1,126 @@
+/* Pattern · dot map. Things placed by two numbers, as dots on two scales, drawn from a real table (dot-map.js
+   for the markup and what it sends). Each dot is a button at its place, named beside it where there is room, so
+   there is no legend to look up; a dot's verdict shows as the verdict label's own mark, shape and color together
+   (C4); the one pressed is filled, as anything chosen is (G3). The table stays on the page under the map: it is
+   how a value is looked up. A reader may not know this form, so the page says in a sentence how to read it.
+
+     <po-dot-map y-scale="log" x-unit="%" y-unit="%">
+       <table>
+         <thead><tr><th scope="col">Topic</th><th scope="col">Growth a year</th><th scope="col">Share in 2025</th><th scope="col">Challenge</th></tr></thead>
+         <tbody>
+           <tr data-state="kept" data-label><th scope="row">Topic A</th><td>32.0</td><td>4.00</td>
+             <td><span class="po-verdict" data-state="kept">Kept</span></td></tr>
+         </tbody>
+       </table>
+     </po-dot-map>
+
+   --po-dot-map-height sets how tall the map is (20rem by default). Until the script has drawn it, and wherever
+   the script does not run, the table shows as it is. */
+
+@layer poiesis.patterns {
+  po-dot-map {
+    --po-dot-map-height: calc(var(--space) * 80);
+    display: grid;
+    gap: calc(var(--space) * 2);
+    min-inline-size: 0;
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    font-variant-numeric: tabular-nums;
+  }
+  po-dot-map > * { margin: 0; min-inline-size: 0; }
+
+  /* The table: the numbers, in a column of figures. */
+  po-dot-map table { inline-size: 100%; border-collapse: collapse; text-align: start; }
+  po-dot-map :is(th, td) {
+    padding: calc(var(--space) * 1.5) calc(var(--space) * 2);
+    border-block-end: 1px solid var(--divider);
+    font-weight: var(--weight-regular);
+    text-align: end;
+    white-space: nowrap;
+  }
+  po-dot-map :is(th, td):first-child { padding-inline-start: 0; text-align: start; white-space: normal; }
+  po-dot-map :is(th, td):last-child { padding-inline-end: 0; }
+  po-dot-map thead th { border-block-end-color: var(--line-color); color: var(--muted); white-space: normal; vertical-align: bottom; }
+  .po-dot-map-numbers > div { overflow-x: auto; }
+
+  /* What each scale counts, in words: the upright one above the map, the level one under it. */
+  .po-dot-map-axis { color: var(--muted); }
+  .po-dot-map-axis[data-axis="x"] { text-align: end; }
+
+  .po-dot-map-chart {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: var(--po-dot-map-height) auto;
+    column-gap: calc(var(--space) * 2);
+    direction: ltr;
+  }
+  .po-dot-map-scale, .po-dot-map-plot { position: relative; }
+  .po-dot-map-scale { color: var(--muted); }
+  .po-dot-map-scale[data-axis="y"] { grid-area: 1 / 1; text-align: end; }
+  .po-dot-map-scale[data-axis="x"] { grid-area: 2 / 2; block-size: calc(1lh + var(--space) * 2); }
+  .po-dot-map-plot { grid-area: 1 / 2; }
+
+  .po-dot-map-sizer { display: block; block-size: 0; overflow: hidden; visibility: hidden; white-space: nowrap; }
+  .po-dot-map-scale > span:not(.po-dot-map-sizer) { position: absolute; white-space: nowrap; }
+  .po-dot-map-scale[data-axis="y"] > span:not(.po-dot-map-sizer) { inset-inline-end: 0; translate: 0 50%; }
+  .po-dot-map-scale[data-axis="x"] > span { inset-block-start: calc(var(--space) * 2); translate: -50% 0; }
+
+  /* The lines of the scales; the one at zero is darker. */
+  .po-dot-map-rule { position: absolute; background: var(--divider); pointer-events: none; }
+  .po-dot-map-rule[data-axis="x"] { inset-block: 0; inline-size: 1px; }
+  .po-dot-map-rule[data-axis="y"] { inset-inline: 0; block-size: 1px; }
+  .po-dot-map-rule[data-base] { background: var(--line-color); }
+
+  /* A dot: a pressable whose mark stands on its place; its name beside it, to the end or to the start. */
+  .po-dot {
+    position: absolute;
+    block-size: var(--control-xs);
+    gap: 0;
+    translate: calc(var(--control-xs) / -2) 50%;
+    font-weight: var(--weight-regular);
+  }
+  .po-dot:not([aria-pressed="true"]) { color: var(--muted); }
+  .po-dot[data-side="start"] { flex-direction: row-reverse; translate: calc(var(--control-xs) / 2 - 100%) 50%; }
+  .po-dot[hidden], .po-dot-map-key[hidden] { display: none; }
+  .po-dot:is(:hover, :focus-visible) { z-index: 1; }
+  .po-dot:not([aria-pressed="true"]):is(:hover, :focus-visible) { color: var(--ink); }
+  .po-dot[aria-pressed="true"] { z-index: 1; }
+  .po-dot-name { padding-inline-end: var(--control-pad-sm); }
+  .po-dot[data-side="start"] > .po-dot-name { padding-inline: var(--control-pad-sm) 0; }
+
+  .po-dot-mark {
+    --po-dot-color: var(--ink);
+    display: grid;
+    place-items: center;
+    flex: none;
+    inline-size: var(--control-xs);
+    block-size: var(--control-xs);
+  }
+  .po-dot-mark::before {
+    content: "";
+    inline-size: calc(var(--space) * 2);
+    block-size: calc(var(--space) * 2);
+    background: var(--po-dot-color);
+  }
+  .po-dot[aria-pressed="true"]:not([data-state]) > .po-dot-mark { --po-dot-color: currentColor; }
+
+  /* A dot with a verdict wears that verdict's mark; any other word in data-state is not challenged. */
+  .po-dot[data-state] > .po-dot-mark { --po-dot-color: var(--muted); --po-dot-icon: var(--po-icon-circle); }
+  .po-dot[data-state] > .po-dot-mark::before {
+    inline-size: var(--icon);
+    block-size: var(--icon);
+    -webkit-mask: var(--po-dot-icon) center / contain no-repeat;
+    mask: var(--po-dot-icon) center / contain no-repeat;
+  }
+  .po-dot[data-state="kept"] > .po-dot-mark { --po-dot-color: var(--success); --po-dot-icon: var(--po-icon-success); }
+  .po-dot[data-state="weakened"] > .po-dot-mark { --po-dot-color: var(--warning); --po-dot-icon: var(--po-icon-warning); }
+  .po-dot[data-state="dropped"] > .po-dot-mark { --po-dot-color: var(--danger); --po-dot-icon: var(--po-icon-danger); }
+  .po-dot[data-state][aria-pressed="true"]:not([data-state="kept"], [data-state="weakened"], [data-state="dropped"]) > .po-dot-mark { --po-dot-color: currentColor; }
+
+  /* The dot pointed at or pressed, in words. It keeps its line whether or not it has words (K3). */
+  .po-dot-map-readout { min-block-size: 1lh; color: var(--muted); text-wrap: pretty; }
+
+  /* What the marks say: the verdict labels found in the table, once each. */
+  .po-dot-map-key { display: flex; flex-wrap: wrap; gap: var(--space); }
+}
