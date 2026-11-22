@@ -3,10 +3,12 @@
 ## 0.2.0 (poiesis-studio)
 Everything is added: no path or field of 0.1.0 was renamed or removed, and the scripts read every file as before.
 - **Properties.** What `explore` writes starts with a block of Obsidian properties (YAML between two `---` lines):
-  `notes.md` and a session with `type`, `plugin`, `date` and `topic`; a pattern card adds `id`, `status` (`none
-  yet`, a copy of its Decision line) and `from`, its sketches as quoted links. `explore.mjs` writes the question
-  and the pattern's name quoted, so a quotation mark or a colon in them cannot break the block. The block is a
+  `notes.md` and a session with `type`, `plugin`, `date` and `topic`; a pattern card adds `id` and `from`, its
+  sketches as quoted links. It has no `status`: the Decision is the owner's, and a copy of it would go stale. `explore.mjs` writes the question
+  and the pattern's name quoted, with control characters escaped, so nothing in them can break the block. The block is a
   copy for Obsidian's views: the label lines stay the record, and every script reads those.
+- **Repository.** `.poiesis-design/voice.md` counts five products, and five plugins in Design; `notebook.mjs` points to
+  the notebook's `CLAUDE.md` for its folders.
 - **Tests.** In `studio.test.mjs`: the block in the three templates and in what `explore.mjs new` and `card` write,
   and the report reading conclusions and their records the same with a block on the note.
 - **Not checked in this version:** how Obsidian shows the properties (no vault was opened), and any run on a topic.

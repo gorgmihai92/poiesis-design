@@ -309,7 +309,7 @@ test('the templates of an exploration, a pattern card and a session start with a
   const T = join(STUDIO, 'skills/explore/templates');
   const want = {
     'exploration.md': ['type', 'plugin', 'date', 'topic'],
-    'pattern-card.md': ['type', 'plugin', 'date', 'topic', 'id', 'status', 'from'],
+    'pattern-card.md': ['type', 'plugin', 'date', 'topic', 'id', 'from'],
     'session.md': ['type', 'plugin', 'date', 'topic'],
   };
   for (const [name, keys] of Object.entries(want)) {
@@ -322,17 +322,17 @@ test('the templates of an exploration, a pattern card and a session start with a
 
 test('explore writes the block with the question quoted and the card\'s sources as links, and still reads its notes', () => {
   const dir = scratch();
-  const question = 'How "else" could: a delete # work?';
+  const question = 'How "else" could: a delete # work?\u0085';
   assert.equal(run(EXPLORE, ['new', question, '--variants', '3', '--date', '2026-11-22'], dir).status, 0);
   const lab = 'design/lab/2026-11-22-how-else-could-a-delete-work';
   const notes = readFileSync(join(dir, lab, 'notes.md'), 'utf8');
-  assert.deepEqual(blockOf(notes), ['type: exploration', 'plugin: poiesis-studio', 'date: 2026-11-22', `topic: ${JSON.stringify(question)}`]);
+  assert.deepEqual(blockOf(notes), ['type: exploration', 'plugin: poiesis-studio', 'date: 2026-11-22', 'topic: "How \\"else\\" could: a delete # work?\\u0085"']);
   blockRules('notes.md', blockOf(notes));
   const card = run(EXPLORE, ['card', lab, '--name', 'Undo: the "confirmation"', '--from', 'SK-002,SK-003,@key2020'], dir);
   assert.equal(card.status, 0, card.stderr);
   const text = readFileSync(join(dir, 'design/patterns/PT-001-undo-the-confirmation.md'), 'utf8');
   const block = blockOf(text);
-  assert.deepEqual(block.slice(4), ['id: "PT-001"', 'status: "none yet"', 'from:', '  - "[[SK-002]]"', '  - "[[SK-003]]"', '  - "@key2020"']);
+  assert.deepEqual(block.slice(4), ['id: "PT-001"', 'from:', '  - "[[SK-002]]"', '  - "[[SK-003]]"', '  - "@key2020"']);
   blockRules('pattern card', block);
   assert.match(text, /^- \*\*From:\*\* SK-002, SK-003, @key2020$/m);
   assert.match(text, /^- \*\*Id:\*\* PT-001$/m);
