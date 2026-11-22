@@ -43,7 +43,11 @@ export function readStamps(path) {
   return { path, exists: true, damaged, last, count };
 }
 
-const realDate = (d) => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d) && new Date(`${d}T00:00:00Z`).toISOString().slice(0, 10) === d;
+const realDate = (d) => {
+  if (typeof d !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(d)) return false;
+  const day = new Date(`${d}T00:00:00Z`);
+  return !Number.isNaN(day.getTime()) && day.toISOString().slice(0, 10) === d;
+};
 const intact = (s) =>
   s.v === 1 && ID.test(s.id) && VERDICTS.includes(s.verdict) && realDate(s.date) &&
   typeof s.text_sha256 === 'string' && /^[0-9a-f]{64}$/.test(s.text_sha256) &&
@@ -76,8 +80,9 @@ export function verify({ id, text, shown = null }, stamps) {
 // label also holds a word of negation (not, no, never, or a word starting with "un"): "not challenged" holds none.
 export function verdictWords(label) {
   const part = String(label).split('·')[0];
-  const found = [...new Set((part.match(/\b(kept|weakened|dropped)\b/gi) ?? []).map((w) => w.toLowerCase()))];
-  return found.length && /\b(not|no|never|un\w*)\b/i.test(part) ? [] : found;
+  // Whole words as Python reads them: letters and digits of any script, and "_", are word characters.
+  const found = [...new Set((part.match(/(?<![\p{L}\p{N}_])(kept|weakened|dropped)(?![\p{L}\p{N}_])/giu) ?? []).map((w) => w.toLowerCase()))];
+  return found.length && /(?<![\p{L}\p{N}_])(not|no|never|un[\p{L}\p{N}_]*)(?![\p{L}\p{N}_])/iu.test(part) ? [] : found;
 }
 
 // The conclusions of a Markdown note: every heading with an Id line under it. For each: the sentence (the
@@ -97,14 +102,14 @@ export function readNote(markdown) {
     }
     const open = line.match(/^[ \t]*(`{3,}|~{3,})/);
     if (open) { fence = { char: open[1][0], count: open[1].length }; continue; }
-    const heading = line.match(/^#{1,6}[ \t]+(.*)$/);
+    const heading = line.match(/^#{1,6}[ \t]+([\s\S]*)$/);
     if (heading) { block = { text: heading[1], id: null, challenge: null, fields: [] }; blocks.push(block); continue; }
     if (!block) continue;
     const id = line.match(/^[ \t]*(?:[-*+][ \t]+(?:\*\*)?|\*\*)id(?:\*\*)?[ \t]*:(?:\*\*)?[ \t]*(\S+)[ \t]*$/i);
     if (id) { block.id ??= id[1]; continue; }
-    const challenge = line.match(/^[ \t]*(?:[-*+][ \t]+(?:[*_]{1,2})?|[*_]{1,2})challenge[a-z ]*?(?:[*_]{1,2})?[ \t]*(?::(?:[*_]{1,2})?|(?:[*_]{1,2})?:|[*_]{2}[ \t])[ \t]*(.*)$/i);
+    const challenge = line.match(/^[ \t]*(?:[-*+][ \t]+(?:[*_]{1,2})?|[*_]{1,2})challenge[a-z ]*?(?:[*_]{1,2})?[ \t]*(?::(?:[*_]{1,2})?|(?:[*_]{1,2})?:|[*_]{2}[ \t])[ \t]*([\s\S]*)$/i);
     if (challenge) { block.challenge ??= challenge[1]; continue; }
-    const field = line.match(/^[ \t]*[-*+][ \t]+\*\*([^*:]+):?\*\*:?[ \t]*(.*)$/);
+    const field = line.match(/^[ \t]*[-*+][ \t]+\*\*([^*:]+):?\*\*:?[ \t]*([\s\S]*)$/);
     if (field) block.fields.push({ label: field[1].trim(), text: field[2].trim() });
   }
   const objects = blocks.filter((b) => b.id);

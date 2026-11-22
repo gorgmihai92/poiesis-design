@@ -141,7 +141,8 @@ function resolveDots(root, block, seen) {
 function resolveConclusions(root, block, stamps, seen) {
   let items;
   if (/\.md$/i.test(block.from)) {
-    items = readNote(readText(root, block.from, seen)).map((o) => ({
+    // A research question has an id and is not challenged: with no Challenge line, it is not a conclusion.
+    items = readNote(readText(root, block.from, seen)).filter((o) => !(o.challenge === null && /^QN-/.test(o.id))).map((o) => ({
       id: o.id, text: o.text, shown: o.challenge, twice: o.twice,
       fields: o.fields.filter((f) => !/^(id|challenge|from|written)$/i.test(f.label)).map((f) => ({ name: f.label, text: f.text })),
     }));
