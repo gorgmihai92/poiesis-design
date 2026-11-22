@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.1.0 (poiesis-studio)
+A new plugin, the fifth of Poiesis Design, for a lab notebook. It installs on its own and switches none of the
+others on.
+- **`explore`**: free design exploration. One question, six working sketches by default (three at the least), all
+  made before any is judged and shown side by side, from the Poiesis theme's own token files, which `explore.mjs`
+  finds on the computer and joins into the exploration's `theme.css`. No design rule applies: the ui, ux and copy
+  rules are not used, no auditor or tester runs, and no `.poiesis-design/` folder is made. Every sketch says
+  "Prototype" on itself. What stays is a written critique and a pattern card (`PT-001`) whose decision is the
+  owner's. Generators, each marked untested, in `generators.md`.
+- **`report`**: the showroom. One HTML page from what the notebook holds, built by `report.mjs` from a report's
+  references (series, evidence tables, dot maps, conclusions); no number and no verdict is typed into it. Each
+  verdict is read from its challenge record (poiesis-insight 2.0.0's format) and checked; a conclusion without one
+  shows as not challenged. `report.mjs compare` compares a page with another on its series, numbers and verdict
+  labels. Rules for showing data, U1 to U12, each with the source it rests on and how much of it was read.
+- Sources read for this version are in `research/notes/`, each with a **Read** line.
+
+## 0.14.0 (poiesis-components)
+Four patterns for showing findings, built for poiesis-studio's reports and usable anywhere.
+- **Verdict** (`patterns/verdict.css`, `.po-verdict`): what a challenge decided, as a mark and a word; with no
+  state, or any other word, it reads as not challenged.
+- **Evidence** (`patterns/evidence.css`, `.po-evidence`): a table with one source in each row, the source staying
+  in view while the columns scroll; muted notes, figures, "not stated" cells and gaps.
+- **Series** (`patterns/series.css`, `series.js`, `<po-series>`): counts over time as lines drawn from a table that
+  stays on the page; one scale from zero, names at the lines' ends, partial periods dashed, gaps never zero.
+- **Dot map** (`patterns/dot-map.css`, `dot-map.js`, `<po-dot-map>`): things placed by two numbers, each a button
+  named where it stands, with the verdict's mark; linear or logarithmic scales.
+- `add.mjs` copies each with what it is built from (series: collapsible; dot map: collapsible and verdict).
+
 ## 0.13.8 (poiesis-components)
 - **Icons:** `home`, `box` (products), `chart` (analytics) and `gear` (settings), for an app's places.
 - **Nav:** a link may start with an icon; it takes the link's colour.
