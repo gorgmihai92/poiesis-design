@@ -43,6 +43,10 @@ const PARTS = {
   nav: [],
   frame: [],
   'form-field': ['label', 'input'],
+  verdict: [],
+  evidence: [],
+  series: ['collapsible'],
+  'dot-map': ['collapsible', 'verdict'],
 };
 
 if (argv.includes('--list') || !names.length) {

@@ -48,3 +48,7 @@
 @import "./patterns/nav.css";
 @import "./patterns/frame.css";
 @import "./patterns/form-field.css";
+@import "./patterns/verdict.css";
+@import "./patterns/evidence.css";
+@import "./patterns/series.css";
+@import "./patterns/dot-map.css";

@@ -1,0 +1,145 @@
+/* Pattern · series. One or more counts over time, as lines drawn from a real table (series.js for the markup
+   and what it sends). Values are positions on one shared scale that starts at zero; each line is named where it
+   ends, so there is no legend to look up; one line is ink and the others grey, because the role colors stay for
+   statuses (C2); a period that is not complete is dashed, with a hollow point, and says so in words. The table
+   stays on the page under the lines: it is how a value is looked up, and it is the copy a keyboard and a screen
+   reader use (ux I1).
+
+     <po-series unit="per 100,000 articles">
+       <table>
+         <thead><tr><th scope="col">Year</th><th scope="col" data-focus>Quantum computing</th><th scope="col">Synthetic biology</th></tr></thead>
+         <tbody>
+           <tr><th scope="row">2024</th><td>84.2</td><td>27.2</td></tr>
+           <tr data-partial="partial"><th scope="row">2026</th><td>44.1</td><td>15.9</td></tr>
+         </tbody>
+       </table>
+     </po-series>
+
+   --po-series-height sets how tall the lines' box is (16rem by default). Until the script has drawn it, and
+   wherever the script does not run, the table shows as it is. */
+
+@layer poiesis.patterns {
+  po-series {
+    --po-series-height: calc(var(--space) * 64);
+    display: grid;
+    gap: calc(var(--space) * 2);
+    min-inline-size: 0;
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    font-variant-numeric: tabular-nums;
+  }
+  po-series > * { margin: 0; min-inline-size: 0; }
+
+  /* The table: the numbers, in a column of figures. */
+  po-series table { inline-size: 100%; border-collapse: collapse; text-align: start; }
+  po-series :is(th, td) {
+    padding: calc(var(--space) * 1.5) calc(var(--space) * 2);
+    border-block-end: 1px solid var(--divider);
+    font-weight: var(--weight-regular);
+    text-align: end;
+    white-space: nowrap;
+  }
+  po-series :is(th, td):first-child { padding-inline-start: 0; text-align: start; }
+  po-series :is(th, td):last-child { padding-inline-end: 0; }
+  po-series thead th { border-block-end-color: var(--line-color); color: var(--muted); white-space: normal; vertical-align: bottom; }
+  po-series tbody tr[data-partial] :is(th, td) { color: var(--muted); }
+  .po-series-numbers > div { overflow-x: auto; }
+
+  /* What the lines count, and what the axis does when it is not the usual one. */
+  .po-series-unit { color: var(--muted); }
+
+  /* Names in a row above the lines, when they do not fit at the lines' ends. */
+  .po-series-row { display: none; flex-wrap: wrap; gap: var(--space); }
+  po-series[data-names="row"] .po-series-row { display: flex; }
+  po-series[data-names="row"] .po-series-ends { display: none; }
+
+  /* The chart: the scale, the lines, the names at their ends; the periods under the lines. */
+  .po-series-chart {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: var(--po-series-height) auto;
+    column-gap: calc(var(--space) * 2);
+    direction: ltr;
+  }
+  po-series[data-names="row"] .po-series-chart { grid-template-columns: auto minmax(0, 1fr); }
+
+  .po-series-scale, .po-series-ends, .po-series-periods, .po-series-plot { position: relative; }
+  .po-series-scale { grid-area: 1 / 1; color: var(--muted); text-align: end; }
+  .po-series-plot { grid-area: 1 / 2; }
+  .po-series-ends { grid-area: 1 / 3; }
+  .po-series-periods { grid-area: 2 / 2; block-size: calc(1lh + var(--space) * 2); color: var(--muted); }
+
+  /* A hidden copy of the widest word gives a column its width; the words themselves are placed on the scale. */
+  .po-series-sizer { display: block; block-size: 0; overflow: hidden; visibility: hidden; white-space: nowrap; }
+  .po-series-ends > .po-series-sizer { padding-inline: var(--control-pad-sm); font-weight: var(--weight-strong); }
+
+  .po-series-scale > span:not(.po-series-sizer) {
+    position: absolute;
+    inset-inline-end: 0;
+    translate: 0 50%;
+    white-space: nowrap;
+  }
+  .po-series-periods > span {
+    position: absolute;
+    inset-block-start: calc(var(--space) * 2);
+    translate: -50% 0;
+    white-space: nowrap;
+  }
+
+  .po-series-plot > svg {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    overflow: visible;
+  }
+  .po-series-grid { stroke: var(--divider); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+  .po-series-grid[data-base] { stroke: var(--line-color); }
+  .po-series-line {
+    fill: none;
+    stroke: var(--line-color);
+    stroke-width: 1px;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .po-series-line[data-partial] { stroke-dasharray: 3 3; }
+  .po-series-line[data-focus] { stroke: var(--ink); stroke-width: var(--ring); }
+
+  /* The last point of a line, and the point of a period that is not complete (hollow). */
+  .po-series-point {
+    position: absolute;
+    box-sizing: border-box;
+    inline-size: calc(var(--space) * 1.5);
+    block-size: calc(var(--space) * 1.5);
+    translate: -50% -50%;
+    border: 1px solid currentColor;
+    background: currentColor;
+    color: var(--line-color);
+    pointer-events: none;
+  }
+  .po-series-point[data-focus] { color: var(--ink); }
+  .po-series-point[data-partial] { background: var(--paper); }
+
+  /* The period pointed at. */
+  .po-series-guide {
+    position: absolute;
+    inset-block: 0;
+    inline-size: 1px;
+    background: var(--line-color);
+    pointer-events: none;
+  }
+
+  /* A line's name: a pressable that keeps one line in ink. The pressed one keeps the selected colors (C3). */
+  .po-series-name {
+    block-size: var(--control-xs);
+    padding-inline: var(--control-pad-sm);
+  }
+  .po-series-name:not([aria-pressed="true"]) { color: var(--muted); }
+  .po-series-name:not([aria-pressed="true"]):hover { color: var(--ink); }
+  .po-series-ends > .po-series-name { position: absolute; inset-inline-start: 0; translate: 0 -50%; }
+  .po-series-name[hidden] { display: none; }
+
+  /* What the pointer is on, in words. It keeps its line whether or not it has words, so nothing moves (K3). */
+  .po-series-readout { min-block-size: 1lh; color: var(--muted); text-wrap: pretty; }
+}
