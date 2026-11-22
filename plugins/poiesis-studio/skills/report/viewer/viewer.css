@@ -1,0 +1,30 @@
+/* The report's own page: the theme's cells and the library's primitives, nothing else. */
+
+* , *::before, *::after { box-sizing: border-box; }
+html { font-family: var(--font-sans); }
+body { margin: 0; }
+
+.report {
+  display: grid;
+  gap: var(--subsection-space);
+  max-inline-size: calc(var(--measure) * 1.6);
+  margin-inline: auto;
+  padding: calc(var(--space) * 12) calc(var(--space) * 4) calc(var(--space) * 24);
+}
+.report p { margin: 0; max-inline-size: var(--measure); text-wrap: pretty; }
+.report-head, .report-section { display: grid; gap: calc(var(--space) * 4); min-inline-size: 0; }
+.report-section { padding-block-start: var(--block-pad); border-block-start: 1px solid var(--divider); }
+.report-block { display: grid; gap: calc(var(--space) * 3); min-inline-size: 0; margin-block-start: calc(var(--space) * 4); }
+
+.report-conclusions { display: grid; gap: calc(var(--space) * 6); margin: 0; padding: 0; list-style: none; }
+.report-conclusions > li { display: grid; gap: calc(var(--space) * 1.5); }
+.report-conclusion-head { display: flex; align-items: center; gap: calc(var(--space) * 2); }
+.report-id { color: var(--muted); font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-mono); }
+.report-conclusion-text { font-weight: var(--weight-strong); }
+.report-conclusion-note, .report-conclusion-field { color: var(--muted); font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans); }
+.report-conclusion-note[data-warn] { color: var(--ink); }
+.report-conclusion-note[data-warn]::before { content: "Note: "; font-weight: var(--weight-strong); }
+.report-conclusion-field > span { color: var(--ink); }
+
+.report-sources, .report-not-checked { display: grid; gap: calc(var(--space) * 1.5); margin: 0; padding-inline-start: calc(var(--space) * 5); }
+.report-sources code { font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-mono); }

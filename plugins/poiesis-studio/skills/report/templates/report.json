@@ -1,0 +1,47 @@
+{
+  "title": "<What the page is about, in a few words>",
+  "about": "<Who it is for and what it answers, in one or two sentences. No numbers here: they come from the files.>",
+  "stamps": "insights/challenge-stamps.jsonl",
+  "sections": [
+    {
+      "heading": "<A heading that says the point>",
+      "text": "<What to look at, and the one comparison that matters>",
+      "blocks": [
+        {
+          "type": "series",
+          "heading": "<What is counted>",
+          "from": "research/data/<name>.csv",
+          "period": "year",
+          "period_label": "Year",
+          "series": "label",
+          "key": "series",
+          "value": "share_per_100k",
+          "partial": "partial",
+          "unit": "<per 100,000 articles, reviews and preprints>",
+          "digits": 1
+        },
+        {
+          "type": "table",
+          "from": "research/maps/<name>.md",
+          "heading": "Studies",
+          "key": "Citation",
+          "columns": [
+            { "field": "Citation", "name": "Study" },
+            { "field": "Read", "name": "Read" },
+            { "field": "What was varied", "name": "What was varied" },
+            { "field": "What was measured", "name": "What was measured" },
+            { "field": "Key number", "name": "Key number" }
+          ]
+        },
+        {
+          "type": "conclusions",
+          "heading": "What survived the challenge",
+          "from": "insights/<date>-<topic>.md"
+        }
+      ]
+    }
+  ],
+  "not_checked": [
+    "<What nobody looked at>"
+  ]
+}

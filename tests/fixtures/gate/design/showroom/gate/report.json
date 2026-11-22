@@ -1,0 +1,11 @@
+{
+  "title": "Three conclusions and their challenge",
+  "about": "The gate example of poiesis-insight 2.0.0: one conclusion kept, one dropped, one never challenged. Each verdict below is read from its record.",
+  "sections": [
+    {
+      "heading": "Conclusions",
+      "blocks": [{ "type": "conclusions", "from": "insights/2026-11-17-gate-example.md" }]
+    }
+  ],
+  "not_checked": ["Whether the conclusions are right: the page shows what the challenge recorded, not whether it was correct."]
+}

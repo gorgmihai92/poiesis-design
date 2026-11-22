@@ -1,0 +1,320 @@
+{
+  "title": "Generative Responsibility Map",
+  "about": "Three questions from one thesis, answered in one pass: where moral psychology is moving, who people blame when AI causes harm, and what a responsibility check inside a generative tool could be. Every conclusion below went through an independent challenge, and every concept carries the experiment that could kill it.",
+  "sections": [
+    {
+      "heading": "Where moral psychology is moving",
+      "text": "Each dot is a topic inside moral research: records in Europe PMC whose title or abstract says moral or morality. Further right, its share grew faster each year from 2020 to 2025; higher, it was a larger share of moral research in 2025 (a logarithmic scale). A dot's mark is the verdict of the conclusion about it.",
+      "blocks": [
+        {
+          "type": "dots",
+          "from": "fixtures/responsibility-map/page_data.json",
+          "items": "topics",
+          "things": "topics",
+          "key": "id",
+          "name": "name",
+          "x": "momentum",
+          "y": "size",
+          "x_label": "Share growth a year, 2020–25",
+          "y_label": "Share of moral research, 2025",
+          "x_unit": "%",
+          "y_unit": "%",
+          "x_signed": true,
+          "y_scale": "log",
+          "label": [
+            "ai",
+            "injury",
+            "social",
+            "climate",
+            "dev",
+            "progress",
+            "politics",
+            "blame",
+            "circle",
+            "found"
+          ],
+          "verdicts": {
+            "from": "topics",
+            "map": {
+              "emotion": "found",
+              "circle": "found"
+            }
+          }
+        },
+        {
+          "type": "table",
+          "from": "fixtures/responsibility-map/page_data.json",
+          "items": "topics",
+          "things": "topics",
+          "key": "id",
+          "label": "Sixteen topics",
+          "columns": [
+            {
+              "field": "name",
+              "name": "Topic"
+            },
+            {
+              "field": "size",
+              "name": "Share, 2025",
+              "number": true,
+              "digits": 2,
+              "unit": "%"
+            },
+            {
+              "field": "n25",
+              "name": "Records, 2025",
+              "number": true,
+              "digits": 0
+            },
+            {
+              "field": "momentum",
+              "name": "Share growth a year, 2020–25",
+              "number": true,
+              "digits": 1,
+              "signed": true,
+              "unit": "%"
+            },
+            {
+              "field": "momentum_prev",
+              "name": "2015–20",
+              "number": true,
+              "digits": 1,
+              "signed": true,
+              "unit": "%"
+            }
+          ]
+        },
+        {
+          "type": "conclusions",
+          "name": "topics",
+          "heading": "What survived the challenge",
+          "from": "fixtures/responsibility-map/page-literals.json",
+          "rows": "TOPIC_VERDICTS",
+          "id_field": "id",
+          "text": "claim",
+          "shown": "v",
+          "fields": [
+            {
+              "field": "why",
+              "name": "Why"
+            }
+          ]
+        },
+        {
+          "type": "series",
+          "heading": "Share of moral research over time",
+          "from": "fixtures/responsibility-map/page_data.json",
+          "items": "topics",
+          "things": "topics",
+          "key": "id",
+          "values": "share",
+          "periods": "universe",
+          "period_label": "Year",
+          "focus": "ai",
+          "digits": 2,
+          "unit": "% of moral research"
+        },
+        {
+          "type": "series",
+          "heading": "Moral research a year",
+          "from": "fixtures/responsibility-map/page_data.json",
+          "rows": "universe",
+          "things": "universe",
+          "period": "key",
+          "period_label": "Year",
+          "digits": 0,
+          "unit": "records in Europe PMC",
+          "columns": [
+            {
+              "field": "value",
+              "name": "Moral records"
+            }
+          ]
+        },
+        {
+          "type": "series",
+          "heading": "Where the three questions meet: work a year",
+          "from": "fixtures/responsibility-map/page_data.json",
+          "items": "cross",
+          "things": "cross",
+          "key": "id",
+          "values": "counts",
+          "periods": "universe",
+          "period_label": "Year",
+          "digits": 0,
+          "unit": "records a year"
+        }
+      ]
+    },
+    {
+      "heading": "Who people blame when AI causes harm",
+      "blocks": [
+        {
+          "type": "conclusions",
+          "from": "fixtures/responsibility-map/page-literals.json",
+          "rows": "FINDINGS",
+          "id_field": "id",
+          "text": "claim",
+          "shown": "v",
+          "fields": [
+            {
+              "field": "why",
+              "name": "Why"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "from": "fixtures/responsibility-map/page-literals.json",
+          "rows": "STUDIES",
+          "things": "studies",
+          "key": "id",
+          "label": "Studies and who they found blamed",
+          "columns": [
+            {
+              "field": "cite",
+              "name": "Study"
+            },
+            {
+              "field": "what",
+              "name": "What it varied"
+            },
+            {
+              "field": "venue",
+              "name": "Where and how many"
+            },
+            {
+              "field": "human.0",
+              "name": "The human"
+            },
+            {
+              "field": "human.1",
+              "name": "Note"
+            },
+            {
+              "field": "ai.0",
+              "name": "The AI"
+            },
+            {
+              "field": "ai.1",
+              "name": "Note"
+            },
+            {
+              "field": "dev.0",
+              "name": "Developers"
+            },
+            {
+              "field": "dev.1",
+              "name": "Note"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "What a responsibility check inside a generative tool could be",
+      "blocks": [
+        {
+          "type": "table",
+          "from": "fixtures/responsibility-map/page-literals.json",
+          "rows": "CHAIN",
+          "things": "chain",
+          "key": "3",
+          "label": "What responsibility is for",
+          "columns": [
+            {
+              "field": "0",
+              "name": "What responsibility is for"
+            },
+            {
+              "field": "1",
+              "name": "What must be true, and its source"
+            },
+            {
+              "field": "2",
+              "name": "Thesis principle"
+            },
+            {
+              "field": "3",
+              "name": "Concept"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "from": "fixtures/responsibility-map/page-literals.json",
+          "rows": "CONCEPTS",
+          "things": "concepts",
+          "key": "name",
+          "label": "Concepts and their tests",
+          "caption": "The marks ready and sharpen are the experimentalist's, about each test's design. They are not challenge verdicts.",
+          "columns": [
+            {
+              "field": "name",
+              "name": "Concept"
+            },
+            {
+              "field": "v",
+              "name": "Test design"
+            },
+            {
+              "field": "ifthen",
+              "name": "If, then"
+            },
+            {
+              "field": "assume",
+              "name": "Riskiest assumption"
+            },
+            {
+              "field": "test",
+              "name": "Smallest test"
+            },
+            {
+              "field": "kill",
+              "name": "Kill criterion"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Sources",
+      "blocks": [
+        {
+          "type": "table",
+          "from": "fixtures/responsibility-map/page-literals.json",
+          "rows": "SOURCES",
+          "things": "sources",
+          "key": "1",
+          "label": "Sources",
+          "columns": [
+            {
+              "field": "0",
+              "name": "Source"
+            },
+            {
+              "field": "1",
+              "name": "DOI"
+            },
+            {
+              "field": "2",
+              "name": "Note"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "not_checked": [
+    "Full texts. Every study was read from its abstract, and some sample sizes are missing (Awad 2020, Kneer & Christen 2024, Tolmeijer 2022, Franklin 2021).",
+    "Forward-citation searches. OpenAlex's free daily budget ran out mid-run and Semantic Scholar rate-limited, so the scouts searched mostly through Crossref. \"No designer-choice experiment found\" is a limited search, not proof of absence; such work may sit in law, HCI or product-liability research under other terms.",
+    "Carro & Lagnado 2026 (arXiv 2603.13236), found by the challenger: not read beyond its summary.",
+    "The trend counts come from one index, Europe PMC, which leans biomedical. That is why moral injury and distress, common in nursing research, is the largest topic. The same counts were not repeated in OpenAlex.",
+    "Phrase sets were not validated by reading samples. \"Robot\" and \"algorithm\" are broad, and \"mind perception\" sits in the moral status topic and overlaps with AI.",
+    "\"Moral crumple zone\" was coined (Elish) for humans absorbing blame for automated systems; Hohenstein & Jung use it for the AI absorbing blame. From general knowledge, unverified.",
+    "The 2025 jump in all moral records (2,620 to 3,450) may partly be an indexing change.",
+    "The experiment's power numbers are rough and its effect sizes are guesses, not from the sources.",
+    "The page's vignette, with its sliders, is a sketch of an experiment, not data; it is not rebuilt here.",
+    "This page was rebuilt by poiesis-studio from page_data.json and from the published page's own literals, copied out by script. Its verdicts come from challenge records written on 2026-11-22 over the published page's wording, with the challenger's recorded verdicts; the split conclusion T2 is recorded as its two parts."
+  ]
+}
