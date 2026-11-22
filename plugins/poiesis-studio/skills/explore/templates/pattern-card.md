@@ -1,3 +1,11 @@
+---
+type: pattern
+plugin: poiesis-studio
+date: {{date}}
+topic: {{topic}}
+id: "{{id}}"
+from:{{from_links}}
+---
 # {{name}}
 
 - **Id:** {{id}}

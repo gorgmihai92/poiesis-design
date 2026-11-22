@@ -4,7 +4,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
-// The folders the Poiesis plugins write in (PROTOCOL.md, "Where things go").
+// The folders the Poiesis plugins write in (the notebook's CLAUDE.md, "Where things go"; PROTOCOL.md says what is in them).
 export const FOLDERS = ['research', 'insights', 'foresight', 'frontier', 'design', 'lab'];
 const SKIP = new Set(['.git', 'node_modules', '.obsidian', '.trash', 'fixtures']);
 const TEXT = /\.(md|html|json|jsonl|csv|txt)$/i;

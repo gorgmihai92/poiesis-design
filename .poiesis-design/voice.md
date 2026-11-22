@@ -23,8 +23,8 @@ how to install it and what to ask.
 | Idea | English | Romanian | Not |
 |---|---|---|---|
 | One installable unit | plugin | | extension, add-on |
-| The four products as a family | the Poiesis Toolkit | | the toolkits, suite, platform |
-| One of the four, one repository each | product: Poiesis Research, Poiesis Insight, Poiesis Frontier, Poiesis Design | | toolkit, module |
+| The five products as a family | the Poiesis Toolkit | | the toolkits, suite, platform |
+| One of the five, one repository each | product: Poiesis Research, Poiesis Insight, Poiesis Foresight, Poiesis Frontier, Poiesis Design | | toolkit, module |
 | What Claude follows for a kind of work | skill | | mode |
 | A sub-assistant run on its own | agent | | bot, worker |
 | A procedure inside a skill | playbook | | workflow |
@@ -49,9 +49,11 @@ of results the evidence does not give.
 - O1 · Reference headings stay labels ("Install", "Update or remove", "License", "What's in this repository",
   "Files shared with the other products"): readers look them up by name, and other files refer to them.
 
-- Product framing (George, 2026-10-17): the Poiesis Toolkit is one product made of four: Research, Insight,
-  Frontier, Design. A product is named "Poiesis <Name>" in prose and by its plugin or repository name in code and
-  commands. Design is one product with four plugins (poiesis-ui, poiesis-ux, poiesis-copy, poiesis-components);
+- Product framing (George, 2026-10-17; Foresight became the fifth product when poiesis-foresight 0.1.0 was merged on
+  2026-11-22, and poiesis-studio the fifth plugin of Design): the Poiesis Toolkit is one product made of five:
+  Research, Insight, Foresight, Frontier, Design. A product is named "Poiesis <Name>" in prose and by its plugin or
+  repository name in code and commands. Design is one product with five plugins (poiesis-ui, poiesis-ux,
+  poiesis-copy, poiesis-components, poiesis-studio);
   its README says what each plugin does. Every README opens with what its product does, then the same
   "Part of the Poiesis Toolkit" section.
 

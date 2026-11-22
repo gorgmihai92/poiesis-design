@@ -17,7 +17,7 @@ builds a Frontier concept when you ask, and its poiesis-studio shows what the ot
 
 | Product | What it does | Plugins | Agents | Reads | Leaves in your project |
 |---|---|---|---|---|---|
-| [Poiesis Research](https://github.com/gorgmihai92/poiesis-research) | **collect:** the literature on a topic, the evidence for and against a claim, the grants that fit | `poiesis-research` | `paper-scout`, `evidence-scout`, `funding-scout` | the web's scholarly databases, official funding pages | `research/` |
+| [Poiesis Research](https://github.com/gorgmihai92/poiesis-research) | **collect:** the literature on a topic, the evidence for and against a claim, the grants that fit, yearly counts, signals | `poiesis-research` | `paper-scout`, `evidence-scout`, `funding-scout`, `signal-scout` | the web's scholarly databases, official funding pages | `research/` |
 | [Poiesis Insight](https://github.com/gorgmihai92/poiesis-insight) | **connect:** what the evidence or your data mean; every conclusion challenged | `poiesis-insight` | `insight-analyst`, `challenger` | `research/`, your own data, `frontier/results/` | `insights/` |
 | [Poiesis Foresight](https://github.com/gorgmihai92/poiesis-foresight) | **anticipate:** signals, trends, scenarios, forecasts, signposts | `poiesis-foresight` | `foresight-analyst`, `forecaster` | `research/`, `insights/`, your own data | `foresight/` |
 | [Poiesis Frontier](https://github.com/gorgmihai92/poiesis-frontier) | **explore:** new concepts, each with the smallest experiment that could kill it | `poiesis-frontier` | `experimentalist` | `insights/`, `foresight/`, `research/` | `frontier/` |
