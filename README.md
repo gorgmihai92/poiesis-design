@@ -4,28 +4,29 @@ Interface design that is checked while Claude builds it, in Claude Code: how it 
 says. Claude follows the rules as it works, builds from components that already meet them, and runs a check before
 you publish.
 
-For anyone building an app or a site with Claude Code. Poiesis Design is one of the four products in the
-[Poiesis Toolkit](#part-of-the-poiesis-toolkit). It comes as four plugins, each installed on its own; start with
+For anyone building an app or a site with Claude Code. Poiesis Design is one of the five products in the
+[Poiesis Toolkit](#part-of-the-poiesis-toolkit). It comes as five plugins, each installed on its own; start with
 [Install](#install).
 
 ## Part of the Poiesis Toolkit
 
-The Poiesis Toolkit is four products for Claude Code, one for each step from a question to a finished product:
-**Research** collects, **Insight** connects, **Frontier** explores, **Design** creates. Each installs and works on
-its own. Insight and Frontier also read what the other steps left in your project, as plain files, and Design
-builds a Frontier concept when you ask.
+The Poiesis Toolkit is five products for Claude Code, one for each step from a question to a finished product:
+**Research** collects, **Insight** connects, **Foresight** anticipates, **Frontier** explores, **Design** creates.
+Each installs and works on its own, and reads what the other steps left in your project, as plain files. Design
+builds a Frontier concept when you ask, and its poiesis-studio shows what the other steps found.
 
 | Product | What it does | Plugins | Agents | Reads | Leaves in your project |
 |---|---|---|---|---|---|
 | [Poiesis Research](https://github.com/gorgmihai92/poiesis-research) | **collect:** the literature on a topic, the evidence for and against a claim, the grants that fit | `poiesis-research` | `paper-scout`, `evidence-scout`, `funding-scout` | the web's scholarly databases, official funding pages | `research/` |
-| [Poiesis Insight](https://github.com/gorgmihai92/poiesis-insight) | **connect:** what the evidence or your data mean, and what is emerging; every conclusion challenged | `poiesis-insight` | `insight-analyst`, `foresight-analyst`, `challenger` | `research/`, your own data, `frontier/results/` | `insights/`, `foresight/` |
+| [Poiesis Insight](https://github.com/gorgmihai92/poiesis-insight) | **connect:** what the evidence or your data mean; every conclusion challenged | `poiesis-insight` | `insight-analyst`, `challenger` | `research/`, your own data, `frontier/results/` | `insights/` |
+| [Poiesis Foresight](https://github.com/gorgmihai92/poiesis-foresight) | **anticipate:** signals, trends, scenarios, forecasts, signposts | `poiesis-foresight` | `foresight-analyst`, `forecaster` | `research/`, `insights/`, your own data | `foresight/` |
 | [Poiesis Frontier](https://github.com/gorgmihai92/poiesis-frontier) | **explore:** new concepts, each with the smallest experiment that could kill it | `poiesis-frontier` | `experimentalist` | `insights/`, `foresight/`, `research/` | `frontier/` |
-| [Poiesis Design](https://github.com/gorgmihai92/poiesis-design) | **create:** how the interface looks, behaves and what it says, built from components that already pass, checked before release | `poiesis-ui`, `poiesis-ux`, `poiesis-copy`, `poiesis-components` | `ui-auditor`, `ux-tester`, `copy-reviewer` | your code, `.poiesis-design/` | `.poiesis-design/`, design tokens, components |
+| [Poiesis Design](https://github.com/gorgmihai92/poiesis-design) | **create:** how the interface looks, behaves and what it says, built from components that already pass, checked before release; free exploration and reports in a lab notebook | `poiesis-ui`, `poiesis-ux`, `poiesis-copy`, `poiesis-components`, `poiesis-studio` | `ui-auditor`, `ux-tester`, `copy-reviewer` | your code, `.poiesis-design/`; for reports, the notebook's folders | `.poiesis-design/`, design tokens, components; `design/` in a notebook |
 
 ```
-Research ──► Insight ──► Frontier ──► Design
-               ▲            │
-               └─ results ◄─┘   (experiment results go back to Insight as data)
+Research ──► Insight ──► Foresight ──► Frontier ──► Design
+               ▲                           │
+               └───────── results ◄────────┘   (experiment results go back to Insight as data)
 ```
 
 - **One job each.** Research says what sources say; Insight says what it means; Frontier proposes what could be
@@ -39,7 +40,7 @@ Research ──► Insight ──► Frontier ──► Design
   parts in parallel, or for an independent check at thorough depth.
 - **Rules limit what is reported as true, never what may be explored.**
 
-## Four plugins: how it looks, how it behaves, what it says, and the pieces
+## Five plugins: how it looks, how it behaves, what it says, the pieces, and the studio
 
 | Plugin | What it does | Checked by | Kept in your project |
 |---|---|---|---|
@@ -47,6 +48,7 @@ Research ──► Insight ──► Frontier ──► Design
 | **poiesis-ux** | **how the app behaves:** what happens when people click, wait, make a mistake or use only a keyboard | `ux-tester`, which does your app's main tasks | `.poiesis-design/ux.md` |
 | **poiesis-copy** | **what it says:** buttons, errors, empty states, landing pages, ads and email, in English and Romanian | `copy-reviewer`, which reads your text | `.poiesis-design/voice.md` |
 | **poiesis-components** | **the pieces a screen is made of:** primitives, then buttons, tabs, inputs, notices and more, built on the first two | `ui-auditor` and `ux-tester` | the library files you copy, e.g. `src/poiesis/` |
+| **poiesis-studio** | **exploration and reports, for a lab notebook:** several working sketches of one interaction with no rule applied, and a page built from what the notebook holds | nothing: exploration is judged by a written critique; a report checks its verdicts' records | `design/lab/`, `design/patterns/`, `design/showroom/` |
 
 Take a single button. Its size, weight and color are UI. Whether something visibly happens when you press it
 and whether you can reach it with the Tab key are UX. Whether its label says what it will do is copy. A screen can
@@ -64,9 +66,11 @@ In Claude Code:
 /plugin install poiesis-ux@poiesis-design
 /plugin install poiesis-copy@poiesis-design
 /plugin install poiesis-components@poiesis-design
+/plugin install poiesis-studio@poiesis-design
 ```
 
-poiesis-components needs poiesis-ui's tokens and nothing else: plain CSS and a few small script modules, in any web
+poiesis-studio needs Node 18+ and reads the theme and the components from a copy of this repository on your
+computer (the marketplace keeps one). poiesis-components needs poiesis-ui's tokens and nothing else: plain CSS and a few small script modules, in any web
 project, with or without a framework. poiesis-ui needs
 **Node 18+**; the tokens it writes need a recent browser (Chrome 123, Safari 17.5, Firefox 120). poiesis-ux needs
 nothing else; it drives the running app when Claude in Chrome is available. poiesis-copy needs nothing else.
@@ -88,6 +92,10 @@ The plugins come in when the work is about design, and you can name their agents
 - *"Review the copy."* `copy-reviewer` reads the text in every language and lists what breaks a rule.
 - *"Build the settings screen from the components."* Claude copies the components it needs and builds with them.
 - *"Round the corners"* or *"add thin lines."* Claude changes the shape atoms; every component follows.
+- *"Explore other ways to confirm a delete."* `explore` makes six working sketches side by side, from the theme,
+  with no rule applied.
+- *"Make a report of the trend scan."* `report` builds one page from the notebook's files, every verdict from its
+  record.
 
 ## What each plugin does
 
@@ -258,6 +266,24 @@ shows every component and its states, read straight from this folder, so you can
 **What checks it:** `ui-auditor` for the look and `ux-tester` for the behavior, the same checks as the rest of
 your app.
 
+### poiesis-studio: exploration with no rule, and reports that retype nothing
+
+- **Explores one question with several working sketches,** six by default, all made before any is judged and
+  shown side by side. They are made from the theme's own token files, which the script finds on your computer;
+  no design rule applies to them: no rules loaded, no auditor or tester, no `.poiesis-design/` folder, nothing
+  "corrected". Every sketch says that it is a prototype.
+- **Keeps what is worth keeping as a pattern card:** what the pattern does, what it is for, what it came out of.
+  You decide whether it joins the component catalog or becomes a rule.
+- **Builds a report page from the notebook's files:** series, evidence tables, dot maps and conclusions, every
+  number read from its file and every verdict from its challenge record (written by poiesis-insight), so a label
+  typed by hand can't drift. A conclusion with no record shows as not challenged.
+- **Compares a page with another** on its series, its numbers and its verdict labels. The two pages of the lab's
+  recorded runs were rebuilt this way.
+
+The rules for showing data (`plugins/poiesis-studio/skills/report/rules.md`, U1 to U12) cite their sources, and
+each source note says how much of it was read. The rules of poiesis-ui, poiesis-ux and poiesis-copy don't apply
+in an exploration; they still apply to a product.
+
 ## Every rule has an id, and your decisions win
 
 Every rule has an id, like C3 or K1, and the letters never repeat between the plugins. **must** is a defect;
@@ -318,12 +344,12 @@ poiesis-ux and poiesis-copy cite each source by key in their `rules.md`.
 
 ## What's in this repository
 
-The repository is a Claude Code **marketplace** holding the four **plugins** of Poiesis Design, each installable on
+The repository is a Claude Code **marketplace** holding the five **plugins** of Poiesis Design, each installable on
 its own.
 
 ```
 .claude-plugin/
-  marketplace.json             the marketplace: its name and the four plugins it lists
+  marketplace.json             the marketplace: its name and the five plugins it lists
 plugins/
   poiesis-ui/                  how the interface looks
     .claude-plugin/
@@ -386,7 +412,14 @@ plugins/
                                dot map; a .css, and a .js where they behave
       scripts/
         add.mjs                copy components and the primitives they sit on into a project
+  poiesis-studio/              exploration and reports, for a lab notebook
+    .claude-plugin/
+      plugin.json              name, version, description
+    lib/                       finding the theme and the library on this computer; ids and folders
+    skills/explore/            SKILL.md, generators.md, templates/, scripts/explore.mjs
+    skills/report/             SKILL.md, rules.md (U1–U12), templates/report.json, scripts/report.mjs, viewer/
 research/                      the sources behind the evidence-based rules: one note per study
+tests/                         poiesis-studio and the four data patterns: node --test tests/studio.test.mjs
 CHANGELOG.md                   what changed in each version
 LICENSE                        MIT
 ```
@@ -408,10 +441,12 @@ an error. The full list is in each skill's `SKILL.md`, so Claude knows it too.
 /plugin update poiesis-ux@poiesis-design
 /plugin update poiesis-copy@poiesis-design
 /plugin update poiesis-components@poiesis-design
+/plugin update poiesis-studio@poiesis-design
 /plugin uninstall poiesis-ui@poiesis-design
 /plugin uninstall poiesis-ux@poiesis-design
 /plugin uninstall poiesis-copy@poiesis-design
 /plugin uninstall poiesis-components@poiesis-design
+/plugin uninstall poiesis-studio@poiesis-design
 ```
 
 In a project that uses poiesis-ui, also run `init.mjs --update` after an update to refresh the derived cells.
