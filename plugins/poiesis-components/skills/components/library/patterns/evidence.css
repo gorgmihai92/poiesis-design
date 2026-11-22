@@ -1,0 +1,96 @@
+/* Pattern · evidence. A table of evidence: one source in each row, one question in each column, so a reader can
+   look a value up and see where nothing was found. A native table in a box that scrolls sideways when it is too
+   wide, the first column staying in view. Each row names its source in ink; a note under or beside any words is
+   muted; numbers are set in a column of figures (T5). CSS only.
+
+     <div class="po-evidence" role="region" aria-label="Delivery times by depot" tabindex="0">
+       <table>
+         <caption>Five depots, read from their monthly reports.</caption>
+         <thead><tr><th scope="col">Depot</th><th scope="col">On time</th><th scope="col">Parcels</th></tr></thead>
+         <tbody>
+           <tr>
+             <th scope="row">North depot <span class="po-evidence-note">Two vans in service</span></th>
+             <td>most <span class="po-evidence-note">except on Mondays</span></td>
+             <td data-type="number">1,240</td>
+           </tr>
+         </tbody>
+       </table>
+     </div>
+     (The depots and figures are synthetic, for the test.)
+
+   Cell   data-type="number" (a figure: set to the end of its column) · data-state="none" (the source does not
+          say: muted, and it still holds its words, never an empty cell) · data-state="gap" (nothing was found
+          for this place: a grey step)
+   Row    data-state="on" marks the rows a statement rests on: with data-filter on the box they stay ink and
+          the other rows turn muted, with nothing moving (ux K3)
+   The box takes the keyboard focus so it can be scrolled by keyboard (ux I1); name it with aria-label. */
+
+@layer poiesis.patterns {
+  .po-evidence {
+    --po-evidence-bg: var(--paper);
+    box-sizing: border-box;
+    max-inline-size: 100%;
+    overflow-x: auto;
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+  .po-evidence > table {
+    inline-size: 100%;
+    border-collapse: collapse;
+    text-align: start;
+  }
+  .po-evidence caption {
+    padding-block-end: calc(var(--space) * 2);
+    color: var(--muted);
+    text-align: start;
+    caption-side: top;
+  }
+
+  .po-evidence :is(th, td) {
+    box-sizing: border-box;
+    min-inline-size: calc(var(--space) * 32);
+    padding: calc(var(--space) * 2);
+    border-block-end: 1px solid var(--divider);
+    font-weight: var(--weight-regular);
+    text-align: start;
+    vertical-align: top;
+    text-wrap: pretty;
+  }
+  .po-evidence :is(th, td):first-child { padding-inline-start: 0; }
+  .po-evidence :is(th, td):last-child { padding-inline-end: 0; }
+  .po-evidence thead th {
+    border-block-end-color: var(--line-color);
+    color: var(--muted);
+    vertical-align: bottom;
+  }
+
+  /* The source stays in view while the questions scroll. */
+  .po-evidence tbody th {
+    position: sticky;
+    inset-inline-start: 0;
+    min-inline-size: calc(var(--space) * 44);
+    background: var(--po-evidence-bg);
+  }
+  .po-evidence thead th:first-child {
+    position: sticky;
+    inset-inline-start: 0;
+    background: var(--po-evidence-bg);
+  }
+
+  .po-evidence-note { color: var(--muted); }
+  .po-evidence tbody th > .po-evidence-note { display: block; }
+
+  .po-evidence :is(th, td)[data-type="number"] {
+    min-inline-size: 0;
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .po-evidence td[data-state="none"] { color: var(--muted); }
+  .po-evidence td[data-state="gap"] { background: var(--surface); }
+  .po-evidence td[data-state="gap"]:is(:first-child, :last-child) { padding-inline: calc(var(--space) * 2); }
+
+  /* The rows a statement rests on stay ink; the others step back. */
+  .po-evidence[data-filter] tbody tr:not([data-state="on"]) :is(th, td) { color: var(--muted); }
+}

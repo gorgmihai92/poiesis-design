@@ -1,0 +1,47 @@
+/* Pattern · verdict. What a challenge decided about a conclusion, as a label: kept, weakened, dropped, or not
+   challenged. A mark in the verdict's shape and color on that role's tint, then the word in ink, so it never
+   rests on color alone (C4) and the word keeps its contrast (C3). Built from the icon set; CSS only.
+
+     <span class="po-verdict" data-state="weakened">Weakened</span>
+     <span class="po-verdict">Not challenged</span>
+
+   data-state  kept · weakened · dropped. With no state, or any other word, it shows as not challenged: a label
+               that lost its verdict never looks like one that has it.
+
+   The word is the verdict as it was recorded. The script that read the record writes it; it is never typed
+   again by hand (poiesis-studio U1). */
+
+@layer poiesis.patterns {
+  .po-verdict {
+    --po-verdict-color: var(--muted);
+    --po-verdict-icon: var(--po-icon-circle);
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--space) * 1.5);
+    min-block-size: var(--control-xs);
+    padding-inline: calc(var(--space) * 2);
+    border-radius: var(--radius-s);
+    background: var(--surface);
+    color: var(--ink);
+    font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans);
+    letter-spacing: var(--tracking-body);
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  /* The mark: an icon from the set, in the verdict's color. */
+  .po-verdict::before {
+    content: "";
+    flex: none;
+    inline-size: var(--icon);
+    block-size: var(--icon);
+    background: var(--po-verdict-color);
+    -webkit-mask: var(--po-verdict-icon) center / contain no-repeat;
+    mask: var(--po-verdict-icon) center / contain no-repeat;
+  }
+
+  .po-verdict[data-state="kept"] { --po-verdict-color: var(--success); --po-verdict-icon: var(--po-icon-success); background: var(--success-tint); }
+  .po-verdict[data-state="weakened"] { --po-verdict-color: var(--warning); --po-verdict-icon: var(--po-icon-warning); background: var(--warning-tint); }
+  .po-verdict[data-state="dropped"] { --po-verdict-color: var(--danger); --po-verdict-icon: var(--po-icon-danger); background: var(--danger-tint); }
+}
