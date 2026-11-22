@@ -1,3 +1,9 @@
+---
+type: exploration
+plugin: poiesis-studio
+date: {{date}}
+topic: {{topic}}
+---
 # {{question}}
 
 - **Date:** {{date}}

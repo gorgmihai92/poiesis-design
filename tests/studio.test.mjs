@@ -282,9 +282,70 @@ test('the patterns use cells only: no literal colors or sizes beyond hairlines',
 test('the versions agree in plugin.json, marketplace.json and the changelog', () => {
   const market = JSON.parse(readFileSync(join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
   const log = readFileSync(join(ROOT, 'CHANGELOG.md'), 'utf8');
-  for (const [name, version] of [['poiesis-studio', '0.1.0'], ['poiesis-components', '0.14.0']]) {
+  for (const [name, version] of [['poiesis-studio', '0.2.0'], ['poiesis-components', '0.14.0']]) {
     assert.equal(JSON.parse(readFileSync(join(ROOT, 'plugins', name, '.claude-plugin/plugin.json'), 'utf8')).version, version);
     assert.equal(market.plugins.find((p) => p.name === name)?.version, version);
     assert.match(log, new RegExp(`^## ${version.replaceAll('.', '\\.')} \\(${name}\\)`, 'm'));
   }
+});
+
+// Properties (poiesis-studio 0.2.0): a block of Obsidian properties at the top of what explore writes, as a copy
+// for Obsidian's views. The label lines stay the record, and every script reads those.
+const blockOf = (text) => {
+  const lines = text.split('\n');
+  if (lines[0] !== '---' || !lines.slice(1).includes('---')) return [];
+  return lines.slice(1, lines.indexOf('---', 1));
+};
+const keysOf = (block) => block.filter((l) => !l.startsWith(' ')).map((l) => l.split(':')[0]);
+const blockRules = (name, block) => {
+  for (const line of block) {
+    assert.ok(!line.trimStart().startsWith('#'), `${name}: ${line}`);
+    if (line.startsWith(' ')) assert.match(line, /^ {2}- "(?:\[\[[^\]|]+\]\]|[^"[\]]*)"$/, `${name}: ${line}`);
+    else assert.match(line, /^[a-z]+:(?: (?:"(?:[^"\\]|\\.)*"|\[\]|<[^:"]*>|\{\{\w+\}\}|[a-z-]+|[0-9]{4}-[0-9]{2}-[0-9]{2}))?(?:\{\{\w+\}\})?$/, `${name}: ${line}`);
+  }
+};
+
+test('the templates of an exploration, a pattern card and a session start with a properties block', () => {
+  const T = join(STUDIO, 'skills/explore/templates');
+  const want = {
+    'exploration.md': ['type', 'plugin', 'date', 'topic'],
+    'pattern-card.md': ['type', 'plugin', 'date', 'topic', 'id', 'from'],
+    'session.md': ['type', 'plugin', 'date', 'topic'],
+  };
+  for (const [name, keys] of Object.entries(want)) {
+    const block = blockOf(readFileSync(join(T, name), 'utf8'));
+    assert.deepEqual(keysOf(block), keys, name);
+    assert.ok(block.includes('plugin: poiesis-studio'), name);
+    blockRules(name, block);
+  }
+});
+
+test('explore writes the block with the question quoted and the card\'s sources as links, and still reads its notes', () => {
+  const dir = scratch();
+  const question = 'How "else" could: a delete # work?\u0085';
+  assert.equal(run(EXPLORE, ['new', question, '--variants', '3', '--date', '2026-11-22'], dir).status, 0);
+  const lab = 'design/lab/2026-11-22-how-else-could-a-delete-work';
+  const notes = readFileSync(join(dir, lab, 'notes.md'), 'utf8');
+  assert.deepEqual(blockOf(notes), ['type: exploration', 'plugin: poiesis-studio', 'date: 2026-11-22', 'topic: "How \\"else\\" could: a delete # work?\\u0085"']);
+  blockRules('notes.md', blockOf(notes));
+  const card = run(EXPLORE, ['card', lab, '--name', 'Undo: the "confirmation"', '--from', 'SK-002,SK-003,@key2020,E-001'], dir);
+  assert.equal(card.status, 0, card.stderr);
+  const text = readFileSync(join(dir, 'design/patterns/PT-001-undo-the-confirmation.md'), 'utf8');
+  const block = blockOf(text);
+  assert.deepEqual(block.slice(4), ['id: "PT-001"', 'from:', '  - "[[SK-002]]"', '  - "[[SK-003]]"', '  - "@key2020"', '  - "E-001"']);
+  blockRules('pattern card', block);
+  assert.match(text, /^- \*\*From:\*\* SK-002, SK-003, @key2020, E-001$/m);
+  assert.match(text, /^- \*\*Id:\*\* PT-001$/m);
+  // The board still takes the question from the title, not from the block.
+  assert.match(readFileSync(join(dir, lab, 'index.html'), 'utf8'), /How &quot;else&quot; could: a delete # work\?|How "else" could: a delete # work\?/);
+  assert.equal(run(EXPLORE, ['next', 'PT'], dir).stdout.trim(), 'PT-002');
+});
+
+test('the report reads conclusions and their records the same with a properties block on the note', () => {
+  const plain = readFileSync(join(FIX, 'gate/insights/2026-11-17-gate-example.md'), 'utf8');
+  const withBlock = '---\ntype: insight-report\nplugin: poiesis-insight\ndate: 2026-11-17\ntopic: "gate example"\n---\n' + plain;
+  const stamps = readStamps(join(FIX, 'gate/insights/challenge-stamps.jsonl'));
+  const shown = (text) => readNote(text).map((c) => [c.id, c.text, verify({ id: c.id, text: c.text, shown: c.challenge }, stamps)]);
+  assert.deepEqual(shown(withBlock), shown(plain));
+  assert.deepEqual(shown(withBlock).map(([id, , v]) => [id, v.verdict]), [['IN-001', 'kept'], ['IN-002', 'dropped'], ['IN-003', null]]);
 });
