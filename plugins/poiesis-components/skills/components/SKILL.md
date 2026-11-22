@@ -1,6 +1,6 @@
 ---
 name: components
-description: The Poiesis component library, all its own and with no dependencies - tokens (from poiesis-ui), primitives (layout, text, surface, pressable, field, focus, motion), thirteen fundamental components where every variant is a setting (icon, button, input, label, checkbox, list, tabs, tooltip, collapsible, alert, progress, status dot, separator) and patterns built from them (combobox, picker, date pick, line form, pager, toast, bars, empty, masthead, sections, nav, frame, form field), in plain CSS with small custom elements (<po-morph>, <po-tabs>, <po-tooltip>, and the patterns' <po-combobox>, <po-picker>, <po-date-pick>, <po-line-form>, <po-pager>, <po-toast>, <po-sections>) where behavior needs script. Use when building or restyling an interface, adding one of these pieces, or making a new primitive, component or pattern that follows the poiesis-ui and poiesis-ux rules.
+description: The Poiesis component library, all its own and with no dependencies - tokens (from poiesis-ui), primitives (layout, text, surface, pressable, field, focus, motion), thirteen fundamental components where every variant is a setting (icon, button, input, label, checkbox, list, tabs, tooltip, collapsible, alert, progress, status dot, separator) and patterns built from them (combobox, picker, date pick, line form, pager, toast, bars, empty, masthead, sections, nav, frame, form field, verdict, evidence, series, dot map), in plain CSS with small custom elements (<po-morph>, <po-tabs>, <po-tooltip>, and the patterns' <po-combobox>, <po-picker>, <po-date-pick>, <po-line-form>, <po-pager>, <po-toast>, <po-sections>, <po-series>, <po-dot-map>) where behavior needs script. Use when building or restyling an interface, adding one of these pieces, or making a new primitive, component or pattern that follows the poiesis-ui and poiesis-ux rules.
 ---
 
 # Poiesis Components
@@ -20,14 +20,16 @@ CSS framework, no icon or animation package. It is four layers, each built only 
    a `.js` only for tabs and tooltip. What each is for, its settings and its markup: `catalog.md`.
 4. **Patterns** (`library/patterns/`): components joined, with the behavior that joins them: combobox (an input
    with suggestions), picker (a search and what it finds), date pick, line form, pager, toast, bars, empty,
-   masthead, sections, nav (the places of an app, the current one strong) and frame (a side column and the page).
+   masthead, sections, nav (the places of an app, the current one strong), frame (a side column and the page),
+   form field, and four for showing findings: verdict (what a challenge decided, as a label), evidence (a table
+   with one source in each row), series (counts over time as lines) and dot map (things placed by two numbers).
 
 `$C` is this folder (`${CLAUDE_PLUGIN_ROOT}/skills/components`).
 
 **Set up.** The page's stylesheet imports, in this order: `<poiesis-ui>/skills/ui/tokens/poiesis.css`, the
 theme `tokens/themes/poiesis.css`, then `library/poiesis-components.css` (or a copy). Load
 `library/poiesis-components.js` once, as a module, when the page has a morph, tabs, a tooltip or a pattern with
-behavior. Read the files in place from a poiesis-design checkout or copy them, and say which:
+behavior (a series and a dot map draw themselves from the table they hold; without the script the table shows). Read the files in place from a poiesis-design checkout or copy them, and say which:
 `node $C/scripts/add.mjs button tabs --to src/poiesis` copies the primitives, the icon set and the components and
 patterns named (a pattern brings the components it is built from), with entry files that load just those (`all`
 for every one, `--list` to see them). No package is ever installed.

@@ -241,11 +241,13 @@ progress (bar or level), status dot and separator. **Patterns** join components 
 a combobox (an input with suggestions under it), a picker (a search line and what it finds), a date pick, a line
 form (one line to add or edit an item), a pager, a toast (what just happened, with Undo), bars, an empty state, a
 masthead, sections (a long page whose section names always show), a nav (the places of an app, the current
-one strong) and a frame (a side column with the masthead and nav, and the page). They are plain CSS on native HTML (a switch
+one strong), a frame (a side column with the masthead and nav, and the page), a form field, and four for showing
+findings: a verdict label, an evidence table, a series over time and a dot map. They are plain CSS on native HTML (a switch
 is a checkbox, a collapsible is `<details>`, a closed fold is `inert`), with a small custom element only where
 behavior needs script (`<po-morph>`, `<po-tabs>`, `<po-tooltip>`, and the patterns' `<po-combobox>`,
-`<po-picker>`, `<po-date-pick>`, `<po-line-form>`, `<po-pager>`, `<po-toast>`, `<po-sections>`), so they work in
-any framework or none. Everything that opens, closes or swaps moves the same way: its height glides as it fades,
+`<po-picker>`, `<po-date-pick>`, `<po-line-form>`, `<po-pager>`, `<po-toast>`, `<po-sections>`, `<po-series>`,
+`<po-dot-map>`), so they work in any framework or none. A series and a dot map draw themselves from a real table
+that stays on the page, so the numbers can always be looked up. Everything that opens, closes or swaps moves the same way: its height glides as it fades,
 on the motion cells. Round controls follow the corner atom (square by default). All component text is one size
 (13px by default, 12px in the poiesis theme), bold only on buttons and tabs. `catalog.md` lists them.
 
@@ -380,7 +382,8 @@ plugins/
         primitives/            layout, text, surface, pressable, field, focus, motion (and motion.js)
         components/            the fundamentals: one .css each, and tabs.js, tooltip.js
         patterns/              components joined: combobox, picker, date pick, line form, pager, toast, bars,
-                               empty, masthead, sections, nav, frame; a .css, and a .js where they behave
+                               empty, masthead, sections, nav, frame, form field, verdict, evidence, series,
+                               dot map; a .css, and a .js where they behave
       scripts/
         add.mjs                copy components and the primitives they sit on into a project
 research/                      the sources behind the evidence-based rules: one note per study
