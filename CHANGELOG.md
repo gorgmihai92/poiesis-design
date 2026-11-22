@@ -10,7 +10,8 @@ others on.
   "Prototype" on itself. What stays is a written critique and a pattern card (`PT-001`) whose decision is the
   owner's. Generators, each marked untested, in `generators.md`.
 - **`report`**: the showroom. One HTML page from what the notebook holds, built by `report.mjs` from a report's
-  references (series, evidence tables, dot maps, conclusions); no number and no verdict is typed into it. Each
+  references (series, evidence tables, dot maps, conclusions): its figures, tables and verdicts are read from files,
+  and its prose is the report's own. Each
   verdict is read from its challenge record (poiesis-insight 2.0.0's format) and checked; a conclusion without one
   shows as not challenged. `report.mjs compare` compares a page with another on its series, numbers and verdict
   labels. Rules for showing data, U1 to U12, each with the source it rests on and how much of it was read.
