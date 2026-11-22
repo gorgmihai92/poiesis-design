@@ -9,10 +9,11 @@ record, so nothing on the page is typed by hand.
 One of the five plugins of [Poiesis Design](https://github.com/gorgmihai92/poiesis-design), with poiesis-ui,
 poiesis-ux, poiesis-copy and poiesis-components; it installs on its own and switches none of them on. It reads the
 theme's token files and the component library where they are on your computer, so a checkout or the marketplace's
-copy of poiesis-design must be there. Poiesis Design is one of the products in the Poiesis Toolkit: Research
-collects, Insight connects, Frontier explores, Design creates ([Poiesis
+copy of poiesis-design must be there. Poiesis Design is one of the five products in the Poiesis Toolkit: Research
+collects, Insight connects, Foresight anticipates, Frontier explores, Design creates ([Poiesis
 Research](https://github.com/gorgmihai92/poiesis-research), [Poiesis
 Insight](https://github.com/gorgmihai92/poiesis-insight), [Poiesis
+Foresight](https://github.com/gorgmihai92/poiesis-foresight), [Poiesis
 Frontier](https://github.com/gorgmihai92/poiesis-frontier)).
 
 ```
