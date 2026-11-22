@@ -60,6 +60,11 @@ test('a retyped label, a changed sentence, an altered record and a damaged file 
   assert.equal(verify({ id: 'IN-001', text: first.text, shown: '**Kept** · with caveats' }, stamps(lines)).status, 'ok');
   assert.equal(readStamps(join(dir, 's.jsonl')).damaged, false);
   assert.equal(stamps(lines.replace('"IN-001"', '"IN 001"')).damaged, true, 'an id not of the form is a damaged line');
+  assert.equal(verify({ id: 'IN-001', text: first.text, shown: null }, stamps(lines.replace('2026-11-17', '2026-99-99'))).status, 'stamp altered', 'an impossible date');
+  assert.equal(verify({ id: 'IN-009', text: 'Anything.', shown: 'kept' }, stamps(lines)).status, 'no stamp', 'a typed label with no record');
+  assert.equal(verify({ id: 'IN-001', text: first.text, shown: 'ékept' }, stamps(lines)).status, 'verdict retyped', 'a word inside another word is not a verdict');
+  const odd = readNote('## A line\u2028with a separator\n\n- **Id:** Z-1\n- **Challenge:** kept\u2028done\n\n## Q\n\n- **Id:** QN-001\n');
+  assert.deepEqual(odd.map((o) => [o.id, o.text, o.challenge]), [['Z-1', 'A line\u2028with a separator', 'kept\u2028done'], ['QN-001', 'Q', null]]);
 });
 
 // ---- The report ---------------------------------------------------------------------------------------------
@@ -231,7 +236,7 @@ test('poiesis-studio has no agent, no hook and no dependency, and its scripts st
   const skill = readFileSync(join(STUDIO, 'skills/explore/SKILL.md'), 'utf8').replace(/\n(?!\s*\n|\s*(?:[-*|]|\d+\.)\s)\s*/g, ' ');
   for (const sentence of skill.split(/(?<=[.:])\s+|\n/)) {
     if (/ui-auditor|ux-tester|copy-reviewer|init\.mjs|scan\.mjs|resolve\.mjs|\.poiesis-design/.test(sentence)) {
-      assert.match(sentence, /\b(do not|never|not|no|looks for)\b/i, `explore/SKILL.md names a check without saying not to run it: ${sentence.trim()}`);
+      assert.match(sentence, /\b(do not|never) (run|use|read|create|make|load)\b|\bno `\.poiesis-design\/`|\blooks for a `\.poiesis-design\/`|\bnever create a `\.poiesis-design\/`|\bnot read their/i, `explore/SKILL.md names a check without saying not to run it: ${sentence.trim()}`);
     }
   }
   const scripts = filesUnder(STUDIO).filter((f) => f.endsWith('.mjs'));

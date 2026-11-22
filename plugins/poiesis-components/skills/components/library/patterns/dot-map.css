@@ -123,6 +123,7 @@
   /* The dot pointed at or pressed, in words. It keeps its line whether or not it has words (K3). */
   .po-dot-map-readout { min-block-size: 1lh; color: var(--muted); text-wrap: pretty; }
 
-  /* What the marks say: the verdict labels found in the table, once each. */
+  /* What the marks say: the verdict labels found in the table, once each, their marks in ink as on the dots. */
   .po-dot-map-key { display: flex; flex-wrap: wrap; gap: var(--space); }
+  .po-dot-map-key .po-verdict::before { background: var(--ink); }
 }
