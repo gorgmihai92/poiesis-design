@@ -72,7 +72,8 @@ export function responsibilityShows(lit = responsibilityLiterals()) {
   for (const t of FIELD.topics) {
     expected.series[`topics:${t.id}`] = Object.fromEntries(years.map((y, i) => [y, t.share[i]]));
     expected.names[`topics:${t.id}`] = t.name;
-    // The dot's tooltip: size, n25, momentum, prev. The dot's colour: its verdict, or "not tested".
+    // The dot's tooltip: size, n25, momentum, prev. The dot's colour: its verdict; with none, the page writes
+    // "Not tested by the challenger", which is what the report calls "not challenged".
     expected.numbers[`topics:${t.id}`] = [t.size, t.momentum, t.prev, t.n25];
     expected.verdicts[`dot:${t.id}`] = topicVerdict[t.id] ?? 'not challenged';
   }
@@ -90,6 +91,11 @@ export function responsibilityShows(lit = responsibilityLiterals()) {
 // Which conclusion each page's verdict belongs to, and the verdict the challenger gave it
 // (fixtures/challenge-verdicts.json). The records themselves are written by poiesis-insight's challenge_stamp.py
 // and kept in tests/fixtures/stamps/; this only says what they cover.
+// These are test records, not records as the format asks for. The format hashes the sentence as it stands after
+// the challenge (for a weakened conclusion, the narrower claim); these hash the sentence the published page shows,
+// because the pages were made before the format and show that sentence beside the verdict. The split conclusion
+// T2 is two records, because the page shows its two parts as two conclusions with ids of their own. The gate
+// example (tests/fixtures/gate/) is the record as the format asks for.
 
 export const CHALLENGES = {
   'trend-scan': { c1: 'C1', c2: 'C2', c3: 'C3', c4: 'C4', c5: 'C5', c6: 'C6' },

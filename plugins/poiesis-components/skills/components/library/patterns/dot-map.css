@@ -1,7 +1,7 @@
 /* Pattern · dot map. Things placed by two numbers, as dots on two scales, drawn from a real table (dot-map.js
    for the markup and what it sends). Each dot is a button at its place, named beside it where there is room, so
-   there is no legend to look up; a dot's verdict shows as the verdict label's own mark, shape and color together
-   (C4); the one pressed is filled, as anything chosen is (G3). The table stays on the page under the map: it is
+   there is no legend to look up; a dot's verdict shows as the verdict label's shape, in ink on that role's tint
+   (C3, C4); the one pressed is filled, as anything chosen is (G3). The table stays on the page under the map: it is
    how a value is looked up. A reader may not know this form, so the page says in a sentence how to read it.
 
      <po-dot-map y-scale="log" x-unit="%" y-unit="%">
@@ -105,18 +105,20 @@
   }
   .po-dot[aria-pressed="true"]:not([data-state]) > .po-dot-mark { --po-dot-color: currentColor; }
 
-  /* A dot with a verdict wears that verdict's mark; any other word in data-state is not challenged. */
-  .po-dot[data-state] > .po-dot-mark { --po-dot-color: var(--muted); --po-dot-icon: var(--po-icon-circle); }
+  /* A dot with a verdict wears that verdict's shape, in ink on the role's tint: the shape carries the verdict
+     and keeps its contrast (C3), the tint repeats it (C4). Any other word in data-state is not challenged. */
+  .po-dot[data-state] > .po-dot-mark { --po-dot-icon: var(--po-icon-circle); --po-dot-tint: var(--surface); }
   .po-dot[data-state] > .po-dot-mark::before {
     inline-size: var(--icon);
     block-size: var(--icon);
+    background: var(--ink);
     -webkit-mask: var(--po-dot-icon) center / contain no-repeat;
     mask: var(--po-dot-icon) center / contain no-repeat;
   }
-  .po-dot[data-state="kept"] > .po-dot-mark { --po-dot-color: var(--success); --po-dot-icon: var(--po-icon-success); }
-  .po-dot[data-state="weakened"] > .po-dot-mark { --po-dot-color: var(--warning); --po-dot-icon: var(--po-icon-warning); }
-  .po-dot[data-state="dropped"] > .po-dot-mark { --po-dot-color: var(--danger); --po-dot-icon: var(--po-icon-danger); }
-  .po-dot[data-state][aria-pressed="true"]:not([data-state="kept"], [data-state="weakened"], [data-state="dropped"]) > .po-dot-mark { --po-dot-color: currentColor; }
+  .po-dot[data-state] > .po-dot-mark { background: radial-gradient(circle closest-side, var(--po-dot-tint) 95%, transparent); }
+  .po-dot[data-state="kept"] > .po-dot-mark { --po-dot-icon: var(--po-icon-success); --po-dot-tint: var(--success-tint); }
+  .po-dot[data-state="weakened"] > .po-dot-mark { --po-dot-icon: var(--po-icon-warning); --po-dot-tint: var(--warning-tint); }
+  .po-dot[data-state="dropped"] > .po-dot-mark { --po-dot-icon: var(--po-icon-danger); --po-dot-tint: var(--danger-tint); }
 
   /* The dot pointed at or pressed, in words. It keeps its line whether or not it has words (K3). */
   .po-dot-map-readout { min-block-size: 1lh; color: var(--muted); text-wrap: pretty; }

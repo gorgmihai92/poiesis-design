@@ -23,7 +23,6 @@ body { margin: 0; }
 .report-conclusion-text { font-weight: var(--weight-strong); }
 .report-conclusion-note, .report-conclusion-field { color: var(--muted); font: var(--weight-regular) var(--text-ui) / var(--leading-ui) var(--font-sans); }
 .report-conclusion-note[data-warn] { color: var(--ink); }
-.report-conclusion-note[data-warn]::before { content: "Note: "; font-weight: var(--weight-strong); }
 .report-conclusion-field > span { color: var(--ink); }
 
 .report-sources, .report-not-checked { display: grid; gap: calc(var(--space) * 1.5); margin: 0; padding-inline-start: calc(var(--space) * 5); }
