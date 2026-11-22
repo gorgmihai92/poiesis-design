@@ -1,0 +1,58 @@
+{
+  "about": "Three test vectors for the challenge stamp of poiesis-insight 2.0.0. `text` is the conclusion's sentence as it is found; `normalised` is what is hashed (UTF-8). The same vectors are in challenge-stamp-format.md.",
+  "seal_head": "poiesis-challenge-stamp v1",
+  "vectors": [
+    {
+      "name": "plain: one line, with an en dash and a per cent sign that stay as typed",
+      "id": "IN-001",
+      "verdict": "kept",
+      "date": "2026-11-22",
+      "text": "Machines, AI and robots is the fastest-growing major area of moral research. Its share of the universe went from 0.4% (2015) to 6.9% (2025), growing about 20% a year in 2020–25, down from about 46% in 2015–20.",
+      "normalised": "Machines, AI and robots is the fastest-growing major area of moral research. Its share of the universe went from 0.4% (2015) to 6.9% (2025), growing about 20% a year in 2020–25, down from about 46% in 2015–20.",
+      "normalised_utf8_bytes": 213,
+      "stamp": {
+        "v": 1,
+        "id": "IN-001",
+        "verdict": "kept",
+        "date": "2026-11-22",
+        "text_sha256": "455c151ffde4f720c2f17a2b42f0dd0b46a60d725abcb10cf267a84a1368c31c",
+        "seal": "ba58912e7b2f843f530cf374b5b959123e9363d221c07d8d96d69ce1ec22bcbf"
+      }
+    },
+    {
+      "name": "layout and accents: wrapped lines, a tab, double spaces, a carriage return, and letters typed as a base letter plus a combining mark",
+      "id": "IN-002",
+      "verdict": "weakened",
+      "date": "2026-11-22",
+      "text": "  Studiile despre vină folosesc aproape numai viniete,\r\n  nu măsurători\tale comportamentului:  un tipar de metodă, nu o concluzie despre oameni. ",
+      "normalised": "Studiile despre vină folosesc aproape numai viniete, nu măsurători ale comportamentului: un tipar de metodă, nu o concluzie despre oameni.",
+      "normalised_utf8_bytes": 142,
+      "stamp": {
+        "v": 1,
+        "id": "IN-002",
+        "verdict": "weakened",
+        "date": "2026-11-22",
+        "text_sha256": "1fd56d068a53325003345415dc4f543c9becf658587fe9a39c6ea7ad92cddcf7",
+        "seal": "26364cd21ce3c162adba549468b49f9748eaf190e242c97870bde6dc0fd57a38"
+      }
+    },
+    {
+      "name": "from a note: the sentence is the heading above the Id line",
+      "id": "IN-003",
+      "verdict": "dropped",
+      "date": "2026-11-22",
+      "note": "## Dropped\n\n### Politics and polarization is a \"neglected\" topic.\n\n- **Id:** IN-003\n- **Challenge:** dropped · 5 of 88 against an expected 3.5 is within chance\n",
+      "text": "Politics and polarization is a \"neglected\" topic.",
+      "normalised": "Politics and polarization is a \"neglected\" topic.",
+      "normalised_utf8_bytes": 49,
+      "stamp": {
+        "v": 1,
+        "id": "IN-003",
+        "verdict": "dropped",
+        "date": "2026-11-22",
+        "text_sha256": "67b9ccd455c43ccaccca975356b643f5486519c0de7411c14ba4ce7c3baf6748",
+        "seal": "27eb4fddaea15a7b8a06445de16650487dcdac80192ce8a023a9d2a4cec4ca45"
+      }
+    }
+  ]
+}

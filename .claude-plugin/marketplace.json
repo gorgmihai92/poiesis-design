@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "poiesis-design",
-  "description": "Design toolkit for Claude Code: poiesis-ui (how an interface looks), poiesis-ux (how an app behaves), poiesis-copy (what it says) and poiesis-components (the component set built on ui and ux).",
+  "description": "Design toolkit for Claude Code: poiesis-ui (how an interface looks), poiesis-ux (how an app behaves), poiesis-copy (what it says), poiesis-components (the component set built on ui and ux) and poiesis-studio (free design exploration and reports from a lab notebook).",
   "owner": {
     "name": "George Mihai",
     "email": "hi@georgemihai.com"
@@ -45,13 +45,25 @@
     },
     {
       "name": "poiesis-components",
-      "description": "The Poiesis component library: tokens, primitives, thirteen fundamental components (every variant a setting) and patterns built from them, all its own, plain CSS with a few small custom elements and no dependencies, copied into any web project; change the atoms and every component follows. Shown in poiesis-gallery.",
-      "version": "0.13.8",
+      "description": "The Poiesis component library: tokens, primitives, thirteen fundamental components (every variant a setting) and patterns built from them, among them four for showing findings (a verdict label, an evidence table, a series over time and a dot map), all its own, plain CSS with a few small custom elements and no dependencies, copied into any web project; change the atoms and every component follows. Shown in poiesis-gallery.",
+      "version": "0.14.0",
       "author": {
         "name": "George Mihai",
         "email": "hi@georgemihai.com"
       },
       "source": "./plugins/poiesis-components",
+      "category": "design",
+      "homepage": "https://github.com/gorgmihai92/poiesis-design"
+    },
+    {
+      "name": "poiesis-studio",
+      "description": "Design exploration and reports for a lab notebook: several working sketches of one interaction, side by side, made from the Poiesis theme and held to no design rule, with pattern cards for what is worth keeping; and a showroom page built from the notebook's own files, where every verdict is read from its challenge record and never retyped.",
+      "version": "0.1.0",
+      "author": {
+        "name": "George Mihai",
+        "email": "hi@georgemihai.com"
+      },
+      "source": "./plugins/poiesis-studio",
       "category": "design",
       "homepage": "https://github.com/gorgmihai92/poiesis-design"
     }
