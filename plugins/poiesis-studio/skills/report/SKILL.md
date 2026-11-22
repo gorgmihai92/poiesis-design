@@ -1,6 +1,6 @@
 ---
 name: report
-description: The showroom - one page that shows what a project's notebook holds (series, evidence tables, conclusions and their challenge verdicts) built from the files themselves, never retyped. A verdict is shown from its challenge record; anything without one shows as not challenged. Use when asked for a report, a showroom page, a page or dashboard of findings, or to rebuild a published page from its data. Not for text with citations to export (Texere's export does that) and not for a product's interface.
+description: The showroom - one page that shows what a project's notebook holds (series, evidence tables, conclusions and their challenge verdicts) built from the files themselves, never retyped. A verdict is shown from its challenge record; anything without one shows as not challenged. Use when asked for a report, a showroom page, a page or dashboard of findings, or to rebuild a published page from its data. Not for text with citations to export, and not for a product's interface.
 ---
 
 # Report
@@ -74,8 +74,8 @@ verdict label. Not pixels, colors or layout. `expected.json` holds what the othe
 
 ## Text with citations
 
-A page of prose with citations is not this skill's work: Texere's export already turns a note with
-`[@key, p. N]` citations into a document.
+A page of prose with citations is not this skill's work. Where Texere is installed, its export turns a note
+with `[@key, p. N]` citations into a document; nothing here needs it.
 
 ## Files
 
