@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.12.1 (poiesis-ui)
+Two gaps an audit of the stack found (2026-11-23). No rule text changed.
+- **The publish gate sees the script files that shape the UI.** Until now a change to the `po-*` elements that
+  poiesis-components copies in, or to a plain `.js` component, let a push through after an audit. The audit
+  stamp now also hashes a `.js`, `.mjs`, `.cjs`, `.ts`, `.mts` or `.cts` file under the UI paths when it is a
+  theme's config (`tailwind`, `stitches`, `panda`, `uno` or `tamagui.config.*`), or when its text defines a custom
+  element (`customElements.define`), imports a stylesheet (`.css`, `.scss`, `.sass`, `.less`) or a UI library
+  (React, Preact, Vue, Svelte, Solid, Lit, styled-components, Emotion, Stitches, vanilla-extract), uses a custom
+  property (`var(--…)`) or a `po-` class, or imports, by a relative path, a script file that counts (so the
+  library's `poiesis-components.js` and a component folder's `index.js` count). Never counted: tests
+  (`*.test.*`, `*.spec.*`), type declarations (`*.d.ts`), other tools' configs (`vite.config.js`), and the folders
+  skipped as before (`node_modules`, `dist/`, `build/`, `.next/`, `out/`, dotfolders). So a change to an API
+  route, the database or a store does not hold a push back. Missed: a script with none of these marks that still
+  changes what is shown, such as a helper a component imports (a date format, a menu's items) or a style set as a
+  literal (`el.style.padding = "8px"`). `.jsx`/`.tsx` and the other UI files count as before. A project with such
+  script files is asked for one new audit after the update, since the stamp's file set grew.
+- `scan.mjs` still reads no `.js`/`.ts` file: on plain script its checks raise false alarms (a private member
+  such as `#add` or an issue number `#123` read as a color, a chart's `padding: 8` as spacing). `ui-auditor` now
+  reads the styles those files set by hand.
+- **`ui-auditor` names every must.** Its reading step now lists each `must` that the scan and the token checks do
+  not cover, adding T5, T6, C2, G2, G3, G5 and G6, and its report says which musts it could not check and why
+  (for example one that needs the rendered page).
+- **Tests.** `tests/ui.test.mjs`: a changed `.js` component changes the hash and the gate holds the push back;
+  each mark makes a script count, and so does importing one that counts; an API route, the database and a store
+  do not; nor do `node_modules`, `dist/`, tests, declarations and `vite.config.js`; the five theme configs do.
+
 ## 0.2.0 (poiesis-studio)
 Everything is added: no path or field of 0.1.0 was renamed or removed, and the scripts read every file as before.
 - **Properties.** What `explore` writes starts with a block of Obsidian properties (YAML between two `---` lines):

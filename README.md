@@ -419,7 +419,8 @@ plugins/
     skills/explore/            SKILL.md, generators.md, templates/, scripts/explore.mjs
     skills/report/             SKILL.md, rules.md (U1–U12), templates/report.json, scripts/report.mjs, viewer/
 research/                      the sources behind the evidence-based rules: one note per study
-tests/                         poiesis-studio and the four data patterns: node --test tests/studio.test.mjs
+tests/                         poiesis-studio, the four data patterns and poiesis-ui's publish gate:
+                               node --test tests/studio.test.mjs tests/ui.test.mjs
 CHANGELOG.md                   what changed in each version
 LICENSE                        MIT
 ```
