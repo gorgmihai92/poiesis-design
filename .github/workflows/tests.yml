@@ -1,0 +1,21 @@
+name: Tests
+
+# The unit tests, on every push to main and every pull request.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run the tests
+        run: node --test tests/studio.test.mjs tests/ui.test.mjs
