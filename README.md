@@ -1,5 +1,7 @@
 # Poiesis Design
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24501572.svg)](https://doi.org/10.5281/zenodo.24501572)
+
 Interface design that is checked while Claude builds it, in Claude Code: how it looks, how it behaves and what it
 says. Claude follows the rules as it works, builds from components that already meet them, and runs a check before
 you publish.
