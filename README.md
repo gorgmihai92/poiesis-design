@@ -1,6 +1,6 @@
 # Poiesis Design
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24501572.svg)](https://doi.org/10.5281/zenodo.24501572) [![Cognitive Centered Design Oath: signed](https://raw.githubusercontent.com/gorgmihai92/ccd-oath/main/badges/ccd-oath-signed.svg)](https://github.com/gorgmihai92/ccd-oath/blob/main/SIGNATORIES.md)
+[![Tests](https://github.com/gorgmihai92/poiesis-design/actions/workflows/tests.yml/badge.svg)](https://github.com/gorgmihai92/poiesis-design/actions/workflows/tests.yml) [![Release](https://img.shields.io/github/v/release/gorgmihai92/poiesis-design)](https://github.com/gorgmihai92/poiesis-design/releases/latest) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24501572.svg)](https://doi.org/10.5281/zenodo.24501572) [![Cognitive Centered Design Oath: signed](https://raw.githubusercontent.com/gorgmihai92/ccd-oath/main/badges/ccd-oath-signed.svg)](https://github.com/gorgmihai92/ccd-oath/blob/main/SIGNATORIES.md)
 
 Interface design that is checked while Claude builds it, in Claude Code: how it looks, how it behaves and what it
 says. Claude follows the rules as it works, builds from components that already meet them, and runs a check before
